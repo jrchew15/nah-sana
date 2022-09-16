@@ -1,11 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
-from .__init__ import med_str, long_str
-
-db = SQLAlchemy()
+from .db import db
 
 # Enum lists
 project_statuses = ['On Track', 'At Risk', 'On Hold', 'Complete', 'Off Track']
 
+# Strings
+small_str = 15
+med_str = 100
+long_str = 500
 
 # -- Join Tables
 # Connects users to workspaces they are assigned to
@@ -69,10 +71,10 @@ class Project(db.Model):
     def to_dict(self):
         return {
         "id": self.id,
-        "workspace_id": self.workspace_id,
+        "workspaceId": self.workspace_id,
         "name": self.name,
         "status": self.status,
-        "due_date": self.due_date,
+        "dueDate": self.due_date,
         "description": self.description,
         "icon": self.icon
       }
@@ -95,10 +97,10 @@ class Task(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "project_id": self.project_id,
+            "userId": self.user_id,
+            "projectId": self.project_id,
             "name": self.name,
-            "due_date": self.due_date,
+            "dueDate": self.due_date,
             "description": self.description,
             "complete": self.complete
         }
