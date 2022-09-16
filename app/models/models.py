@@ -1,11 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
-from .__init__ import med_str, long_str
-
-db = SQLAlchemy()
+from .db import db
 
 # Enum lists
 project_statuses = ['On Track', 'At Risk', 'On Hold', 'Complete', 'Off Track']
 
+# Strings
+small_str = 15
+med_str = 100
+long_str = 500
 
 # -- Join Tables
 # Connects users to workspaces they are assigned to

@@ -1,9 +1,12 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .__init__ import small_str, med_str, long_str
 from .models import user_projects, user_workspaces
 
+# Strings
+small_str = 15
+med_str = 100
+long_str = 500
 
 
 class User(db.Model, UserMixin):
