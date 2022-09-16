@@ -52,7 +52,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id'))
     name = db.Column(db.String(med_str), nullable=False)
-    status = db.Column(db.Enum(*project_statuses))
+    status = db.Column(db.Enum(*project_statuses, name="project_statuses"))
     due_date = db.Column(db.Date)
     description = db.Column(db.String(long_str))
     icon = db.Column(db.String(med_str))
