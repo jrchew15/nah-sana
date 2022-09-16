@@ -4,7 +4,7 @@ from datetime import date
 
 def seed_tasks():
 
-    task1 = Task(project_id=1, user_id=1, name='Watch Interview Prep Videos', due_date=(2022,4,1), description=None, complete=True)
+    task1 = Task(project_id=1, user_id=1, name='Watch Interview Prep Videos', due_date=date(2022,4,1), description=None, complete=True)
     task2 = Task(project_id=1, user_id=1, name='HTML/CSS',  due_date=date(2022,5,2), description=None, complete=True)
     task3 = Task(project_id=1, user_id=1, name='Git',  due_date=date(2022,5,2), description='Wow so many branches', complete=True)
     task4 = Task(project_id=1, user_id=1, name='Boolean Algebra',  due_date=date(2022,5,2),description='Did we even use Boolean Algebra in the course? hmm...', complete=True)
