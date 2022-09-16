@@ -4,15 +4,61 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        first_name='Demo',
+        last_name='User',
+        role='Demo',
+        email='demo@demo.io',
+        password='pass',
+        image='/static/images/users/1.png',
+        pronouns='They/Them',
+        department='Executive'
+    )
+    cecilia = User(
+        first_name='Cecilia',
+        last_name='Ou',
+        role='Engineer',
+        email='cou.code@gmail.com',
+        password='pass',
+        image='/static/images/users/2.png',
+        pronouns='She/Her/Hers',
+        department='Engineering'
+    )
+    chen = User(
+        first_name='Chen',
+        last_name='Chen',
+        role='Engineer',
+        email='chencc3333@gmail.com',
+        password='password',
+        image='/static/images/users/3.png',
+        pronouns='She/Her/Hers',
+        department='Engineering'
+    )
+    francisco = User(
+        first_name='Francisco',
+        last_name='Palacios',
+        role='Engineer',
+        email='pineapples@gmail.com',
+        password='password',
+        image='/static/images/users/4.png',
+        pronouns=None,
+        department='Engineering'
+    )
+    jason = User(
+        first_name='Jason',
+        last_name='Chew',
+        role='Engineer',
+        email='demojason@user.io',
+        password='password',
+        image='/static/images/users/5.png',
+        pronouns=None,
+        department='Engineering'
+    )
 
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(cecilia)
+    db.session.add(chen)
+    db.session.add(francisco)
+    db.session.add(jason)
 
     db.session.commit()
 

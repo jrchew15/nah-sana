@@ -1,9 +1,12 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .__init__ import small_str, med_str, long_str
 from .models import user_projects, user_workspaces
 
+# Strings
+small_str = 15
+med_str = 100
+long_str = 500
 
 
 class User(db.Model, UserMixin):
@@ -47,8 +50,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
             'email': self.email,
             'role': self.role,
             'image': self.image,
