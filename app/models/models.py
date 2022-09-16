@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from .db import db
 
-# Enum lists
-project_statuses = ['On Track', 'At Risk', 'On Hold', 'Complete', 'Off Track']
 
 # Strings
 small_str = 15
@@ -52,7 +50,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id'))
     name = db.Column(db.String(med_str), nullable=False)
-    status = db.Column(db.Enum(*project_statuses, name="project_statuses"))
+    status = db.Column(db.String(small_str))
     due_date = db.Column(db.Date)
     description = db.Column(db.String(long_str))
     icon = db.Column(db.String(med_str))
