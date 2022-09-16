@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(med_str), nullable=False)
     role = db.Column(db.String(small_str))
     email = db.Column(db.String(med_str), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(med_str), nullable=False)
+    hashed_password = db.Column(db.String(long_str), nullable=False)
     image = db.Column(db.String(med_str))
     pronouns = db.Column(db.String(small_str))
     department = db.Column(db.String(small_str))
