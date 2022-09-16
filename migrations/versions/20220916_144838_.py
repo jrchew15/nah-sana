@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: b5ec99702dcb
-Revises: 
+Revises:
 Create Date: 2022-09-16 14:48:38.842252
 
 """
@@ -40,7 +40,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('workspace_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('status', sa.Enum('On Track', 'At Risk', 'On Hold', 'Complete', 'Off Track'), nullable=True),
+    sa.Column('status', sa.String(length=15), nullable=True),
     sa.Column('due_date', sa.Date(), nullable=True),
     sa.Column('description', sa.String(length=500), nullable=True),
     sa.Column('icon', sa.String(length=100), nullable=True),
