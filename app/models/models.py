@@ -71,10 +71,10 @@ class Project(db.Model):
     def to_dict(self):
         return {
         "id": self.id,
-        "workspace_id": self.workspace_id,
+        "workspaceId": self.workspace_id,
         "name": self.name,
         "status": self.status,
-        "due_date": self.due_date,
+        "dueDate": self.due_date,
         "description": self.description,
         "icon": self.icon
       }
@@ -97,10 +97,10 @@ class Task(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "project_id": self.project_id,
+            "userId": self.user_id,
+            "projectId": self.project_id,
             "name": self.name,
-            "due_date": self.due_date,
+            "dueDate": self.due_date,
             "description": self.description,
             "complete": self.complete
         }
