@@ -1,10 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+from .__init__ import med_str, long_str
 
 db = SQLAlchemy()
 
-# String Constraints
-med_str = 100
-long_str = 500
+# Enum lists
+project_statuses = ['On Track', 'At Risk', 'On Hold', 'Complete', 'Off Track']
+
 
 # -- Join Tables
 # Connects users to workspaces they are assigned to
@@ -37,13 +38,19 @@ class Workspace(db.Model):
         back_populates='spaces',
     )
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }
+
 class Project(db.Model):
     __tablename__ = "projects"
 
     id = db.Column(db.Integer, primary_key=True)
     workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id'))
     name = db.Column(db.String(med_str), nullable=False)
-    status = db.Column(db.String(med_str))
+    status = db.Column(db.Enum(*project_statuses))
     due_date = db.Column(db.Date)
     description = db.Column(db.String(long_str))
     icon = db.Column(db.String(med_str))
@@ -58,6 +65,17 @@ class Project(db.Model):
         secondary=user_projects,
         back_populates='assigned_projects',
     )
+
+    def to_dict(self):
+        return {
+        "id": self.id,
+        "workspace_id": self.workspace_id,
+        "name": self.name,
+        "status": self.status,
+        "due_date": self.due_date,
+        "description": self.description,
+        "icon": self.icon
+      }
 
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -74,29 +92,13 @@ class Task(db.Model):
     project = db.relationship("Project", back_populates="tasks")
     task_user = db.relationship("User", back_populates="user_tasks")
 
-class User(db.Model):
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(med_str), nullable=False)
-    last_name = db.Column(db.String(med_str), nullable=False)
-    role = db.Column(db.String(med_str))
-    email = db.Column(db.String(med_str), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(med_str), nullable=False)
-    image = db.Column(db.String(med_str))
-    pronouns = db.Column(db.String(med_str))
-    department = db.Column(db.String(med_str))
-
-    # Relationships
-    user_tasks = db.relationship("Task", back_populates="task_user")
-    project_owner = db.relationship("Project", back_populates="owner")
-    spaces = db.relationship(
-        "Workspace",
-        secondary=user_workspaces,
-        back_populates='members',
-    )
-    assigned_projects = db.relationship(
-        "Project",
-        secondary=user_projects,
-        back_populates='contributors',
-    )
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "project_id": self.project_id,
+            "name": self.name,
+            "due_date": self.due_date,
+            "description": self.description,
+            "complete": self.complete
+        }

@@ -1,15 +1,37 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .__init__ import small_str, med_str, long_str
+from .models import user_projects, user_workspaces
+
 
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(med_str), nullable=False)
+    last_name = db.Column(db.String(med_str), nullable=False)
+    role = db.Column(db.String(small_str))
+    email = db.Column(db.String(med_str), nullable=False, unique=True)
+    hashed_password = db.Column(db.String(med_str), nullable=False)
+    image = db.Column(db.String(med_str))
+    pronouns = db.Column(db.String(small_str))
+    department = db.Column(db.String(small_str))
+
+    user_tasks = db.relationship("Task", back_populates="task_user")
+    project_owner = db.relationship("Project", back_populates="owner")
+    spaces = db.relationship(
+        "Workspace",
+        secondary=user_workspaces,
+        back_populates='members',
+    )
+    assigned_projects = db.relationship(
+        "Project",
+        secondary=user_projects,
+        back_populates='contributors',
+    )
+
 
     @property
     def password(self):
@@ -25,6 +47,11 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'role': self.role,
+            'image': self.image,
+            'pronouns': self.pronouns,
+            'department': self.department
         }
