@@ -17,8 +17,8 @@ def seed():
     seed_users()
     # Add other seed functions here
     seed_workspaces()
-    seed_tasks()
     seed_projects()
+    seed_tasks()
 
 
 # Creates the `flask seed undo` command
@@ -29,4 +29,3 @@ def undo():
     undo_workspaces()
     undo_projects()
     undo_tasks()
-
