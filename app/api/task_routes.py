@@ -35,7 +35,10 @@ def get_task_by_projectId(projectId):
 #need to move this route to the workspace-routes and change the url a little if needed
 @task_routes.route('/<int:workspaceId>/users/<int:userId>/tasks')
 def tasks_by_workspace_userId(workspaceId, userId):
-    user_id = current_user.id
-    tasks = Task.query.join(Project).filter(Project.workspace_id==workspaceId, Project.owner_id==user_id).all()
+
+    tasks = Task.query\
+        .join(Project)\
+        .filter(Project.workspace_id==workspaceId, Task.user_id==userId)\
+        .all()
     response = {task.id:task.to_dict() for task in tasks}
     return response
