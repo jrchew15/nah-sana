@@ -8,7 +8,7 @@ project_routes = Blueprint('project', __name__)
 
 @project_routes.route('/')
 def all_projects():
-    projects_all= [project.to_dict() for project in Project.query.all() ]
+    projects_all= [project.to_dict() for project in Project.query.all()]
     return { "projects": projects_all }
 
 @project_routes.route("/<int:id>")
@@ -24,7 +24,7 @@ def one_project(id):
         }
 
 @project_routes.route("/<int:id>", methods=["DELETE"])
-def project_delete(id):
+def delete_project(id):
     project_one = Project.query.get(id)
     if project_one is not None:
         db.session.delete(project_one)
