@@ -1,8 +1,8 @@
-
 from flask import Blueprint, request
 from app.models import Project
 from ..models.db import db
 from app.forms.project_form import ProjectForm
+from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import date
 
 
@@ -46,8 +46,7 @@ def new_project():
     db.session.add(new_project)
     db.session.commit()
     return new_project.to_dict()
-  if new_form.errors:
-    return new_form.errors
+  return {'errors': validation_errors_to_error_messages(new_form.errors)}, 401
 
 # Update an existing project based on id
 @project_routes.route('/<int:id>', methods=["PUT"])
@@ -72,8 +71,7 @@ def update_project(id):
     project = Project.query.filter(Project.id==id)[0]
     return project.to_dict()
   
-  if update_form.errors:
-    return update_form.errors
+  return {'errors': validation_errors_to_error_messages(update_form.errors)}, 401
 
 
 @project_routes.route("/<int:id>", methods=["DELETE"])
