@@ -1,3 +1,4 @@
+
 from flask import Blueprint
 from app.models import Project
 from ..models.db import db
