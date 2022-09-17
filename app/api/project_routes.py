@@ -5,7 +5,7 @@ from ..models.db import db
 project_routes = Blueprint('project', __name__)
 
 
-@project_routes.route('')
+@project_routes.route('/')
 def all_projects():
     projects_all= [project.to_dict() for project in Project.query.all()]
     return { "projects": projects_all }
