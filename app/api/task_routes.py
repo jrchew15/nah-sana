@@ -10,6 +10,13 @@ from ..utils import sql_date_to_date_obj
 
 task_routes = Blueprint('task', __name__, url_prefix='/api/tasks')
 
+@task_routes.route('')
+def get_all_tasks():
+    user_id = current_user.id
+    tasks = Task.query.filter(Task.user_id==user_id)
+    response = {task.id:task.to_dict() for task in tasks}
+    return response
+
 #get details of a task by id
 @task_routes.route('/<int:taskId>')
 def get_task_by_id(taskId):
@@ -73,7 +80,3 @@ def delete_task(id):
             "message": "Successfully deleted",
              "statusCode": 200
         }
-    user_id = current_user.id
-    tasks = Task.query.filter(Task.user_id==user_id)
-    response = {task.id:task.to_dict() for task in tasks}
-    return response
