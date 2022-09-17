@@ -21,9 +21,15 @@ def one_project(id):
             "statusCode": 404,
             "message": "Project not found"
         }
-@project_routes.route('/', methods=["POST"])
+
+@project_routes.route('/<int:id>', methods=["POST"])
 def create_project():
     pass
+
+@project_routes.route('/<int:id>', methods=["PUT"])
+def create_project():
+    pass
+
 
 @project_routes.route("/<int:id>", methods=["DELETE"])
 def delete_project(id):
