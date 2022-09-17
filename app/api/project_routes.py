@@ -7,7 +7,7 @@ from app.models import Project
 from ..models.db import db
 from app.forms.project_form import ProjectForm
 from app.api.auth_routes import validation_errors_to_error_messages
-from datetime import date
+from flask_login import login_required
 
 project_routes = Blueprint('project', __name__)
 
@@ -93,7 +93,7 @@ def update_project(id):
     db.session.commit()
     project = Project.query.filter(Project.id==id)[0]
     return project.to_dict()
-  
+
   return {'errors': validation_errors_to_error_messages(update_form.errors)}, 401
 
 
