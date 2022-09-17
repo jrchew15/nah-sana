@@ -12,9 +12,9 @@ def get_workspace(id):
     # workspaces = [wk.to_dict() for wk in Workspace.query.all()]
     # return {"workspaces": workspaces}
 
-@workspace_routes.route('/<int:id>', methods=['POST'])
-def get_workspace(id):
-    workspace = Workspace.query.get(id)
-    #figure out how to add User to workspace after getting workspace
+# @workspace_routes.route('/<int:id>', methods=['POST'])
+# def get_workspace(id):
+#     workspace = Workspace.query.get(id)
+#     #figure out how to add User to workspace after getting workspace
 
-    return workspace.to_dict()
+#     return workspace.to_dict()
