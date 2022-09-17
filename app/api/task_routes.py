@@ -6,6 +6,7 @@ from ..models import db
 from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
 from ..utils import sql_date_to_date_obj
+from .auth_routes import validation_errors_to_error_messages
 
 
 task_routes = Blueprint('task', __name__, url_prefix='/api/tasks')
@@ -65,7 +66,7 @@ def edit_task(id):
         db.session.commit()
         return task.to_dict()
 
-    return {"message":"Bad Data", "statusCode": 400}
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 @task_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

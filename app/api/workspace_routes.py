@@ -3,6 +3,7 @@ from ..forms.task_form import TaskForm
 from ..models import db, Task
 from flask_login import login_required
 from ..utils import sql_date_to_date_obj
+from .auth_routes import validation_errors_to_error_messages
 
 workspace_routes = Blueprint('workspace', __name__, url_prefix='/api/workspaces')
 
@@ -24,4 +25,4 @@ def create_task(id):
         db.session.add(new_task)
         db.session.commit()
         return new_task.to_dict()
-    return {"message":"Bad Data", "statusCode": 400}
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
