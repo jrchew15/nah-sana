@@ -22,14 +22,6 @@ def one_project(id):
             "message": "Project not found"
         }
 
-@project_routes.route('/<int:id>', methods=["POST"])
-def create_project():
-    pass
-
-@project_routes.route('/<int:id>', methods=["PUT"])
-def edit_project():
-    pass
-
 
 @project_routes.route("/<int:id>", methods=["DELETE"])
 def delete_project(id):
