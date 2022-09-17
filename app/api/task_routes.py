@@ -36,8 +36,6 @@ def get_task_by_projectId(projectId):
 @task_routes.route('/<int:workspaceId>/users/<int:userId>/tasks')
 def tasks_by_workspace_userId(workspaceId, userId):
     user_id = current_user.id
-    projects = Project.query.filter(Project.workspace_id==workspaceId, Project.owner_id==user_id)
-    response = {project.id:project.to_dict() for project in projects}
     tasks = Task.query.join(Project).filter(Project.workspace_id==workspaceId, Project.owner_id==user_id).all()
-    response1 = {task.id:task.to_dict() for task in tasks}
-    return response1
+    response = {task.id:task.to_dict() for task in tasks}
+    return response
