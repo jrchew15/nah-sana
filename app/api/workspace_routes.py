@@ -1,8 +1,10 @@
-from crypt import methods
-from flask import Blueprint
+from flask import Blueprint,request
 from app.api.user_routes import users
+from app.forms import project_form
+from app.forms.workspace_form import AddUserForm, WorkspaceForm
 from app.models import Workspace, User
 from ..models.db import db
+
 
 workspace_routes = Blueprint('workspace', __name__)
 
@@ -24,30 +26,69 @@ def get_all_workspace():
 def one_workspace(id):
     workspace = Workspace.query.get(id)
     users_in_this_ws = workspace.members
+    project_in_this_ws= [projects.to_dict() for projects in workspace.projects]
     return {
         "workspace": workspace.to_dict(),
-        "users": users_in_this_ws
+        "users": users_in_this_ws,
+        "projects": project_in_this_ws,
         }
 
 
+# Create a  Workspace
+@workspace_routes.route('/', methods=['POST'])
+def create_workspace():
+    form = WorkspaceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_workspace = Workspace(
+            name = form.data['name'],
+            users = form.data['user']
+        )
+        db.session.add(new_workspace)
+        db.session.commit()
+        return  new_workspace.to_dict()
+    else:
+        form.errors
+
+#Update a Workspace
+@workspace_routes.route('/<int:id>', methods=['PUT'])
+def update_workspace(id):
+    form = WorkspaceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        workspace = Workspace.query.get(id).update(
+            name = form.data['name'],
+            users = form.data['user']
+
+        )
+        db.session.commit()
+        return workspace.to_dict()
+    else:
+        form.errors
+
+
 # # Add a User to the Workspace
-@workspace_routes.route('/<int:id>/users/<int:user_id>', methods=['POST'])
-def get_workspace(id, user_id):
-
-    workspace = Workspace.query.get(id)
-    find_user = User.get(user_id)
-
-
-    #figure out how to add User to workspace after getting workspace
-
-    return workspace.to_dict()
-
-
-
-# #Remove a user from Workspace
-@workspace_routes.route('/<int:id>/users/<int:userId>', methods=['DELETE'])
+@workspace_routes.route('/<int:id>/users', methods=['POST'])
 def get_workspace(id, user_id):
     workspace = Workspace.query.get(id)
-    find_user = workspace.members.get(user_id)
-    db.session.delete(find_user)
+    form = AddUserForm()
+    find_user = User.query.filter(User.email == form.data['users'])
+    if form.validate_on_submit():
+        workspace = Workspace.query.get(id).update(
+            name = form.data['name'],
+            users = find_user
+        )
+        db.session.commit()
+        return workspace.to_dict()
+    else:
+        form.errors
     return workspace.to_dict()
+
+# # #Remove a user from Workspace
+# @workspace_routes.route('/<int:id>/users/<int:userId>', methods=['DELETE'])
+# def get_workspace(id, user_id):
+#     workspace = Workspace.query.get(id)
+#     find_user = workspace.members.get(user_id)
+#     db.session.delete(find_user)
+#     #figure out how to add User to workspace after getting workspace
+#     return workspace.to_dict()

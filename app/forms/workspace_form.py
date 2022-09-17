@@ -7,3 +7,7 @@ class WorkspaceForm(FlaskForm):
       # from variables are in camelCase to better match the front end
     name = StringField("Name", validators=[DataRequired(), Length(0, 100)])
     users = StringField('Users')
+
+class AddUserForm(FlaskForm):
+      # from variables are in camelCase to better match the front end
+    users = StringField('Users')
