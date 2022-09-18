@@ -11,6 +11,14 @@ from flask_login import login_required
 
 project_routes = Blueprint('project', __name__)
 
+#get all tasks by a project id
+@project_routes.route('/<int:projectId>/tasks')
+def get_task_by_projectId(projectId):
+    tasks = Task.query.filter(Task.project_id==projectId)
+    response = {task.id:task.to_dict() for task in tasks}
+    return response
+
+#add a new task to project
 @project_routes.route('/<int:id>/tasks', methods=['POST'])
 @login_required
 def create_task(id):
