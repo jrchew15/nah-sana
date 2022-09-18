@@ -59,6 +59,5 @@ class User(db.Model, UserMixin):
             'department': self.department
         }
         if workspaces:
-            user_dict['Workspaces'] = self.spaces
-            print('in user.to_dict()', user_dict)
+            user_dict['Workspaces'] = [ workspace.to_dict() for workspace in self.spaces]
         return user_dict

@@ -7,17 +7,49 @@ export default function Workspace() {
     const match = useRouteMatch();
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(null)
-    const workspace = useSelector(state => state.workspace)
+    // const workspace = useSelector(state => state.workspace)
+
+    // for testing only:
+    const [workspace, setWorkspace] = useState(null)
 
     useEffect(() => {
         (async () => {
-            const loadedWorkspace = await fetch(
-                `/api/workspaces/${match.path.split('/')[2]}`
+            const response = await fetch(
+                `/api/workspaces/${match.params.id}`
             )
+            const loadedWorkspace = await response.json()
+            // console.log(loadedWorkspace)
+            setWorkspace(loadedWorkspace)
             setWorkspaceLoaded(true)
             // dispatch(actionLoadProjects(loadedWorkspace.projects))
             // dispatch(actionLoadUsers(loadedWorkspace.users))
             // dispatch(actionLoadTasks(loadedWorkspace.tasks))
         })()
     }, [dispatch])
+
+    return workspaceLoaded ? (
+        <ul>
+            <li>
+                <ul>Projects:
+                    {workspace.projects.map(project => (
+                        <li>{project.name}</li>
+                    ))}
+                </ul>
+            </li>
+            <li>
+                <ul>Users:
+                    {workspace.users.map(user => (
+                        <li>{user.name}</li>
+                    ))}
+                </ul>
+            </li>
+            <li>
+                <ul>Tasks:
+                    {workspace.tasks.map(task => (
+                        <li>{task.name}</li>
+                    ))}
+                </ul>
+            </li>
+        </ul>
+    ) : null
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
@@ -7,12 +7,10 @@ import { authenticate } from './store/session';
 import Workspace from './components/Workspace';
 
 
-function App() {
+export default function App() {
     const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
     const dispatch = useDispatch();
-    const history = useHistory();
-
-    currentUser = useSelector(state => state.session.user);
+    const currentUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         (async () => {
@@ -21,21 +19,23 @@ function App() {
         })();
     }, [dispatch]);
 
-    if (!currentUserIsLoaded) return null;
 
-    if (currentUser) {
-        if (currentUser.Workspaces.length) {
-            // If there is a current user that is on a workspace,
-            // then redirect them to their 0 index workspace
-            workspaceUrl = `/workspaces/${currentUser.Workspaces[0].id}`
-            history.push(workspaceUrl)
-            return
+    useEffect(() => {
+        if (currentUser) {
+            if (currentUser.Workspaces.length) {
+                // If there is a current user that is on a workspace,
+                // then redirect them to their 0 index workspace
+                const workspaceUrl = `/workspaces/${currentUser.Workspaces[0].id}`;
+                console.log('REDIRECT', workspaceUrl)
+                return <Redirect to={workspaceUrl} />
+            }
+            // If the user isn't on a workspace, suggest they create one
+
+            return // workspace form here
         }
-        // If the user isn't on a workspace, suggest they create one
+    }, [currentUser, currentUserIsLoaded])
 
-        return // workspace form here
-    }
-
+    if (!currentUserIsLoaded) return null;
 
     return (
         <BrowserRouter>
@@ -44,7 +44,7 @@ function App() {
                     {/* <SplashPage /> */}
                 </Route>
                 <Route path='/workspaces/:id'>
-                    <Workspaces />
+                    <Workspace />
                 </Route>
             </Switch>
         </BrowserRouter>
