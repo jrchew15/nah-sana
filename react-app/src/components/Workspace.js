@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
 import LogoutButton from './auth/LogoutButton';
+import Topbar from "./Topbar";
+import DevOnlyContent from "./DevOnlyContent";
 
 export default function Workspace() {
     const dispatch = useDispatch();
+    // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(null)
-    // const workspace = useSelector(state => state.workspace)
+
     const [navDisplay, setNavDisplay] = useState(true)
-    // for testing only:
+
+    // this will be updated with a fetch containing all info
+    // in the future, we may instead use useSelectors on all slices of state
+    //    which are filled when fetch hydrates state
     const [workspace, setWorkspace] = useState(null)
 
     useEffect(() => {
@@ -35,38 +41,17 @@ export default function Workspace() {
 
     return workspaceLoaded ? (
         <>
-            <div id='topbar'>
-                <i class="fas fa-bars" onClick={toggleNavbarDisplay} />
-            </div>
+            <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
             <div id='navbar-and-content'>
                 <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}></div>
                 <div id='content'>
-                    <>
-                        <ul>
-                            <li>
-                                <ul>Projects:
-                                    {workspace.projects.map(project => (
-                                        <li>{project.name}</li>
-                                    ))}
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>Users:
-                                    {workspace.users.map(user => (
-                                        <li>{user.firstName} {user.lastName}</li>
-                                    ))}
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>Tasks:
-                                    {workspace.tasks.map(task => (
-                                        <li>{task.name}</li>
-                                    ))}
-                                </ul>
-                            </li>
-                        </ul>
-                        <LogoutButton />
-                    </>
+                    <Switch>
+                        {/* Put all other main content routes here */}
+                        {/* This one below is just a placeholder for content */}
+                        <Route path='/'>
+                            <DevOnlyContent workspace={workspace} />
+                        </Route>
+                    </Switch>
                 </div>
             </div>
         </>

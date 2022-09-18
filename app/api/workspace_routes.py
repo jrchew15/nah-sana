@@ -3,7 +3,7 @@ from flask import Blueprint,request
 from app.api.user_routes import user, users
 from app.forms import project_form
 from app.forms.workspace_form import AddUserForm, WorkspaceForm
-from app.models import Workspace, User
+from app.models import Workspace, User, Project
 from ..forms.task_form import TaskForm
 from ..models import db, Task,Workspace
 from flask_login import login_required
