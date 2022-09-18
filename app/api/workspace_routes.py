@@ -31,11 +31,19 @@ def get_all_workspace():
 def one_workspace(id):
     workspace = Workspace.query.get(id)
     users_in_this_ws = [user.to_dict() for user in workspace.members]
-    project_in_this_ws= [projects.to_dict() for projects in workspace.projects]
+    project_objs= [project for project in workspace.projects]
+    project_in_this_ws= [project.to_dict() for project in project_objs]
+    task_in_this_ws = []
+
+    # add all the tasks from each project on the workspace
+    for project in project_objs:
+        task_in_this_ws.extend([task.to_dict() for task in project.tasks])
+
     return {
         "workspace": workspace.to_dict(),
         "users": users_in_this_ws,
         "projects": project_in_this_ws,
+        "tasks": task_in_this_ws
         }
 
 # Create a  Workspace
