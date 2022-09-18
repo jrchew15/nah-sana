@@ -86,7 +86,7 @@ class Task(db.Model):
     name = db.Column(db.String(med_str), nullable=False)
     due_date = db.Column(db.Date)
     description = db.Column(db.String(long_str))
-    complete = db.Column(db.Boolean)
+    complete = db.Column(db.Boolean, default=False)
 
     # Relationships
     project = db.relationship("Project", back_populates="tasks")
