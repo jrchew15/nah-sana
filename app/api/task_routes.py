@@ -24,26 +24,6 @@ def get_task_by_id(taskId):
     tasks = Task.query.get(taskId)
     return tasks.to_dict()
 
-#get all tasks by a project id
-#need to move this route to the project-routes and change the url a little if needed
-@task_routes.route('/<int:projectId>/tasks')
-def get_task_by_projectId(projectId):
-    tasks = Task.query.filter(Task.project_id==projectId)
-    response = {task.id:task.to_dict() for task in tasks}
-    return response
-
-#Get all tasks by a user's id who is in the same workspace as current user
-#need to move this route to the workspace-routes and change the url a little if needed
-@task_routes.route('/<int:workspaceId>/users/<int:userId>/tasks')
-def tasks_by_workspace_userId(workspaceId, userId):
-
-    tasks = Task.query\
-        .join(Project)\
-        .filter(Project.workspace_id==workspaceId, Task.user_id==userId)\
-        .all()
-    response = {task.id:task.to_dict() for task in tasks}
-    return response
-
 @task_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_task(id):
