@@ -47,8 +47,8 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
+    def to_dict(self, workspaces=False):
+        user_dict = {
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
@@ -58,3 +58,7 @@ class User(db.Model, UserMixin):
             'pronouns': self.pronouns,
             'department': self.department
         }
+        if workspaces:
+            user_dict['Workspaces'] = self.spaces
+            print('in user.to_dict()', user_dict)
+        return user_dict
