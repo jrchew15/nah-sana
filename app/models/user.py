@@ -8,7 +8,6 @@ small_str = 15
 med_str = 100
 long_str = 500
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -59,5 +58,5 @@ class User(db.Model, UserMixin):
             'department': self.department
         }
         if workspaces:
-            user_dict['Workspaces'] = [ workspace.to_dict() for workspace in self.spaces]
+            user_dict['workspaces'] = [ workspace.to_dict() for workspace in self.spaces]
         return user_dict

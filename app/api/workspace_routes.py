@@ -19,12 +19,17 @@ def get_all_workspace():
     workspaces = [wk.to_dict() for wk in Workspace.query.all()]
     return {"workspaces": workspaces}
 
-# Get One workSpaces by id
-# @workspace_routes.route('/<int:id>')
-# def one_workspace(id):
-#     workspace = Workspace.query.get(id)
-#     return workspace.to_dict()
 
+#Get all tasks by a user's id who is in the same workspace as current user
+@workspace_routes.route('/<int:workspaceId>/users/<int:userId>/tasks')
+def tasks_by_workspace_userId(workspaceId, userId):
+
+    tasks = Task.query\
+        .join(Project)\
+        .filter(Project.workspace_id==workspaceId, Task.user_id==userId)\
+        .all()
+    response = {task.id:task.to_dict() for task in tasks}
+    return response
 
 # Get One Workspaces by id with users
 @workspace_routes.route('/<int:id>')

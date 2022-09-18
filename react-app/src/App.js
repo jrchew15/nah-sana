@@ -45,7 +45,7 @@ export default function App() {
                 <Route path='/' exact={true}>
                     {
                         currentUser ?
-                            <Redirect to={`/workspaces/${currentUser.Workspaces[0].id}`} /> :
+                            <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
                             <>
                                 <h1>Splash Page</h1>
                                 <LoginForm />
