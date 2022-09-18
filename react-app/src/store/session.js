@@ -1,9 +1,15 @@
 // constants
 const SET_USER = 'session/SET_USER';
+const UPDATE_USER = 'session/UPDATE_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
 const setUser = (user) => ({
   type: SET_USER,
+  payload: user
+});
+
+const updateUser = (user) => ({
+  type: UPDATE_USER,
   payload: user
 });
 
@@ -73,6 +79,31 @@ export const logout = () => async (dispatch) => {
 export const signUp = (email, password, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email, password, firstName, lastName, role, image, pronouns, department
+    }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const updateProfile = (email, password, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
+  const response = await fetch('/api/users/:id', {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
