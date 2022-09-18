@@ -67,7 +67,7 @@ def update_workspace(id):
 
 # Add a User to the Workspace
 @workspace_routes.route('/<int:id>/users', methods=['POST'])
-def get_workspace(id):
+def add_user_from_workspace(id):
     workspace = Workspace.query.get(id)
     form = AddUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -81,28 +81,14 @@ def get_workspace(id):
     else:
         return form.errors
 
-
-
-
-
-    form = AddUserForm()
-    find_user = User.query.filter(User.email == form.data['users'])
-    if form.validate_on_submit():
-        workspace = Workspace.query.get(id).update(
-            name = form.data['name'],
-            users = workspace.members.append(find_user)
-        )
-        db.session.commit()
-        return workspace.to_dict()
-    else:
-        form.errors
-    return workspace.to_dict()
-
 # # # #Remove a user from Workspace
-# @workspace_routes.route('/<int:id>/users/<int:userId>', methods=['DELETE'])
-# def get_workspace(id, user_id):
-#     workspace = Workspace.query.get(id)
-#     find_user = workspace.members.get(user_id)
-#     db.session.delete(find_user)
-#     #figure out how to add User to workspace after getting workspace
-#     return workspace.to_dict()
+@workspace_routes.route('/<int:id>/users/<int:user_id>', methods=['DELETE'])
+def delete_user_from_workspace(id, user_id ):
+    workspace = Workspace.query.get(id)
+    find_user_to_delete = [x for x in workspace.members if x.id == user_id]
+    if len(find_user_to_delete) > 0:
+        db.session.delete(find_user_to_delete[0])
+        db.session.commit()
+        return {'message': f'{find_user_to_delete[0].first_name} was successfully removed from workspace'}
+    else:
+        return {'Error':'User not found in workspace'}
