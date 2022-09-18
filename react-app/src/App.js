@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
-import LogoutButton from './components/auth/LogoutButton';
+import LoginForm from './components/auth/LoginForm';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
@@ -28,6 +28,8 @@ export default function App() {
     //             // then redirect them to their 0 index workspace
     //         }
     //         // If the user isn't on a workspace, suggest they create one
+    // maybe add a 'demo workspace' button that adds the current user to a default workspace
+    // with some seeded data
 
     //         return // workspace form here
     //     }
@@ -46,14 +48,13 @@ export default function App() {
                             <Redirect to={`/workspaces/${currentUser.Workspaces[0].id}`} /> :
                             <>
                                 <h1>Splash Page</h1>
-                                <Depricated_App />
+                                <LoginForm />
                             </>
                     }
                 </Route>
                 <Route path='/workspaces/:id'>
                     <>
                         <Workspace />
-                        <LogoutButton />
                     </>
                 </Route>
             </Switch>
