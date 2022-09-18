@@ -18,8 +18,13 @@ def all_projects():
 @project_routes.route("/<int:id>")
 def one_project(id):
     project_one = Project.query.get(id)
+    task = [x.to_dict() for x in project_one.tasks]
     if project_one is not None:
-        return project_one.to_dict()
+      # return project_one.to_dict()
+        return {
+          'projects':project_one.to_dict(),
+          'tasks':task
+        }
         # return { id: project_one.to_dict() }
     else:
         return {
@@ -71,7 +76,7 @@ def update_project(id):
     db.session.commit()
     project = Project.query.filter(Project.id==id)[0]
     return project.to_dict()
-  
+
   if update_form.errors:
     return update_form.errors
 
