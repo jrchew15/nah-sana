@@ -39,7 +39,7 @@ export default function Workspace() {
             <li>
                 <ul>Users:
                     {workspace.users.map(user => (
-                        <li>{user.name}</li>
+                        <li>{user.firstName} {user.lastName}</li>
                     ))}
                 </ul>
             </li>
