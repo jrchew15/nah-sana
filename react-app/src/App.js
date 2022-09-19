@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import TaskList from './components/Tasks/TasksList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import TaskDetail from './components/Tasks/TaskDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +45,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route exact path='/tasks/:taskId'>
+          <TaskDetail />
+        </Route>
         <Route exact path='/tasks'>
           <TaskList />
         </Route>

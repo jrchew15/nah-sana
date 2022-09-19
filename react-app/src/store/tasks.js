@@ -1,4 +1,5 @@
 export const LOAD_TASKS = 'tasks/LOAD_TASKS';
+export const LOAD_TASK = 'tasks/LOAD_TASK'
 export const UPDATE_TASK = 'tasks/UPDATE_TASK';
 export const ADD_TASK = 'tasks/ADD_TASK';
 export const REMOVE_TASK = 'tasks/REMOVE_TASK';
@@ -8,16 +9,17 @@ const loadAll = tasks => ({
     tasks
 });
 
+const loadOneTask = (task) => ({
+    type: LOAD_TASK,
+    task
+});
+
 // const loadByProject = (tasks, projectId) => ({
 //     type: LOAD_TASKS,
 //     tasks,
 //     projectId
 // });
 
-// const loadOneTask = (task) => ({
-//     type: LOAD_TASKS,
-//     task
-// });
 
 const add = (task) => ({
     type: ADD_TASK,
@@ -45,23 +47,24 @@ export const getTasks = () => async dispatch => {
     }
 };
 
-// export const getTasksById = (taskId) => async (dispatch) => {
-//     const response = await fetch(`/api/tasks/${taskId}`);
-//     if (response.ok) {
-//         const task = await response.json()
-//         dispatch(loadOneTask(task))
-//         return task
-//     }
-// };
+export const getTaskById = (taskId) => async (dispatch) => {
+    const response = await fetch(`/api/tasks/${taskId}`);
+    if (response.ok) {
+        const task = await response.json()
+        // console.log('*******tasks from thunk******', task)
+        dispatch(loadOneTask(task))
+        return task
+    }
+};
 
-// export const getTasksByProjectId = (projectId) => async (dispatch) => {
-//     const response = await fetch(`/api/projects/${projectId}/tasks`);
-//     if (response.ok) {
-//         const tasks = await response.json()
-//         dispatch(loadByProject(tasks, projectId))
-//         return tasks
-//     }
-// };
+export const getTasksByProjectId = (projectId) => async (dispatch) => {
+    const response = await fetch(`/api/projects/${projectId}/tasks`);
+    if (response.ok) {
+        const tasks = await response.json()
+        dispatch(loadAll(tasks))
+        return tasks
+    }
+};
 
 export const createOneTask = data => async dispatch => {
     const response = await fetch(`/api/tasks`, {
@@ -102,12 +105,16 @@ export const deleteOneTask = taskId => async dispatch => {
 
 const initialState = {};
 const tasksReducer = (state = initialState, action) => {
+    let newState = {}
     switch (action.type) {
         case LOAD_TASKS:
-            let allTasks = {}
-            console.log('*********tasks from reducer******', action.tasks)
-            allTasks = { ...action.tasks }
-            return allTasks
+            newState = { ...state, ...action.tasks }
+            // console.log('*********tasks from reducer******', action.tasks)
+            return newState
+        case LOAD_TASK:
+            newState = { ...state }
+            newState[action.task.id] = action.task
+            return newState
         default:
             return state;
     }
