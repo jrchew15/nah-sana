@@ -24,9 +24,18 @@ const TaskList = () => {
     if (!tasksArr.length) return null
     return (
         <>
-            {tasksArr.map((task) => (
-                <div>{task.name}</div>
-            ))}
+            <table>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Due Date</th>
+                </tr>
+                {tasksArr.map((task) => (
+                    <tr>
+                        <td>{task.name}</td>
+                        <td>{task.dueDate.split(',')[1]}</td>
+                    </tr>
+                ))}
+            </table>
         </>
     )
 }
