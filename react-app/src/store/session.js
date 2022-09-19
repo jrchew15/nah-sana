@@ -76,14 +76,14 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (email, password, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
+export const signUp = (email, password, firstName, lastName, role, image, pronouns, department, bio) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      email, password, firstName, lastName, role, image, pronouns, department
+      email, password, firstName, lastName, role, image, pronouns, department, bio
     }),
   });
 
@@ -101,14 +101,14 @@ export const signUp = (email, password, firstName, lastName, role, image, pronou
   }
 }
 
-export const updateProfile = (user, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
+export const updateProfile = (user, firstName, lastName, role, image, pronouns, department, bio) => async (dispatch) => {
   const response = await fetch(`/api/users/${user.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      firstName, lastName, role, image, pronouns, department
+      firstName, lastName, role, image, pronouns, department, bio
     }),
   });
 

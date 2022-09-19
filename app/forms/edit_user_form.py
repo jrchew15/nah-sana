@@ -19,4 +19,6 @@ class EditUserForm(FlaskForm):
                         validators=[Length(max=15, message='Pronouns must be less than 15 characters')])
     department = StringField('Department', 
                         validators=[Length(max=15, message='Department must be less than 15 characters')])
-
+    bio = StringField('Biography', 
+                        validators=[Length(max=500, message='Biography must be less than 500 characters')])
+    
