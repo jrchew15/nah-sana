@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAProject, getAllProjects, getAProject } from '../../store/projects';
 import EditProjectModal from './EditProjectModal';
 
-function ProjectDetail() {
+function ProjectDetail({workspaceId}) {
   const dispatch = useDispatch();
   const history = useHistory()
   const { id } = useParams()
@@ -21,7 +21,7 @@ function ProjectDetail() {
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
     await dispatch(getAllProjects())
-    await history.push('/projects')
+    await history.push(`/workspaces/${workspaceId}/projects`)
   }
 
   let dueDate;

@@ -5,6 +5,8 @@ import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
+import GetProjects from "./Projects/ProjectsList";
+import ProjectDetail from "./Projects/ProjectDetail";
 
 
 export default function Workspace() {
@@ -51,12 +53,18 @@ export default function Workspace() {
                     <Switch>
                         {/* Put all other main content routes here */}
                         {/* This one below is just a placeholder for content */}
-                        <Route path='/workspaces/:id'>
+                        <Route exact path='/workspaces/:id'>
                             {/* changed path from / */}
                             {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne workspaceId={workspaceId} />
+                            <GetProjects workspaceId={workspaceId} />
                         </Route>
-
+                        <Route exact path='/workspaces/:id/projects'>
+                            <GetProjects workspaceId={workspaceId}/>
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/projects/:id'>
+                            <ProjectDetail workspaceId={workspaceId} />
+                        </Route>
                     </Switch>
                 </div>
             </div>

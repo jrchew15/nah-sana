@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
@@ -7,7 +7,6 @@ import TaskList from './components/Tasks/TasksList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
-import LoginForm from './components/auth/LoginForm';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
@@ -51,7 +50,7 @@ export default function App() {
     if (!currentUserIsLoaded) return null;
 
     const Home = () => {
-        if (currentUser) {
+        if (currentUser && currentUser.workspaces) {
             return currentUser.workspaces.length ?
                 <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
                 <CreateWorkspace />
@@ -60,11 +59,14 @@ export default function App() {
             <>
                 <h1>Splash Page</h1>
                 <LoginForm />
-                <h2>Sign Up</h2>
-                <SignUpForm />
-              </>
+                <p>Don't have an account? 
+                    <NavLink to="/signup">
+                        Sign Up
+                    </NavLink>
+                </p>
+            </>
         )
-          }
+    }
 
 
     return (
@@ -74,22 +76,25 @@ export default function App() {
                     <Home />
                 </Route>
                 <Route path='/workspaces/:id'>
-          <>
-            <Workspace />
-          </>
-        </Route>
-        <Route path='/workspaces'>
-           <AllWorkSpaces />
-           <CreateWorkspace />
-        </Route>
-        <Route exact path='/projects/:id'>
-          <ProjectDetail />
-        </Route>
-        <Route exact path='/projects'>
-          <GetProjects />
-          <CreateProjectModal />
-          <EditUserFormModal />
-        </Route>
+                    <>
+                        <Workspace />
+                    </>
+                </Route>
+                <Route path='/signup'>
+                    <SignUpForm />
+                </Route>
+                {/* <Route path='/workspaces'>
+                    <AllWorkSpaces />
+                    <CreateWorkspace />
+                </Route>
+                <Route exact path='/projects/:id'>
+                    <ProjectDetail />
+                </Route>
+                <Route exact path='/projects'>
+                    <GetProjects />
+                    <CreateProjectModal />
+                    <EditUserFormModal />
+                </Route> */}
             </Switch>
         </BrowserRouter>
     )
