@@ -36,11 +36,13 @@ const TaskList = () => {
                         <td>
                             {task.name}
                             <button onClick={() => (
-                                history.push('/tasks/${task.id}')
+                                history.push(`/tasks/${task.id}`)
                             )
                             }>details</button>
                         </td>
-                        <td>{task.dueDate}</td>
+                        <td>
+                            {task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}
+                        </td>
                     </tr>
                 ))}
             </table>

@@ -18,9 +18,11 @@ const TaskDetail = () => {
     if (!task) { return null }
     return (
         <>
-            <h1>Hi</h1>
             <div>{task.name}</div>
+            <div>Due Date:   {task.dueDate}</div>
+            <div>Description:    {task.description}</div>
             <div>{task.complete.toString()}</div>
+            <button onClick={() => { history.push(`/tasks/${task.id}/edit`) }}>Edit</button>
             <button onClick={async () => {
                 await dispatch(deleteOneTask(taskId))
                 history.push('/tasks')

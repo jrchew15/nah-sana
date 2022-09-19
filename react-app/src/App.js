@@ -74,6 +74,9 @@ export default function App() {
         <Route exact path='/tasks'>
           <TaskList />
         </Route>
+        <Route exact path='/tasks/:taskId'>
+          <TaskDetail />
+        </Route>
 
       </Switch>
     </BrowserRouter>
