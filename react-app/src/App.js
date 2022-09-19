@@ -7,6 +7,8 @@ import LoginForm from './components/auth/LoginForm';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
+import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
+import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 
 export default function App() {
     const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -56,6 +58,10 @@ export default function App() {
                     <>
                         <Workspace />
                     </>
+                </Route>
+                <Route path='/workspaces'>
+                    <AllWorkSpaces />
+                    <CreateWorkspace />
                 </Route>
             </Switch>
         </BrowserRouter>

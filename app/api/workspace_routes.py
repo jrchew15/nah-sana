@@ -43,16 +43,17 @@ def one_workspace(id):
     # add all the tasks from each project on the workspace
     for project in project_objs:
         task_in_this_ws.extend([task.to_dict() for task in project.tasks])
-
+    id =workspace.to_dict()
+    print('-------------------',id)
     return {
-        "workspace": workspace.to_dict(),
+        'workspace' : workspace.to_dict(),
         "users": users_in_this_ws,
         "projects": project_in_this_ws,
         "tasks": task_in_this_ws
         }
 
 # Create a  Workspace
-@workspace_routes.route('/', methods=['POST'])
+@workspace_routes.route('', methods=['POST'])
 def create_workspace():
     form = WorkspaceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
