@@ -14,13 +14,6 @@ const loadOneTask = (task) => ({
     task
 });
 
-// const loadByProject = (tasks, projectId) => ({
-//     type: LOAD_TASKS,
-//     tasks,
-//     projectId
-// });
-
-
 const add = (task) => ({
     type: ADD_TASK,
     task
@@ -77,11 +70,13 @@ export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => 
 }
 
 export const createOneTask = data => async dispatch => {
-    const response = await fetch(`/api/tasks`, {
+    console.log('in thunk before fetch', data)
+    const response = await fetch(`/api/projects/${data.projectId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
+    console.log('in thunk after fetch', response)
     if (response.ok) {
         const task = await response.json()
         dispatch(add(task))
@@ -122,6 +117,10 @@ const tasksReducer = (state = initialState, action) => {
             // console.log('*********tasks from reducer******', action.tasks)
             return newState
         case LOAD_TASK:
+            newState = { ...state }
+            newState[action.task.id] = action.task
+            return newState
+        case ADD_TASK:
             newState = { ...state }
             newState[action.task.id] = action.task
             return newState

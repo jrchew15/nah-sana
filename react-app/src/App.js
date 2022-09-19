@@ -13,6 +13,7 @@ import Depricated_App from './Depricated_App';
 import NavBar from './components/NavBar';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import TaskForm from './components/Tasks/TaskForm';
 
 export default function App() {
   let dispatch = useDispatch()
@@ -44,6 +45,9 @@ export default function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route exact path='/tasks/new'>
+          <TaskForm />
+        </Route>
         <Route exact path='/tasks/:taskId'>
           <TaskDetail />
         </Route>
