@@ -40,8 +40,9 @@ def edit_task(id):
         task.user_id = data["userId"]
         task.project_id=data['projectId']
         task.name=data['name']
-        task.due_date=sql_date_to_date_obj(data['dueDate'])
+        task.due_date=data['dueDate']
         task.description=data['description']
+        task.complete=data['complete']
 
         db.session.commit()
         return task.to_dict()

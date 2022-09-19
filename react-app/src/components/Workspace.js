@@ -6,6 +6,7 @@ import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 
+
 export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
@@ -54,6 +55,7 @@ export default function Workspace() {
                             {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne />
                         </Route>
+
                     </Switch>
                 </div>
             </div>
