@@ -5,6 +5,9 @@ const CREATE_WORKSPACE = 'workspace/CREATE_WORKSPACE'
 const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE'
 const GET_ONE_WORKSPACE = 'workspace/GET_ONE_WORKSPACE'
 
+const ADD_USER = 'workspace/ADD_USER'
+const DELETE_USER = 'workspace/DELETE_USER'
+
 const loadWorkspace = (workspace) => ({
     type: LOAD_WORKSPACE,
     workspace
@@ -23,6 +26,10 @@ const updateWorkspace = (workspace) => ({
     workspace
 })
 
+const addUser = (user) => ({
+    type: ADD_USER,
+    user
+})
 // Get All Workspace
 export const workspaceGet = () => async (dispatch) => {
     const response = await fetch(`/api/workspaces`)
@@ -51,7 +58,7 @@ export const workspaceCreate = (workspace) => async (dispatch) => {
     if (response.ok) {
         const wks = await response.json();
         dispatch(createWorkspace(wks))
-        return wks
+        // return wks
     }
     return response
 }
@@ -69,7 +76,20 @@ export const workspaceUpdate = (workspace, id) => async (dispatch) => {
         return wks
     }
     return response
-
+}
+//add user
+export const addUserToWorkspace = (user, id) => async (dispatch) => {
+    const response = await fetch(`/api/workspaces/${id}/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    })
+    if (response.ok) {
+        const user = await response.json();
+        dispatch(addUser(user));
+        return user
+    }
+    return response
 }
 
 const initialState = {};
@@ -96,6 +116,11 @@ export default function workspaceReducer(state = initialState, action) {
         case UPDATE_WORKSPACE:
             newState = { ...state }
             newState['workspace'] = { ...action.workspace }
+            return newState
+        case ADD_USER:
+            newState = { ...state }
+            // newState[action.user.id] = { ...newState[action.user.id], ...action.user }
+            newState['users'].push(action.user)
             return newState
         default:
             return state;

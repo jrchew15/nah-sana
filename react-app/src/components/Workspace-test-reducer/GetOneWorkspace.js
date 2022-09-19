@@ -6,8 +6,10 @@ import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 
 import { oneWorkspace } from "../../store/workspace";
+import AddUser from "./AddUser";
 export default function GetOne() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false)
     const { id } = useParams()
 
@@ -15,7 +17,11 @@ export default function GetOne() {
     useEffect(() => {
         dispatch(oneWorkspace(id)).then(() => setIsLoaded(true))
     }, [dispatch, id])
+    const handlepush = (e) => {
+        e.preventDefault()
+        history.push('/workspaces')
 
+    }
 
     return isLoaded ? (
 
@@ -51,8 +57,10 @@ export default function GetOne() {
                             </ul>
                         </li>
                     </ul>
-                    <UpdateWorkspace workspace={workspace} />
+                    <UpdateWorkspace />
+                    <AddUser />
                     <LogoutButton />
+                    <button onClick={handlepush}>Back to workspaces</button>
                 </div>
             )}
         </>

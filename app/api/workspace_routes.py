@@ -1,4 +1,5 @@
 
+import email
 from flask import Blueprint,request
 from app.api.user_routes import user, users
 from app.forms import project_form
@@ -6,7 +7,7 @@ from app.forms.workspace_form import AddUserForm, WorkspaceForm
 from app.models import Workspace, User, Project
 from ..forms.task_form import TaskForm
 from ..models import db, Task,Workspace
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..utils import sql_date_to_date_obj
 from .auth_routes import validation_errors_to_error_messages
 
@@ -55,33 +56,26 @@ def one_workspace(id):
 # Create a  Workspace
 @workspace_routes.route('', methods=['POST'])
 def create_workspace():
+    maker_email = current_user.email
     form = WorkspaceForm()
+    # add_user_form = AddUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_workspace = Workspace(
             name = form.data['name'],
-            # users = form.data['users']
+            # email = form.data['email']
         )
         db.session.add(new_workspace)
+        new_workspace.members.append(current_user)
+
+        # user_email = str(form.data['email'])
+        # foundUser = User.query.filter(User.email == user_email)[0]
+        # print(user_email,'----------------33333-')
+        # new_workspace.members.append(foundUser)
         db.session.commit()
         return  new_workspace.to_dict()
     else:
         form.errors
-
-# #Update a Workspace
-@workspace_routes.route('/<int:id>', methods=['PUT'])
-def update_workspace(id):
-    form = WorkspaceForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        workspace = Workspace.query.get(id)
-        workspace.name = form.data['name']
-            # users = form.data['user']
-        db.session.commit()
-        return workspace.to_dict()
-    else:
-        form.errors
-
 
 # Add a User to the Workspace
 @workspace_routes.route('/<int:id>/users', methods=['POST'])
@@ -98,6 +92,21 @@ def add_user_from_workspace(id):
         return foundUser.to_dict()
     else:
         return form.errors
+
+# #Update a Workspace
+@workspace_routes.route('/<int:id>', methods=['PUT'])
+def update_workspace(id):
+    form = WorkspaceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        workspace = Workspace.query.get(id)
+        workspace.name = form.data['name']
+            # users = form.data['user']
+        db.session.commit()
+        return workspace.to_dict()
+    else:
+        form.errors
+
 
 # # # #Remove a user from Workspace
 @workspace_routes.route('/<int:id>/users/<int:user_id>', methods=['DELETE'])
