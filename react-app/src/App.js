@@ -21,63 +21,48 @@ import EditUserFormModal from './components/EditUserModal';
 import SignUpForm from './components/auth/SignUpForm';
 
 export default function App() {
-    const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
-    const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.session.user);
+  const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        (async () => {
-            await dispatch(authenticate());
-            setCurrentUserIsLoaded(true);
-        })();
-    }, [dispatch]);
+  useEffect(() => {
+    (async () => {
+      await dispatch(authenticate());
+      setCurrentUserIsLoaded(true);
+    })();
+  }, [dispatch]);
 
+  if (!currentUserIsLoaded) return null;
 
-    // useEffect(() => {
-    //     if (currentUser) {
-    //         if (currentUser.Workspaces.length) {
-    //             // If there is a current user that is on a workspace,
-    //             // then redirect them to their 0 index workspace
-    //         }
-    //         // If the user isn't on a workspace, suggest they create one
-    // maybe add a 'demo workspace' button that adds the current user to a default workspace
-    // with some seeded data
-
-    //         return // workspace form here
-    //     }
-    // }, [currentUser, currentUserIsLoaded])
-
-    if (!currentUserIsLoaded) return null;
-
-    const Home = () => {
-        if (currentUser) {
-            return currentUser.workspaces.length ?
-                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-                <CreateWorkspace />
-        }
-        return (
-            <>
-                <h1>Splash Page</h1>
-                <LoginForm />
-                <h2>Sign Up</h2>
-                <SignUpForm />
-              </>
-        )
-          }
-
-
+  const Home = () => {
+    if (currentUser) {
+      return currentUser.workspaces.length ?
+        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+        <CreateWorkspace />
+    }
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route path='/' exact={true}>
-                    <Home />
-                </Route>
-                <Route path='/workspaces/:id'>
+      <>
+        <h1>Splash Page</h1>
+        <LoginForm />
+        <h2>Sign Up</h2>
+        <SignUpForm />
+      </>
+    )
+  }
+
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path='/' exact={true}>
+          <Home />
+        </Route>
+        <Route path='/workspaces/:id'>
           <>
             <Workspace />
           </>
         </Route>
-        <Route path='/workspaces'>
+        {/* <Route path='/workspaces'>
           <AllWorkSpaces />
           <CreateWorkspace />
         </Route>
@@ -88,8 +73,8 @@ export default function App() {
           <GetProjects />
           <CreateProjectModal />
           <EditUserFormModal />
-        </Route>
-            </Switch>
-        </BrowserRouter>
-    )
+        </Route> */}
+      </Switch>
+    </BrowserRouter>
+  )
 }
