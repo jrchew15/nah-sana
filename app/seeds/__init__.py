@@ -4,6 +4,7 @@ from .users import seed_users, undo_users
 from .workspaces import seed_workspaces, undo_workspaces
 from .projects import seed_projects, undo_projects
 from .tasks import seed_tasks, undo_tasks
+from .join_tables import seed_join_tables, undo_join_tables
 
 
 # Creates a seed group to hold our commands
@@ -19,6 +20,7 @@ def seed():
     seed_workspaces()
     seed_projects()
     seed_tasks()
+    seed_join_tables()
 
 
 # Creates the `flask seed undo` command
@@ -29,3 +31,4 @@ def undo():
     undo_workspaces()
     undo_projects()
     undo_tasks()
+    undo_join_tables()
