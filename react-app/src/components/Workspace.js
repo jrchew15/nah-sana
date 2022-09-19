@@ -5,6 +5,7 @@ import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 
+
 export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
@@ -51,6 +52,7 @@ export default function Workspace() {
                         <Route path='/'>
                             <DevOnlyContent workspace={workspace} />
                         </Route>
+
                     </Switch>
                 </div>
             </div>
