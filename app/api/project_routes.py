@@ -1,14 +1,14 @@
 
 from ..models import Task
 from ..forms.task_form import TaskForm
-from ..utils import sql_date_to_date_obj
+from ..utils import date_obj_from_dash_connected
 from flask import Blueprint, request
 from app.models import Project
 from ..models.db import db
 from app.forms.project_form import ProjectForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask_login import login_required
-from datetime import date, datetime
+
 
 project_routes = Blueprint('project', __name__)
 
@@ -23,7 +23,6 @@ def get_task_by_projectId(projectId):
 @project_routes.route('/<int:id>/tasks', methods=['POST'])
 @login_required
 def create_task(id):
-    print('***********triggered api task post route')
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -32,9 +31,9 @@ def create_task(id):
             user_id=data['userId'],
             project_id=data['projectId'] or id,
             name=data['name'],
-            due_date=datetime.date(datetime.strptime(data['dueDate'], '%Y-%m-%d')),
-            description=data['description']
-            # complete=data['complete'] or None
+            due_date=data['dueDate'],
+            description=data['description'],
+            complete=data['complete'] or False
         )
 
         db.session.add(new_task)
