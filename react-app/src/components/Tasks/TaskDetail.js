@@ -18,6 +18,7 @@ const TaskDetail = () => {
         <>
             <h1>Hi</h1>
             <div>{task.name}</div>
+            <div>{task.complete.toString()}</div>
         </>
     )
 }

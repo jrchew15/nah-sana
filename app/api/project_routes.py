@@ -1,13 +1,14 @@
 
 from ..models import Task
 from ..forms.task_form import TaskForm
-from ..utils import sql_date_to_date_obj
+from ..utils import date_obj_from_dash_connected
 from flask import Blueprint, request
 from app.models import Project
 from ..models.db import db
 from app.forms.project_form import ProjectForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask_login import login_required
+
 
 project_routes = Blueprint('project', __name__)
 
@@ -30,8 +31,9 @@ def create_task(id):
             user_id=data['userId'],
             project_id=data['projectId'] or id,
             name=data['name'],
-            due_date=sql_date_to_date_obj(data['dueDate']),
-            description=data['description']
+            due_date=data['dueDate'],
+            description=data['description'],
+            complete=data['complete'] or False
         )
 
         db.session.add(new_task)
