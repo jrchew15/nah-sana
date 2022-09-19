@@ -10,53 +10,67 @@ import TaskDetail from './components/Tasks/TaskDetail';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
-import NavBar from './components/NavBar';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import TaskForm from './components/Tasks/TaskForm';
+import GetProjects from './components/Projects/ProjectsList';
+import ProjectDetail from './components/Projects/ProjectDetail';
+import CreateProjectModal from './components/Projects/CreateProjectModal';
+
 
 export default function App() {
-  let dispatch = useDispatch()
-  let [loaded, setLoaded] = useState()
+  const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      setLoaded(true);
+      setCurrentUserIsLoaded(true);
     })();
   }, [dispatch]);
 
+
+  // useEffect(() => {
+  //     if (currentUser) {
+  //         if (currentUser.Workspaces.length) {
+  //             // If there is a current user that is on a workspace,
+  //             // then redirect them to their 0 index workspace
+  //         }
+  //         // If the user isn't on a workspace, suggest they create one
+  // maybe add a 'demo workspace' button that adds the current user to a default workspace
+  // with some seeded data
+
+  //         return // workspace form here
+  //     }
+  // }, [currentUser, currentUserIsLoaded])
+
+  if (!currentUserIsLoaded) return null;
+
+
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
+        <Route path='/' exact={true}>
+          {
+            currentUser ?
+              <Redirect to={`/workspaces/${currentUser.workspaces[0]}`} /> :
+              <>
+                <h1>Splash Page</h1>
+                <LoginForm />
+              </>
+          }
         </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/workspaces/:id'>
+          <>
+            <Workspace />
+          </>
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-        <Route exact path='/tasks/new'>
-          <TaskForm />
+        <Route exact path='/projects/:id'>
+          <ProjectDetail />
         </Route>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
+        <Route exact path='/projects'>
+          <GetProjects />
+          <CreateProjectModal />
         </Route>
-        <Route exact path='/tasks/:taskId/edit'>
-          <TaskForm />
-        </Route>
-        <Route exact path='/tasks'>
-          <TaskList />
-        </Route>
+
       </Switch>
     </BrowserRouter>
   )
