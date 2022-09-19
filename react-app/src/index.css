@@ -1,1 +1,64 @@
-/* TODO Add site wide styles */
+:root {
+    --bkg-color-grey: #363639;
+    --bkg-color-black: #1e1f21;
+    --text-color: #f5f4f3;
+    --text-color-unfocused: #6a696a;
+    --border-color: #424244;
+    --border-color-hover: #6a696a;
+    --border-color-active: #a2a0a2;
+
+    --topbar-height: 48px;
+    --navbar-width: 240px;
+}
+
+body {
+    margin: 0px;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#topbar,
+#navbar {
+    background-color: var(--bkg-color-grey);
+}
+
+
+#navbar-and-content {
+    display: flex;
+    min-height: calc(100vh - var(--topbar-height));
+}
+
+#navbar,
+#content {
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    background-color: var(--bkg-color-black);
+    overflow: auto;
+    flex-grow: 1;
+    height: 100%;
+    color: var(--text-color)
+}
+
+#navbar {
+    width: var(--navbar-width);
+    height: 100%;
+}
+
+#topbar {
+    height: var(--topbar-height);
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--border-color);
+}

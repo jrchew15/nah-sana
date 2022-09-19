@@ -6,13 +6,14 @@ import { useParams } from 'react-router-dom';
 const TaskDetail = () => {
     const { taskId } = useParams()
     const dispatch = useDispatch()
-    const task = useSelector((state) => state.tasks)
-    console.log('**********tasks from component****', task)
+    const tasks = useSelector((state) => state.tasks)
+    const task = tasks[taskId]
 
     useEffect(() => {
         dispatch(getTaskById(taskId))
     }, [dispatch])
 
+    if (!task) { return null }
     return (
         <>
             <h1>Hi</h1>

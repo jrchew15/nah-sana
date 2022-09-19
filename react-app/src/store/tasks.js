@@ -66,6 +66,16 @@ export const getTasksByProjectId = (projectId) => async (dispatch) => {
     }
 };
 
+export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => {
+    const response = await fetch(`/api/workspaces/${workspaceId}/users/${userId}/tasks`)
+    if (response.ok) {
+        const tasks = await response.json()
+        // console.log('*******tasks from thunk******', tasks)
+        dispatch(loadAll(tasks))
+        return tasks
+    }
+}
+
 export const createOneTask = data => async dispatch => {
     const response = await fetch(`/api/tasks`, {
         method: 'POST',

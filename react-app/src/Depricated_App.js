@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import TaskList from './components/Tasks/TasksList';
-import User from './components/User';
-import { authenticate } from './store/session';
-import TaskDetail from './components/Tasks/TaskDetail';
-
-import Workspace from './components/Workspace';
-import Depricated_App from './Depricated_App';
-import NavBar from './components/NavBar';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import NavBar from './components/NavBar';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import UsersList from './components/UsersList';
+import User from './components/User';
+import { authenticate } from './store/session';
 
-export default function App() {
-  let dispatch = useDispatch()
-  let [loaded, setLoaded] = useState()
+function Depricated_App() {
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -24,6 +19,10 @@ export default function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <BrowserRouter>
@@ -44,13 +43,9 @@ export default function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
-        </Route>
-        <Route exact path='/tasks'>
-          <TaskList />
-        </Route>
       </Switch>
     </BrowserRouter>
-  )
+  );
 }
+
+export default Depricated_App;
