@@ -17,6 +17,9 @@ import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 import GetProjects from './components/Projects/ProjectsList';
 import ProjectDetail from './components/Projects/ProjectDetail';
 import CreateProjectModal from './components/Projects/CreateProjectModal';
+import LoginForm from './components/auth/LoginForm';
+import EditUserFormModal from './components/EditUserModal';
+import SignUpForm from './components/auth/SignUpForm';
 
 export default function App() {
     const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -57,10 +60,11 @@ export default function App() {
             <>
                 <h1>Splash Page</h1>
                 <LoginForm />
-            </>
+                <h2>Sign Up</h2>
+                <SignUpForm />
+              </>
         )
-    }
-
+          }
 
 
     return (
@@ -70,21 +74,22 @@ export default function App() {
                     <Home />
                 </Route>
                 <Route path='/workspaces/:id'>
-                    <>
-                        <Workspace />
-                    </>
-                </Route>
-                <Route path='/workspaces'>
-                    <AllWorkSpaces />
-                    <CreateWorkspace />
-                </Route>
-                <Route exact path='/projects/:id'>
-                    <ProjectDetail />
-                </Route>
-                <Route exact path='/projects'>
-                    <GetProjects />
-                    <CreateProjectModal />
-                </Route>
+          <>
+            <Workspace />
+          </>
+        </Route>
+        <Route path='/workspaces'>
+           <AllWorkSpaces />
+           <CreateWorkspace />
+        </Route>
+        <Route exact path='/projects/:id'>
+          <ProjectDetail />
+        </Route>
+        <Route exact path='/projects'>
+          <GetProjects />
+          <CreateProjectModal />
+          <EditUserFormModal />
+        </Route>
             </Switch>
         </BrowserRouter>
     )

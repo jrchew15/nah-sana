@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     image = db.Column(db.String(med_str))
     pronouns = db.Column(db.String(small_str))
     department = db.Column(db.String(small_str))
+    bio = db.Column(db.String(long_str))
 
     user_tasks = db.relationship("Task", back_populates="task_user")
     project_owner = db.relationship("Project", back_populates="owner")
@@ -55,7 +56,8 @@ class User(db.Model, UserMixin):
             'role': self.role,
             'image': self.image,
             'pronouns': self.pronouns,
-            'department': self.department
+            'department': self.department,
+            'bio': self.bio
         }
         if workspaces:
             user_dict['workspaces'] = [ workspace.to_dict() for workspace in self.spaces]

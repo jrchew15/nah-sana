@@ -11,12 +11,14 @@ const EditUserForm = () => {
   const [image, setImage] = useState(user.image || '');
   const [pronouns, setPronouns] = useState(user.pronouns || '');
   const [department, setDepartment] = useState(user.department || '');
+  const [bio, setBio] = useState(user.bio || '');
+
 
   const dispatch = useDispatch();
 
   const onUpdateProfile = async (e) => {
     e.preventDefault();
-    const data = await dispatch(updateProfile(user, firstName, lastName, role, image, pronouns, department));
+    const data = await dispatch(updateProfile(user, firstName, lastName, role, image, pronouns, department, bio));
     if (data) {
       setErrors(data)
     } 
@@ -81,6 +83,15 @@ const EditUserForm = () => {
           name='department'
           onChange={(e) => setDepartment(e.target.value)}
           value={department}
+        ></input>
+      </div>
+      <div>
+        <label>Biography</label>
+        <input
+          type='text'
+          name='bio'
+          onChange={(e) => setBio(e.target.value)}
+          value={bio}
         ></input>
       </div>
       <button type='submit'>Submit</button>

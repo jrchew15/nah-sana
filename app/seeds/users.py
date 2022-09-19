@@ -11,7 +11,8 @@ def seed_users():
         password='pass',
         image='/static/images/users/1.png',
         pronouns='They/Them',
-        department='Executive'
+        department='Executive',
+        bio=''
     )
     cecilia = User(
         first_name='Cecilia',
@@ -21,7 +22,8 @@ def seed_users():
         password='pass',
         image='/static/images/users/2.png',
         pronouns='She/Her/Hers',
-        department='Engineering'
+        department='Engineering',
+        bio='I am the demo user!'
     )
     chen = User(
         first_name='Chen',
@@ -31,7 +33,8 @@ def seed_users():
         password='password',
         image='/static/images/users/3.png',
         pronouns='She/Her/Hers',
-        department='Engineering'
+        department='Engineering',
+        bio='This is my bio.'
     )
     francisco = User(
         first_name='Francisco',
@@ -41,7 +44,8 @@ def seed_users():
         password='password',
         image='/static/images/users/4.png',
         pronouns=None,
-        department='Engineering'
+        department='Engineering',
+        bio='This is my bio.'
     )
     jason = User(
         first_name='Jason',
@@ -51,7 +55,8 @@ def seed_users():
         password='password',
         image='/static/images/users/5.png',
         pronouns=None,
-        department='Engineering'
+        department='Engineering',
+        bio='This is my bio.'
     )
 
     db.session.add(demo)
