@@ -21,7 +21,17 @@ const TaskForm = () => {
     useEffect(async () => {
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
+
+            let inputDate;
+            foundTask.dueDate ?
+                inputDate = new Date(foundTask.dueDate).toJSON().split("T")[0] : inputDate = ''
             setTask(foundTask)
+            setName(foundTask.name)
+            setDueDate(inputDate)
+            setDescription(foundTask.description)
+            setComplete(foundTask.complete)
+            setUserId(foundTask.userId)
+            setProjectId(foundTask.projectId)
         }
     }, [dispatch])
 
