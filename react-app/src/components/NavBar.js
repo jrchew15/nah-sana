@@ -1,9 +1,23 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import EditUserFormModal from './EditUserModal';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
+  const sessionUser = useSelector(state => state.session.user);
+
+  let sessionLinks;
+  if (sessionUser) {
+    sessionLinks = (
+      <EditUserFormModal />
+    );
+  } else {
+    sessionLinks = (
+      <></>
+    );
+  }
   return (
     <nav>
       <ul>
@@ -26,6 +40,9 @@ const NavBar = () => {
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
+        </li>
+        <li>
+          {sessionLinks}
         </li>
         <li>
           <LogoutButton />

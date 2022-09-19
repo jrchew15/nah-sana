@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user
 from app.models import User, db
-from app.forms import SignUpForm
+from app.forms import EditUserForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
 
@@ -27,18 +27,17 @@ def update_user(id):
     """
     Edits user profile information
     """
-    update_form = SignUpForm()
+    update_form = EditUserForm()
     update_form['csrf_token'].data = request.cookies['csrf_token']
     if update_form.validate_on_submit():
         user = User.query.filter(User.id==id)[0]
-        user.email = update_form.data['email']
-        user.password = update_form.data['password']
         user.first_name = update_form.data['firstName']
         user.last_name = update_form.data['lastName']
         user.role = update_form.data['role']
         user.image = update_form.data['image']
         user.pronouns = update_form.data['pronouns']
         user.department = update_form.data['department']
+        user.bio = update_form.data['bio']
         
         # REVISIT - Why isn't the update method working? 
         # User.query.filter(User.id==id).update(

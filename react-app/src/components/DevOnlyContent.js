@@ -1,26 +1,32 @@
 import LogoutButton from "./auth/LogoutButton"
+import UpdateWorkspace from "./Workspace-test-reducer/UpdateWorkSpace"
 
 export default function DevOnlyContent({ workspace }) {
     return <>
         <ul>
             <li>
+                <ul>Workspace :
+                    <li>{workspace.workspace.name}</li>
+                </ul>
+            </li>
+            <li>
                 <ul>Projects:
                     {workspace.projects.map(project => (
-                        <li>{project.name}</li>
+                        <li key={project.id}>{project.name}</li>
                     ))}
                 </ul>
             </li>
             <li>
                 <ul>Users:
                     {workspace.users.map(user => (
-                        <li>{user.firstName} {user.lastName}</li>
+                        <li key={user.id}>{user.firstName} {user.lastName}</li>
                     ))}
                 </ul>
             </li>
             <li>
                 <ul>Tasks:
                     {workspace.tasks.map(task => (
-                        <li>{task.name}</li>
+                        <li key={task.id}>{task.name}</li>
                     ))}
                 </ul>
             </li>

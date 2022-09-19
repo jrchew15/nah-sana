@@ -4,36 +4,31 @@ import { useRouteMatch, Switch, Route } from "react-router-dom";
 import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
+import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
+// import { getAllProjects } from '../store/projects';
+// import { getTasksByWorkspace } from "../store/tasks";
+import { oneWorkspace } from "../store/workspace";
+
 
 export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
+    const workspaceId = match.params.id
 
-    const [workspaceLoaded, setWorkspaceLoaded] = useState(null)
+    const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
 
     const [navDisplay, setNavDisplay] = useState(true)
 
     // this will be updated with a fetch containing all info
     // in the future, we may instead use useSelectors on all slices of state
     //    which are filled when fetch hydrates state
-    const [workspace, setWorkspace] = useState(null)
+    // const [workspace, setWorkspace] = useState(null)
 
     useEffect(() => {
-        (async () => {
-            const response = await fetch(
-                `/api/workspaces/${match.params.id}`
-            )
-            const loadedWorkspace = await response.json()
-            // console.log(loadedWorkspace)
-            setWorkspace(loadedWorkspace)
-            setWorkspaceLoaded(true)
-            // dispatch(actionLoadWorkspace(loadedWorkspace.workspace))
-            // dispatch(actionLoadProjects(loadedWorkspace.projects))
-            // dispatch(actionLoadUsers(loadedWorkspace.users))
-            // dispatch(actionLoadTasks(loadedWorkspace.tasks))
-        })()
-    }, [dispatch])
+        dispatch(oneWorkspace(workspaceId))
+        setWorkspaceLoaded(true)
+    }, [dispatch, workspaceId])
 
     function toggleNavbarDisplay() {
         setNavDisplay(state => !state)
@@ -46,11 +41,17 @@ export default function Workspace() {
                 <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}></div>
                 <div id='content'>
                     <Switch>
+                        <Route path='/workspaces/:workspaceId/projects/:projectId'>
+                            {/* ProjectDetails */}
+                        </Route>
                         {/* Put all other main content routes here */}
                         {/* This one below is just a placeholder for content */}
-                        <Route path='/'>
-                            <DevOnlyContent workspace={workspace} />
+                        <Route path='/workspaces/:id' exact>
+                            {/* changed path from / */}
+                            {/* <DevOnlyContent workspace={workspace} /> */}
+                            <GetOne workspaceId={workspaceId} />
                         </Route>
+
                     </Switch>
                 </div>
             </div>
