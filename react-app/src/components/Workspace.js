@@ -4,6 +4,7 @@ import { useRouteMatch, Switch, Route } from "react-router-dom";
 import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
+import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 
 
 export default function Workspace() {
@@ -49,8 +50,10 @@ export default function Workspace() {
                     <Switch>
                         {/* Put all other main content routes here */}
                         {/* This one below is just a placeholder for content */}
-                        <Route path='/'>
-                            <DevOnlyContent workspace={workspace} />
+                        <Route path='/workspaces/:id'>
+                            {/* changed path from / */}
+                            {/* <DevOnlyContent workspace={workspace} /> */}
+                            <GetOne />
                         </Route>
 
                     </Switch>
