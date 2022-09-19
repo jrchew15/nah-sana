@@ -3,24 +3,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateAProject } from '../../../store/projects';
 
 const EditProjectForm = ({ project }) => {
-  console.log("PROJECT", project)
+
+  let inputDate;
+  project.dueDate ? 
+    inputDate = new Date(project.dueDate).toJSON().split("T")[0] : inputDate = ''
+
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState(project.name || '')
   const [status, setStatus] = useState(project.status || '')
-  // REVISIT - date needs to be changed to a format that can be read in front end
-  const [dueDate, setDueDate] = useState('')
+  const [dueDate, setDueDate] = useState(inputDate)
   const [description, setDescription] = useState(project.description || '')
   const [icon, setIcon] = useState(project.icon || '')
-  const [ownerId, setOwnerId] = useState(user.id || '')
+  let ownerId = user.id
   // REVISIT THIS WHEN WORKSPACE IS ADDED TO STATE
   let workspaceId = 1
 
   const dispatch = useDispatch();
   const editProject = async (e) => {
     e.preventDefault();
-    // REVISIT DATE
-    let payload = {id: project.id, workspaceId, name, status, description, icon, ownerId }
+    let payload = { id: project.id, workspaceId, name, status, dueDate, description, icon, ownerId }
     const data = await dispatch(updateAProject(payload));
     if (data) {
       setErrors(data)

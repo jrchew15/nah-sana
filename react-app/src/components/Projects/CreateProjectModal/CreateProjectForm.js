@@ -7,10 +7,11 @@ const CreateProjectForm = () => {
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('')
   const [status, setStatus] = useState('')
-  const [dueDate, setDueDate] = useState('')
+  const [dueDate, setDueDate] = useState()
   const [description, setDescription] = useState('')
   const [icon, setIcon] = useState('')
-  const [ownerId, setOwnerId] = useState(user.id || '')
+  let ownerId = user.id
+
   // REVISIT THIS WHEN WORKSPACE IS ADDED TO STATE
   let workspaceId = 1
 

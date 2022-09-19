@@ -24,6 +24,9 @@ function ProjectDetail() {
     await history.push('/projects')
   }
 
+  let dueDate;
+  project.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
+
   return (
     <div >
       {
@@ -38,7 +41,7 @@ function ProjectDetail() {
               {project.description}
             </div>
             <div>
-              {project.dueDate}
+              {dueDate}
             </div>
             <div>
               {project.status}

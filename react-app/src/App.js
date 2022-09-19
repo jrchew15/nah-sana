@@ -11,6 +11,7 @@ import GetProjects from './components/Projects/ProjectsList';
 import ProjectDetail from './components/Projects/ProjectDetail';
 import CreateProjectModal from './components/Projects/CreateProjectModal';
 
+
 export default function App() {
     const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
     const dispatch = useDispatch();
@@ -60,13 +61,14 @@ export default function App() {
                         <Workspace />
                     </>
                 </Route>
+                <Route exact path='/projects/:id'>
+                    <ProjectDetail />
+                </Route>
                 <Route exact path='/projects'>
                     <GetProjects />
                     <CreateProjectModal />
                 </Route>
-                <Route exact path='/projects/:id'>
-                    <ProjectDetail />
-                </Route>
+
             </Switch>
         </BrowserRouter>
     )
