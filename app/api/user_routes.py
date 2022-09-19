@@ -37,6 +37,7 @@ def update_user(id):
         user.image = update_form.data['image']
         user.pronouns = update_form.data['pronouns']
         user.department = update_form.data['department']
+        user.bio = update_form.data['bio']
         
         # REVISIT - Why isn't the update method working? 
         # User.query.filter(User.id==id).update(

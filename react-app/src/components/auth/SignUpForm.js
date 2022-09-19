@@ -14,6 +14,8 @@ const SignUpForm = () => {
   const [image, setImage] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [department, setDepartment] = useState('');
+  const [bio, setBio] = useState('');
+
 
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(email, password, firstName, lastName, role, image, pronouns, department));
+      const data = await dispatch(signUp(email, password, firstName, lastName, role, image, pronouns, department, bio));
       if (data) {
         setErrors(data)
       }
@@ -100,6 +102,15 @@ const SignUpForm = () => {
           name='department'
           onChange={(e) => setDepartment(e.target.value)}
           value={department}
+        ></input>
+      </div>
+      <div>
+        <label>Biography</label>
+        <input
+          type='text'
+          name='bio'
+          onChange={(e) => setBio(e.target.value)}
+          value={bio}
         ></input>
       </div>
       <div>

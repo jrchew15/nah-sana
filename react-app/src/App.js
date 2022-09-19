@@ -17,6 +17,9 @@ import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 import GetProjects from './components/Projects/ProjectsList';
 import ProjectDetail from './components/Projects/ProjectDetail';
 import CreateProjectModal from './components/Projects/CreateProjectModal';
+import LoginForm from './components/auth/LoginForm';
+import EditUserFormModal from './components/EditUserModal';
+import SignUpForm from './components/auth/SignUpForm';
 
 
 export default function App() {
@@ -59,6 +62,8 @@ export default function App() {
               <>
                 <h1>Splash Page</h1>
                 <LoginForm />
+                <h2>Sign Up</h2>
+                <SignUpForm />
               </>
           }
         </Route>
@@ -77,6 +82,7 @@ export default function App() {
         <Route exact path='/projects'>
           <GetProjects />
           <CreateProjectModal />
+          <EditUserFormModal />
         </Route>
 
       </Switch>

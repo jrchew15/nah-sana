@@ -70,7 +70,8 @@ def sign_up():
             role=form.data['role'],
             image=form.data['image'],
             pronouns=form.data['pronouns'],
-            department=form.data['department']
+            department=form.data['department'],
+            bio=form.data['bio']
         )
         db.session.add(user)
         db.session.commit()
