@@ -124,6 +124,10 @@ const tasksReducer = (state = initialState, action) => {
             newState = { ...state }
             newState[action.task.id] = action.task
             return newState
+        case UPDATE_TASK:
+            newState = { ...state }
+            newState[action.task.id] = action.task
+            return newState
         case REMOVE_TASK:
             newState = { ...state }
             delete newState[action.taskId]

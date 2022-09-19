@@ -1,36 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createOneTask } from '../../store/tasks';
+import { useHistory, useParams } from 'react-router-dom';
+import { createOneTask, updateOneTask } from '../../store/tasks';
+import { getTaskById } from '../../store/tasks';
 
 const TaskForm = () => {
     const dispatch = useDispatch();
 
+    const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
-
+    const [task, setTask] = useState(null)
 
     const [name, setName] = useState('');
-    const [dueDate, setDueDate] = useState();
+    const [dueDate, setDueDate] = useState(null);
     const [description, setDescription] = useState('');
     const [complete, setComplete] = useState(false);
     const [userId, setUserId] = useState(0);
     const [projectId, setProjectId] = useState(0);
 
-    // useEffect(() => {
-
-    // }, [dispatch])
+    useEffect(async () => {
+        if (taskId) {
+            const foundTask = await dispatch(getTaskById(taskId))
+            setTask(foundTask)
+        }
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const data = await dispatch(createOneTask({
+        let formData = {
             name,
             dueDate,
             description,
             userId,
             projectId,
             complete
-        }))
+        }
+        if (!task) {
+            const data = await dispatch(createOneTask(formData))
+        } else {
+            formData.id = taskId;
+            const data = await dispatch(updateOneTask(formData))
+        }
     }
 
     return (

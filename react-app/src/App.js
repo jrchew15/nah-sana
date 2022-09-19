@@ -51,6 +51,9 @@ export default function App() {
         <Route exact path='/tasks/:taskId'>
           <TaskDetail />
         </Route>
+        <Route exact path='/tasks/:taskId/edit'>
+          <TaskForm />
+        </Route>
         <Route exact path='/tasks'>
           <TaskList />
         </Route>
