@@ -1,11 +1,10 @@
 
-from ..models import Task
 from ..forms.task_form import TaskForm
 # from ..utils import date_obj_from_dash_connected
 from flask import Blueprint, request
 from app.models import Project
-from ..models.db import db
-from app.forms.project_form import ProjectForm
+from ..models import db, Task, User
+from app.forms.project_form import ProjectForm, AddUserToProjectForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask_login import login_required
 
@@ -122,3 +121,26 @@ def delete_project(id):
             "statusCode": 404,
             "message": "Project not found"
         }
+
+@project_routes.route("/<int:projectId>/users", methods=["POST"])
+def add_user_to_project(projectId):
+    form = AddUserToProjectForm()
+    user = User.query.get(form.userId.data)
+    project = Project.query.get(projectId)
+
+    if user and project:
+        project.contributors.append(user)
+        db.session.commit()
+        return {"message": "User successfully added to project", "statusCode": 201}
+    return { "statusCode":404, "message":"Unable to add specified user to project" }
+
+@project_routes.route("/<int:projectId>/users/<int:userId>", methods=["DELETE"])
+def remove_user_from_project(projectId, userId):
+    user = User.query.get(userId)
+    project = Project.query.get(projectId)
+
+    if user and project:
+        project.contributors.remove(user)
+        db.session.commit()
+        return {"message": "User successfully deleted from project", "statusCode": 201}
+    return { "statusCode":404, "message":"Unable to add specified user to project" }

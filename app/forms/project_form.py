@@ -11,3 +11,6 @@ class ProjectForm(FlaskForm):
   description = StringField("Description", validators=[Length(max=500, message="Description must be less than 500 characters")])
   icon = StringField("Icon", validators=[Length(max=100, message="Icon must be less than 100 characters")])
   ownerId = IntegerField("Owner")
+
+class AddUserToProjectForm(FlaskForm):
+  userId = IntegerField("User ID", validators=[DataRequired()])
