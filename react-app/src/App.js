@@ -7,6 +7,9 @@ import LoginForm from './components/auth/LoginForm';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
+import GetProjects from './components/Projects/ProjectsList';
+import ProjectDetail from './components/Projects/ProjectDetail';
+import CreateProjectModal from './components/Projects/CreateProjectModal';
 
 export default function App() {
     const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -45,7 +48,7 @@ export default function App() {
                 <Route path='/' exact={true}>
                     {
                         currentUser ?
-                            <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+                            <Redirect to={`/workspaces/${currentUser.workspaces[0]}`} /> :
                             <>
                                 <h1>Splash Page</h1>
                                 <LoginForm />
@@ -56,6 +59,13 @@ export default function App() {
                     <>
                         <Workspace />
                     </>
+                </Route>
+                <Route exact path='/projects'>
+                    <GetProjects />
+                    <CreateProjectModal />
+                </Route>
+                <Route exact path='/projects/:id'>
+                    <ProjectDetail />
                 </Route>
             </Switch>
         </BrowserRouter>
