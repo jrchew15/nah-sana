@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
-import LoginForm from './LoginForm';
+import EditUserForm from './EditUserForm';
 
-function LoginFormModal() {
+function EditUserFormModal() {
   const [showModal, setShowModal] = useState(false);
+  const user = useSelector(state => state.session.user)
+
+  useEffect(() => {
+    setShowModal(false)
+  }, [user])
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button onClick={() => setShowModal(true)}>My Settings</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
+          <EditUserForm />
         </Modal>
       )}
     </>
   );
 }
 
-export default LoginFormModal;
+export default EditUserFormModal;

@@ -101,20 +101,20 @@ export const signUp = (email, password, firstName, lastName, role, image, pronou
   }
 }
 
-export const updateProfile = (email, password, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
-  const response = await fetch('/api/users/:id', {
+export const updateProfile = (user, firstName, lastName, role, image, pronouns, department) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      email, password, firstName, lastName, role, image, pronouns, department
+      firstName, lastName, role, image, pronouns, department
     }),
   });
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
+    dispatch(updateUser(data))
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -129,6 +129,8 @@ export const updateProfile = (email, password, firstName, lastName, role, image,
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
+      return { user: action.payload }
+    case UPDATE_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
