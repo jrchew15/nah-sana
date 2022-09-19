@@ -2,11 +2,13 @@ import { getTasks } from "../../store/tasks";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getTasksByWorkspace } from "../../store/tasks";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import TaskForm from "./TaskForm";
+import { Route } from "react-router-dom";
 
 const TaskList = () => {
     const dispatch = useDispatch()
-
+    const history = useHistory()
     const tasks = useSelector((state) => state.tasks)
     const tasksArr = Object.values(tasks)
     console.log('**********tasks from component****', tasksArr)
@@ -30,9 +32,15 @@ const TaskList = () => {
                     <th>Due Date</th>
                 </tr>
                 {tasksArr.map((task) => (
-                    <tr>
-                        <td>{task.name}</td>
-                        <td>{task.dueDate.split(',')[1]}</td>
+                    <tr key={task.id}>
+                        <td>
+                            {task.name}
+                            <button onClick={() => (
+                                history.push('/tasks/${task.id}')
+                            )
+                            }>details</button>
+                        </td>
+                        <td>{task.dueDate}</td>
                     </tr>
                 ))}
             </table>
