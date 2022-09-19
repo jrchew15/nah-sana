@@ -11,6 +11,7 @@ export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
+    const workspaceId = match.params.id
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(null)
 
@@ -24,7 +25,7 @@ export default function Workspace() {
     useEffect(() => {
         (async () => {
             const response = await fetch(
-                `/api/workspaces/${match.params.id}`
+                `/api/workspaces/${workspaceId}`
             )
             const loadedWorkspace = await response.json()
             // console.log(loadedWorkspace)
@@ -53,7 +54,7 @@ export default function Workspace() {
                         <Route path='/workspaces/:id'>
                             {/* changed path from / */}
                             {/* <DevOnlyContent workspace={workspace} /> */}
-                            <GetOne />
+                            <GetOne workspaceId={workspaceId} />
                         </Route>
 
                     </Switch>
