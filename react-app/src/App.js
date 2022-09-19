@@ -1,51 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
+import LoginForm from './components/auth/LoginForm';
 
-function App() {
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
+import Workspace from './components/Workspace';
+import Depricated_App from './Depricated_App';
 
-  useEffect(() => {
-    (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+export default function App() {
+    const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user);
 
-  if (!loaded) {
-    return null;
-  }
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            setCurrentUserIsLoaded(true);
+        })();
+    }, [dispatch]);
 
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
-  );
+
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         if (currentUser.Workspaces.length) {
+    //             // If there is a current user that is on a workspace,
+    //             // then redirect them to their 0 index workspace
+    //         }
+    //         // If the user isn't on a workspace, suggest they create one
+    // maybe add a 'demo workspace' button that adds the current user to a default workspace
+    // with some seeded data
+
+    //         return // workspace form here
+    //     }
+    // }, [currentUser, currentUserIsLoaded])
+
+    if (!currentUserIsLoaded) return null;
+    // console.log('REDIRECT', workspaceUrl)
+
+
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route path='/' exact={true}>
+                    {
+                        currentUser ?
+                            <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+                            <>
+                                <h1>Splash Page</h1>
+                                <LoginForm />
+                            </>
+                    }
+                </Route>
+                <Route path='/workspaces/:id'>
+                    <>
+                        <Workspace />
+                    </>
+                </Route>
+            </Switch>
+        </BrowserRouter>
+    )
 }
-
-export default App;

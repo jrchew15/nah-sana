@@ -8,7 +8,6 @@ small_str = 15
 med_str = 100
 long_str = 500
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -47,8 +46,8 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
+    def to_dict(self, workspaces=False):
+        user_dict = {
             'id': self.id,
             'firstName': self.first_name,
             'lastName': self.last_name,
@@ -58,3 +57,6 @@ class User(db.Model, UserMixin):
             'pronouns': self.pronouns,
             'department': self.department
         }
+        if workspaces:
+            user_dict['workspaces'] = [ workspace.to_dict() for workspace in self.spaces]
+        return user_dict
