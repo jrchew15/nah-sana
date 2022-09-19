@@ -12,7 +12,7 @@ import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
 import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
 import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
-
+import LoginForm from './components/auth/LoginForm';
 
 import GetProjects from './components/Projects/ProjectsList';
 import ProjectDetail from './components/Projects/ProjectDetail';
@@ -68,8 +68,8 @@ export default function App() {
           </>
         </Route>
         <Route path='/workspaces'>
-           <AllWorkSpaces />
-           <CreateWorkspace />
+          <AllWorkSpaces />
+          <CreateWorkspace />
         </Route>
         <Route exact path='/projects/:id'>
           <ProjectDetail />

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 
-import { oneWorkspace } from "../../store/workspace";
+import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import AddUser from "./AddUser";
 export default function GetOne() {
     const dispatch = useDispatch()
@@ -18,6 +18,7 @@ export default function GetOne() {
     // const users = workspace.users
     // console.log('----users-----', users['1'])
     // console.log(Object.values(users))
+    // const users = Object.values(workspace.users)
     useEffect(() => {
         dispatch(oneWorkspace(id)).then(() => setIsLoaded(true))
     }, [dispatch, id])
@@ -25,6 +26,10 @@ export default function GetOne() {
         e.preventDefault()
         history.push('/workspaces')
 
+    }
+    const deleteUser = userid => {
+        console.log(userid, '------------')
+        dispatch(removeUserFromWorkspace(id, userid))
     }
     // console.log('--------------------', Object.values(workspace.users))
 
@@ -49,11 +54,12 @@ export default function GetOne() {
                         </li>
                         <li>
                             <ul>Users:
-                                {
-                                    Object.values(
-                                        workspace.users).map(user => (
-                                            <li key={user.id}>{user.firstName} {user.lastName}</li>
-                                        ))}
+                                {Object.values(workspace.users).map(user => (
+                                    <>
+                                        <li key={user.id}>{user.firstName} {user.lastName}</li>
+                                        <button onClick={() => deleteUser(user.id)} >Delete</button>
+                                    </>
+                                ))}
                             </ul>
                         </li>
                         <li>
