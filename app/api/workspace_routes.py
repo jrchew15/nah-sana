@@ -36,16 +36,16 @@ def tasks_by_workspace_userId(workspaceId, userId):
 @workspace_routes.route('/<int:id>')
 def one_workspace(id):
     workspace = Workspace.query.get(id)
-    users_in_this_ws = [user.to_dict() for user in workspace.members]
+    users_in_this_ws = {user.id :user.to_dict() for user in workspace.members}
     project_objs= [project for project in workspace.projects]
     project_in_this_ws= [project.to_dict() for project in project_objs]
     task_in_this_ws = []
+    print(users_in_this_ws,'1111111111')
 
     # add all the tasks from each project on the workspace
     for project in project_objs:
         task_in_this_ws.extend([task.to_dict() for task in project.tasks])
     id =workspace.to_dict()
-    print('-------------------',id)
     return {
         'workspace' : workspace.to_dict(),
         "users": users_in_this_ws,
@@ -105,7 +105,7 @@ def update_workspace(id):
         db.session.commit()
         return workspace.to_dict()
     else:
-        form.errors
+        return form.errors
 
 
 # # # #Remove a user from Workspace

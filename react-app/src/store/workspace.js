@@ -6,7 +6,7 @@ const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE'
 const GET_ONE_WORKSPACE = 'workspace/GET_ONE_WORKSPACE'
 
 const ADD_USER = 'workspace/ADD_USER'
-const DELETE_USER = 'workspace/DELETE_USER'
+const REMOVE_USER = 'workspace/DELETE_USER'
 
 const loadWorkspace = (workspace) => ({
     type: LOAD_WORKSPACE,
@@ -28,6 +28,10 @@ const updateWorkspace = (workspace) => ({
 
 const addUser = (user) => ({
     type: ADD_USER,
+    user
+})
+const removeUser = (user) => ({
+    type: REMOVE_USER,
     user
 })
 // Get All Workspace
@@ -91,7 +95,16 @@ export const addUserToWorkspace = (user, id) => async (dispatch) => {
     }
     return response
 }
-
+export const removeUserFromWorkspace = (user, id, userId) => async (dispatch) => {
+    const response = await fetch(`/api/workspace/${id}/users/${userId}`, {
+        method: 'DELETE',
+    })
+    if (response.ok) {
+        const res = await response.json()
+        dispatch(removeUser(res))
+    }
+    return response
+}
 const initialState = {};
 export default function workspaceReducer(state = initialState, action) {
     let newState;
@@ -117,11 +130,19 @@ export default function workspaceReducer(state = initialState, action) {
             newState = { ...state }
             newState['workspace'] = { ...action.workspace }
             return newState
+
         case ADD_USER:
             newState = { ...state }
-            // newState[action.user.id] = { ...newState[action.user.id], ...action.user }
-            newState['users'].push(action.user)
+            newState['users'] = { ...newState[action.user.id] }
+            // newState['users'].push(action.user)
             return newState
+        case REMOVE_USER:
+            newState = { ...state }
+            newState['user'] = delete newState[action.user.id]
+            return newState
+        // newState['users'].filter(user => user.id === action.user.id)
+        // return newState
+        // delete newState['user'] = action.user
         default:
             return state;
 

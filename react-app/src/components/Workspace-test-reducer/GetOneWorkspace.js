@@ -14,6 +14,10 @@ export default function GetOne() {
     const { id } = useParams()
 
     const workspace = useSelector(state => state.workspace)
+    // console.log('--------------------', workspace.users)
+    // const users = workspace.users
+    // console.log('----users-----', users['1'])
+    // console.log(Object.values(users))
     useEffect(() => {
         dispatch(oneWorkspace(id)).then(() => setIsLoaded(true))
     }, [dispatch, id])
@@ -22,6 +26,7 @@ export default function GetOne() {
         history.push('/workspaces')
 
     }
+    // console.log('--------------------', Object.values(workspace.users))
 
     return isLoaded ? (
 
@@ -44,9 +49,11 @@ export default function GetOne() {
                         </li>
                         <li>
                             <ul>Users:
-                                {workspace.users.map(user => (
-                                    <li key={user.id}>{user.firstName} {user.lastName}</li>
-                                ))}
+                                {
+                                    Object.values(
+                                        workspace.users).map(user => (
+                                            <li key={user.id}>{user.firstName} {user.lastName}</li>
+                                        ))}
                             </ul>
                         </li>
                         <li>
