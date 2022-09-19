@@ -7,7 +7,6 @@ import TaskList from './components/Tasks/TasksList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
-import LoginForm from './components/auth/LoginForm';
 
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
