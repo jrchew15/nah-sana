@@ -6,7 +6,7 @@ const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE'
 const GET_ONE_WORKSPACE = 'workspace/GET_ONE_WORKSPACE'
 
 const ADD_USER = 'workspace/ADD_USER'
-const REMOVE_USER = 'workspace/DELETE_USER'
+const REMOVE_USER = 'workspace/REMOVE_USER'
 
 const loadWorkspace = (workspace) => ({
     type: LOAD_WORKSPACE,
@@ -30,9 +30,9 @@ const addUser = (user) => ({
     type: ADD_USER,
     user
 })
-const removeUser = (user) => ({
+const removeUser = (userId) => ({
     type: REMOVE_USER,
-    user
+    userId
 })
 // Get All Workspace
 export const workspaceGet = () => async (dispatch) => {
@@ -95,13 +95,13 @@ export const addUserToWorkspace = (user, id) => async (dispatch) => {
     }
     return response
 }
-export const removeUserFromWorkspace = (user, id, userId) => async (dispatch) => {
-    const response = await fetch(`/api/workspace/${id}/users/${userId}`, {
+export const removeUserFromWorkspace = (id, userid) => async (dispatch) => {
+    const response = await fetch(`/api/workspaces/${id}/users/${userid}`, {
         method: 'DELETE',
     })
     if (response.ok) {
         const res = await response.json()
-        dispatch(removeUser(res))
+        dispatch(removeUser(userid))
     }
     return response
 }
@@ -133,16 +133,18 @@ export default function workspaceReducer(state = initialState, action) {
 
         case ADD_USER:
             newState = { ...state }
-            newState['users'] = { ...newState[action.user.id] }
+            let newUsers = { ...newState['users'] }
+            newUsers[action.user.id] = action.user
+            newState['users'] = newUsers
             // newState['users'].push(action.user)
             return newState
         case REMOVE_USER:
             newState = { ...state }
-            newState['user'] = delete newState[action.user.id]
+            let oldUsers = { ...newState['users'] }
+            console.log(action)
+            delete oldUsers[action.userId]
+            newState['users'] = oldUsers
             return newState
-        // newState['users'].filter(user => user.id === action.user.id)
-        // return newState
-        // delete newState['user'] = action.user
         default:
             return state;
 

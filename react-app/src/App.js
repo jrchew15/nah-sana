@@ -78,8 +78,8 @@ export default function App() {
           </>
         </Route>
         <Route path='/workspaces'>
-           <AllWorkSpaces />
-           <CreateWorkspace />
+          <AllWorkSpaces />
+          <CreateWorkspace />
         </Route>
         <Route exact path='/projects/:id'>
           <ProjectDetail />
