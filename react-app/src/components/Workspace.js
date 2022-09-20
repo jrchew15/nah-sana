@@ -50,8 +50,17 @@ export default function Workspace() {
                             {/* changed path from / */}
                             {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne workspaceId={workspaceId} />
+                            <GetProjects workspaceId={workspaceId} />
                         </Route>
-
+                        <Route exact path='/workspaces/:id/projects'>
+                            <GetProjects workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/projects/:id'>
+                            <ProjectDetail workspaceId={workspaceId} />
+                        </Route>
+                        {/* <Route exact path='/workspaces/:workspaceId/projects/:id/list'>
+                            <ProjectDetailList workspaceId={workspaceId} />
+                        </Route> */}
                     </Switch>
                 </div>
             </div>
