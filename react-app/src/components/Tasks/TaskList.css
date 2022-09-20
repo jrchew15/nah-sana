@@ -1,0 +1,49 @@
+.task-items {
+    border-bottom: 1px solid #edeae9;
+    padding: .5em;
+
+}
+
+.task-container-list {
+    width: 100%;
+    height: 18em;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border-radius: 5px;
+}
+
+.task-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: .5em;
+}
+
+.task-button {
+    background-color: transparent;
+    border: none;
+}
+
+.fa-check-circle-o {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.fa:hover {
+    background-color: rgb(11, 202, 11);
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+
+}
+
+.task-container-list:hover {
+    overflow-y: visible;
+
+}
+
+.task-flex:hover {
+    background-color: #dbdbdb;
+}

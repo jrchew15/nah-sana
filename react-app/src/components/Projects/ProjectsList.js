@@ -26,13 +26,13 @@ function GetProjects({ workspaceId }) {
     <div >
       {filtered[0] ? (
         <>
-          <h3>Projects</h3>
+          <h3 className='title-projects'>Projects</h3>
           {filtered.map(project => {
             return (
               <div>
                 <div key={project.id} >
                   <NavLink to={`/workspaces/${workspaceId}/projects/${project.id}`} >
-                    <img src={project.icon} alt="icon" style={{height: '25px', weight: '25px'}}/>
+                    <img src={project.icon} alt="icon" style={{ height: '25px', weight: '25px' }} />
                     {project.name}
                     {project.workspaceId}
                   </NavLink>

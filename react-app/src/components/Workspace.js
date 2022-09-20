@@ -8,6 +8,8 @@ import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 // import { getAllProjects } from '../store/projects';
 // import { getTasksByWorkspace } from "../store/tasks";
 import { oneWorkspace } from "../store/workspace";
+import GetProjects from "./Projects/ProjectsList";
+import ProjectDetail from "./Projects/ProjectDetailList";
 
 
 export default function Workspace() {
@@ -50,7 +52,7 @@ export default function Workspace() {
                             {/* changed path from / */}
                             {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne workspaceId={workspaceId} />
-                            <GetProjects workspaceId={workspaceId} />
+                            {/* <GetProjects workspaceId={workspaceId} /> */}
                         </Route>
                         <Route exact path='/workspaces/:id/projects'>
                             <GetProjects workspaceId={workspaceId} />
