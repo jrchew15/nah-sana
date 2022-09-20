@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import EditUserForm from './EditUserForm';
 
-function EditUserFormModal() {
+function EditUserFormModal({ toggleUserDropdown }) {
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user)
 
@@ -13,7 +13,12 @@ function EditUserFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>My Settings</button>
+      <span onClick={() => {
+        setShowModal(true)
+        toggleUserDropdown()
+      }}>
+        My Settings
+      </span>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditUserForm />

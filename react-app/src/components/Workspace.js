@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import LogoutButton from './auth/LogoutButton';
-import Topbar from "./Topbar";
+import Topbar from "./Navbars/Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
@@ -50,6 +50,9 @@ export default function Workspace() {
                             <GetProjects workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:workspaceId/projects/:id'>
+                            <ProjectDetail workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/projects/:id/list'>
                             <ProjectDetail workspaceId={workspaceId} />
                         </Route>
                     </Switch>
