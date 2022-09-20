@@ -86,13 +86,13 @@ const EditUserForm = () => {
         ></input>
       </div>
       <div>
-        <label>Biography</label>
-        <input
+        <label>About Me</label>
+        <textarea
           type='text'
           name='bio'
           onChange={(e) => setBio(e.target.value)}
           value={bio}
-        ></input>
+        ></textarea>
       </div>
       <button type='submit'>Submit</button>
     </form>

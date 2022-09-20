@@ -5,9 +5,12 @@ import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
-// import { getAllProjects } from '../store/projects';
-// import { getTasksByWorkspace } from "../store/tasks";
+import GetProjects from "./Projects/ProjectsList";
+import ProjectDetail from "./Projects/ProjectDetail";
+import ProjectDetailList from "./Projects/ProjectDetailList";
+
 import { oneWorkspace } from "../store/workspace";
+
 
 
 export default function Workspace() {
@@ -41,15 +44,18 @@ export default function Workspace() {
                 <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}></div>
                 <div id='content'>
                     <Switch>
-                        <Route path='/workspaces/:workspaceId/projects/:projectId'>
-                            {/* ProjectDetails */}
-                        </Route>
-                        {/* Put all other main content routes here */}
-                        {/* This one below is just a placeholder for content */}
                         <Route path='/workspaces/:id' exact>
+
                             {/* changed path from / */}
                             {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne workspaceId={workspaceId} />
+                            <GetProjects workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:id/projects'>
+                            <GetProjects workspaceId={workspaceId}/>
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/projects/:id'>
+                            <ProjectDetail workspaceId={workspaceId} />
                         </Route>
 
                     </Switch>
