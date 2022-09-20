@@ -11,6 +11,42 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.projectNavTabsContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.projectNavTabsSpace {
+  width: 10px;
+}
+
+.projectNavTabs {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.projectNavTabs>a {
+  box-sizing: border-box;
+  font-size: 18px;
+  color: var(--text-color-unfocused);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+
+}
+
+.projectNavTabs>a.active {
+  background: unset;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.projectNavTabs>a:hover:not(.active) {
+  font-weight: 200;
+  background: unset;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
 .projectNavBarIcon {
   display: flex;
   align-items: center;
@@ -39,42 +75,96 @@
   padding-top: 10px;
 }
 
-.projectNavBarLinkContainer {
-  justify-items: end;
+.projectNavBarInfoTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.projectNavBarLinks {
-  background-color: transparent;
-  color: var(--border-color);
-  border: none;
-  font-size: 18px;
+.projectNavBarInfoName {
+  font-size: 24px;
 }
 
-.projectNavBarLinksActive {
-  background-color: transparent;
-  color: white;
-  border: none;
-  font-size: 18px;
-  border-bottom: 2px solid white;
+.projectNavBarInfoStatus {
+  padding-left: 8px;
+  font-size: 14px;
+  font-weight: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.projectNavStatus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 4px;
+  padding-left: 20px;
+}
+
+.projectNavStatusCircle {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-ontrack-complete)
+}
+
+.projectNavStatusCircleRisk {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-at-risk)
+}
+
+.projectNavStatusCircleOffTrack {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-off-track)
+}
+
+.projectNavStatusCircleHold {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-on-hold)
+}
+
+
+.projectDetailOuter {
+  height: 92%;
 }
 
 .projectDetail {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 94%;
+  height: 100%;
 }
+
 
 .projectDetailLeft {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 .projectDetailRight {
-  width: 25%;
+  width: 30%;
   align-items: flex-end;
   border-left: 1px solid var(--border-color);
 }
+
+.projectDescriptionContainer {
+  padding: 25px;
+}
+
+.projectDescriptionInner {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+
+
+
 
 .projectButton {
   align-items: center;
@@ -133,5 +223,3 @@
   background-color: #dbdbdb;
 
 }
-
-
