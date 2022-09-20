@@ -1,15 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getTaskById } from "../../store/tasks";
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteOneTask } from '../../store/tasks';
+import TaskForm from './TaskForm';
 
-const TaskDetail = () => {
-    const { taskId } = useParams()
+const TaskDetail = ({ taskId }) => {
+    // const { taskId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
     const tasks = useSelector((state) => state.tasks)
     const task = tasks[taskId]
+
+    const [showForm, setShowForm] = useState(false)
 
     useEffect(() => {
         dispatch(getTaskById(taskId))
@@ -18,13 +21,23 @@ const TaskDetail = () => {
     if (!task) { return null }
     return (
         <>
-            <h1>Hi</h1>
-            <div>{task.name}</div>
-            <div>{task.complete.toString()}</div>
-            <button onClick={async () => {
-                await dispatch(deleteOneTask(taskId))
-                history.push('/tasks')
-            }}>Delete</button>
+            <div id='side-bar' class='side-bar'>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div>{task.name}</div>
+                <div>Due date  {task.dueDate.split(' ')[2]}{task.dueDate.split(' ')[1]}</div>
+                <div>Projects  {task.projectId}</div>
+                <div>Description  {task.description}</div>
+                <div>{task.complete.toString()}</div>
+                <button onClick={() => {
+                    setShowForm(true)
+                    // history.push(`/tasks/${task.id}/edit`)
+                }}>Edit</button>
+                <button onClick={async () => {
+                    await dispatch(deleteOneTask(taskId))
+                    history.push('/tasks')
+                }}>Delete</button>
+                {showForm ? <TaskForm /> : null}
+            </div>
         </>
     )
 }
