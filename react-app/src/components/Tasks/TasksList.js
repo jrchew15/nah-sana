@@ -27,7 +27,7 @@ const TaskList = ({ projects }) => {
     // let userId = useParams()
     useEffect(() => {
         dispatch(getTasksByWorkspace(1, 1))
-    }, [dispatch])
+    }, [dispatch, showTaskDetail])
 
     if (!tasksArr.length) return null
     return (
@@ -46,7 +46,7 @@ const TaskList = ({ projects }) => {
                         <td>{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
                         <td>{task.projectId}</td>
                         <button onClick={() => (
-                            setShowTaskDetail(true),
+                            setShowTaskDetail(!showTaskDetail),
                             setOnClickTaskId(task.id)
                             // history.push(`/tasks/${task.id}`)
                         )}>details</button>
