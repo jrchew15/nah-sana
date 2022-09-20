@@ -11,11 +11,10 @@ import TaskDetail from './components/Tasks/TaskDetail';
 import Workspace from './components/Workspace';
 import Depricated_App from './Depricated_App';
 import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
-import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
+import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspaceModal/CreateWS'
 
 import GetProjects from './components/Projects/ProjectsList';
 import ProjectDetail from './components/Projects/ProjectDetail';
-import CreateProjectModal from './components/Projects/CreateProjectModal';
 import LoginForm from './components/auth/LoginForm';
 import EditUserFormModal from './components/EditUserModal';
 import SignUpForm from './components/auth/SignUpForm';
@@ -36,23 +35,24 @@ export default function App() {
 
 
   const Home = () => {
-        if (currentUser && currentUser.workspaces) {
-            return currentUser.workspaces.length ?
-                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-                <CreateWorkspace />
-        }
-        return (
-            <>
-                <h1>Splash Page</h1>
-                <LoginForm />
-                <p>Don't have an account? 
-                    <NavLink to="/signup">
-                        Sign Up
-                    </NavLink>
-                </p>
-            </>
-        )
+    if (currentUser && currentUser.workspaces) {
+      <>
+        return currentUser.workspaces.length ?
+        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} />
+      </>
     }
+    return (
+      <>
+        <h1>Splash Page</h1>
+        <LoginForm />
+        <p>Don't have an account?
+          <NavLink to="/signup">
+            Sign Up
+          </NavLink>
+        </p>
+      </>
+    )
+  }
 
 
   return (
@@ -88,4 +88,3 @@ export default function App() {
     </BrowserRouter>
   )
 }
-

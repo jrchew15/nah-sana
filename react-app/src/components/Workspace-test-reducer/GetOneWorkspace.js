@@ -1,5 +1,4 @@
 import LogoutButton from "../auth/LogoutButton"
-import UpdateWorkspace from "./UpdateWorkSpace"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -10,6 +9,8 @@ import GetProjects from "../Projects/ProjectsList";
 import TaskList from "../Tasks/TasksList";
 import TaskDetail from "../Tasks/TaskDetail";
 import './GetOne.css'
+import CreateWorkspaceModal from "./CreateWorkspaceModal";
+import UpdateWorkspaceModal from "./UpdateWorkspaceModal";
 export default function GetOne({ workspaceId }) {
 
     const dispatch = useDispatch()
@@ -44,6 +45,8 @@ export default function GetOne({ workspaceId }) {
             {(isLoaded &&
                 <div className="dashboard-container">
                     <div className="left-corner">Home</div>
+                    <CreateWorkspaceModal />
+                    <UpdateWorkspaceModal />
                     <div className="dashboard-titles">
                         <h5>{current}</h5>
                         <div>
@@ -92,7 +95,6 @@ export default function GetOne({ workspaceId }) {
                     </div>
 
                     <div>
-                        <UpdateWorkspace />
                         <AddUser />
                         <LogoutButton />
                         <button onClick={handlepush}>Back to workspaces</button>

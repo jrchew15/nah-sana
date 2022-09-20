@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { workspaceCreate } from "../../store/workspace";
+import { useDispatch, useSelector } from "react-redux";
+import { workspaceUpdate } from "../../../store/workspace"
+import { useHistory, useParams } from "react-router-dom";
 
 
-const CreateWorkspace = () => {
+
+
+const UpdateWorkspace = () => {
     const dispatch = useDispatch()
+    const { id } = useParams()
+    // const workspaceId = workspace.workspace.id
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const workspaces = useSelector(state => state.workspace.workspace)
+    const [name, setName] = useState(workspaces.name)
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -27,12 +32,12 @@ const CreateWorkspace = () => {
             name
         }
         if (!validationErrors.length) {
-            dispatch(workspaceCreate(workspace))
+            dispatch(workspaceUpdate(workspace, id))
         }
     }
     return (
         <>
-            <h2>Create Workspace</h2>
+            <h2>Update Workspace</h2>
             {hasSubmitted && validationErrors.length > 0 && (
                 <div>
                     <ul style={{ padding: '10px', color: 'red', listStyle: 'none' }}>
@@ -53,23 +58,10 @@ const CreateWorkspace = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </label>
-                {/* <label>
-                    Add User :
-                    <input
-                        maxLength={41}
-                        type='email'
-                        placeholder="name@company.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </label> */}
-                <button type="submit"
-                    style={{ borderRadius: '50%', height: '60px', width: '60px', background: 'purple', color: 'white' }}
-                >Create</button>
-
+                <button type="submit">Update</button>
             </form>
         </>
     )
 
 }
-export default CreateWorkspace
+export default UpdateWorkspace

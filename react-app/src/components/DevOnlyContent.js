@@ -1,5 +1,4 @@
 import LogoutButton from "./auth/LogoutButton"
-import UpdateWorkspace from "./Workspace-test-reducer/UpdateWorkSpace"
 
 export default function DevOnlyContent({ workspace }) {
     return <>
