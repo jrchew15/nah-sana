@@ -6,7 +6,7 @@ import { getAProject } from '../../store/projects';
 import './Projects.css'
 import TaskList from '../Tasks/TasksList';
 
-function ProjectDetail({ workspaceId }) {
+function ProjectDetailList({ workspaceId }) {
   const dispatch = useDispatch();
   const { id } = useParams()
   const projectObj = useSelector(state => state.projects)
@@ -28,4 +28,4 @@ function ProjectDetail({ workspaceId }) {
     </div>
   )
 }
-export default ProjectDetail
+export default ProjectDetailList
