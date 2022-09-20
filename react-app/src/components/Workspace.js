@@ -8,10 +8,7 @@ import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
 import ProjectDetailList from "./Projects/ProjectDetailList";
-
 import { oneWorkspace } from "../store/workspace";
-import ProjectDetail from "./Projects/ProjectDetail";
-
 
 
 export default function Workspace() {
@@ -46,14 +43,10 @@ export default function Workspace() {
                 <div id='content'>
                     <Switch>
                         <Route path='/workspaces/:id' exact>
-
-                            {/* changed path from / */}
-                            {/* <DevOnlyContent workspace={workspace} /> */}
                             <GetOne workspaceId={workspaceId} />
-                            <GetProjects workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:id/projects'>
-                            <GetProjects workspaceId={workspaceId}/>
+                            <GetProjects workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:workspaceId/projects/:id'>
                             <ProjectDetail workspaceId={workspaceId} />

@@ -90,3 +90,48 @@
   background-color: #2a2b2d;
   color: white;
 }
+
+.title-projects {
+  font-weight: 500;
+  font-size: 20px;
+  padding-left: 1em;
+}
+
+.create-project-button {
+  background-color: transparent;
+  width: 17em;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+
+.create-project-button:hover {
+  background-color: #dbdbdb;
+}
+
+.square {
+  padding-right: 10px;
+}
+
+.project-links {
+  text-decoration-line: none;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: .3em;
+  border-radius: 5px;
+  margin-left: 10px;
+
+}
+
+.project-links:hover {
+  background-color: #dbdbdb;
+
+}
+
+

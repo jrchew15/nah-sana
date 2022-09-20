@@ -26,13 +26,16 @@ function GetProjects({ workspaceId }) {
     <div >
       {filtered[0] ? (
         <>
-          <h3>Projects</h3>
+          <h3 className='title-projects'>Projects</h3>
+          <CreateProjectModal />
+
           {filtered.map(project => {
             return (
               <div>
                 <div key={project.id} >
-                  <NavLink to={`/workspaces/${workspaceId}/projects/${project.id}`} >
-                    <img src={project.icon} alt="icon" style={{height: '25px', weight: '25px'}}/>
+
+                  <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
+                    <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
                     {project.name}
                     {project.workspaceId}
                   </NavLink>
