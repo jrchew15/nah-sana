@@ -14,7 +14,7 @@ function CreateProjectModal() {
   return (
     <>
       <button className='create-project-button' onClick={() => setShowModal(true)}>
-        <i class="square fa fa-plus-square-o fa-3x square" aria-hidden="true"></i>
+        <i className="square fa fa-plus-square-o fa-3x square" aria-hidden="true"></i>
         Create Project
       </button>
       {showModal && (

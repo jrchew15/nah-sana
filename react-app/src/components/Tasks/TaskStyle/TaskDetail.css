@@ -4,20 +4,69 @@
     position: fixed;
     z-index: 1;
     /* Stay on top */
-    top: 0;
+    top: 4;
     /* Stay at the top */
     right: 0;
-    transition: 1s;
+    transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */
     border: 1px solid rgba(128, 128, 128, 0.393);
-    background-color: rgba(0, 0, 0, 0.746);
+    background-color: rgb(51, 51, 51);
     border-radius: 20px;
 }
 
-.sidenav .closebtn {
+.closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
+    right: 0;
     font-size: 36px;
     margin-left: 50px;
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.task-complete {
+    border: 1px solid grey;
+    border-radius: 4px;
+    font-size: x-small;
+    width: fit-content;
+    margin: 10px;
+    margin-top: 30px;
+}
+
+.fa-check-circle-o {
+    margin-right: 5px;
+}
+
+#task-complete {
+    padding: 3px;
+}
+
+hr {
+    margin: 10px -40px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    margin: 10px;
+}
+
+tr {
+    text-align: left;
+}
+
+td {
+    padding: 0 15px;
+}
+
+.task-name {
+    font-size: xx-large;
+    margin: 10px;
+}
+
+.task-detail {
+    font-size: small;
+    color: rgb(146, 145, 145);
+    padding-right: 5%;
+    margin-right: 20%;
 }

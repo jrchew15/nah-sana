@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import GetProjects from "../Projects/ProjectsList";
-import TaskList from "../Tasks/TasksList";
+import TasksListByUser from "../Tasks/TasksListByUser";
 import TaskDetail from "../Tasks/TaskDetail";
 import './GetOne.css'
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
@@ -20,11 +20,11 @@ export default function GetOne({ workspaceId }) {
 
     const workspace = useSelector(state => state.workspace)
     const user = useSelector(state => state.session.user)
-    console.log(user.image)
+    // console.log(user.image)
     const current = new Date().toDateString()
     // const date = new Date().toLocaleDateString();
-
     // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`
+
 
     useEffect(() => {
         dispatch(oneWorkspace(id)).then(() => setIsLoaded(true))
@@ -66,7 +66,8 @@ export default function GetOne({ workspaceId }) {
                                     <h3 className="task-words">My Priorities</h3>
                                 </div>
                                 <div className="task-div">
-                                    <TaskList />
+                                    <TasksListByUser />
+                                    {/* <h1>Hi</h1> */}
                                 </div>
                             </div>
                         </div>

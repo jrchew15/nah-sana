@@ -1,18 +1,17 @@
-import { useParams, useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, useHistory, NavLink, Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAProject, getAllProjects, getAProject } from '../../store/projects';
 import EditProjectModal from './EditProjectModal';
-import ProjectDetailList from './ProjectDetailList'
+// import TaskList from '../Tasks/TasksList';
 import './Projects.css'
+
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const { id } = useParams()
   const projectObj = useSelector(state => state.projects)
   const project = projectObj[id]
-  const [seeOverview, setOverview] = useState(true)
-  const [seeList, setList] = useState(false)
 
   useEffect(() => {
     dispatch(getAProject(id))
@@ -29,19 +28,41 @@ function ProjectDetail({ workspaceId }) {
   let dueDate;
   project.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
 
+  function widgetColor() {
+    if (project?.status === "At Risk") {
+      return "statusWidgetColorRisk"
+    } else if (project?.status === "Off Track") {
+      return "statusWidgetColorOffTrack"
+    } else if (project?.status === "On Hold") {
+      return "statusWidgetColorHold"
+    } else {
+      return "statusWidgetColor"
+    }
+  }
+
+  function widgetColorFont() {
+    if (project?.status === "At Risk") {
+      return "statusWidgetColorRiskFont"
+    } else if (project?.status === "Off Track") {
+      return "statusWidgetColorOffTrackFont"
+    } else if (project?.status === "On Hold") {
+      return "statusWidgetColorHoldFont"
+    } else {
+      return "statusWidgetColorFont"
+    }
+  }
+
   let overview = (
     <div className='projectDetail'>
       <div className='projectDetailLeft'>
         {
           project ? (
-            <>
-              <div>
+            <div className='projectDescriptionContainer'>
+              <h3>Project Description</h3>
+              <div className='projectDescriptionInner'>
                 {project.description}
               </div>
-              <div>
-                {dueDate}
-              </div>
-            </>
+            </div>
           ) : (
             <>
               <p>Loading...</p>
@@ -50,18 +71,36 @@ function ProjectDetail({ workspaceId }) {
         }
       </div>
       <div className='projectDetailRight'>
-        <EditProjectModal project={project} />
-        <button onClick={handleDeleteClick} className='projectButton'>Delete Project</button>
-        {project.status}
+        <div className='statusWidgetContainer'>
+          <div className={widgetColor()}></div>
+          <div className={widgetColorFont()}>
+            {project.status}
+          </div>
+          <div className='statusWidgetDue'>
+            Due On: {dueDate}
+          </div>
+        </div>
+        <div className='projectDetailRightButtons'>
+          <EditProjectModal project={project} />
+          <button onClick={handleDeleteClick} className='projectButton'>Delete Project</button>
+        </div>
       </div>
     </div>
   )
 
-  function projectDetailView() {
-    if (seeOverview === true) {
-      return overview
+  let list = (<div></div>
+    //   <TaskList />
+  )
+
+  function circleType() {
+    if (project?.status === "At Risk") {
+      return "projectNavStatusCircleRisk"
+    } else if (project?.status === "Off Track") {
+      return "projectNavStatusCircleOffTrack"
+    } else if (project?.status === "On Hold") {
+      return "projectNavStatusCircleHold"
     } else {
-      return (<ProjectDetailList />)
+      return "projectNavStatusCircle"
     }
   }
 
@@ -73,34 +112,40 @@ function ProjectDetail({ workspaceId }) {
           <div className='projectIconContainer'>
             <img src={project.icon} alt="project icon" className='projectIcon' />
           </div>
-
         </div>
         <div className='projectNavBarInfo'>
-          <div>
-            {project.name}
-            {project.status}
+          <div className='projectNavBarInfoTop'>
+            <div className='projectNavBarInfoName'>
+              {project.name}
+            </div>
+            <div className='projectNavStatus'>
+              <div className={circleType()}></div>
+              <div className='projectNavBarInfoStatus'>
+                {project.status}
+              </div>
+            </div>
           </div>
-          <div className='projectNavBarLinkContainer'>
-            <button
-              onClick={(e) => {setOverview(true) && setList(false)}}
-              className={seeOverview ? "projectNavBarLinksActive" : "projectNavBarLinks"}
-            >
-              Overview
-            </button>
-            <button
-              onClick={(e) => {setOverview(false) && setList(true)}}
-              className={seeList ? "projectNavBarLinksActive" : "projectNavBarLinks"}
-            >
-              List
-            </button>
-            {/* 
-            <a href={`/workspaces/${workspaceId}/projects/${id}`} className="projectNavBarLinks">Overview</a>
-            <a href={`/workspaces/${workspaceId}/projects/${id}/list`} className="projectNavBarLinks">List</a> */}
-          </div>
+          <nav className='projectNavTabsContainer'>
+            <div className='projectNavTabs'>
+              <NavLink to={`/workspaces/${workspaceId}/projects/${id}`} exact>Overview</NavLink>
+            </div>
+            <div className='projectNavTabsSpace'></div>
+            <div className='projectNavTabs'>
+              <NavLink to={`/workspaces/${workspaceId}/projects/${id}/list`}>List</NavLink>
+            </div>
+          </nav>
         </div>
-
       </div>
-      {projectDetailView()}
+      <div className='projectDetailOuter'>
+        <Switch>
+          <Route exact path={`/workspaces/${workspaceId}/projects/${id}`}>
+            {overview}
+          </Route>
+          <Route exact path={`/workspaces/${workspaceId}/projects/${id}/list`}>
+            {list}
+          </Route>
+        </Switch>
+      </div>
 
     </div>
   )
