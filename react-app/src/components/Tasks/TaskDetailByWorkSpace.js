@@ -4,7 +4,8 @@ import { getTaskById, updateOneTask } from "../../store/tasks";
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteOneTask } from '../../store/tasks';
 import TaskForm from './TaskForm';
-import './TaskStyle/TaskDetailModal.css'
+import './TaskStyle/TaskDetail.css'
+import './TaskStyle/TaskModal.css'
 
 const TaskDetailByWorkSpace = ({ taskId }) => {
     // const { taskId } = useParams()
