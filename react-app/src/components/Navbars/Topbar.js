@@ -56,7 +56,6 @@ export default function Topbar({ toggleNavbarDisplay }) {
 
                 <div id="user-links">
                     <NavLink to={currentUserTaskListUrl}>My Profile</NavLink>
-                    {/* <span>My Settings needs an onClick listener to display modal</span> */}
                     <EditUserFormModal toggleUserDropdown={toggleUserDropdown} />
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
