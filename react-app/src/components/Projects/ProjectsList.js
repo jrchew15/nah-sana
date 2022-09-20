@@ -7,47 +7,54 @@ import CreateProjectModal from './CreateProjectModal';
 function GetProjects({ workspaceId }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllProjects())
-  }, [dispatch])
+
 
   const allProjects = useSelector(state => state.projects)
 
+
   let projectArr;
   let filtered;
+  useEffect(() => {
+    dispatch(getAllProjects())
+  }, [dispatch, filtered])
   if (allProjects) {
     projectArr = Object.values(allProjects)
+    console.log(projectArr)
     filtered = projectArr.filter(project => project?.workspaceId === Number(workspaceId))
   } else {
     return null
   }
 
   return (
-    <div >
-      {filtered[0] ? (
+    <div className='project-container'>
+      <h3 className='title-projects'>Projects</h3>
+      {filtered.length > 0 ? (
         <>
-          <h3 className='title-projects'>Projects</h3>
-          <CreateProjectModal />
 
-          {filtered.map(project => {
-            return (
-              <div>
-                <div key={project.id} >
+          <div className='project-wrapper'>
+            <CreateProjectModal />
 
-                  <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
-                    <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
+
+            {filtered.map(project => {
+              return (
+                <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
+                  <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
+                  <div className='project-titles'>
                     {project.name}
                     {project.workspaceId}
-                  </NavLink>
-                </div>
-              </div>
-            )
-          })}
-          <CreateProjectModal />
+
+                  </div>
+                </NavLink>
+              )
+            })}
+          </div>
         </>
       ) : (
         <>
-          Loading...
+          <div className='project-wrapper' >
+            <CreateProjectModal />
+          </div>
+
         </>
       )}
     </div>

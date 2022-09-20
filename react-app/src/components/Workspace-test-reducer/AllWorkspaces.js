@@ -9,7 +9,7 @@ export default function AllWorkSpaces() {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const workspaces = useSelector(state => state.workspace)
-    // console.log(workspaces)
+    console.log(workspaces)
     const workspace = Object.values(workspaces)
     useEffect(() => {
         dispatch(workspaceGet()).then(() => setIsLoaded(true))

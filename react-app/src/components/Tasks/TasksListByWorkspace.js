@@ -55,7 +55,8 @@ const TaskList = ({ projects }) => {
                         </li>
                     </NavLink> */}
 
-            <table>
+
+            {/* <table>
                 <tr>
                     <th>Task Name</th>
                     <th>Due Date</th>
@@ -76,7 +77,7 @@ const TaskList = ({ projects }) => {
                     </tr>
                 ))}
             </table>
-            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null}
+            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null} */}
 
         </>
     )
