@@ -7,7 +7,6 @@ import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
-import ProjectDetailList from "./Projects/ProjectDetailList";
 import { oneWorkspace } from "../store/workspace";
 import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
 
