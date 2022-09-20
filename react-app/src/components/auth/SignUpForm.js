@@ -105,13 +105,14 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Biography</label>
-        <input
+        <label>About Me</label>
+        <textarea
           type='text'
           name='bio'
           onChange={(e) => setBio(e.target.value)}
           value={bio}
-        ></input>
+          placeholder="My hours are 9am-5pm PST"
+        ></textarea>
       </div>
       <div>
         <label>Password</label>

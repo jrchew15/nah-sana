@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
@@ -34,21 +34,25 @@ export default function App() {
 
   if (!currentUserIsLoaded) return null;
 
+
   const Home = () => {
-    if (currentUser) {
-      return currentUser.workspaces.length ?
-        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-        <CreateWorkspace />
+        if (currentUser && currentUser.workspaces) {
+            return currentUser.workspaces.length ?
+                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+                <CreateWorkspace />
+        }
+        return (
+            <>
+                <h1>Splash Page</h1>
+                <LoginForm />
+                <p>Don't have an account? 
+                    <NavLink to="/signup">
+                        Sign Up
+                    </NavLink>
+                </p>
+            </>
+        )
     }
-    return (
-      <>
-        <h1>Splash Page</h1>
-        <LoginForm />
-        <h2>Sign Up</h2>
-        <SignUpForm />
-      </>
-    )
-  }
 
 
   return (
@@ -78,3 +82,4 @@ export default function App() {
     </BrowserRouter>
   )
 }
+
