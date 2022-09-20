@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import UsersList from './components/UsersList';
+import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 
@@ -27,37 +30,53 @@ export default function App() {
 
 
   const Home = () => {
-        if (currentUser && currentUser.workspaces) {
-            return currentUser.workspaces.length ?
-                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-                <CreateWorkspace />
-        }
-        return (
-            <>
-                <Splashpage />
-            </>
-        )
+    // if (currentUser && currentUser.workspaces) {
+    //   return currentUser.workspaces.length ?
+    //     <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+    //     <CreateWorkspace />
+    if (currentUser && currentUser.workspaces) {
+      return currentUser.workspaces.length ?
+        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+        <CreateWorkspace />
     }
+    return (
+      <>
+        <Splashpage />
+      </>
+    )
+  }
+  // return (
+  //   <>
+  //     <h1>Splash Page</h1>
+  //     <LoginForm />
+  //     <p>Don't have an account?
+  //       <NavLink to="/signup">
+  //         Sign Up
+  //       </NavLink>
+  //     </p>
+  //   </>
+  // )
+}
 
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact={true}>
-          <Home />
-        </Route>
-        <Route path='/workspaces/:id'>
-          <>
-            <Workspace />
-          </>
-        </Route>
-        <Route exact path='/login'>
-          <LoginPage />
-        </Route>
-        <Route exact path='/signup'>
-          <SignUpPage />
-        </Route>
-        {/* <Route path='/workspaces'>
+return (
+  <BrowserRouter>
+    <Switch>
+      <Route path='/' exact={true}>
+        <Home />
+      </Route>
+      <Route path='/workspaces/:id'>
+        <>
+          <Workspace />
+        </>
+      </Route>
+      <Route exact path='/login'>
+        <LoginPage />
+      </Route>
+      <Route exact path='/signup'>
+        <SignUpPage />
+      </Route>
+      {/* <Route path='/workspaces'>
           <AllWorkSpaces />
           <CreateWorkspace />
         </Route>
@@ -69,14 +88,13 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
-        <Route exact path='/tasks/:taskId/edit'>
-          <TaskDetail />
-        </Route>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  )
+      <Route exact path='/tasks/:taskId/edit'>
+        <TaskDetail />
+      </Route>
+      <Route exact path='/tasks/:taskId'>
+        <TaskDetail />
+      </Route>
+    </Switch>
+  </BrowserRouter>
+)
 }
-

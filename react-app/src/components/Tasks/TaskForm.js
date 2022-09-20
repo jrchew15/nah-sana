@@ -4,10 +4,12 @@ import { useHistory, useParams } from 'react-router-dom';
 import { createOneTask, updateOneTask } from '../../store/tasks';
 import { getTaskById } from '../../store/tasks';
 
-const TaskForm = () => {
+import './TaskStyle/TaskForm.css'
+
+const TaskForm = ({ taskId }) => {
     const dispatch = useDispatch();
 
-    const { taskId } = useParams();
+    // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
     const [task, setTask] = useState(null)
 
@@ -56,20 +58,32 @@ const TaskForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='name'>Name</label>
-                <input type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
-                <label htmlFor='dueDate'>Due Date</label>
-                <input type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
-                <label htmlFor='description'>Description</label>
-                <input type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
-                <label htmlFor='complete'>Complete</label>
-                <input type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
+                <label htmlFor='name'>
+                    Name
+                    <input type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
+                </label>
+                <label htmlFor='dueDate'>
+                    Due Date
+                    <input type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
+                </label>
+                <label htmlFor='description'>
+                    Description
+                    <input type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
+                </label>
+                <label htmlFor='complete'>
+                    Complete
+                    <input type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
+                </label>
                 {/* User Id will eventually be chosen from workspace users dropdown */}
-                <label htmlFor='userId'>User Id</label>
-                <input type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
+                <label htmlFor='userId'>
+                    User Id
+                    <input type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
+                </label>
                 {/* project Id will eventually be chosen from workspace projects dropdown */}
-                <label htmlFor='projectId'>Project Id</label>
-                <input type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
+                <label htmlFor='projectId'>
+                    Project Id
+                    <input type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
+                </label>
                 <button type='submit'>Submit</button>
             </div>
         </form>
