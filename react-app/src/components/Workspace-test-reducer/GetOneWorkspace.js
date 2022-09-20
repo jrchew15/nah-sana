@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
+import TasksList from "../Tasks/TasksList"
 
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import AddUser from "./AddUser";
+import TaskDetail from "../Tasks/TaskDetail";
 export default function GetOne() {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -62,14 +64,15 @@ export default function GetOne() {
                                 ))}
                             </ul>
                         </li>
-                        <li>
+                        {/* <li>
                             <ul>Tasks:
                                 {workspace.tasks.map(task => (
                                     <li key={task.id}>{task.name}</li>
                                 ))}
                             </ul>
-                        </li>
+                        </li> */}
                     </ul>
+                    <TasksList projects={workspace.projects} />
                     <UpdateWorkspace />
                     <AddUser />
                     <LogoutButton />

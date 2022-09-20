@@ -10,6 +10,7 @@ import ProjectDetail from "./Projects/ProjectDetail";
 import ProjectDetailList from "./Projects/ProjectDetailList";
 
 import { oneWorkspace } from "../store/workspace";
+import ProjectDetail from "./Projects/ProjectDetail";
 
 
 
@@ -57,7 +58,6 @@ export default function Workspace() {
                         <Route exact path='/workspaces/:workspaceId/projects/:id'>
                             <ProjectDetail workspaceId={workspaceId} />
                         </Route>
-
                     </Switch>
                 </div>
             </div>

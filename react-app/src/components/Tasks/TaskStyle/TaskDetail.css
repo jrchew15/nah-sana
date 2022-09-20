@@ -1,0 +1,23 @@
+.side-bar {
+    height: 100%;
+    width: 40%;
+    position: fixed;
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    right: 0;
+    transition: 1s;
+    /* 0.5 second transition effect to slide in the sidenav */
+    border: 1px solid rgba(128, 128, 128, 0.393);
+    background-color: rgba(0, 0, 0, 0.746);
+    border-radius: 20px;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}

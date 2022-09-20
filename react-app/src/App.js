@@ -78,6 +78,12 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
+        <Route exact path='/tasks/:taskId/edit'>
+          <TaskDetail />
+        </Route>
+        <Route exact path='/tasks/:taskId'>
+          <TaskDetail />
+        </Route>
       </Switch>
     </BrowserRouter>
   )
