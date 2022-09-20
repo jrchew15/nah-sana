@@ -66,9 +66,9 @@ export default function GetOne({ workspaceId }) {
                             </div>
                         </div>
                         <div className="right-widget">
-                            <div>
-                                <GetProjects workspaceId={workspaceId} />
-                            </div>
+                            {/* <div className="wrapper"> */}
+                            <GetProjects workspaceId={workspaceId} />
+                            {/* </div> */}
                         </div>
                     </div>
                     <div className="bottom-container">
