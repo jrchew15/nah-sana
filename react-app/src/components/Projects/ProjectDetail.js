@@ -28,6 +28,30 @@ function ProjectDetail({ workspaceId }) {
   let dueDate;
   project.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
 
+  function widgetColor() {
+    if (project?.status === "At Risk") {
+      return "statusWidgetColorRisk"
+    } else if (project?.status === "Off Track") {
+      return "statusWidgetColorOffTrack"
+    } else if (project?.status === "On Hold") {
+      return "statusWidgetColorHold"
+    } else {
+      return "statusWidgetColor"
+    }
+  }
+
+  function widgetColorFont() {
+    if (project?.status === "At Risk") {
+      return "statusWidgetColorRiskFont"
+    } else if (project?.status === "Off Track") {
+      return "statusWidgetColorOffTrackFont"
+    } else if (project?.status === "On Hold") {
+      return "statusWidgetColorHoldFont"
+    } else {
+      return "statusWidgetColorFont"
+    }
+  }
+
   let overview = (
     <div className='projectDetail'>
       <div className='projectDetailLeft'>
@@ -47,10 +71,19 @@ function ProjectDetail({ workspaceId }) {
         }
       </div>
       <div className='projectDetailRight'>
-        <EditProjectModal project={project} />
-        <button onClick={handleDeleteClick} className='projectButton'>Delete Project</button>
-        {project.status}
-        {dueDate}
+        <div className='statusWidgetContainer'>
+          <div className={widgetColor()}></div>
+          <div className={widgetColorFont()}>
+            {project.status}
+          </div>
+          <div className='statusWidgetDue'>
+            Due On: {dueDate}
+          </div>
+        </div>
+        <div className='projectDetailRightButtons'>
+          <EditProjectModal project={project} />
+          <button onClick={handleDeleteClick} className='projectButton'>Delete Project</button>
+        </div>
       </div>
     </div>
   )
