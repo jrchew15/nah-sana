@@ -1,0 +1,92 @@
+.innerContent {
+  height: 100%;
+}
+
+.projectNavBar {
+  display: flex;
+  flex-direction: row;
+  height: 72px;
+  padding: 0 24px;
+  z-index: 200;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.projectNavBarIcon {
+  display: flex;
+  align-items: center;
+}
+
+.projectIconContainer {
+  display: flex;
+  height: 48px;
+  width: 48px;
+  border-radius: 12px;
+  background-color: var(--bkg-color-grey);
+  justify-content: center;
+  align-items: center;
+}
+
+.projectIcon {
+  height: 70%;
+  width: 70%;
+}
+
+.projectNavBarInfo {
+  display: flex;
+  padding-left: 25px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.projectNavBarLinkContainer {
+  justify-items: end;
+}
+
+.projectNavBarLinks {
+  background-color: transparent;
+  color: var(--border-color);
+  border: none;
+  font-size: 18px;
+}
+
+.projectNavBarLinksActive {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 18px;
+  border-bottom: 2px solid white;
+}
+
+.projectDetail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 94%;
+}
+
+.projectDetailLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectDetailRight {
+  width: 25%;
+  align-items: flex-end;
+  border-left: 1px solid var(--border-color);
+}
+
+.projectButton {
+  align-items: center;
+  border: 1px solid #565557;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  height: 65px;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+  width: 130px;
+  background-color: #2a2b2d;
+  color: white;
+}
