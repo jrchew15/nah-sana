@@ -1,4 +1,4 @@
-form {
+/* form {
     box-sizing: border-box;
     padding: 2rem;
     border-radius: 1rem;
@@ -27,11 +27,12 @@ input {
 }
 
 button {
-    /* justify-content: center;
-    align-items: center; */
+    justify-content: center;
+    align-items: center;
     width: 60%;
     border: none;
     border-radius: 3px;
     margin-left: 20px;
     cursor: pointer;
 }
+*/
