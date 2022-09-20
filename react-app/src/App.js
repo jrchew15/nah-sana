@@ -1,24 +1,14 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import TaskList from './components/Tasks/TasksList';
-import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 
 import Workspace from './components/Workspace';
-import Depricated_App from './Depricated_App';
-import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
 import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 
-import GetProjects from './components/Projects/ProjectsList';
-import ProjectDetail from './components/Projects/ProjectDetail';
-import CreateProjectModal from './components/Projects/CreateProjectModal';
-import LoginForm from './components/auth/LoginForm';
-import EditUserFormModal from './components/EditUserModal';
-import SignUpForm from './components/auth/SignUpForm';
+import LoginPage from './components/auth/LoginPage';
+import Splashpage from './components/Splashpage';
 
 export default function App() {
   const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -43,13 +33,7 @@ export default function App() {
         }
         return (
             <>
-                <h1>Splash Page</h1>
-                <LoginForm />
-                <p>Don't have an account? 
-                    <NavLink to="/signup">
-                        Sign Up
-                    </NavLink>
-                </p>
+                <Splashpage />
             </>
         )
     }
@@ -65,6 +49,9 @@ export default function App() {
           <>
             <Workspace />
           </>
+        </Route>
+        <Route exact path='/login'>
+          <LoginPage />
         </Route>
         {/* <Route path='/workspaces'>
           <AllWorkSpaces />
