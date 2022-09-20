@@ -22,7 +22,7 @@ function ProjectDetailList({ workspaceId }) {
   return (
     <div className='innerContent'>
       <div className='projectDetail'>
-        <TaskList />
+        <h3>Test</h3>
       </div>
 
     </div>
