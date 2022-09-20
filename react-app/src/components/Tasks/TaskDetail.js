@@ -23,7 +23,7 @@ const TaskDetail = ({ taskId }) => {
     return (
         <>
             {showSideBar && (
-                <div id='side-bar' class='side-bar'>
+                <div id='side-bar' className='side-bar'>
                     <a href="javascript:void(0)" class="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a>
                     <div>{task.name}</div>
                     <div>Due date  {task.dueDate.split(' ')[2]}{task.dueDate.split(' ')[1]}</div>
