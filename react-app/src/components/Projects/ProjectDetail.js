@@ -5,7 +5,6 @@ import { deleteAProject, getAllProjects, getAProject } from '../../store/project
 import EditProjectModal from './EditProjectModal';
 import ProjectDetailList from './ProjectDetailList'
 import './Projects.css'
-
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
   const history = useHistory()
