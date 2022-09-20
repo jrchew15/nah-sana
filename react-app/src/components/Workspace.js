@@ -67,9 +67,7 @@ export default function Workspace() {
                         <Route exact path='/workspaces/:workspaceId/projects/:id'>
                             <ProjectDetail workspaceId={workspaceId} />
                         </Route>
-                        {/* <Route exact path='/workspaces/:workspaceId/projects/:id/list'>
-                            <ProjectDetailList workspaceId={workspaceId} />
-                        </Route> */}
+
                     </Switch>
                 </div>
             </div>
