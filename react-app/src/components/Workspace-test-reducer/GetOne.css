@@ -70,6 +70,7 @@
     /* width: 40.5vw; */
     width: 35em;
     margin: .5em;
+
 }
 
 .bottom-container {
@@ -99,7 +100,7 @@
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: scroll;
     overflow-x: visible;
     overflow-y: visible;

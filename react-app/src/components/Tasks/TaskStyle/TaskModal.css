@@ -1,0 +1,16 @@
+.task-modal {
+    width: 400px;
+    height: 400px;
+}
+
+.task-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    margin: auto;
+    width: 75%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}

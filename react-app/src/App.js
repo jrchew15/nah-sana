@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import UsersList from './components/UsersList';
+import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 
 import Workspace from './components/Workspace';
-import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
+import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspaceModal/CreateWS'
 
 import Splashpage from './components/Splashpage';
 import LoginPage from './components/auth/LoginPage';
@@ -27,17 +30,19 @@ export default function App() {
 
 
   const Home = () => {
-        if (currentUser && currentUser.workspaces) {
-            return currentUser.workspaces.length ?
-                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-                <CreateWorkspace />
-        }
-        return (
-            <>
-                <Splashpage />
-            </>
-        )
+    if (currentUser && currentUser.workspaces) {
+      return currentUser.workspaces.length ?
+        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+        <CreateWorkspace />
     }
+    else
+      return (
+        <>
+          <Splashpage />
+        </>
+      )
+  }
+
 
 
   return (
@@ -59,8 +64,9 @@ export default function App() {
         </Route>
         {/* <Route path='/workspaces'>
           <AllWorkSpaces />
+        </Route> */}
+        {/*
           <CreateWorkspace />
-        </Route>
         <Route exact path='/projects/:id'>
           <ProjectDetail />
         </Route>
@@ -79,4 +85,3 @@ export default function App() {
     </BrowserRouter>
   )
 }
-

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAProject, getAllProjects, getAProject } from '../../store/projects';
 import EditProjectModal from './EditProjectModal';
-import TaskList from '../Tasks/TasksList';
+import TasksListByProject from '../Tasks/TasksListByProject';
 import './Projects.css'
 
 function ProjectDetail({ workspaceId }) {
@@ -89,7 +89,7 @@ function ProjectDetail({ workspaceId }) {
   )
 
   let list = (
-    <TaskList />
+    <TasksListByProject projectId={id} />
   )
 
   function circleType() {

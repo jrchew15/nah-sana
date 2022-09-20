@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUserToWorkspace } from "../../store/workspace";
-import { useHistory, useParams } from "react-router-dom";
+import { workspaceCreate } from "../../../store/workspace";
 
 
-
-const AddUser = () => {
+const CreateWorkspace = () => {
     const dispatch = useDispatch()
-    const { id } = useParams()
+
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -16,24 +15,24 @@ const AddUser = () => {
     useEffect(() => {
 
         const errors = []
-        if (!email.length) errors.push('Email name is required')
+        if (!name.length) errors.push('Workspace name is required')
         setValidationErrors(errors)
-    }, [email])
+    }, [name])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true)
 
-        const user = {
-            email
+        const workspace = {
+            name
         }
         if (!validationErrors.length) {
-            dispatch(addUserToWorkspace(user, id))
+            dispatch(workspaceCreate(workspace))
         }
     }
     return (
         <>
-            <h2>Add Member to Workspace</h2>
+            <h2>Create Workspace</h2>
             {hasSubmitted && validationErrors.length > 0 && (
                 <div>
                     <ul style={{ padding: '10px', color: 'red', listStyle: 'none' }}>
@@ -45,7 +44,17 @@ const AddUser = () => {
             )}
             <form onSubmit={handleSubmit}>
                 <label>
-                    User Email :
+                    Workspace Name :
+                    <input
+                        maxLength={41}
+                        type='text'
+                        placeholder="Company or Team Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </label>
+                {/* <label>
+                    Add User :
                     <input
                         maxLength={41}
                         type='email'
@@ -53,14 +62,14 @@ const AddUser = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                </label>
+                </label> */}
                 <button type="submit"
                     style={{ borderRadius: '50%', height: '60px', width: '60px', background: 'purple', color: 'white' }}
-                >Add</button>
+                >Create</button>
 
             </form>
         </>
     )
 
 }
-export default AddUser
+export default CreateWorkspace
