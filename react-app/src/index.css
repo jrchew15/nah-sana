@@ -55,3 +55,10 @@ body {
     width: var(--navbar-width);
     height: 100%;
 }
+
+div.horizontal-separator {
+    height: 1px;
+    width: 100%;
+    background-color: var(--border-color);
+    content: "";
+}
