@@ -11,7 +11,7 @@ import TaskDetail from "./TaskDetail";
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 
-const TaskListByProject = ({ projectId }) => {
+const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -76,4 +76,4 @@ const TaskListByProject = ({ projectId }) => {
     )
 }
 
-export default TaskListByProject
+export default TasksListByProject

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-do
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import TaskList from './components/Tasks/TasksList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
@@ -36,23 +35,23 @@ export default function App() {
 
 
   const Home = () => {
-        if (currentUser && currentUser.workspaces) {
-            return currentUser.workspaces.length ?
-                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-                <CreateWorkspace />
-        }
-        return (
-            <>
-                <h1>Splash Page</h1>
-                <LoginForm />
-                <p>Don't have an account? 
-                    <NavLink to="/signup">
-                        Sign Up
-                    </NavLink>
-                </p>
-            </>
-        )
+    if (currentUser && currentUser.workspaces) {
+      return currentUser.workspaces.length ?
+        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+        <CreateWorkspace />
     }
+    return (
+      <>
+        <h1>Splash Page</h1>
+        <LoginForm />
+        <p>Don't have an account?
+          <NavLink to="/signup">
+            Sign Up
+          </NavLink>
+        </p>
+      </>
+    )
+  }
 
 
   return (
@@ -88,4 +87,3 @@ export default function App() {
     </BrowserRouter>
   )
 }
-

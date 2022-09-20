@@ -4,8 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getAProject } from '../../store/projects';
 import './Projects.css'
-import TaskList from '../Tasks/TasksList';
-import TaskListByProject from '../Tasks/TaskListByProject';
+import TasksListByProject from '../Tasks/TasksListByProject';
 
 function ProjectDetailList({ workspaceId }) {
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ function ProjectDetailList({ workspaceId }) {
   return (
     <div className='innerContent'>
       <div className='projectDetail'>
-        <TaskListByProject projectId={id} />
+        <TasksListByProject projectId={id} />
       </div>
 
     </div>
