@@ -7,7 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import AddUser from "./AddUser";
 import GetProjects from "../Projects/ProjectsList";
-import TaskList from "../Tasks/TasksList";
+import TaskListByUser from "../Tasks/TasksList";
 import TaskDetail from "../Tasks/TaskDetail";
 import './GetOne.css'
 export default function GetOne({ workspaceId }) {
@@ -61,7 +61,8 @@ export default function GetOne({ workspaceId }) {
                                     <h3 className="task-words">My Priorities</h3>
                                 </div>
                                 <div className="task-div">
-                                    <TaskList />
+                                    <TaskListByUser />
+                                    {/* <h1>Hi</h1> */}
                                 </div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ import TaskDetail from "./TaskDetail";
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 
-const TaskList = ({ projects }) => {
+const TaskListByUser = ({ projects }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -23,20 +23,14 @@ const TaskList = ({ projects }) => {
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
-    // useEffect(() => {
-    //     dispatch(getTasks())
-    // }, [dispatch])
-
-    // let workspaceId = useParams()
-    // let userId = useParams()
     useEffect(() => {
-        dispatch(getTasksByWorkspace(1, 1))
-    }, [dispatch, showTaskDetail])
+        dispatch(getTasks())
+    }, [dispatch])
 
     if (!tasksArr.length) return null
     return (
         <>
-
+            <h1>Hi</h1>
             {/* REVISIT
             <div className="task-container-list">
                 {tasksArr.map((task) => (
@@ -49,26 +43,25 @@ const TaskList = ({ projects }) => {
                         </div>
                     </>
                 ))}
-            </div>
+            </div> */}
             {/* <NavLink to={`/tasks/${task.id}`} className="task-items">
                         <li>
                             {task.name}
                         </li>
-                    </NavLink> */}
+                    </NavLink>
 
-            <table>
+            {/* <table>
                 <tr>
                     <th>Task Name</th>
                     <th>Due Date</th>
-                    <th>Project</th>
                 </tr>
                 {tasksArr.map((task) => (
                     <tr key={task.id}>
                         <td>
+                            <i class="fa-thin fa-circle-check"></i>
                             {task.name}
                         </td>
                         <td>{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
-                        <td>{task.projectId}</td>
                         <button onClick={() => (
                             setShowTaskDetail(!showTaskDetail),
                             setOnClickTaskId(task.id)
@@ -77,10 +70,10 @@ const TaskList = ({ projects }) => {
                     </tr>
                 ))}
             </table>
-            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null}
+            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null} */}
 
         </>
     )
 }
 
-export default TaskList
+export default TaskListByUser
