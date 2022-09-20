@@ -31,7 +31,6 @@ const TasksListByUser = ({ projects }) => {
     if (!tasksArr.length) return null
     return (
         <>
-            {/* <h1>Hi</h1> */}
             {/* REVISIT */}
             <div className="task-container-list">
                 {tasksArr.map((task) => (
@@ -55,7 +54,6 @@ const TasksListByUser = ({ projects }) => {
                 </Modal>
             )
             }
-            {/* {showTaskDetail && (<TaskDetailByWorkSpace taskId={onClickTaskId} />)} */}
         </>
     )
 }
