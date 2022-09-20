@@ -15,7 +15,8 @@ export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
-    const workspaceId = match.params.id
+    const workspaceId = match.params.id;
+    const user = useSelector(state => state.session.user)
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
 
@@ -35,7 +36,7 @@ export default function Workspace() {
         setNavDisplay(state => !state)
     }
 
-    return workspaceLoaded ? (
+    return workspaceLoaded && user ? (
         <>
             <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
             <div id='navbar-and-content'>
