@@ -48,7 +48,7 @@ textarea {
 
 #modal-content form input:focus,
 textarea:focus {
-  outline: 2px solid #4473D2;
+  outline: 2px solid var(--status-color-on-hold);
   border: 1px solid var(--border-color-active)
 }
 
@@ -67,7 +67,8 @@ textarea:focus {
   height: 36px;
   border-radius: 4px;
   color: var(--text-color);
-  background-color: #4473D2;
+  background-color: var(--status-color-on-hold);
   width: 80%;
   border: none;
+  cursor: pointer;
 }

@@ -24,8 +24,7 @@ const EditUserForm = () => {
   const onUpdateProfile = async (e) => {
     e.preventDefault();
 
-    const image = `/static/images/user/${Math.ceil(Math.random() * 5)}.png`
-    const data = await dispatch(updateProfile(user, firstName, lastName, role, image, pronouns, department, bio));
+    const data = await dispatch(updateProfile(user, firstName, lastName, role, user.image, pronouns, department, bio));
     if (data) {
       setErrors(data)
     }

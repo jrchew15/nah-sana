@@ -24,7 +24,7 @@ export default function Topbar({ toggleNavbarDisplay }) {
         history.push('/')
     };
 
-    return currentWorkspace ? (
+    return currentWorkspace && currentUser ? (
         <>
             <div id='topbar'>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
