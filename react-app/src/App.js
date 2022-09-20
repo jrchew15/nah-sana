@@ -7,8 +7,9 @@ import TaskDetail from './components/Tasks/TaskDetail';
 import Workspace from './components/Workspace';
 import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 
-import LoginPage from './components/auth/LoginPage';
 import Splashpage from './components/Splashpage';
+import LoginPage from './components/auth/LoginPage';
+import SignUpPage from './components/auth/SignUpPage';
 
 export default function App() {
   const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -52,6 +53,9 @@ export default function App() {
         </Route>
         <Route exact path='/login'>
           <LoginPage />
+        </Route>
+        <Route exact path='/signup'>
+          <SignUpPage />
         </Route>
         {/* <Route path='/workspaces'>
           <AllWorkSpaces />
