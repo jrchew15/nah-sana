@@ -34,21 +34,25 @@ export default function App() {
 
   if (!currentUserIsLoaded) return null;
 
+
   const Home = () => {
-    if (currentUser) {
-      return currentUser.workspaces.length ?
-        <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-        <CreateWorkspace />
+        if (currentUser && currentUser.workspaces) {
+            return currentUser.workspaces.length ?
+                <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+                <CreateWorkspace />
+        }
+        return (
+            <>
+                <h1>Splash Page</h1>
+                <LoginForm />
+                <p>Don't have an account? 
+                    <NavLink to="/signup">
+                        Sign Up
+                    </NavLink>
+                </p>
+            </>
+        )
     }
-    return (
-      <>
-        <h1>Splash Page</h1>
-        <LoginForm />
-        <h2>Sign Up</h2>
-        <SignUpForm />
-      </>
-    )
-  }
 
 
   return (
@@ -74,7 +78,14 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
+        <Route exact path='/tasks/:taskId/edit'>
+          <TaskDetail />
+        </Route>
+        <Route exact path='/tasks/:taskId'>
+          <TaskDetail />
+        </Route>
       </Switch>
     </BrowserRouter>
   )
 }
+

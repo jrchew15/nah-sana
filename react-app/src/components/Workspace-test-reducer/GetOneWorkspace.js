@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
-import './GetOne.css'
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import AddUser from "./AddUser";
 import GetProjects from "../Projects/ProjectsList";
 import TaskList from "../Tasks/TasksList";
-
+import TaskDetail from "../Tasks/TaskDetail";
+import './GetOne.css'
 export default function GetOne({ workspaceId }) {
+
     const dispatch = useDispatch()
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -87,9 +88,6 @@ export default function GetOne({ workspaceId }) {
                                     </>
                                 ))}
                             </div>
-
-
-
                         </div>
                     </div>
 

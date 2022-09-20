@@ -28,10 +28,12 @@ function GetProjects({ workspaceId }) {
         <>
           <h3 className='title-projects'>Projects</h3>
           <CreateProjectModal />
+
           {filtered.map(project => {
             return (
               <div>
                 <div key={project.id} >
+
                   <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
                     <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
                     {project.name}
@@ -41,6 +43,7 @@ function GetProjects({ workspaceId }) {
               </div>
             )
           })}
+          <CreateProjectModal />
         </>
       ) : (
         <>

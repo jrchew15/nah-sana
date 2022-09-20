@@ -27,7 +27,6 @@ body {
     height: 100%;
 }
 
-#topbar,
 #navbar {
     background-color: var(--bkg-color-grey);
 }
@@ -55,11 +54,4 @@ body {
 #navbar {
     width: var(--navbar-width);
     height: 100%;
-}
-
-#topbar {
-    height: var(--topbar-height);
-    width: 100%;
-    box-sizing: border-box;
-    border-bottom: 1px solid var(--border-color);
 }
