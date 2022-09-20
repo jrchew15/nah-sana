@@ -9,6 +9,7 @@ import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
 import ProjectDetailList from "./Projects/ProjectDetailList";
 import { oneWorkspace } from "../store/workspace";
+import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
 
 
 export default function Workspace() {

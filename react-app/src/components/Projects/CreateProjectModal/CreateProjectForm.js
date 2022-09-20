@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom';
 import { createAProject } from '../../../store/projects';
 
 const CreateProjectForm = () => {
@@ -11,10 +12,10 @@ const CreateProjectForm = () => {
   const [description, setDescription] = useState('')
   const [icon, setIcon] = useState('')
   let ownerId = user.id
+  const { id } = useParams()
 
-  // REVISIT THIS WHEN WORKSPACE IS ADDED TO STATE
-  let workspaceId = 1
 
+  let workspaceId = id
   const dispatch = useDispatch();
   const createProject = async (e) => {
     e.preventDefault();
