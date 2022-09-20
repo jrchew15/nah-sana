@@ -92,7 +92,8 @@ def add_user_from_workspace(id):
         return foundUser.to_dict()
     else:
         return form.errors
-
+#   return {'errors': validation_errors_to_error_messages(new_form.errors)}, 401
+#
 # #Update a Workspace
 @workspace_routes.route('/<int:id>', methods=['PUT'])
 def update_workspace(id):
@@ -112,10 +113,11 @@ def update_workspace(id):
 @workspace_routes.route('/<int:id>/users/<int:user_id>', methods=['DELETE'])
 def delete_user_from_workspace(id, user_id ):
     workspace = Workspace.query.get(id)
-    find_user_to_delete = [x for x in workspace.members if x.id == user_id]
-    if len(find_user_to_delete) > 0:
-        db.session.delete(find_user_to_delete[0])
+    find_user_to_not_delete = [x for x in workspace.members if x.id != user_id]
+    if len(find_user_to_not_delete) > 0:
+        workspace.members = find_user_to_not_delete
+        # db.session.delete(find_user_to_delete[0])
         db.session.commit()
-        return {'message': f'{find_user_to_delete[0].first_name} was successfully removed from workspace'}
+        return {'message': 'User was successfully removed from workspace'}
     else:
         return {'Error':'User not found in workspace'}
