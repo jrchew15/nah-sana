@@ -8,16 +8,11 @@ import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 
 import Workspace from './components/Workspace';
-import Depricated_App from './Depricated_App';
-import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
 import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
 
-import GetProjects from './components/Projects/ProjectsList';
-import ProjectDetail from './components/Projects/ProjectDetail';
-import CreateProjectModal from './components/Projects/CreateProjectModal';
-import LoginForm from './components/auth/LoginForm';
-import EditUserFormModal from './components/EditUserModal';
-import SignUpForm from './components/auth/SignUpForm';
+import Splashpage from './components/Splashpage';
+import LoginPage from './components/auth/LoginPage';
+import SignUpPage from './components/auth/SignUpPage';
 
 export default function App() {
   const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -35,6 +30,10 @@ export default function App() {
 
 
   const Home = () => {
+    // if (currentUser && currentUser.workspaces) {
+    //   return currentUser.workspaces.length ?
+    //     <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
+    //     <CreateWorkspace />
     if (currentUser && currentUser.workspaces) {
       return currentUser.workspaces.length ?
         <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
@@ -42,30 +41,42 @@ export default function App() {
     }
     return (
       <>
-        <h1>Splash Page</h1>
-        <LoginForm />
-        <p>Don't have an account?
-          <NavLink to="/signup">
-            Sign Up
-          </NavLink>
-        </p>
+        <Splashpage />
       </>
     )
   }
+  // return (
+  //   <>
+  //     <h1>Splash Page</h1>
+  //     <LoginForm />
+  //     <p>Don't have an account?
+  //       <NavLink to="/signup">
+  //         Sign Up
+  //       </NavLink>
+  //     </p>
+  //   </>
+  // )
+}
 
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact={true}>
-          <Home />
-        </Route>
-        <Route path='/workspaces/:id'>
-          <>
-            <Workspace />
-          </>
-        </Route>
-        {/* <Route path='/workspaces'>
+return (
+  <BrowserRouter>
+    <Switch>
+      <Route path='/' exact={true}>
+        <Home />
+      </Route>
+      <Route path='/workspaces/:id'>
+        <>
+          <Workspace />
+        </>
+      </Route>
+      <Route exact path='/login'>
+        <LoginPage />
+      </Route>
+      <Route exact path='/signup'>
+        <SignUpPage />
+      </Route>
+      {/* <Route path='/workspaces'>
           <AllWorkSpaces />
           <CreateWorkspace />
         </Route>
@@ -77,13 +88,13 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
-        <Route exact path='/tasks/:taskId/edit'>
-          <TaskDetail />
-        </Route>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  )
+      <Route exact path='/tasks/:taskId/edit'>
+        <TaskDetail />
+      </Route>
+      <Route exact path='/tasks/:taskId'>
+        <TaskDetail />
+      </Route>
+    </Switch>
+  </BrowserRouter>
+)
 }

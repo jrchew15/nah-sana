@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import LogoutButton from './auth/LogoutButton';
-import Topbar from "./Topbar";
+import Topbar from "./Navbars/Topbar";
 import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
@@ -15,7 +15,8 @@ export default function Workspace() {
     const dispatch = useDispatch();
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
-    const workspaceId = match.params.id
+    const workspaceId = match.params.id;
+    const user = useSelector(state => state.session.user)
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
 
@@ -35,7 +36,7 @@ export default function Workspace() {
         setNavDisplay(state => !state)
     }
 
-    return workspaceLoaded ? (
+    return workspaceLoaded && user ? (
         <>
             <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
             <div id='navbar-and-content'>
@@ -49,6 +50,9 @@ export default function Workspace() {
                             <GetProjects workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:workspaceId/projects/:id'>
+                            <ProjectDetail workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/projects/:id/list'>
                             <ProjectDetail workspaceId={workspaceId} />
                         </Route>
                     </Switch>

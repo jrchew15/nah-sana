@@ -5,7 +5,7 @@ import { updateAProject } from '../../../store/projects';
 const EditProjectForm = ({ project }) => {
 
   let inputDate;
-  project.dueDate ? 
+  project.dueDate ?
     inputDate = new Date(project.dueDate).toJSON().split("T")[0] : inputDate = ''
 
   const user = useSelector(state => state.session.user);

@@ -1,9 +1,15 @@
+#topbar span,
+div,
+a {
+    --dropdown-left-padding: 30px;
+}
+
 #topbar {
-    height: var(--topbar-height);
+    min-height: var(--topbar-height);
     width: 100%;
     box-sizing: border-box;
     border-bottom: 1px solid var(--border-color);
-    background-color: var(--bkg-color-grey);
+    background-color: #2e2e30;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,22 +54,53 @@
     z-index: 2;
     width: 250px;
     border-radius: 4px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
 }
 
-#profile-dropdown>ul {
+#workspaces,
+#user-links,
+#create-workspace-dropdown {
+    padding: 3px 0;
     width: 100%;
 }
 
 #workspaces {
-    /* padding-inline-start: 0px; */
-
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* #profile-dropdown>#workspaces>.active-workspace {} */
 
-#profile-dropdown li {
-    list-style-type: none;
+#profile-dropdown a,
+span {
     height: 36px;
     display: flex;
     align-items: center;
+    padding-left: var(--dropdown-left-padding);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#profile-dropdown a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+#profile-dropdown span:hover,
+a:hover {
+    background-color: var(--bkg-color-grey);
+}
+
+#workspaces a.active::before {
+    content: "✓";
+    min-width: var(--dropdown-left-padding);
+    display: flex;
+    justify-content: center;
+}
+
+#workspaces a.active {
+    padding-left: 0;
 }

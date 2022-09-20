@@ -36,14 +36,13 @@ const TaskList = ({ projects }) => {
     if (!tasksArr.length) return null
     return (
         <>
-
             {/* REVISIT
             <div className="task-container-list">
                 {tasksArr.map((task) => (
                     <>
                         <div className="task-flex">
                             <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                <i className="fa fa-check-circle-o" aria-hidden="true"></i>
                             </button>
                             <div className="task-items">{task.name}</div>
                         </div>
