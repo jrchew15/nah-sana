@@ -59,9 +59,7 @@
 
 }
 
-#profile-dropdown li.active-workspace {
-    list-style-type: "✓";
-}
+/* #profile-dropdown>#workspaces>.active-workspace {} */
 
 #profile-dropdown li {
     list-style-type: none;

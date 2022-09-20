@@ -17,7 +17,7 @@ export default function Topbar({ toggleNavbarDisplay }) {
             <div id='profile-dropdown'>
                 <ul id='workspaces'>
                     {currentUser.workspaces.map(workspace => (
-                        <li key={workspace.id} className={workspace.id == workspaceId ? 'active_workspace' : ''}>
+                        <li key={workspace.id} className={workspace.id == workspaceId ? 'active-workspace' : ''}>
                             {workspace.name}
                         </li>
                     ))}
