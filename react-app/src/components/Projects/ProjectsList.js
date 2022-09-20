@@ -7,16 +7,19 @@ import CreateProjectModal from './CreateProjectModal';
 function GetProjects({ workspaceId }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllProjects())
-  }, [dispatch])
+
 
   const allProjects = useSelector(state => state.projects)
 
+
   let projectArr;
   let filtered;
+  useEffect(() => {
+    dispatch(getAllProjects())
+  }, [dispatch, filtered])
   if (allProjects) {
     projectArr = Object.values(allProjects)
+    console.log(projectArr)
     filtered = projectArr.filter(project => project?.workspaceId === Number(workspaceId))
   } else {
     return null
@@ -25,12 +28,12 @@ function GetProjects({ workspaceId }) {
   return (
     <div className='project-container'>
       <h3 className='title-projects'>Projects</h3>
-      {filtered[0] ? (
+      {filtered.length > 0 ? (
         <>
 
           <div className='project-wrapper'>
-
             <CreateProjectModal />
+
 
             {filtered.map(project => {
               return (
@@ -48,7 +51,10 @@ function GetProjects({ workspaceId }) {
         </>
       ) : (
         <>
-          Loading...
+          <div className='project-wrapper' >
+            <CreateProjectModal />
+          </div>
+
         </>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUserToWorkspace } from "../../store/workspace";
+import { addUserToWorkspace } from "../../../store/workspace";
 import { useHistory, useParams } from "react-router-dom";
 
 

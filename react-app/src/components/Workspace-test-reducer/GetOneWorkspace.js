@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
-import AddUser from "./AddUser";
 import GetProjects from "../Projects/ProjectsList";
 import TaskList from "../Tasks/TasksList";
 import TaskDetail from "../Tasks/TaskDetail";
 import './GetOne.css'
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
 import UpdateWorkspaceModal from "./UpdateWorkspaceModal";
+import AddUserToWorkspace from "./AddUserModal";
 export default function GetOne({ workspaceId }) {
 
     const dispatch = useDispatch()
@@ -44,9 +44,11 @@ export default function GetOne({ workspaceId }) {
         <>
             {(isLoaded &&
                 <div className="dashboard-container">
+                    {/* <button onClick={handlepush}>Back to workspaces</button> */}
                     <div className="left-corner">Home</div>
                     <CreateWorkspaceModal />
                     <UpdateWorkspaceModal />
+                    <AddUserToWorkspace />
                     <div className="dashboard-titles">
                         <h5>{current}</h5>
                         <div>
@@ -60,7 +62,7 @@ export default function GetOne({ workspaceId }) {
                         <div className="left-widget">
                             <div className="task-container">
                                 <div className="task-title">
-                                    <img className="profile-pic" src='https://images.pexels.com/photos/5969628/pexels-photo-5969628.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load' alt={user.firstName}></img>
+                                    <img className="profile-pic" src={user.image} alt={user.firstName}></img>
                                     <h3 className="task-words">My Priorities</h3>
                                 </div>
                                 <div className="task-div">
@@ -81,7 +83,7 @@ export default function GetOne({ workspaceId }) {
                                 {Object.values(workspace.users).map(user => (
                                     <>
                                         <div className="user-card">
-                                            <img className="user-card-image" src='https://images.pexels.com/photos/5225398/pexels-photo-5225398.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' alt={user.firstName}></img>
+                                            <img className="user-card-image" src={user.image} alt={user.firstName}></img>
                                             <div key={user.id}>{user.firstName} {user.lastName}</div>
                                             <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
                                             <div>
@@ -95,9 +97,8 @@ export default function GetOne({ workspaceId }) {
                     </div>
 
                     <div>
-                        <AddUser />
+                        {/* <AddUser /> */}
                         <LogoutButton />
-                        <button onClick={handlepush}>Back to workspaces</button>
                     </div>
                 </div>
             )}
