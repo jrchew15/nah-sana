@@ -1,0 +1,71 @@
+#topbar {
+    height: var(--topbar-height);
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bkg-color-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    position: relative;
+}
+
+#topbar>i {
+    font-size: 1.4em;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+#topbar>i:hover {
+    background-color: var(--border-color-hover);
+}
+
+#topbar>.userIcon {
+    font-size: 0.9em;
+    background-color: aqua;
+    color: var(--text-color-unfocused);
+    font-weight: lighter;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
+    cursor: pointer;
+}
+
+#profile-dropdown {
+    position: absolute;
+    right: 24px;
+    top: 38px;
+    color: var(--text-color);
+    background-color: var(--bkg-color-black);
+    border: var(--border-color) 1px solid;
+    z-index: 2;
+    width: 250px;
+    border-radius: 4px;
+}
+
+#profile-dropdown>ul {
+    width: 100%;
+}
+
+#workspaces {
+    /* padding-inline-start: 0px; */
+
+}
+
+#profile-dropdown li.active-workspace {
+    list-style-type: "✓";
+}
+
+#profile-dropdown li {
+    list-style-type: none;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
