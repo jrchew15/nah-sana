@@ -6,6 +6,8 @@ import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
 import { oneWorkspace } from "../store/workspace";
+import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
+import LeftNavBar from "./Navbars/LeftNavBar";
 import UserProfilePage from "./UserProfilePage";
 
 
@@ -38,7 +40,9 @@ export default function Workspace() {
         <>
             <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
             <div id='navbar-and-content'>
-                <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}></div>
+                <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}>
+                    <LeftNavBar />
+                </div>
                 <div id='content'>
                     <Switch>
                         <Route path='/workspaces/:id' exact>
