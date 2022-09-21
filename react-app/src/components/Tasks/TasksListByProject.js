@@ -11,6 +11,7 @@ import TaskForm from "./TaskForm";
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
+import TaskDetail from "./TaskDetail";
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const TasksListByProject = ({ projectId }) => {
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
+    const [showSideBar, setShowSideBar] = useState(false)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
@@ -54,7 +56,7 @@ const TasksListByProject = ({ projectId }) => {
                 ))
                 }
             </table >
-            {showTaskDetail ? <TaskForm taskId={onClickTaskId} /> : null}
+            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowSideBar={setShowSideBar} /> : null}
         </>
     ) : null
 }

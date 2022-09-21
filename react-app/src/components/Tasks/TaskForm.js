@@ -6,9 +6,10 @@ import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
 
-const TaskForm = ({ taskId }) => {
+const TaskForm = ({ taskId, setShowModal, userId, projectId }) => {
     const dispatch = useDispatch();
-
+    // const workspace = useSelector((state) => state.workspace.users)
+    // console.log('**************workspace', workspace)
     // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
     const [task, setTask] = useState(null)
@@ -17,15 +18,16 @@ const TaskForm = ({ taskId }) => {
     const [dueDate, setDueDate] = useState(null);
     const [description, setDescription] = useState('');
     const [complete, setComplete] = useState(false);
-    const [userId, setUserId] = useState(0);
-    const [projectId, setProjectId] = useState(0);
+    const [userId, setUserId] = useState(userId || 0);
+    const [projectId, setProjectId] = useState(projectId || 0);
     const [showForm, setShowForm] = useState(true)
 
 
     useEffect(async () => {
+        // console.log('*********in use effct 1*******', taskId)
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
-
+            // console.log('*********in use effct 2*******', foundTask)
             let inputDate;
             foundTask.dueDate ?
                 inputDate = new Date(foundTask.dueDate).toJSON().split("T")[0] : inputDate = ''
@@ -41,6 +43,7 @@ const TaskForm = ({ taskId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowModal(false)
         let formData = {
             name,
             dueDate,
@@ -49,6 +52,7 @@ const TaskForm = ({ taskId }) => {
             projectId,
             complete
         }
+        console.log('*********in task form component*******', formData)
         if (!task) {
             const data = await dispatch(createOneTask(formData))
         } else {
@@ -90,11 +94,12 @@ const TaskForm = ({ taskId }) => {
                                 <label htmlFor='complete' id='form-label'>Complete</label>
                                 <input id='form-input' type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
                             </div>
-                            <button id='form-button' type='submit' onClick={() => { setShowForm(false) }}>Submit</button>
+                            <button id='form-button' type='submit'>Submit</button>
                         </form >
                     </div>
                 </div >
-            )}
+            )
+            }
         </>
     )
 }

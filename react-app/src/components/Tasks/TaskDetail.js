@@ -6,14 +6,15 @@ import { deleteOneTask } from '../../store/tasks';
 import TaskForm from './TaskForm';
 import './TaskStyle/TaskDetail.css';
 
-const TaskDetail = ({ taskId }) => {
+const TaskDetail = ({ taskId, setShowSideBar }) => {
     // const { taskId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
     const tasks = useSelector((state) => state.tasks)
+    const workspaceUsers = useSelector((state) => state.workspace.users)
+    // console.log('**********', workspaceUsers)
     const task = tasks[taskId]
 
-    const [showSideBar, setShowSideBar] = useState(true)
     const [showForm, setShowForm] = useState(false)
     const [taskComplete, setTaskComplete] = useState(false)
     const [showTaskDetail, setShowTaskDetail] = useState(true)
@@ -39,6 +40,10 @@ const TaskDetail = ({ taskId }) => {
                     </div>
                     <div className='task-name'>{task.name}</div>
                     <table>
+                        <tr className='task-detail'>
+                            <th>Assignee</th>
+                            <td>{workspaceUsers[task.userId].firstName}{workspaceUsers[task.userId].lastName}</td>
+                        </tr>
                         <tr className='task-detail'>
                             <th>Due Date</th>
                             <td>{task.dueDate.split(' ')[2]}{task.dueDate.split(' ')[1]}</td>

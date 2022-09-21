@@ -6,7 +6,7 @@ import { Modal } from '../../context/Modal';
 
 import { Route, useParams, useHistory } from "react-router-dom";
 import TaskForm from "./TaskForm";
-import TaskDetailByWorkSpace from "./TaskDetailByWorkSpace";
+// import TaskDetailByWorkSpace from "./TaskDetailByWorkSpace";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
@@ -19,7 +19,7 @@ const TasksListByUser = ({ projects }) => {
     const tasksArr = Object.values(tasks)
 
     const [showModal, setShowModal] = useState(false)
-    const [showTaskDetail, setShowTaskDetail] = useState(false)
+    // const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
@@ -41,7 +41,7 @@ const TasksListByUser = ({ projects }) => {
                             </button>
                             <div className="task-items" onClick={() => {
                                 setShowModal(true)
-                                setShowTaskDetail(true)
+                                // setShowTaskDetail(true)
                                 setOnClickTaskId(task.id)
                             }}>{task.name}</div>
                         </div>
@@ -50,7 +50,7 @@ const TasksListByUser = ({ projects }) => {
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <TaskForm taskId={onClickTaskId} />
+                    <TaskForm taskId={onClickTaskId} setShowModal={setShowModal} />
                 </Modal>
             )
             }
