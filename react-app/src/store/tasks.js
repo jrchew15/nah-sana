@@ -82,7 +82,9 @@ export const createOneTask = data => async dispatch => {
         dispatch(add(data))
         return null
     }
-    return data;
+    if (data.errors.length) {
+        return data.errors;
+    }
 };
 
 export const updateOneTask = data => async dispatch => {
@@ -91,10 +93,14 @@ export const updateOneTask = data => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
+    const resBody = await response.json()
     if (response.ok) {
-        const task = await response.json()
-        dispatch(update(task))
-        return task
+        dispatch(update(resBody))
+        return null
+    }
+    if (resBody.errors.length) {
+        console.log('update Thunk', resBody.errors)
+        return resBody.errors;
     }
 };
 

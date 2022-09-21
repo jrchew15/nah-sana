@@ -43,7 +43,6 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setShowModal(false)
         let formData = {
             name,
             dueDate,
@@ -60,8 +59,10 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             data = await dispatch(updateOneTask(formData))
         }
         if (data) {
-            setErrors(data.errors)
+            setErrors(data)
+            return
         }
+        setShowModal(false)
     }
 
     return (
@@ -71,6 +72,11 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                     <div id='task-form' style={{ marginLeft: '30px' }}>
                         <h2>My Task</h2>
                         <form onSubmit={handleSubmit}>
+                            {errors.length > 0 && <div className='form-row'>
+                                {errors.map((error, ind) => (
+                                    <div key={ind}>{error}</div>
+                                ))}
+                            </div>}
                             <div className='form-row'>
                                 <label htmlFor='name' id='form-label'>Name</label>
                                 <input id='form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
