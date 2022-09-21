@@ -6,10 +6,10 @@ import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
 
-const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId }) => {
+const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId, setTaskDetail }) => {
     const dispatch = useDispatch();
     const { users, projects } = useSelector((state) => state.workspace)
-    // console.log('**************workspace', workspace)
+    // console.log('**************taskform', plainForm)
     // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
     const [task, setTask] = useState(null)
@@ -63,6 +63,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             return
         }
         setShowModal(false)
+        setTaskDetail(false)
     }
 
     return (

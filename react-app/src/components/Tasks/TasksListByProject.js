@@ -34,8 +34,8 @@ const TasksListByProject = ({ projectId }) => {
 
     if (!tasksArr.length) return null
     return isLoaded ? (
-        <>
-            <table className="table">
+        <div style={{ display: 'flex' }}>
+            <table className={showTaskDetail ? "table-onclick" : "table"}>
                 <tr className="table-row">
                     <th className="table-head">Task Name</th>
                     <th className="table-head">Due Date</th>
@@ -47,8 +47,8 @@ const TasksListByProject = ({ projectId }) => {
                             <div>{task.name}</div>
                             <div id='button' onClick={() => (
                                 setShowTaskDetail(!showTaskDetail),
-                                setOnClickTaskId(task.id)
-                                // history.push(`/tasks/${task.id}`)
+                                setOnClickTaskId(task.id),
+                                setShowSideBar(!showSideBar)
                             )}>details</div>
                         </td>
                         <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
@@ -56,8 +56,10 @@ const TasksListByProject = ({ projectId }) => {
                 ))
                 }
             </table >
-            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowSideBar={setShowSideBar} /> : null}
-        </>
+            <div>
+                {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+            </div>
+        </div >
     ) : null
 }
 

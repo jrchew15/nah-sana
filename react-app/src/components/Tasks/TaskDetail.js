@@ -1,23 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getTaskById } from "../../store/tasks";
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { deleteOneTask } from '../../store/tasks';
 import TaskForm from './TaskForm';
+import { Modal } from '../../context/Modal';
 import './TaskStyle/TaskDetail.css';
 
-const TaskDetail = ({ taskId, setShowSideBar }) => {
+const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
     // const { taskId } = useParams()
     const dispatch = useDispatch()
-    const history = useHistory()
     const tasks = useSelector((state) => state.tasks)
     const workspaceUsers = useSelector((state) => state.workspace.users)
-    // console.log('**********', workspaceUsers)
+    const project = useSelector((state) => state.projects)
     const task = tasks[taskId]
 
     const [showForm, setShowForm] = useState(false)
     const [taskComplete, setTaskComplete] = useState(false)
     const [showTaskDetail, setShowTaskDetail] = useState(true)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         dispatch(getTaskById(taskId))
@@ -27,10 +28,10 @@ const TaskDetail = ({ taskId, setShowSideBar }) => {
     return (
         <>
             {showTaskDetail && (
-                <div>
-                    {/* <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a> */}
+                <div className='task-detail-container'>
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => { setTaskDetail(false) }}>&times;</a>
                     <div id='task-complete' className='task-complete'
-                        style={{ backgroundColor: taskComplete.toString() === 'false' ? 'white' : 'lime' }}
+                        style={{ backgroundColor: taskComplete.toString() === 'false' ? 'gray' : 'olive' }}
                         onClick={() => (
                             setTaskComplete(!taskComplete)
                             // handleSubmit()
@@ -57,18 +58,27 @@ const TaskDetail = ({ taskId, setShowSideBar }) => {
                             <td> {task.description}</td>
                         </tr>
                     </table>
-                    <button onClick={() => {
-                        setShowForm(true)
-                        setShowTaskDetail(false)
-                    }}>Edit</button>
-                    <button onClick={async () => {
-                        await dispatch(deleteOneTask(taskId))
-                        history.push('/tasks')
-                    }}>Delete</button>
-                    {showForm ? <TaskForm taskId={taskId} /> : null}
-                </div >
+                    <div style={{ display: 'flex' }}>
+                        <button className='button'
+                            onClick={() => {
+                                setShowForm(true)
+                                setShowTaskDetail(false)
+                                setShowModal(true)
+                            }}>Edit</button>
+                        <button className='button'
+                            onClick={async () => {
+                                await dispatch(deleteOneTask(taskId))
+                                // history.push('/tasks')
+                            }}>Delete</button>
+                    </div >
+                </div>
             )
             }
+            {showForm && showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <TaskForm taskId={taskId} setShowModal={setShowModal} setTaskDetail={setTaskDetail} userId={workspaceUsers[task.userId].id} projectId={Object.keys(project)[0]} />
+                </Modal>
+            )}
         </>
     )
 }
