@@ -25,48 +25,45 @@ const TaskDetail = ({ taskId }) => {
     if (!task) { return null }
     return (
         <>
-            {showSideBar && (
-                <div id='side-bar' className='side-bar'>
-                    <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a>
-                    {showTaskDetail && (
-                        <>
-                            <div id='task-complete' className='task-complete'
-                                style={{ backgroundColor: taskComplete.toString() === 'false' ? 'white' : 'lime' }}
-                                onClick={() => (
-                                    setTaskComplete(!taskComplete)
-                                    // handleSubmit()
-                                )}>
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                                {taskComplete.toString() === 'false' ? "Mark Complete" : "Completed"}
-                            </div>
-                            <div className='task-name'>{task.name}</div>
-                            <table>
-                                <tr className='task-detail'>
-                                    <th>Due Date</th>
-                                    <td>{task.dueDate.split(' ')[2]}{task.dueDate.split(' ')[1]}</td>
-                                </tr>
-                                <tr className='task-detail'>
-                                    <th>Projects</th>
-                                    <td>{task.projectId}</td>
-                                </tr>
-                                <tr className='task-detail'>
-                                    <th>Description</th>
-                                    <td> {task.description}</td>
-                                </tr>
-                            </table>
-                            <button onClick={() => {
-                                setShowForm(true)
-                                setShowTaskDetail(false)
-                            }}>Edit</button>
-                            <button onClick={async () => {
-                                await dispatch(deleteOneTask(taskId))
-                                history.push('/tasks')
-                            }}>Delete</button>
-                        </>
-                    )}
+            {showTaskDetail && (
+                <div>
+                    {/* <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a> */}
+                    <div id='task-complete' className='task-complete'
+                        style={{ backgroundColor: taskComplete.toString() === 'false' ? 'white' : 'lime' }}
+                        onClick={() => (
+                            setTaskComplete(!taskComplete)
+                            // handleSubmit()
+                        )}>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        {taskComplete.toString() === 'false' ? "Mark Complete" : "Completed"}
+                    </div>
+                    <div className='task-name'>{task.name}</div>
+                    <table>
+                        <tr className='task-detail'>
+                            <th>Due Date</th>
+                            <td>{task.dueDate.split(' ')[2]}{task.dueDate.split(' ')[1]}</td>
+                        </tr>
+                        <tr className='task-detail'>
+                            <th>Projects</th>
+                            <td>{task.projectId}</td>
+                        </tr>
+                        <tr className='task-detail'>
+                            <th>Description</th>
+                            <td> {task.description}</td>
+                        </tr>
+                    </table>
+                    <button onClick={() => {
+                        setShowForm(true)
+                        setShowTaskDetail(false)
+                    }}>Edit</button>
+                    <button onClick={async () => {
+                        await dispatch(deleteOneTask(taskId))
+                        history.push('/tasks')
+                    }}>Delete</button>
                     {showForm ? <TaskForm taskId={taskId} /> : null}
-                </div>
-            )}
+                </div >
+            )
+            }
         </>
     )
 }

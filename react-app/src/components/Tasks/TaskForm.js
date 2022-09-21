@@ -19,6 +19,8 @@ const TaskForm = ({ taskId }) => {
     const [complete, setComplete] = useState(false);
     const [userId, setUserId] = useState(0);
     const [projectId, setProjectId] = useState(0);
+    const [showForm, setShowForm] = useState(true)
+
 
     useEffect(async () => {
         if (taskId) {
@@ -56,37 +58,44 @@ const TaskForm = ({ taskId }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor='name'>
-                    Name
-                    <input type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
-                </label>
-                <label htmlFor='dueDate'>
-                    Due Date
-                    <input type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
-                </label>
-                <label htmlFor='description'>
-                    Description
-                    <input type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
-                </label>
-                <label htmlFor='complete'>
-                    Complete
-                    <input type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
-                </label>
-                {/* User Id will eventually be chosen from workspace users dropdown */}
-                <label htmlFor='userId'>
-                    User Id
-                    <input type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
-                </label>
-                {/* project Id will eventually be chosen from workspace projects dropdown */}
-                <label htmlFor='projectId'>
-                    Project Id
-                    <input type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
-                </label>
-                <button type='submit'>Submit</button>
-            </div>
-        </form>
+        <>
+            {showForm && (
+                <div className='form-container'>
+                    <div id='task-form' style={{ marginLeft: '30px' }}>
+                        <h2>My Task</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className='form-row'>
+                                <label htmlFor='name' id='form-label'>Name</label>
+                                <input id='form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
+                            </div>
+                            <div className='form-row'>
+                                <label htmlFor='dueDate' id='form-label'>Due Date</label>
+                                <input id='form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
+                            </div>
+                            {/* User Id will eventually be chosen from workspace users dropdown */}
+                            <div className='form-row'>
+                                <label htmlFor='userId' id='form-label'>User Id</label>
+                                <input id='form-input' type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
+                            </div>
+                            {/* project Id will eventually be chosen from workspace projects dropdown */}
+                            <div className='form-row'>
+                                <label htmlFor='projectId' id='form-label'>Project Id</label>
+                                <input id='form-input' type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
+                            </div>
+                            <div className='form-row'>
+                                <label htmlFor='description' id='form-label'>Description</label>
+                                <input id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
+                            </div>
+                            <div className='form-row'>
+                                <label htmlFor='complete' id='form-label'>Complete</label>
+                                <input id='form-input' type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
+                            </div>
+                            <button id='form-button' type='submit' onClick={() => { setShowForm(false) }}>Submit</button>
+                        </form >
+                    </div>
+                </div >
+            )}
+        </>
     )
 }
 

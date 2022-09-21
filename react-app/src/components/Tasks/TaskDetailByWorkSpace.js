@@ -4,7 +4,6 @@ import { getTaskById, updateOneTask } from "../../store/tasks";
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteOneTask } from '../../store/tasks';
 import TaskForm from './TaskForm';
-import './TaskStyle/TaskDetail.css'
 import './TaskStyle/TaskModal.css'
 
 const TaskDetailByWorkSpace = ({ taskId }) => {
@@ -47,7 +46,7 @@ const TaskDetailByWorkSpace = ({ taskId }) => {
                     <div className='task-modal-content'>
                         <div className='task-complete'>
                             <div id='task-complete'
-                                style={{ backgroundColor: taskComplete.toString() === 'false' ? 'white' : 'lime' }}
+                                style={{ backgroundColor: taskComplete.toString() === 'false' ? 'smoky black' : 'green' }}
                                 onClick={() => (
                                     setTaskComplete(!taskComplete),
                                     handleSubmit()
@@ -75,7 +74,7 @@ const TaskDetailByWorkSpace = ({ taskId }) => {
                         <button onClick={() => {
                             setShowForm(true)
                             setShowTaskDetail(!showTaskDetail)
-                            // history.push(`/tasks/${task.id}/edit`)
+                            // history.push(`/workspaces/${workspaceId}`)
                         }}>Edit</button>
                         <button onClick={async () => {
                             await dispatch(deleteOneTask(taskId))
