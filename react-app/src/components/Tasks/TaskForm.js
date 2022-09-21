@@ -20,7 +20,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const [complete, setComplete] = useState(false);
     const [userId, setUserId] = useState(passedUserId || 0);
     const [projectId, setProjectId] = useState(passedProjectId || 0);
-    const [showForm, setShowForm] = useState(true);
+    const [errors, setErrors] = useState([])
 
 
     useEffect(async () => {
@@ -52,18 +52,21 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             projectId,
             complete
         }
-        console.log('*********in task form component*******', formData)
+        let data
         if (!task) {
-            const data = await dispatch(createOneTask(formData))
+            data = await dispatch(createOneTask(formData))
         } else {
             formData.id = taskId;
-            const data = await dispatch(updateOneTask(formData))
+            data = await dispatch(updateOneTask(formData))
+        }
+        if (data) {
+            setErrors(data.errors)
         }
     }
 
     return (
         <>
-            {showForm && (
+            {(
                 <div className='form-container'>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
                         <h2>My Task</h2>

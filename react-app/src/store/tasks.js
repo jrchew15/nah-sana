@@ -77,11 +77,12 @@ export const createOneTask = data => async dispatch => {
         body: JSON.stringify(data)
     })
     console.log('in thunk after fetch', response)
+    const data = await response.json()
     if (response.ok) {
-        const task = await response.json()
-        dispatch(add(task))
-        return task
+        dispatch(add(data))
+        return null
     }
+    return data;
 };
 
 export const updateOneTask = data => async dispatch => {

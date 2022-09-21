@@ -90,7 +90,7 @@ span {
 }
 
 #profile-dropdown span:hover,
-a:hover {
+#profile-dropdown a:hover {
     background-color: var(--bkg-color-grey);
 }
 
