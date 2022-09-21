@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* background-color: var(--bkg-color-black); */
 }
 
 .splashpageLogoContainer {
@@ -23,6 +24,7 @@
 
 .splashpageLogoText {
   padding-left: 10px;
+  color: #0d0e10;
 }
 
 .splashpageLoginOuterContainer {
@@ -33,14 +35,14 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid black;
+  border: 1px solid #0d0e10;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .splashpageLogin {
-  color: black;
+  color: #0d0e10;
 }
 
 .splashpageContent {
@@ -82,8 +84,6 @@
   padding-right: 20px;
 }
 
-
-
 .splashpageContentRight {
   width: 45%;
 }
@@ -98,6 +98,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* background-color: var(--bkg-color-black); */
 }
 
 .splashpageFooterText {
@@ -106,6 +107,7 @@
   font-weight: 400;
   text-align: center;
   padding-right: 20px;
+  color: #0d0e10;
 }
 
 .splashpageProfileContainer {
@@ -116,11 +118,10 @@
 }
 
 .splashpageButton {
-  border: 1px solid #e0e6e8;
+  border: none;
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  /* background-color: #60c792; */
   font-family: 'Montserrat', sans-serif;
   font-size: 30px;
   font-weight: 400;

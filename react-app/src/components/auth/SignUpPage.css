@@ -6,11 +6,30 @@
 }
 
 .signupNav {
-  height: 54px;
+  height: 58px;
   align-items: center;
   padding-left: 10px;
   font-family: 'Montserrat', sans-serif;
   border-bottom: 1px solid #e0e6e8;
+}
+
+.signupLogoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  text-decoration: none;
+    color: #151b26;
+}
+.signupLogo {
+  height: 50px;
+  width: 50px;
+}
+
+.signupLogoText {
+  padding-left: 10px;
+  color: #151b26;
+  text-decoration: none;
 }
 
 .signupContent {
