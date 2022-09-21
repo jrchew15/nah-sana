@@ -26,8 +26,8 @@ const TaskDetail = ({ taskId }) => {
     return (
         <>
             {showTaskDetail && (
-                <div id={showSideBar ? 'slider-out' : 'slider'}>
-                    <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a>
+                <div>
+                    {/* <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowSideBar(!showSideBar) }}>&times;</a> */}
                     <div id='task-complete' className='task-complete'
                         style={{ backgroundColor: taskComplete.toString() === 'false' ? 'white' : 'lime' }}
                         onClick={() => (

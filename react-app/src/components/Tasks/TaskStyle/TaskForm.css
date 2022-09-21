@@ -24,7 +24,17 @@
 
 .form-row>.form-input {
     justify-content: flex-start;
-    flex: 2
+    flex: 2;
+}
+
+input#form-input {
+    background-color: #1e1f21;
+    border: 1px solid #424244;
+    color: #f5f4f3;
+}
+
+.form-input:focus {
+    border: solid 1px blue;
 }
 
 .form-button {

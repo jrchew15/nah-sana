@@ -2,6 +2,7 @@
     width: 100%;
     border-collapse: collapse;
     border-style: hidden;
+    padding: 10px;
 }
 
 .table-row,

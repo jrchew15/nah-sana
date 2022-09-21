@@ -6,7 +6,7 @@ import { getTasksByWorkspace } from "../../store/tasks";
 
 import { Route, useParams, useHistory } from "react-router-dom";
 import TaskForm from "./TaskForm";
-import TaskDetail from "./TaskDetail";
+// import TaskDetail from "./TaskDetail";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
@@ -51,7 +51,7 @@ const TasksListByProject = ({ projectId }) => {
                 ))
                 }
             </table >
-            {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null}
+            {showTaskDetail ? <TaskForm taskId={onClickTaskId} /> : null}
         </>
     )
 }
