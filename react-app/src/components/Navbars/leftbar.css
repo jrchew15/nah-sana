@@ -1,0 +1,72 @@
+#left-nav-bar,
+#user-main-links,
+#this-workspace-links,
+#create-dropdown,
+#create-dropdown-workspace {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+}
+
+#left-nav-bar {
+    height: calc(100vh - var(--topbar-height))
+}
+
+#left-nav-bar i {
+    color: var(--icon-nav-color);
+    font-size: 1.1rem;
+    min-width: 28px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* #left-nav-bar>div {
+    padding-left: 24px;
+} */
+
+#left-nav-bar span,
+#left-nav-bar a {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding-left: var(--dropdown-left-padding);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#left-nav-bar span:hover {
+    background-color: var(--border-color);
+}
+
+#left-nav-bar a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+#left-nav-bar a.active {
+    background-color: #ffffff29;
+}
+
+#add-any {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 24px;
+}
+
+#left-nav-bar>#add-any>span {
+    background-color: var(--border-color);
+    border-radius: 18px;
+    width: 35%;
+    padding-left: 12px;
+}
+
+#workspace-name {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+#extra-space {
+    flex-grow: 1;
+}

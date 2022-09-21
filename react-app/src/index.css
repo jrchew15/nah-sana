@@ -6,6 +6,7 @@
     --border-color: #424244;
     --border-color-hover: #6a696a;
     --border-color-active: #a2a0a2;
+    --icon-nav-color: #a2a0a2;
     --status-color-ontrack-complete: #5EA283;
     --status-color-at-risk: #F1BD6C;
     --status-color-off-track: #D1395A;
@@ -13,6 +14,7 @@
 
     --topbar-height: 48px;
     --navbar-width: 240px;
+    --dropdown-left-padding: 24px;
 }
 
 body {
@@ -58,7 +60,7 @@ body {
 }
 
 #navbar {
-    width: var(--navbar-width);
+    min-width: var(--navbar-width);
     height: 100%;
 }
 
