@@ -1,0 +1,106 @@
+#topbar span,
+div,
+a {
+    --dropdown-left-padding: 30px;
+}
+
+#topbar {
+    min-height: var(--topbar-height);
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #2e2e30;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    position: relative;
+}
+
+#topbar>i {
+    font-size: 1.4em;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+#topbar>i:hover {
+    background-color: var(--border-color-hover);
+}
+
+#topbar>.userIcon {
+    font-size: 0.9em;
+    background-color: aqua;
+    color: var(--text-color-unfocused);
+    font-weight: lighter;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 24px;
+    cursor: pointer;
+}
+
+#profile-dropdown {
+    position: absolute;
+    right: 24px;
+    top: 38px;
+    color: var(--text-color);
+    background-color: var(--bkg-color-black);
+    border: var(--border-color) 1px solid;
+    z-index: 2;
+    width: 250px;
+    border-radius: 4px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#workspaces,
+#user-links,
+#create-workspace-dropdown {
+    padding: 3px 0;
+    width: 100%;
+}
+
+#workspaces {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* #profile-dropdown>#workspaces>.active-workspace {} */
+
+#profile-dropdown a,
+span {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding-left: var(--dropdown-left-padding);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#profile-dropdown a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+#profile-dropdown span:hover,
+a:hover {
+    background-color: var(--bkg-color-grey);
+}
+
+#workspaces a.active::before {
+    content: "✓";
+    min-width: var(--dropdown-left-padding);
+    display: flex;
+    justify-content: center;
+}
+
+#workspaces a.active {
+    padding-left: 0;
+}

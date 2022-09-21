@@ -19,7 +19,7 @@ def users():
 @login_required
 def user(id):
     user = User.query.get(id)
-    return user.to_dict()
+    return user.to_dict(workspaces=True)
 
 @user_routes.route('/<int:id>', methods=["PUT"])
 @login_required
@@ -38,8 +38,8 @@ def update_user(id):
         user.pronouns = update_form.data['pronouns']
         user.department = update_form.data['department']
         user.bio = update_form.data['bio']
-        
-        # REVISIT - Why isn't the update method working? 
+
+        # REVISIT - Why isn't the update method working?
         # User.query.filter(User.id==id).update(
         #     {
         #         "email": update_form.data['email'],
@@ -52,8 +52,8 @@ def update_user(id):
         #         "department": update_form.data['department']
         #     }
         # )
-        
+
         db.session.commit()
         login_user(user)
-        return user.to_dict()
+        return user.to_dict(workspaces=True)
     return {'errors': validation_errors_to_error_messages(update_form.errors)}, 401

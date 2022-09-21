@@ -6,6 +6,10 @@
     --border-color: #424244;
     --border-color-hover: #6a696a;
     --border-color-active: #a2a0a2;
+    --status-color-ontrack-complete: #5EA283;
+    --status-color-at-risk: #F1BD6C;
+    --status-color-off-track: #D1395A;
+    --status-color-on-hold: #4473D2;
 
     --topbar-height: 48px;
     --navbar-width: 240px;
@@ -14,6 +18,7 @@
 body {
     margin: 0px;
     overflow: hidden;
+    font-weight: 400;
     width: 100vw;
     height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -26,7 +31,6 @@ body {
     height: 100%;
 }
 
-#topbar,
 #navbar {
     background-color: var(--bkg-color-grey);
 }
@@ -56,9 +60,9 @@ body {
     height: 100%;
 }
 
-#topbar {
-    height: var(--topbar-height);
+div.horizontal-separator {
+    height: 1px;
     width: 100%;
-    box-sizing: border-box;
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--border-color);
+    content: "";
 }

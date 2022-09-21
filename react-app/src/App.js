@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import TaskList from './components/Tasks/TasksList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 
 import Workspace from './components/Workspace';
-import Depricated_App from './Depricated_App';
-import AllWorkSpaces from './components/Workspace-test-reducer/AllWorkspaces';
-import CreateWorkspace from './components/Workspace-test-reducer/CreateWS'
+import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspaceModal/CreateWS'
 
-import GetProjects from './components/Projects/ProjectsList';
-import ProjectDetail from './components/Projects/ProjectDetail';
-import CreateProjectModal from './components/Projects/CreateProjectModal';
-import LoginForm from './components/auth/LoginForm';
-import EditUserFormModal from './components/EditUserModal';
-import SignUpForm from './components/auth/SignUpForm';
+import Splashpage from './components/Splashpage';
+import LoginPage from './components/auth/LoginPage';
+import SignUpPage from './components/auth/SignUpPage';
 
 export default function App() {
   const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -34,21 +28,21 @@ export default function App() {
 
   if (!currentUserIsLoaded) return null;
 
+
   const Home = () => {
-    if (currentUser) {
+    if (currentUser && currentUser.workspaces) {
       return currentUser.workspaces.length ?
         <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
         <CreateWorkspace />
     }
-    return (
-      <>
-        <h1>Splash Page</h1>
-        <LoginForm />
-        <h2>Sign Up</h2>
-        <SignUpForm />
-      </>
-    )
+    else
+      return (
+        <>
+          <Splashpage />
+        </>
+      )
   }
+
 
 
   return (
@@ -62,10 +56,17 @@ export default function App() {
             <Workspace />
           </>
         </Route>
+        <Route exact path='/login'>
+          <LoginPage />
+        </Route>
+        <Route exact path='/signup'>
+          <SignUpPage />
+        </Route>
         {/* <Route path='/workspaces'>
           <AllWorkSpaces />
+        </Route> */}
+        {/*
           <CreateWorkspace />
-        </Route>
         <Route exact path='/projects/:id'>
           <ProjectDetail />
         </Route>
@@ -74,6 +75,12 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
+        <Route exact path='/tasks/:taskId/edit'>
+          <TaskDetail />
+        </Route>
+        <Route exact path='/tasks/:taskId'>
+          <TaskDetail />
+        </Route>
       </Switch>
     </BrowserRouter>
   )

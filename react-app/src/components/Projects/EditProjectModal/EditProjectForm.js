@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom';
 import { updateAProject } from '../../../store/projects';
 
 const EditProjectForm = ({ project }) => {
 
   let inputDate;
-  project.dueDate ? 
+  project.dueDate ?
     inputDate = new Date(project.dueDate).toJSON().split("T")[0] : inputDate = ''
 
   const user = useSelector(state => state.session.user);
@@ -16,8 +17,7 @@ const EditProjectForm = ({ project }) => {
   const [description, setDescription] = useState(project.description || '')
   const [icon, setIcon] = useState(project.icon || '')
   let ownerId = user.id
-  // REVISIT THIS WHEN WORKSPACE IS ADDED TO STATE
-  let workspaceId = 1
+  const { workspaceId } = useParams()
 
   const dispatch = useDispatch();
   const editProject = async (e) => {

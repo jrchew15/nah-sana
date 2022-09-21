@@ -1,0 +1,325 @@
+.innerContent {
+  height: 100%;
+}
+
+.projectNavBar {
+  display: flex;
+  flex-direction: row;
+  height: 72px;
+  padding: 0 24px;
+  z-index: 200;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.projectNavTabsContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.projectNavTabsSpace {
+  width: 10px;
+}
+
+.projectNavTabs {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.projectNavTabs>a {
+  box-sizing: border-box;
+  font-size: 18px;
+  color: var(--text-color-unfocused);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+
+}
+
+.projectNavTabs>a.active {
+  background: unset;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.projectNavTabs>a:hover:not(.active) {
+  font-weight: 200;
+  background: unset;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.projectNavBarIcon {
+  display: flex;
+  align-items: center;
+}
+
+.projectIconContainer {
+  display: flex;
+  height: 48px;
+  width: 48px;
+  border-radius: 12px;
+  background-color: var(--bkg-color-grey);
+  justify-content: center;
+  align-items: center;
+}
+
+.projectIcon {
+  height: 70%;
+  width: 70%;
+}
+
+.projectNavBarInfo {
+  display: flex;
+  padding-left: 25px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.projectNavBarInfoTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.projectNavBarInfoName {
+  font-size: 24px;
+}
+
+.projectNavBarInfoStatus {
+  padding-left: 8px;
+  font-size: 14px;
+  font-weight: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.projectNavStatus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 4px;
+  padding-left: 20px;
+}
+
+.projectNavStatusCircle {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-ontrack-complete)
+}
+
+.projectNavStatusCircleRisk {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-at-risk)
+}
+
+.projectNavStatusCircleOffTrack {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-off-track)
+}
+
+.projectNavStatusCircleHold {
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--status-color-on-hold)
+}
+
+
+.projectDetailOuter {
+  height: 92%;
+}
+
+.projectDetail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
+.projectDetailLeft {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.projectDetailRight {
+  width: 30%;
+  align-items: flex-end;
+  border-left: 1px solid var(--border-color);
+  padding: 10px;
+}
+
+.projectDescriptionContainer {
+  padding: 25px;
+  height: 100px;
+}
+
+.projectDescriptionInner {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.statusWidgetContainer {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.statusWidgetColor {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 10px;
+  background-color: var(--status-color-ontrack-complete);
+}
+
+.statusWidgetColorFont {
+  padding-top: 15px;
+  padding-left: 10px;
+  color: var(--status-color-ontrack-complete);
+}
+
+.statusWidgetColorRisk {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 10px;
+  background-color: var(--status-color-at-risk);
+}
+
+.statusWidgetColorRiskFont {
+  padding-top: 15px;
+  padding-left: 10px;
+  color: var(--status-color-at-risk);
+}
+
+.statusWidgetColorOffTrack {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 10px;
+  background-color: var(--status-color-off-track);
+}
+
+.statusWidgetColorOffTrackFont {
+  padding-top: 15px;
+  padding-left: 10px;
+  color: var(--status-color-off-track);
+}
+
+.statusWidgetColorHold {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 10px;
+  background-color: var(--status-color-on-hold);
+}
+
+.statusWidgetColorHoldFont {
+  padding-top: 15px;
+  padding-left: 10px;
+  color: var(--status-color-on-hold);
+}
+
+.statusWidgetDue {
+  padding: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+
+.projectDetailRightButtons {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  justify-content: space-between;
+}
+
+.projectButton {
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 65px;
+  margin-bottom: 8px;
+  width: 48%;
+  background-color: #2a2b2d;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.title-projects {
+  font-weight: 500;
+  font-size: 20px;
+  padding-left: 1em;
+}
+
+.project-container {
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.project-container:hover {
+  overflow-y: visible;
+}
+
+.project-wrapper {
+  display: flex;
+  /* width: 100%; */
+  /* height: 100%; */
+  margin-left: 2em;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.create-project-button {
+  background-color: transparent;
+  width: 40%;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+
+}
+
+.create-project-button:hover {
+  background-color: #dbdbdb;
+}
+
+.square {
+  padding-right: 8px;
+}
+
+.project-links {
+  text-decoration-line: none;
+  width: 40%;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: .2em;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 16px;
+
+}
+
+.project-links:hover {
+  background-color: #dbdbdb;
+
+}
+
+.project-titles {
+  font-size: 16px;
+  margin-left: 6px;
+}
