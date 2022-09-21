@@ -81,7 +81,6 @@ const CreateWorkspace = ({ setShowModal }) => {
                         <div className="button-container-create">
                             <button className='submit-create-workspace' type="submit" >Create Workspace</button>
                         </div>
-
                     </form>
                 </div>
             </div>

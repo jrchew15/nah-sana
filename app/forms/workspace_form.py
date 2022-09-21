@@ -1,3 +1,4 @@
+from enum import unique
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, BooleanField, DateField, SubmitField
 from wtforms.validators import DataRequired,ValidationError, NumberRange, Length
