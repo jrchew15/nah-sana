@@ -25,8 +25,9 @@
   background-color: var(--bkg-color-black);
   color: var(--text-color);
   box-sizing: border-box;
-  /* padding: 8px 32px; */
   border-radius: 10px;
+
+  padding: 8px 32px;
 }
 
 #modal-content form {
@@ -54,8 +55,9 @@ textarea:focus {
 
 #modal-content form>div:not(.horizontal-separator) {
   display: flex;
-  /* justify-content: space-between; */
-  /* height: 40px; */
+
+  justify-content: space-between;
+  height: 40px;
 }
 
 .user-settings-field {
