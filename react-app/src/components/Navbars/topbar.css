@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 
-.user-icon {
+/* .user-icon {
     font-size: 0.9em;
     border-radius: 50%;
     width: 1.8em;
@@ -55,7 +55,7 @@
     padding: 3px;
     cursor: pointer;
     margin-right: 24px;
-}
+} */
 
 #profile-dropdown {
     position: absolute;
