@@ -168,10 +168,9 @@ const SignUpPage = () => {
           </form>
         </div>
         <div className='signupMedia'>
-
+          <img src="/static/images/signupPageImage.png" alt="computer signup" className='signupImage'/>
         </div>
       </div>
-
     </div>
 
   );

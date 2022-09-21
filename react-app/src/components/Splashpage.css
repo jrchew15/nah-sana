@@ -9,6 +9,26 @@
   justify-content: space-between;
 }
 
+.splashpageLogoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.splashpageLogo {
+  height: 50px;
+  width: 50px;
+}
+
+.splashpageLogoText {
+  padding-left: 10px;
+}
+
+.splashpageLoginOuterContainer {
+  padding-right: 20px;
+}
+
 .splashpageLoginContainer {
   width: 30px;
   height: 30px;
@@ -21,4 +41,100 @@
 
 .splashpageLogin {
   color: black;
+}
+
+.splashpageContent {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e0e6e8;
+  height: auto;
+  width: 100%;
+}
+
+.splashpageContentLeft {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.splashpageQuote {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 200;
+  text-align: left;
+}
+
+.splashpageTextDivider {
+  width: 100px;
+  border-bottom: 1px solid #0d0e10;
+}
+
+.splashpageDescription {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  text-align: left;
+  padding-right: 20px;
+}
+
+
+
+.splashpageContentRight {
+  width: 45%;
+}
+
+.splashpageImage {
+  max-width: 100%;
+  height: 100%;
+}
+
+.splashpageFooter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.splashpageFooterText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.splashpageProfileContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.splashpageButton {
+  border: 1px solid #e0e6e8;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  /* background-color: #60c792; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--bkg-color-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splashpageButton#spgreen {
+  background-color: #60c792;
+}
+
+.splashpageButton#spyellow {
+  background-color: #F3DD94;
 }
