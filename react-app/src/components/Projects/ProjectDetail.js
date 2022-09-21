@@ -5,6 +5,7 @@ import { deleteAProject, getAllProjects, getAProject } from '../../store/project
 import EditProjectModal from './EditProjectModal';
 import TasksListByProject from '../Tasks/TasksListByProject';
 import './Projects.css'
+import TaskDetail from '../Tasks/TaskDetail';
 
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function ProjectDetail({ workspaceId }) {
       return "statusWidgetColorFont"
     }
   }
-  
+
   function circleType() {
     if (project?.status === "At Risk") {
       return "projectNavStatusCircleRisk"
