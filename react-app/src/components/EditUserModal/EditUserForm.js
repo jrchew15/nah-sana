@@ -13,7 +13,7 @@ const EditUserForm = () => {
   const [department, setDepartment] = useState(user.department || '');
   const [bio, setBio] = useState(user.bio || '');
 
-  const girdStyles = {
+  const gridStyles = {
     display: 'grid',
     gridColumnTemplate: '50px 50px',
     gap: '15px'
@@ -31,7 +31,7 @@ const EditUserForm = () => {
   };
 
   return (
-    <form onSubmit={onUpdateProfile} style={girdStyles}>
+    <form onSubmit={onUpdateProfile} style={gridStyles}>
       <h3 style={{ gridColumn: '1 / 3' }}>My Settings</h3>
       <div style={{ gridColumn: '1 / 3' }} className="horizontal-separator" />
       {errors.length > 0 && (<div>
