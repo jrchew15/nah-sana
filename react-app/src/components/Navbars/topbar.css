@@ -29,7 +29,7 @@
     background-color: var(--border-color-hover);
 }
 
-#topbar>.userIcon {
+.userIcon {
     font-size: 0.9em;
     background-color: aqua;
     color: var(--text-color-unfocused);
