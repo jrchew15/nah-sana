@@ -7,13 +7,13 @@ const CreateProjectForm = () => {
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('')
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState('On Track')
   const [dueDate, setDueDate] = useState()
   const [description, setDescription] = useState('')
-  const [icon, setIcon] = useState('')
   let ownerId = user.id
   const { id } = useParams()
 
+  const icon = `/static/images/icons/${Math.ceil(Math.random() * 5)}.png`
 
   let workspaceId = id
   const dispatch = useDispatch();
@@ -28,11 +28,11 @@ const CreateProjectForm = () => {
 
   return (
     <form onSubmit={createProject}>
-      <div>
+      {errors.length > 0 && (<div >
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind}>{error.split(":")[1]}</div>
         ))}
-      </div>
+      </div>)}
       <div>
         <label>Name</label>
         <input
@@ -83,16 +83,6 @@ const CreateProjectForm = () => {
           value={description}
         ></textarea>
       </div>
-      <div>
-        <label>Icon</label>
-        <input
-          type='text'
-          name='icon'
-          onChange={(e) => setIcon(e.target.value)}
-          value={icon}
-        ></input>
-      </div>
-
       <button type='submit'>Submit</button>
     </form>
   );
