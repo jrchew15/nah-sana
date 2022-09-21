@@ -14,7 +14,7 @@ export default function LeftNavBar() {
     const [showAddToWorkspace, setShowAddToWorkspace] = useState(false)
 
     function redirectToProfile(userId) {
-        history.push(`/workspaces/${workspace.workspace.id}/users/${userId}`)
+        history.push(`/workspaces/${workspace.workspace.id}/user/${userId}`)
     }
     function redirectToProject(projectId) {
         history.push(`/workspaces/${workspace.workspace.id}/projects/${projectId}`)
