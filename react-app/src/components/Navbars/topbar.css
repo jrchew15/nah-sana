@@ -1,6 +1,6 @@
 #topbar span,
-div,
-a {
+#topbar div,
+#topbar a {
     --dropdown-left-padding: 30px;
 }
 
@@ -44,10 +44,23 @@ a {
     cursor: pointer;
 }
 
+/* .user-icon {
+    font-size: 0.9em;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    display: flex;
+    background-color: var(--bkg-color-grey);
+    border: 1px solid var(--border-color-active);
+    padding: 3px;
+    cursor: pointer;
+    margin-right: 24px;
+} */
+
 #profile-dropdown {
     position: absolute;
     right: 24px;
-    top: 38px;
+    top: 41px;
     color: var(--text-color);
     background-color: var(--bkg-color-black);
     border: var(--border-color) 1px solid;
@@ -75,7 +88,7 @@ a {
 /* #profile-dropdown>#workspaces>.active-workspace {} */
 
 #profile-dropdown a,
-span {
+#profile-dropdown span {
     height: 36px;
     display: flex;
     align-items: center;
@@ -90,7 +103,7 @@ span {
 }
 
 #profile-dropdown span:hover,
-a:hover {
+#profile-dropdown a:hover {
     background-color: var(--bkg-color-grey);
 }
 
