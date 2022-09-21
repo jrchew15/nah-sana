@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRouteMatch, NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";

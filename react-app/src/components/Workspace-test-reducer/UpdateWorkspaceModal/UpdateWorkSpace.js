@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 
 
-const UpdateWorkspace = () => {
+const UpdateWorkspace = ({ setShowModal }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     // const workspaceId = workspace.workspace.id
@@ -33,6 +33,8 @@ const UpdateWorkspace = () => {
         }
         if (!validationErrors.length) {
             dispatch(workspaceUpdate(workspace, id))
+            setShowModal(false)
+
         }
     }
     return (

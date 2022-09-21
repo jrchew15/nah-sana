@@ -1,23 +1,36 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { workspaceCreate } from "../../../store/workspace";
 
 
-const CreateWorkspace = () => {
+const CreateWorkspace = ({ setShowModal }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
+    const currentUser = useSelector(state => state.session.user);
+    // const currentWorkspace = useSelector(state => state.workspace.workspace);
+    console.log(currentUser)
+    console.log(currentUser.workspaces, '------')
+    let workspaceArr = currentUser.workspaces
+
 
     useEffect(() => {
 
         const errors = []
         if (!name.length) errors.push('Workspace name is required')
+        workspaceArr.filter(wkspace => {
+            if (name === wkspace.name) {
+                errors.push(['Workspace name already exists'])
+            }
+        })
         setValidationErrors(errors)
-    }, [name])
+    }, [name, workspaceArr])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +40,12 @@ const CreateWorkspace = () => {
             name
         }
         if (!validationErrors.length) {
-            dispatch(workspaceCreate(workspace))
+            let newWorkspace = await dispatch(workspaceCreate(workspace))
+            if (newWorkspace) {
+                history.push(`/workspaces/${newWorkspace.id}`)
+                setShowModal(false)
+
+            }
         }
     }
     return (
