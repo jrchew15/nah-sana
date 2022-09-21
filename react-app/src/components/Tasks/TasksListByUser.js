@@ -32,7 +32,7 @@ const TasksListByUser = ({ projects }) => {
     return (
         <>
             {/* REVISIT */}
-            <div className="task-container-list">
+            <div className="task-container-list scroller">
                 {tasksArr.map((task) => (
                     <>
                         <div className="task-flex">
