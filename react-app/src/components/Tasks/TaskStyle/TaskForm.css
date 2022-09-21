@@ -6,7 +6,7 @@
     border-radius: 8px;
 }
 
-.task-form {
+#task-form {
     display: flex;
     padding: 30px;
 }

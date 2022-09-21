@@ -6,11 +6,30 @@
 }
 
 .signupNav {
-  height: 54px;
+  height: 58px;
   align-items: center;
   padding-left: 10px;
   font-family: 'Montserrat', sans-serif;
   border-bottom: 1px solid #e0e6e8;
+}
+
+.signupLogoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  text-decoration: none;
+  color: #151b26;
+}
+.signupLogo {
+  height: 50px;
+  width: 50px;
+}
+
+.signupLogoText {
+  padding-left: 10px;
+  color: #151b26;
+  text-decoration: none;
 }
 
 .signupContent {
@@ -98,19 +117,13 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.signupErrorContainer {
-  padding-bottom: 15px;
-}
-
-.signupErrorText {
-  font-family: 'Montserrat', sans-serif;
-  color: red;
-  font-size: 14px;
-}
 
 .signupMedia {
   width: 35%;
-  background-image: url("https://images.pexels.com/photos/6177611/pexels-photo-6177611.jpeg");
-  background-size: cover;
   opacity: 0.9;
+}
+
+.signupImage {
+  max-width: 100%;
+  height: 100%;
 }

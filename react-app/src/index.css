@@ -68,3 +68,16 @@ div.horizontal-separator {
     background-color: var(--border-color);
     content: "";
 }
+
+.errorContainer {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorText {
+    font-family: 'Montserrat', sans-serif;
+    color: red;
+    font-size: 14px;
+}

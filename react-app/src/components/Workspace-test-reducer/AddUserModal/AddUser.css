@@ -1,0 +1,13 @@
+.add-user-container {
+    /* background-color: aqua; */
+    width: 33em;
+    height: 15em;
+}
+
+.add-user-title-div {
+    border-bottom: #424244 2px solid;
+}
+
+.add-user-title {
+    font-weight: 500;
+}
