@@ -6,9 +6,9 @@ import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
 
-const TaskForm = ({ taskId, setShowModal, userId, projectId }) => {
+const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId }) => {
     const dispatch = useDispatch();
-    // const workspace = useSelector((state) => state.workspace.users)
+    const { users, projects } = useSelector((state) => state.workspace)
     // console.log('**************workspace', workspace)
     // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
@@ -18,9 +18,9 @@ const TaskForm = ({ taskId, setShowModal, userId, projectId }) => {
     const [dueDate, setDueDate] = useState(null);
     const [description, setDescription] = useState('');
     const [complete, setComplete] = useState(false);
-    const [userId, setUserId] = useState(userId || 0);
-    const [projectId, setProjectId] = useState(projectId || 0);
-    const [showForm, setShowForm] = useState(true)
+    const [userId, setUserId] = useState(passedUserId || 0);
+    const [projectId, setProjectId] = useState(passedProjectId || 0);
+    const [showForm, setShowForm] = useState(true);
 
 
     useEffect(async () => {
@@ -76,15 +76,27 @@ const TaskForm = ({ taskId, setShowModal, userId, projectId }) => {
                                 <label htmlFor='dueDate' id='form-label'>Due Date</label>
                                 <input id='form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
                             </div>
-                            {/* User Id will eventually be chosen from workspace users dropdown */}
                             <div className='form-row'>
                                 <label htmlFor='userId' id='form-label'>User Id</label>
-                                <input id='form-input' type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
+                                <select name='userId' onChange={e => setUserId(e.target.value)} value={userId}>
+                                    <option disabled value=''>Choose a user</option>
+                                    {
+                                        Object.values(users).map(user => (
+                                            <option value={user.id}>{user.firstName} {user.lastName}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
-                            {/* project Id will eventually be chosen from workspace projects dropdown */}
                             <div className='form-row'>
                                 <label htmlFor='projectId' id='form-label'>Project Id</label>
-                                <input id='form-input' type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
+                                <select name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId}>
+                                    <option disabled value=''>Choose a project</option>
+                                    {
+                                        projects.map(project => (
+                                            <option value={project.id}>{project.name}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='description' id='form-label'>Description</label>
