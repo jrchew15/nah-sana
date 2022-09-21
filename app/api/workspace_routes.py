@@ -97,7 +97,6 @@ def add_user_from_workspace(id):
         workspace.members.append(foundUser)
         db.session.commit()
         return foundUser.to_dict()
-    print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
         # return form.errors
         # return form.errors
