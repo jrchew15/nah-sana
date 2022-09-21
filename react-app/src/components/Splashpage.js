@@ -1,11 +1,19 @@
 import { NavLink } from 'react-router-dom'
+import './Splashpage.css'
 
 function Splashpage() {
-
   return (
-    <div>
-      <h1>Welcome to Nah-sana!</h1>
-      <NavLink to="/login">Log In</NavLink>
+    <div className='signupOuter'>
+      <div className='splashpageNav'>
+        <p>Nah-sana</p>
+        <div className='splashpageLoginContainer'>
+          <NavLink to="/login" className='splashpageLogin' >
+            <i className="fa-solid fa-user"></i>
+          </NavLink>
+
+        </div>
+      </div>
+
     </div>
   )
 }
