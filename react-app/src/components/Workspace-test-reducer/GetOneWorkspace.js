@@ -1,16 +1,13 @@
-import LogoutButton from "../auth/LogoutButton"
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import GetProjects from "../Projects/ProjectsList";
 import TasksListByUser from "../Tasks/TasksListByUser";
 import TaskDetail from "../Tasks/TaskDetail";
-import './GetOne.css'
-import CreateWorkspaceModal from "./CreateWorkspaceModal";
-import UpdateWorkspaceModal from "./UpdateWorkspaceModal";
+import './GetOne.css';
 import AddUserToWorkspace from "./AddUserModal";
+
 export default function GetOne({ workspaceId }) {
 
     const dispatch = useDispatch()
@@ -46,8 +43,6 @@ export default function GetOne({ workspaceId }) {
                 <div className="dashboard-container">
                     {/* <button onClick={handlepush}>Back to workspaces</button> */}
                     <div className="left-corner">Home</div>
-                    <CreateWorkspaceModal />
-                    <UpdateWorkspaceModal />
                     <AddUserToWorkspace />
                     <div className="dashboard-titles">
                         <h5>{current}</h5>
@@ -95,11 +90,6 @@ export default function GetOne({ workspaceId }) {
                                 ))}
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        {/* <AddUser /> */}
-                        <LogoutButton />
                     </div>
                 </div>
             )}

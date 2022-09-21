@@ -41,8 +41,6 @@ function GetProjects({ workspaceId }) {
                   <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
                   <div className='project-titles'>
                     {project.name}
-                    {project.workspaceId}
-
                   </div>
                 </NavLink>
               )
