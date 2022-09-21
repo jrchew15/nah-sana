@@ -27,14 +27,14 @@ const SignUpPage = () => {
       if (data) {
         setErrors(data)
       }
-    } 
+    }
   };
 
   if (user) {
     return <Redirect to='/' />;
   }
-  function passwordCheck(){
-    if (password !== repeatPassword){
+  function passwordCheck() {
+    if (password !== repeatPassword) {
       return (
         <div className='signupErrorText'>
           Passwords must match
@@ -46,7 +46,14 @@ const SignUpPage = () => {
   return (
     <div className='signupOuter'>
       <div className='signupNav'>
-        <p>Nah-sana</p>
+        <div className='signupLogoContainer'>
+          <a href="/" className='signupLogoContainer'>
+            <img src="/static/images/logos/logo-light.png" alt="logo" className='signupLogo' />
+            <p className='signupLogoText'>Nah-sana</p>
+
+          </a>
+        </div>
+
       </div>
       <div className='signupContent'>
         <div className='signupContentLeft'>
@@ -168,10 +175,9 @@ const SignUpPage = () => {
           </form>
         </div>
         <div className='signupMedia'>
-
+          <img src="/static/images/signupPageImage.png" alt="computer signup" className='signupImage' />
         </div>
       </div>
-
     </div>
 
   );
