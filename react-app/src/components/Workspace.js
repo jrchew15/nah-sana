@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
-import LogoutButton from './auth/LogoutButton';
 import Topbar from "./Navbars/Topbar";
-import DevOnlyContent from "./DevOnlyContent";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
 import { oneWorkspace } from "../store/workspace";
-import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
+import UserProfilePage from "./UserProfilePage";
 
 
 export default function Workspace() {
@@ -45,6 +43,12 @@ export default function Workspace() {
                     <Switch>
                         <Route path='/workspaces/:id' exact>
                             <GetOne workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/user/:id'>
+                            <UserProfilePage workspaceId={workspaceId} />
+                        </Route>
+                        <Route exact path='/workspaces/:workspaceId/user/:id/list'>
+                            <UserProfilePage workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:id/projects'>
                             <GetProjects workspaceId={workspaceId} />
