@@ -36,7 +36,7 @@ const SignUpPage = () => {
   function passwordCheck() {
     if (password !== repeatPassword) {
       return (
-        <div className='signupErrorText'>
+        <div className='errorText'>
           Passwords must match
         </div>
       )
@@ -59,11 +59,11 @@ const SignUpPage = () => {
         <div className='signupContentLeft'>
           <p className='signupHeader'>Sign up</p>
           <p className='signupSubheader'> By signing up, I agree to the Nah-sana Privacy Policy and Terms of Service</p>
-
+          
           <form onSubmit={onSignUp} className='signupForm'>
-            {errors.length > 0 && (<div className='signupErrorContainer'>
+            {errors.length > 0 && (<div className='errorContainer'>
               {errors.map((error, ind) => (
-                <div key={ind} className='signupErrorText'>{error.split(":")[1]}</div>
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
               ))}
             </div>)}
             {
