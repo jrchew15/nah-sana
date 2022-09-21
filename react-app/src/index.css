@@ -16,8 +16,6 @@
 }
 
 body {
-    scrollbar-color: rebeccapurple green;
-
     margin: 0px;
     overflow: hidden;
     font-weight: 400;
@@ -70,10 +68,10 @@ div.horizontal-separator {
 }
 
 .errorContainer {
-  padding-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .errorText {
