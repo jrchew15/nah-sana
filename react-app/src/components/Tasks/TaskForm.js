@@ -66,15 +66,6 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         if (setTaskDetail) setTaskDetail(false)
     }
 
-    // const completeStyle = {
-    //     border: '1px solid grey',
-    //     borderRadius: '4px',
-    //     fontSize: 'x - small',
-    //     width: 'fit - content',
-    //     margin: '10px',
-    //     marginTop: '30px'
-    // }
-
     return (
         <>
             {(
@@ -85,7 +76,6 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 style={{ backgroundColor: complete.toString() === 'false' ? 'gray' : 'olive' }}
                                 onClick={() => (
                                     setComplete(!complete)
-                                    // handleSubmit()
                                 )}>
                                 <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                 {complete.toString() === 'false' ? "Mark Complete" : "Completed"}

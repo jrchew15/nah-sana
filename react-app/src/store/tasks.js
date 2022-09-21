@@ -34,7 +34,7 @@ export const getTasks = () => async dispatch => {
     const response = await fetch(`/api/tasks`);
     if (response.ok) {
         const tasks = await response.json()
-        console.log('*******tasks from thunk******', tasks)
+        // console.log('*******tasks from thunk******', tasks)
         dispatch(loadAll(tasks))
         return tasks
     }
@@ -70,13 +70,13 @@ export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => 
 }
 
 export const createOneTask = data => async dispatch => {
-    console.log('in thunk before fetch', data)
+    // console.log('in thunk before fetch', data)
     const response = await fetch(`/api/projects/${data.projectId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    console.log('in thunk after fetch', response)
+    // console.log('in thunk after fetch', response)
     const data = await response.json()
     if (response.ok) {
         dispatch(add(data))
@@ -99,7 +99,7 @@ export const updateOneTask = data => async dispatch => {
         return null
     }
     if (resBody.errors.length) {
-        console.log('update Thunk', resBody.errors)
+        // console.log('update Thunk', resBody.errors)
         return resBody.errors;
     }
 };
