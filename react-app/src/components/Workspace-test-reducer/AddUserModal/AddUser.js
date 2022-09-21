@@ -30,6 +30,10 @@ const AddUser = () => {
         if (!validationErrors.length) {
             dispatch(addUserToWorkspace(user, id))
         }
+        const data = await dispatch(addUserToWorkspace(user, id));
+        if (data) {
+            setValidationErrors(data)
+        }
     }
     return (
         <>
@@ -47,6 +51,7 @@ const AddUser = () => {
                 <label>
                     User Email :
                     <input
+                        required
                         maxLength={41}
                         type='email'
                         placeholder="name@company.com"

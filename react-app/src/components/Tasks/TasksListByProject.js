@@ -18,18 +18,20 @@ const TasksListByProject = ({ projectId }) => {
 
     const tasks = useSelector((state) => state.tasks)
     const tasksArr = Object.values(tasks)
+    console.log(tasks)
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
     useEffect(() => {
-        dispatch(getTasksByProjectId(projectId))
+        dispatch(getTasksByProjectId(projectId)).then(() => setIsLoaded(true))
     }, [dispatch, showTaskDetail])
 
     if (!tasksArr.length) return null
-    return (
+    return isLoaded ? (
         <>
             <table className="table">
                 <tr className="table-row">
@@ -37,6 +39,7 @@ const TasksListByProject = ({ projectId }) => {
                     <th className="table-head">Due Date</th>
                 </tr>
                 {tasksArr.map((task) => (
+
                     <tr key={task.id} className="table-row">
                         <td className="table-cell" id='task-name'>
                             <div>{task.name}</div>
@@ -53,7 +56,7 @@ const TasksListByProject = ({ projectId }) => {
             </table >
             {showTaskDetail ? <TaskForm taskId={onClickTaskId} /> : null}
         </>
-    )
+    ) : null
 }
 
 export default TasksListByProject

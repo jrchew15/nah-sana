@@ -22,7 +22,7 @@ function ProjectDetail({ workspaceId }) {
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
     await dispatch(getAllProjects())
-    await history.push(`/workspaces/${workspaceId}/projects`)
+    await history.push(`/workspaces/${workspaceId}`)
   }
 
   let dueDate;
