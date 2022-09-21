@@ -30,8 +30,9 @@ export default function Topbar({ toggleNavbarDisplay }) {
         <>
             <div id='topbar'>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
-                {/* this usericon is a placeholder */}
-                <div className="userIcon" onClick={toggleUserDropdown}>{currentUser.firstName[0].toUpperCase()}{currentUser.lastName[0].toUpperCase()}</div>
+                {/* {console.log(currentUser.image)} */}
+                <img src={currentUser.image} className='user-icon' onClick={toggleUserDropdown} onError={e => e.target.src = '/static/images/users/1.png'} />
+                {/* <div className="userIcon" onClick={toggleUserDropdown}>{currentUser.firstName[0].toUpperCase()}{currentUser.lastName[0].toUpperCase()}</div> */}
             </div>
             <div id='profile-dropdown' style={{ display: dropdownOpen ? 'flex' : 'none' }}>
                 <div id='workspaces'>

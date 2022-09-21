@@ -55,7 +55,6 @@ textarea:focus {
 #modal-content form>div:not(.horizontal-separator) {
   display: flex;
   justify-content: space-between;
-  /* height: 40px; */
 }
 
 .user-settings-field {
