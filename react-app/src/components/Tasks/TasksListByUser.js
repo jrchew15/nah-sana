@@ -50,7 +50,7 @@ const TasksListByUser = ({ projects }) => {
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <TaskDetailByWorkSpace taskId={onClickTaskId} />
+                    <TaskForm taskId={onClickTaskId} />
                 </Modal>
             )
             }
