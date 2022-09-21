@@ -17,18 +17,20 @@ const TasksListByProject = ({ projectId }) => {
 
     const tasks = useSelector((state) => state.tasks)
     const tasksArr = Object.values(tasks)
+    console.log(tasks)
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
+    const [isLoaded, setIsLoaded] = useState(false)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
     useEffect(() => {
-        dispatch(getTasksByProjectId(projectId))
+        dispatch(getTasksByProjectId(projectId)).then(() => setIsLoaded(true))
     }, [dispatch, showTaskDetail])
 
     if (!tasksArr.length) return null
-    return (
+    return isLoaded ? (
         <>
 
             {/* REVISIT
@@ -58,7 +60,7 @@ const TasksListByProject = ({ projectId }) => {
                 {tasksArr.map((task) => (
                     <tr key={task.id}>
                         <td>
-                            <i class="fa-thin fa-circle-check"></i>
+                            <i className="fa-thin fa-circle-check"></i>
                             {task.name}
                         </td>
                         <td>{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
@@ -73,7 +75,7 @@ const TasksListByProject = ({ projectId }) => {
             {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null}
 
         </>
-    )
+    ) : null
 }
 
 export default TasksListByProject

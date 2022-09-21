@@ -57,7 +57,7 @@ def one_workspace(id):
         'workspace' : workspace.to_dict(),
         "users": users_in_this_ws,
         "projects": project_in_this_ws,
-        "tasks": task_in_this_ws
+        # "tasks": task_in_this_ws
         }
 
 # Create a  Workspace

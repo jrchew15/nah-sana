@@ -29,7 +29,6 @@ export default function GetOne({ workspaceId }) {
     const handlepush = (e) => {
         e.preventDefault()
         history.push('/workspaces')
-
     }
     const deleteUser = userid => {
         console.log(userid, '------------')

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouteMatch, NavLink, useHistory } from "react-router-dom";
+import { useRouteMatch, NavLink, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
@@ -26,8 +26,20 @@ export default function Topbar({ toggleNavbarDisplay }) {
         history.push('/')
     };
 
+
+    {/* comment this out */ }
+
+    // const { id } = useParams()
+    // const handlepush = (e) => {
+    //     e.preventDefault()
+    //     history.push(`/workspaces/${id}`)
+    // }
+
     return currentWorkspace && currentUser ? (
         <>
+            {/* comment this out */}
+            {/* <button onClick={handlepush}>Back to workspaces</button> */}
+
             <div id='topbar'>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
                 {/* this usericon is a placeholder */}

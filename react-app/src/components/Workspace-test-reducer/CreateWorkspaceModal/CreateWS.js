@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { workspaceCreate } from "../../../store/workspace";
+import './createWS.css'
 
 
 const CreateWorkspace = ({ setShowModal }) => {
@@ -14,9 +15,6 @@ const CreateWorkspace = ({ setShowModal }) => {
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
     const currentUser = useSelector(state => state.session.user);
-    // const currentWorkspace = useSelector(state => state.workspace.workspace);
-    console.log(currentUser)
-    console.log(currentUser.workspaces, '------')
     let workspaceArr = currentUser.workspaces
 
 
@@ -50,42 +48,43 @@ const CreateWorkspace = ({ setShowModal }) => {
     }
     return (
         <>
-            <h2>Create Workspace</h2>
-            {hasSubmitted && validationErrors.length > 0 && (
-                <div>
-                    <ul style={{ padding: '10px', color: 'red', listStyle: 'none' }}>
-                        {validationErrors.map(error => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
+            <div className="form-container">
+                <div className="top-create-form">
+                    <h2 className="create-title">Create Your Workspace</h2>
+                    <button className="create-button" onClick={() => setShowModal(false)}>X</button>
                 </div>
-            )}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Workspace Name :
-                    <input
-                        maxLength={41}
-                        type='text'
-                        placeholder="Company or Team Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-                {/* <label>
-                    Add User :
-                    <input
-                        maxLength={41}
-                        type='email'
-                        placeholder="name@company.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </label> */}
-                <button type="submit"
-                    style={{ borderRadius: '50%', height: '60px', width: '60px', background: 'purple', color: 'white' }}
-                >Create</button>
+                <div>
 
-            </form>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <form onSubmit={handleSubmit}>
+                        <div className="label-container-create">
+                            <label className="workspace-label">
+                                Workspace Name
+                                <input
+                                    className="workspace-input"
+                                    maxLength={41}
+                                    type='text'
+                                    placeholder="Company or Team Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <div className="button-container-create">
+                            <button className='submit-create-workspace' type="submit" >Create Workspace</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </>
     )
 
