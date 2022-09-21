@@ -16,6 +16,11 @@ function Splashpage() {
               <i className="fa-solid fa-user"></i>
             </NavLink>
           </div>
+          <div className='splashpageSignupContainer'>
+              <NavLink to="/signup" className="splashpageSignup">
+                Get Started
+              </NavLink>
+          </div>
         </div>
       </div>
       {/* Content */}

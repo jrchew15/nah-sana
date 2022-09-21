@@ -55,11 +55,11 @@ const LoginPage = () => {
         <h2 className='loginTitle'>Log in to Nah-sana</h2>
         <div className='loginFormContainer'>
           <form onSubmit={onLogin}>
-            <div>
+            {errors.length > 0 && (<div className='errorContainer'>
               {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
               ))}
-            </div>
+            </div>)}
             <div className='loginFields'>
               <label htmlFor='email' className='loginLabels'>Email</label>
               <div className='loginInputContainers'>

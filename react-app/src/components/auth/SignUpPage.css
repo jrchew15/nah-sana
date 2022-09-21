@@ -19,7 +19,7 @@
   align-items: center;
   padding-left: 15px;
   text-decoration: none;
-    color: #151b26;
+  color: #151b26;
 }
 .signupLogo {
   height: 50px;
@@ -117,15 +117,6 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.signupErrorContainer {
-  padding-bottom: 15px;
-}
-
-.signupErrorText {
-  font-family: 'Montserrat', sans-serif;
-  color: red;
-  font-size: 14px;
-}
 
 .signupMedia {
   width: 35%;
