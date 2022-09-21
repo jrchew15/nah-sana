@@ -11,6 +11,7 @@ import TaskForm from "./TaskForm";
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
+import TaskDetail from "./TaskDetail";
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const TasksListByProject = ({ projectId }) => {
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
+    const [showSideBar, setShowSideBar] = useState(false)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
@@ -32,8 +34,8 @@ const TasksListByProject = ({ projectId }) => {
 
     if (!tasksArr.length) return null
     return isLoaded ? (
-        <>
-            <table className="table">
+        <div style={{ display: 'flex' }}>
+            <table className={showTaskDetail ? "table-onclick" : "table"}>
                 <tr className="table-row">
                     <th className="table-head">Task Name</th>
                     <th className="table-head">Due Date</th>
@@ -45,8 +47,8 @@ const TasksListByProject = ({ projectId }) => {
                             <div>{task.name}</div>
                             <div id='button' onClick={() => (
                                 setShowTaskDetail(!showTaskDetail),
-                                setOnClickTaskId(task.id)
-                                // history.push(`/tasks/${task.id}`)
+                                setOnClickTaskId(task.id),
+                                setShowSideBar(!showSideBar)
                             )}>details</div>
                         </td>
                         <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
@@ -54,8 +56,10 @@ const TasksListByProject = ({ projectId }) => {
                 ))
                 }
             </table >
-            {showTaskDetail ? <TaskForm taskId={onClickTaskId} /> : null}
-        </>
+            <div>
+                {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+            </div>
+        </div >
     ) : null
 }
 

@@ -91,7 +91,7 @@ export const addUserToWorkspace = (user, id) => async (dispatch) => {
     if (response.ok) {
         const user = await response.json();
         dispatch(addUser(user));
-        return user
+        return null
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

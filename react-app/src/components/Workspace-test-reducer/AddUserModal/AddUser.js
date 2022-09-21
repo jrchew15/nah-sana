@@ -1,69 +1,85 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserToWorkspace } from "../../../store/workspace";
 import { useHistory, useParams } from "react-router-dom";
+import './AddUser.css'
 
 
 
-const AddUser = () => {
+const AddUser = ({ setShowModal }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const [email, setEmail] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const getUsers = useSelector(state => state.workspace.users)
+    const users = Object.values(getUsers)
 
 
     useEffect(() => {
-
         const errors = []
         if (!email.length) errors.push('Email name is required')
+        users.filter(user => {
+            if (user.email === email) {
+                errors.push('User is already in workspace')
+            }
+        })
         setValidationErrors(errors)
+
     }, [email])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true)
-
         const user = {
             email
         }
         if (!validationErrors.length) {
-            dispatch(addUserToWorkspace(user, id))
-        }
-        const data = await dispatch(addUserToWorkspace(user, id));
-        if (data) {
-            setValidationErrors(data)
+
+            const data = await dispatch(addUserToWorkspace(user, id))
+            if (data) {
+                setValidationErrors(data)
+                // await setShowModal(true)
+            }
         }
     }
     return (
         <>
-            <h2>Add Member to Workspace</h2>
-            {hasSubmitted && validationErrors.length > 0 && (
-                <div>
-                    <ul style={{ padding: '10px', color: 'red', listStyle: 'none' }}>
-                        {validationErrors.map(error => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
+            <div className="form-container">
+                <div className="add-user-title-div">
+                    <h2 className="add-user-title">Add Member to Workspace</h2>
                 </div>
-            )}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    User Email :
-                    <input
-                        required
-                        maxLength={41}
-                        type='email'
-                        placeholder="name@company.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </label>
-                <button type="submit"
-                    style={{ borderRadius: '50%', height: '60px', width: '60px', background: 'purple', color: 'white' }}
-                >Add</button>
+                {hasSubmitted && validationErrors.length > 0 && (
+                    <div>
+                        <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                <form onSubmit={handleSubmit}>
+                    <div className="label-container-create">
+                        <label className="workspace-label">
+                            User Email :
+                            <input
+                                className="workspace-input"
+                                required
+                                maxLength={41}
+                                type='email'
+                                placeholder="name@company.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
+                    </div>
 
-            </form>
+                    <div className="button-container-create">
+                        <button className='submit-create-workspace' type="submit" >Add Member</button>
+                    </div>
+
+                </form>
+            </div>
         </>
     )
 
