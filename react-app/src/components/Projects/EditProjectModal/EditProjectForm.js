@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
 import { updateAProject } from '../../../store/projects';
 
 const EditProjectForm = ({ project }) => {
 
-  let inputDate;
-  project.dueDate ?
-    inputDate = new Date(project.dueDate).toJSON().split("T")[0] : inputDate = ''
+  let inputDate = ''
+  if (project.dueDate) {
+    inputDate = new Date(project.dueDate).toJSON().split("T")[0]
+  }
 
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
@@ -15,14 +15,19 @@ const EditProjectForm = ({ project }) => {
   const [status, setStatus] = useState(project.status || '')
   const [dueDate, setDueDate] = useState(inputDate)
   const [description, setDescription] = useState(project.description || '')
-  const [icon, setIcon] = useState(project.icon || '')
+  const icon = project.icon
   let ownerId = user.id
-  const { workspaceId } = useParams()
+  let workspaceId = project.workspaceId
 
   const dispatch = useDispatch();
   const editProject = async (e) => {
     e.preventDefault();
+    if (dueDate === ''){
+      setDueDate()
+    }
+
     let payload = { id: project.id, workspaceId, name, status, dueDate, description, icon, ownerId }
+
     const data = await dispatch(updateAProject(payload));
     if (data) {
       setErrors(data)
@@ -31,11 +36,11 @@ const EditProjectForm = ({ project }) => {
 
   return (
     <form onSubmit={editProject}>
-      <div>
+      {errors.length > 0 && (<div >
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind}>{error.split(":")[1]}</div>
         ))}
-      </div>
+      </div>)}
       <div>
         <label>Name</label>
         <input
@@ -86,16 +91,6 @@ const EditProjectForm = ({ project }) => {
           value={description}
         ></textarea>
       </div>
-      <div>
-        <label>Icon</label>
-        <input
-          type='text'
-          name='icon'
-          onChange={(e) => setIcon(e.target.value)}
-          value={icon}
-        ></input>
-      </div>
-
       <button type='submit'>Submit</button>
     </form>
   );

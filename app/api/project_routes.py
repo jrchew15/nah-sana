@@ -89,7 +89,7 @@ def update_project(id):
   if update_form.validate_on_submit():
     Project.query.filter(Project.id==id).update(
       {
-        "workspace_id": update_form.data['workspaceId'],
+        # "workspace_id": update_form.data['workspaceId'],
         "name": update_form.data['name'],
         "status": update_form.data['status'],
         "due_date": update_form.data['dueDate'],

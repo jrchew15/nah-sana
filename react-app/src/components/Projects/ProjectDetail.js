@@ -51,6 +51,18 @@ function ProjectDetail({ workspaceId }) {
       return "statusWidgetColorFont"
     }
   }
+  
+  function circleType() {
+    if (project?.status === "At Risk") {
+      return "projectNavStatusCircleRisk"
+    } else if (project?.status === "Off Track") {
+      return "projectNavStatusCircleOffTrack"
+    } else if (project?.status === "On Hold") {
+      return "projectNavStatusCircleHold"
+    } else {
+      return "projectNavStatusCircle"
+    }
+  }
 
   let overview = (
     <div className='projectDetail'>
@@ -92,17 +104,7 @@ function ProjectDetail({ workspaceId }) {
     <TasksListByProject projectId={id} />
   )
 
-  function circleType() {
-    if (project?.status === "At Risk") {
-      return "projectNavStatusCircleRisk"
-    } else if (project?.status === "Off Track") {
-      return "projectNavStatusCircleOffTrack"
-    } else if (project?.status === "On Hold") {
-      return "projectNavStatusCircleHold"
-    } else {
-      return "projectNavStatusCircle"
-    }
-  }
+
 
 
   return (
