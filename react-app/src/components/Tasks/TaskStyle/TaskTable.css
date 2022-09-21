@@ -1,0 +1,49 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+.table-row,
+.table-head,
+.table-cell {
+    border: solid 0.3px gray;
+}
+
+.table-cell {
+    height: 50px;
+    font-size: medium;
+}
+
+#task-name {
+    display: flex;
+    border: none;
+    justify-content: space-between;
+}
+
+#task-name:hover>#button {
+    display: block;
+}
+
+.table-cell:hover {
+    background-color: rgba(128, 128, 128, 0.169);
+}
+
+/* td:first-child,
+th:first-child {
+    border-right: 0;
+} */
+
+.table-head {
+    font-size: smaller;
+    color: gray;
+}
+
+#first-child {
+    border-left: none;
+}
+
+#button {
+    display: none;
+    cursor: pointer;
+}

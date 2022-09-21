@@ -10,6 +10,7 @@ import TaskDetail from "./TaskDetail";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
+import './TaskStyle/TaskTable.css'
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
@@ -30,48 +31,27 @@ const TasksListByProject = ({ projectId }) => {
     if (!tasksArr.length) return null
     return (
         <>
-
-            {/* REVISIT
-            <div className="task-container-list">
-                {tasksArr.map((task) => (
-                    <>
-                        <div className="task-flex">
-                            <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                            </button>
-                            <div className="task-items">{task.name}</div>
-                        </div>
-                    </>
-                ))}
-            </div>
-            {/* <NavLink to={`/tasks/${task.id}`} className="task-items">
-                        <li>
-                            {task.name}
-                        </li>
-                    </NavLink> */}
-
-            <table>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Due Date</th>
+            <table className="table">
+                <tr className="table-row">
+                    <th className="table-head">Task Name</th>
+                    <th className="table-head">Due Date</th>
                 </tr>
                 {tasksArr.map((task) => (
-                    <tr key={task.id}>
-                        <td>
-                            <i class="fa-thin fa-circle-check"></i>
-                            {task.name}
+                    <tr key={task.id} className="table-row">
+                        <td className="table-cell" id='task-name'>
+                            <div>{task.name}</div>
+                            <div id='button' onClick={() => (
+                                setShowTaskDetail(!showTaskDetail),
+                                setOnClickTaskId(task.id)
+                                // history.push(`/tasks/${task.id}`)
+                            )}>details</div>
                         </td>
-                        <td>{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
-                        <button onClick={() => (
-                            setShowTaskDetail(!showTaskDetail),
-                            setOnClickTaskId(task.id)
-                            // history.push(`/tasks/${task.id}`)
-                        )}>details</button>
+                        <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
                     </tr>
-                ))}
-            </table>
+                ))
+                }
+            </table >
             {showTaskDetail ? <TaskDetail taskId={onClickTaskId} /> : null}
-
         </>
     )
 }
