@@ -113,7 +113,7 @@ const tasksReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_TASKS:
-            newState = { ...state, ...action.tasks }
+            newState = { ...action.tasks }
             // console.log('*********tasks from reducer******', action.tasks)
             return newState
         case LOAD_TASK:

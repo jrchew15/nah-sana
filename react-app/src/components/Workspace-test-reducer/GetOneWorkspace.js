@@ -29,7 +29,6 @@ export default function GetOne({ workspaceId }) {
     const handlepush = (e) => {
         e.preventDefault()
         history.push('/workspaces')
-
     }
     const deleteUser = userid => {
         console.log(userid, '------------')
@@ -45,12 +44,12 @@ export default function GetOne({ workspaceId }) {
                     <div className="left-corner">Home</div>
                     <AddUserToWorkspace />
                     <div className="dashboard-titles">
-                        <h5>{current}</h5>
+                        <h5 style={{ fontWeight: '500', }}>{current}</h5>
                         <div>
                             <div className="welcome">Welcome {user.firstName}!</div>
                         </div>
                         <div>
-                            <h3> Workspace: {workspace.workspace.name}</h3>
+                            <h3 style={{ fontWeight: '500', }}> Workspace: {workspace.workspace.name}</h3>
                         </div>
                     </div>
                     <div className="top-widgets">
@@ -75,7 +74,7 @@ export default function GetOne({ workspaceId }) {
                     <div className="bottom-container">
                         <div className="bottom-widgets">
                             <h3 className="task-words">People</h3>
-                            <div className="user-list">
+                            <div className="user-list ">
                                 {Object.values(workspace.users).map(user => (
                                     <>
                                         <div className="user-card">

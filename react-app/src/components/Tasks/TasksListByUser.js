@@ -32,7 +32,7 @@ const TasksListByUser = ({ projects }) => {
     return (
         <>
             {/* REVISIT */}
-            <div className="task-container-list">
+            <div className="task-container-list scroller">
                 {tasksArr.map((task) => (
                     <>
                         <div className="task-flex">
@@ -50,7 +50,7 @@ const TasksListByUser = ({ projects }) => {
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <TaskDetailByWorkSpace taskId={onClickTaskId} />
+                    <TaskForm taskId={onClickTaskId} />
                 </Modal>
             )
             }
