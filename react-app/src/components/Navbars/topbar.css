@@ -1,6 +1,6 @@
 #topbar span,
-div,
-a {
+#topbar div,
+#topbar a {
     --dropdown-left-padding: 30px;
 }
 
@@ -75,7 +75,7 @@ a {
 /* #profile-dropdown>#workspaces>.active-workspace {} */
 
 #profile-dropdown a,
-span {
+#profile-dropdown span {
     height: 36px;
     display: flex;
     align-items: center;
@@ -90,7 +90,7 @@ span {
 }
 
 #profile-dropdown span:hover,
-a:hover {
+#profile-dropdown a:hover {
     background-color: var(--bkg-color-grey);
 }
 
