@@ -89,6 +89,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    word-break: break-all;
+    white-space: normal;
 }
 
 /* #profile-dropdown>#workspaces>.active-workspace {} */

@@ -76,14 +76,17 @@ export default function GetOne({ workspaceId }) {
                             <div className="user-list ">
                                 {Object.values(workspace.users).map(user => (
                                     <>
-                                        <div className="user-card">
-                                            <NavLink className='nav-to-users' to={`/workspaces/${workspaceId}/user/${user.id}`}>
-                                                <img className="user-card-image" src={user.image} alt={user.firstName}></img>
-                                                <div className="user-name-link" key={user.id}>{user.firstName} {user.lastName}</div>
-                                            </NavLink>
-                                            <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
-                                            <div>
-                                                <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
+                                        <div>
+
+                                            <div className="user-card">
+                                                <NavLink className='nav-to-users' to={`/workspaces/${workspaceId}/user/${user.id}`}>
+                                                    <img className="user-card-image" src={user.image} alt={user.firstName}></img>
+                                                    <div className="user-name-link" key={user.id}>{user.firstName} {user.lastName}</div>
+                                                </NavLink>
+                                                <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
+                                                <div>
+                                                    <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </>
