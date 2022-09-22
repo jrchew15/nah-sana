@@ -6,6 +6,7 @@
     --border-color: #424244;
     --border-color-hover: #6a696a;
     --border-color-active: #a2a0a2;
+    --icon-nav-color: #a2a0a2;
     --status-color-ontrack-complete: #5EA283;
     --status-color-at-risk: #F1BD6C;
     --status-color-off-track: #D1395A;
@@ -13,11 +14,10 @@
 
     --topbar-height: 48px;
     --navbar-width: 240px;
+    --dropdown-left-padding: 24px;
 }
 
 body {
-    scrollbar-color: rebeccapurple green;
-
     margin: 0px;
     overflow: hidden;
     font-weight: 400;
@@ -33,9 +33,6 @@ body {
     height: 100%;
 }
 
-#navbar {
-    background-color: var(--bkg-color-grey);
-}
 
 
 #navbar-and-content {
@@ -58,8 +55,12 @@ body {
 }
 
 #navbar {
+    min-width: var(--navbar-width);
     width: var(--navbar-width);
+    max-width: var(--navbar-width);
     height: 100%;
+    position: relative;
+    background-color: #2e2e30;
 }
 
 div.horizontal-separator {
@@ -70,14 +71,23 @@ div.horizontal-separator {
 }
 
 .errorContainer {
-  padding-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .errorText {
     font-family: 'Montserrat', sans-serif;
     color: red;
     font-size: 14px;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

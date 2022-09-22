@@ -69,12 +69,12 @@ export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => 
     }
 }
 
-export const createOneTask = data => async dispatch => {
-    // console.log('in thunk before fetch', data)
-    const response = await fetch(`/api/projects/${data.projectId}/tasks`, {
+export const createOneTask = formData => async dispatch => {
+    // console.log('in thunk before fetch', formData)
+    const response = await fetch(`/api/projects/${formData.projectId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData)
     })
     // console.log('in thunk after fetch', response)
     const data = await response.json()

@@ -1,0 +1,75 @@
+.project-create-form-container {
+    width: 30em;
+    height: 33.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-top-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px #424244;
+    padding-left: 16px;
+}
+
+.form-container-inside {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20pxs;
+}
+
+.project-input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    /* width: 95%; */
+}
+
+.project-input-label {
+    /* padding: 10px; */
+    border: orange;
+    padding-bottom: 10px;
+}
+
+.text-area-style {}
+
+.project-submit-button {
+    color: #a2a0a2;
+    background-color: transparent;
+    border: #424244 1px solid;
+    height: 2.5em;
+    border-radius: 5px;
+}
+
+.move-button-down {
+    padding-top: 2.5em;
+}
+
+.test {
+    background-color: #4573d2;
+    color: whitesmoke;
+    border-radius: 7px;
+    border: none;
+    padding: 7px;
+    cursor: pointer;
+    border: #424244 1px solid;
+    height: 2.5em;
+    border-radius: 5px;
+}
+
+.project-select-class {
+    background-color: transparent;
+    color: whitesmoke;
+    padding: 5px;
+    border-radius: 5px;
+    border: #424244 1px solid;
+}
+
+.project-option {
+    color: whitesmoke;
+    background-color: #424244;
+}
+
+.project-errors {
+    padding-top: 10px;
+}

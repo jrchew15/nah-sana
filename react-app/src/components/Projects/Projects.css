@@ -312,6 +312,7 @@
   border-radius: 5px;
   margin-left: 10px;
   font-size: 16px;
+  margin-top: .7em;
 
 }
 
@@ -322,4 +323,8 @@
 .project-titles {
   font-size: 16px;
   margin-left: 6px;
+}
+
+.projectDetailTaskOuterContainer {
+  padding: 20px;
 }
