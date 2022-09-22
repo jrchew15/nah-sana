@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { updateAProject } from '../../../store/projects';
-
+import { oneWorkspace } from '../../../store/workspace';
 const EditProjectForm = ({ project, setShowModal }) => {
 
   let inputDate = ''
@@ -16,7 +16,12 @@ const EditProjectForm = ({ project, setShowModal }) => {
   const [dueDate, setDueDate] = useState(inputDate)
   const [description, setDescription] = useState(project.description || '')
   const [buttonChange, setButtonChange] = useState('project-submit-button')
+
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const projects = useSelector(state => state.workspace.projects)
+  const projectsArray = Object.values(projects)
   useEffect(() => {
+    const error = []
 
     if (name.length > 0) {
       setButtonChange('test')
@@ -24,24 +29,37 @@ const EditProjectForm = ({ project, setShowModal }) => {
     if (name.length === 0) {
       setButtonChange('project-submit-button')
     }
+    projectsArray.filter(project => {
+      if (project.name.toLowerCase() === name.toLowerCase()) {
+        error.push('Error: Project with that name already exists')
+      }
+    })
+    setErrors(error)
   }, [name])
 
   const icon = project.icon
+
   let ownerId = user.id
   let workspaceId = project.workspaceId
 
   const dispatch = useDispatch();
   const editProject = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
+
     if (dueDate === '') {
       setDueDate()
     }
 
     let payload = { id: project.id, workspaceId, name, status, dueDate, description, icon, ownerId }
+    if (!errors.length) {
 
-    const data = await dispatch(updateAProject(payload));
-    if (data) {
-      setErrors(data)
+      const data = await dispatch(updateAProject(payload));
+      await dispatch(oneWorkspace(workspaceId))
+
+      if (data) {
+        setErrors(data)
+      }
     }
   };
 
@@ -53,7 +71,7 @@ const EditProjectForm = ({ project, setShowModal }) => {
           <button className="create-button" onClick={() => setShowModal(false)}>X</button>
         </div>
         <form onSubmit={editProject}>
-          {errors.length > 0 && (<div className='errorContainer project-errors'>
+          {hasSubmitted && errors.length > 0 && (<div className='errorContainer project-errors'>
             {errors.map((error, ind) => (
               <div key={ind} className='errorText'>{error.split(":")[1]}</div>
             ))}
@@ -61,7 +79,7 @@ const EditProjectForm = ({ project, setShowModal }) => {
           <div className='project-input-container'>
             <label className='project-input-label'>Project Name</label>
             <input
-
+              maxLength={25}
               type='text'
               name='name'
               onChange={(e) => setName(e.target.value)}

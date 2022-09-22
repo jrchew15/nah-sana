@@ -17,20 +17,20 @@
     position: relative;
 }
 
-#topbar>i {
+#topbar i {
     font-size: 1.4em;
-    margin-left: 20px;
+    margin: 0 35px 0 20px;
     padding: 5px;
     border-radius: 20%;
     cursor: pointer;
 }
 
-#topbar>i:hover {
+#topbar i:hover {
     background-color: var(--border-color-hover);
 }
 
 .userIcon {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: black;
     font-weight: lighter;
     border-radius: 50%;
@@ -40,7 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 10px;
     cursor: pointer;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -50,18 +50,10 @@
     user-select: none;
 }
 
-/* .user-icon {
-    font-size: 0.9em;
-    border-radius: 50%;
-    width: 1.8em;
-    height: 1.8em;
-    display: flex;
-    background-color: var(--bkg-color-grey);
-    border: 1px solid var(--border-color-active);
-    padding: 3px;
-    cursor: pointer;
+.userIcon:not(#user-circles .userIcon) {
     margin-right: 24px;
-} */
+    font-size: 0.9em;
+}
 
 #profile-dropdown {
     position: absolute;
@@ -89,9 +81,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    word-break: break-all;
+    white-space: normal;
 }
 
-/* #profile-dropdown>#workspaces>.active-workspace {} */
 
 #profile-dropdown a,
 #profile-dropdown span {

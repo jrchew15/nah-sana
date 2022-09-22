@@ -6,7 +6,6 @@ import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
 import ProjectDetail from "./Projects/ProjectDetail";
 import { oneWorkspace } from "../store/workspace";
-import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
 import LeftNavBar from "./Navbars/LeftNavBar";
 import UserProfilePage from "./UserProfilePage";
 import { DropdownHandlingContext } from "../context/DropdownHandlingContext";
@@ -26,14 +25,13 @@ export default function Workspace() {
     useEffect(() => {
         dispatch(oneWorkspace(workspaceId))
         setWorkspaceLoaded(true)
-    }, [dispatch, workspaceId])
+    }, [dispatch, workspaceId, oneWorkspace, setWorkspaceLoaded])
 
     function toggleNavbarDisplay() {
         setNavDisplay(state => !state)
     }
 
     const context = useContext(DropdownHandlingContext);
-    // console.log(context)
     const { dropdownChecks } = context;
 
     return workspaceLoaded && user ? (

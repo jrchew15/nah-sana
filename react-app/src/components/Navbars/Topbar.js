@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouteMatch, NavLink, useHistory, useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useContext } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";
@@ -32,20 +32,14 @@ export default function Topbar({ toggleNavbarDisplay }) {
         history.push('/')
     };
 
-
-    // const conditionalClose = (e) => {
-    //     if (dropdownOpen && profileDropdownRef) {
-    //         if (e.target !== profileDropdownRef.current) {
-    //             setDropdownOpen(false)
-    //         }
-    //     }
-    // }
-
-
     return currentWorkspace && currentUser ? (
         <>
             <div id='topbar' onClick={dropdownChecks}>
-                <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
+                <div className='splashpageLogoContainer'>
+                    <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
+                    <img src="/static/images/logos/logo-dark.png" alt="logo" className='splashpageLogo' onClick={() => { history.push(`/workspaces/${currentWorkspace.id}`) }} style={{ cursor: 'pointer', height: 'calc(0.9 * var(--topbar-height))', width: 'calc(0.9 * var(--topbar-height))' }} />
+                    <p className='unselectable' onClick={() => { history.push(`/workspaces/${currentWorkspace.id}`) }} style={{ cursor: 'pointer' }}>Nah-sana</p>
+                </div>
                 <UserIcon user={currentUser} clickHandler={toggleUserDropdown} />
             </div>
             <div id='profile-dropdown' ref={userDropdownRef} style={{ display: userDropdownOpen ? 'flex' : 'none' }}>
@@ -54,7 +48,8 @@ export default function Topbar({ toggleNavbarDisplay }) {
                         <a key={workspace.id}
                             href={`/workspaces/${workspace.id}`}
                             target='_blank'
-                            className={workspace.id == currentWorkspace.id ? 'active' : ''}>
+                            rel='noreferrer'
+                            className={+workspace.id === +currentWorkspace.id ? 'active' : ''}>
                             {workspace.name}
                         </a>
                     ))}
