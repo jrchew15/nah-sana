@@ -50,7 +50,7 @@
     display: block;
 }
 
-.table-cell:hover {
+#task-name:hover {
     background-color: rgba(128, 128, 128, 0.169);
 }
 
