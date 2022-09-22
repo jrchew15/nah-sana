@@ -37,7 +37,7 @@ const TasksListByUser = ({ projects }) => {
                     <>
                         <div className="task-flex">
                             <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'none', borderRadius: '10px' }}></i>
+                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
                             </button>
                             <div className="task-items" onClick={() => {
                                 setShowModal(true)

@@ -21,10 +21,11 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const [userId, setUserId] = useState(passedUserId || 0);
     const [projectId, setProjectId] = useState(passedProjectId || 0);
     const [errors, setErrors] = useState([])
+    const [hasSubmitted, setHasSubmitted] = useState(false)
 
-
+    console.log('*************in component******', hasSubmitted)
     useEffect(async () => {
-        // console.log('*********in use effct 1*******', taskId)
+        console.log('*********in use effct*******')
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
             // console.log('*********in use effct 2*******', foundTask)
@@ -39,10 +40,17 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             setUserId(foundTask.userId)
             setProjectId(foundTask.projectId)
         }
-    }, [dispatch])
+        let errors = []
+        if (!name) errors.push('Task Name is required')
+        if (!projectId) errors.push('Please choose a project')
+        if (!dueDate) errors.push('Please choose a dueDate')
+        if (!userId) errors.push('Please choose a user')
+        setErrors(errors)
+    }, [dispatch, name, projectId, userId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setHasSubmitted(true)
         let formData = {
             name,
             dueDate,
@@ -60,7 +68,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         }
         if (data) {
             setErrors(data)
-            return
+            // return
         }
         if (!plainForm) setShowModal(false)
         if (plainForm) setShowTaskDetail(false)
@@ -82,13 +90,13 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 onClick={() => (
                                     setComplete(!complete)
                                 )}>
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                <i className="fa fa-check-circle-o" aria-hidden="true"></i>
                                 {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
                             </div>
                             <h2>My Task</h2>
-                            {errors.length > 0 && <div className='form-row'>
+                            {hasSubmitted && errors.length > 0 && <div className='errorContainer'>
                                 {errors.map((error, ind) => (
-                                    <div key={ind}>{error}</div>
+                                    <div key={ind} className='errorText'>{error}</div>
                                 ))}
                             </div>}
                             <div className='form-row'>
@@ -101,22 +109,22 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='userId' id='form-label'>Assignee</label>
-                                <select name='userId' onChange={e => setUserId(e.target.value)} value={userId} style={{ background: 'none', color: 'whitesmoke' }}>
-                                    <option disabled value=''>Choose a user</option>
+                                <select name='userId' required onChange={e => setUserId(e.target.value)} value={userId} style={{ background: 'none', color: 'whitesmoke' }}>
+                                    <option disabled value={0}>Choose a user</option>
                                     {
                                         Object.values(users).map(user => (
-                                            <option value={user.id}>{user.firstName} {user.lastName}</option>
+                                            <option key={user.id} value={user.id}>{user.firstName} {user.lastName}</option>
                                         ))
                                     }
                                 </select>
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='projectId' id='form-label'>Project</label>
-                                <select name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
-                                    <option disabled value=''>Choose a project</option>
+                                <select name='projectId' required onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
+                                    <option disabled value={0}>Choose a project</option>
                                     {
                                         projects.map(project => (
-                                            <option value={project.id}>{project.name}</option>
+                                            <option key={project.id} value={project.id}>{project.name}</option>
                                         ))
                                     }
                                 </select>
