@@ -5,6 +5,7 @@
     /* background-color: olivedrab; */
     display: flex;
     flex-direction: column;
+    padding: 0;
 }
 
 .create-title {
@@ -33,7 +34,6 @@
 .top-create-form {
     display: flex;
     justify-content: space-between;
-    color: orange;
     border-bottom: #424244 solid 2px;
     padding-left: 16px;
 }

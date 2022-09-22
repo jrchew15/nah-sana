@@ -19,7 +19,7 @@ function CreateProjectModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateProjectForm />
+          <CreateProjectForm setShowModal={setShowModal} />
         </Modal>
       )}
     </>

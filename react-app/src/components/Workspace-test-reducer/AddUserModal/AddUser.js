@@ -48,6 +48,8 @@ const AddUser = ({ setShowModal }) => {
             <div className="form-container">
                 <div className="add-user-title-div">
                     <h2 className="add-user-title">Add Member to Workspace</h2>
+                    <button className="create-button" onClick={() => setShowModal(false)}>X</button>
+
                 </div>
                 {hasSubmitted && validationErrors.length > 0 && (
                     <div>

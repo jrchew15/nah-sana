@@ -5,9 +5,15 @@
 }
 
 .add-user-title-div {
-    border-bottom: #424244 2px solid;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #424244 solid 2px;
+    padding-left: 16px;
+
 }
 
 .add-user-title {
+    font-weight: 500;
+    font-size: 20px;
     font-weight: 500;
 }
