@@ -51,15 +51,14 @@ const AddUser = ({ setShowModal }) => {
                     <button className="create-button" onClick={() => setShowModal(false)}>X</button>
 
                 </div>
-                {hasSubmitted && validationErrors.length > 0 && (
-                    <div>
-                        <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
-                            {validationErrors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
+
+                {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors add-user-error'>
+                    {validationErrors.map((error, ind) => (
+                        <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                    ))}
+                </div>
                 )}
+
                 <form onSubmit={handleSubmit}>
                     <div className="label-container-create">
                         <label className="workspace-label">

@@ -92,3 +92,7 @@ div.horizontal-separator {
     -ms-user-select: none;
     user-select: none;
 }
+
+.add-user-error {
+    text-align: center;
+}
