@@ -44,12 +44,11 @@ const CreateProjectForm = ({ setShowModal }) => {
         <button className="create-button" onClick={() => setShowModal(false)}>X</button>
       </div>
       <form onSubmit={createProject}>
-        {errors.length > 0 && (<div className='errorContainer project-errors'>
+        {errors.length > 0 && (<div className='errorContainer project-errors '>
           {errors.map((error, ind) => (
             <div key={ind} className='errorText'>{error.split(":")[1]}</div>
           ))}
         </div>)}
-        {/* <div> */}
         <div className='project-input-container'>
           <label className='project-input-label'>Project Name</label>
           <input

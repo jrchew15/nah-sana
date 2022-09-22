@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, NavLink } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import GetProjects from "../Projects/ProjectsList";
 import TasksListByUser from "../Tasks/TasksListByUser";
@@ -78,8 +78,10 @@ export default function GetOne({ workspaceId }) {
                                 {Object.values(workspace.users).map(user => (
                                     <>
                                         <div className="user-card">
-                                            <img className="user-card-image" src={user.image} alt={user.firstName}></img>
-                                            <div key={user.id}>{user.firstName} {user.lastName}</div>
+                                            <NavLink className='nav-to-users' to={`/workspaces/${workspaceId}/user/${user.id}`}>
+                                                <img className="user-card-image" src={user.image} alt={user.firstName}></img>
+                                                <div className="user-name-link" key={user.id}>{user.firstName} {user.lastName}</div>
+                                            </NavLink>
                                             <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
                                             <div>
                                                 <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
@@ -88,6 +90,10 @@ export default function GetOne({ workspaceId }) {
                                     </>
                                 ))}
                             </div>
+                            {/* <NavLink to={`/workspaces/${workspace.workspace.id}/users/${currentUser.id}`} exact>
+                                <i className="far fa-check-circle" />
+                                My Tasks
+                            </NavLink> */}
                         </div>
                     </div>
                 </div>
