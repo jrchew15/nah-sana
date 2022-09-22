@@ -21,7 +21,7 @@ export default function LeftNavBar() {
         workspaceDropdownRef } = useContext(DropdownHandlingContext);
 
     function redirectToProfile(userId) {
-        history.push(`/workspaces/${workspace.workspace.id}/user/${userId}/list`)
+        history.push(`/workspaces/${workspace.workspace.id}/user/${userId}`)
     }
     function redirectToProject(projectId) {
         history.push(`/workspaces/${workspace.workspace.id}/projects/${projectId}`)
@@ -39,7 +39,7 @@ export default function LeftNavBar() {
                     <NavLink to={`/workspaces/${workspace.workspace.id}`} exact>
                         <i className="fas fa-home" />Home
                     </NavLink>
-                    <NavLink to={`/workspaces/${workspace.workspace.id}/user/${currentUser.id}`} exact>
+                    <NavLink to={`/workspaces/${workspace.workspace.id}/user/${currentUser.id}/list`} exact>
                         <i className="far fa-check-circle" />
                         My Tasks
                     </NavLink>
