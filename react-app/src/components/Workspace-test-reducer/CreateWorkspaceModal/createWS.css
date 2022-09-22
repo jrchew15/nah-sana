@@ -59,7 +59,7 @@
 }
 
 .button-container-create {
-    border-top: #424244 solid 2px;
+    border-top: #424244 solid 1px;
     padding: 10px;
     display: flex;
     justify-content: flex-end;

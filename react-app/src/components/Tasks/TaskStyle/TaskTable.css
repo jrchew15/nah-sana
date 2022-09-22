@@ -1,5 +1,13 @@
-.table {
+.task-section {
+    width: calc(100vw - var(--navbar-width))
+}
+
+.table-outer-container {
     width: 100%;
+}
+
+.table {
+    width: 100vw;
     border-collapse: collapse;
     border-style: hidden;
 }
@@ -43,14 +51,14 @@
 #task-name {
     display: flex;
     border: none;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 #task-name:hover>#button {
     display: block;
 }
 
-.table-cell:hover {
+#task-name:hover {
     background-color: rgba(128, 128, 128, 0.169);
 }
 
@@ -68,6 +76,6 @@
     cursor: pointer;
 }
 
-.table-outer-container {
+/* .table-outer-container {
     width: 100%;
-}
+} */

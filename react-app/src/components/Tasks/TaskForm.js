@@ -43,7 +43,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         let errors = []
         if (!name) errors.push('Task Name is required')
         if (!projectId) errors.push('Please choose a project')
-        if (!dueDate) errors.push('Please choose a dueDate')
+        if (!dueDate) errors.push('Please choose a due date')
         if (!userId) errors.push('Please choose a user')
         setErrors(errors)
     }, [name, projectId, userId])
@@ -79,11 +79,11 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         <>
             {(
                 <div className='task-form-container' style={{ borderLeft: plainForm ? 'solid 1px gray' : 'none' }}>
-                    <a href="javascript:void(0)" className="closebtn"
-                        style={{ display: plainForm ? 'block' : 'none', marginRight: '35px' }}
-                        onClick={() => { setShowTaskDetail(false) }}>&times;</a>
-                    <div className='task-top-container' style={{ marginLeft: '30px' }}>
+                    <div className='task-form-top-container' style={{ marginLeft: '30px' }}>
                         <form onSubmit={handleSubmit}>
+                            <a href="javascript:void(0)" className="closebtn"
+                                style={{ display: plainForm ? 'block' : 'none', marginRight: '35px' }}
+                                onClick={() => { setShowTaskDetail(false) }}>&times;</a>
                             <div className='task-complete'
                                 style={{
                                     padding: '4px',
@@ -141,6 +141,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             <div className='task-form-container'>
                                 <button type='submit'
                                     className={`${buttonChange}`}
+                                    style={{ marginTop: '3px' }}
                                 >Submit</button>
                                 {taskId && (
                                     <button

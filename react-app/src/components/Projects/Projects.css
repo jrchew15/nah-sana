@@ -164,6 +164,21 @@
   font-size: 14px;
 }
 
+.projectHeader {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--status-color-on-hold);
+}
+
+.projectDescriptionTextContainer {
+  height: 410px;
+  width: 95%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
 .statusWidgetContainer {
   border: 1px solid var(--border-color);
   border-radius: 8px;
