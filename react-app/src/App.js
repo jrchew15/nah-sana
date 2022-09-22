@@ -6,6 +6,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
+import { DropdownHandlingProvider } from './context/DropdownHandlingContext';
 
 import Workspace from './components/Workspace';
 import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspaceModal/CreateWS'
@@ -52,9 +53,9 @@ export default function App() {
           <Home />
         </Route>
         <Route path='/workspaces/:id'>
-          <>
+          <DropdownHandlingProvider>
             <Workspace />
-          </>
+          </DropdownHandlingProvider>
         </Route>
         <Route exact path='/login'>
           <LoginPage />

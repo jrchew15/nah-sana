@@ -40,13 +40,16 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             setUserId(foundTask.userId)
             setProjectId(foundTask.projectId)
         }
+    }, [dispatch])
+
+    useEffect(async () => {
         let errors = []
         if (!name) errors.push('Task Name is required')
         if (!projectId) errors.push('Please choose a project')
         if (!dueDate) errors.push('Please choose a dueDate')
         if (!userId) errors.push('Please choose a user')
         setErrors(errors)
-    }, [dispatch, name, projectId, userId])
+    }, [name, projectId, userId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
