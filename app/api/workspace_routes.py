@@ -47,12 +47,14 @@ def one_workspace(id):
     project_objs= [project for project in workspace.projects]
     project_in_this_ws= [project.to_dict() for project in project_objs]
     task_in_this_ws = []
-    print(users_in_this_ws,'1111111111')
-
+    print(users_in_this_ws,'1111111111-----------')
+    print(current_user.to_dict(),'-------------------CURRRRRRR')
     # add all the tasks from each project on the workspace
     for project in project_objs:
         task_in_this_ws.extend([task.to_dict() for task in project.tasks])
     id =workspace.to_dict()
+    # if current_user.to_dict() not in users_in_this_ws:
+    #     return {'Error':'user does not belong to workspace'}
     return {
         'workspace' : workspace.to_dict(),
         "users": users_in_this_ws,

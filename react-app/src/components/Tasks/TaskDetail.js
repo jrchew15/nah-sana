@@ -7,7 +7,6 @@ import { Modal } from '../../context/Modal';
 import './TaskStyle/TaskDetail.css';
 
 const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
-    console.log('********taskId', taskId)
     const dispatch = useDispatch()
     const tasks = useSelector((state) => state.tasks)
     const workspaceUsers = useSelector((state) => state.workspace.users)
@@ -27,15 +26,12 @@ const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
 
     const handleClick = async () => {
         const response = await fetch(`/api/tasks/${taskId}`)
-        console.log('**************response', response)
         if (response.ok) {
             setTaskComplete(!taskComplete)
             const formData = await response.json()
-            console.log('**************formData', formData)
             const data = { ...formData }
             data.complete = taskComplete
             data.id = taskId
-            console.log('**************data', data)
             await dispatch(updateOneTask(data))
         }
     }

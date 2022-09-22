@@ -8,7 +8,6 @@ const EditUserForm = () => {
   const [firstName, setFirstName] = useState(user.firstName || '');
   const [lastName, setLastName] = useState(user.lastName || '');
   const [role, setRole] = useState(user.role || '');
-  // const [image, setImage] = useState(user.image || '');
   const [pronouns, setPronouns] = useState(user.pronouns || '');
   const [department, setDepartment] = useState(user.department || '');
   const [bio, setBio] = useState(user.bio || '');
