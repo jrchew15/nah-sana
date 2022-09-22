@@ -63,16 +63,24 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             return
         }
         setShowModal(false)
-        setTaskDetail(false)
+        if (setTaskDetail) setTaskDetail(false)
     }
 
     return (
         <>
             {(
-                <div className='form-container'>
+                <div className='task-form-container'>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
-                        <h2>My Task</h2>
                         <form onSubmit={handleSubmit}>
+                            <div id='task-complete' className='task-complete'
+                                style={{ backgroundColor: complete.toString() === 'false' ? 'gray' : 'olive' }}
+                                onClick={() => (
+                                    setComplete(!complete)
+                                )}>
+                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
+                            </div>
+                            <h2>My Task</h2>
                             {errors.length > 0 && <div className='form-row'>
                                 {errors.map((error, ind) => (
                                     <div key={ind}>{error}</div>
@@ -110,13 +118,9 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='description' id='form-label'>Description</label>
-                                <input id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
+                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
                             </div>
-                            <div className='form-row'>
-                                <label htmlFor='complete' id='form-label'>Complete</label>
-                                <input id='form-input' type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
-                            </div>
-                            <button id='form-button' type='submit'>Submit</button>
+                            <button id='task-form-button' type='submit'>Submit</button>
                         </form >
                     </div>
                 </div >

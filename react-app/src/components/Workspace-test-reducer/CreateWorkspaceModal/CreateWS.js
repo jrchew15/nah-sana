@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { workspaceCreate } from "../../../store/workspace";
 import './createWS.css'
-
+import { authenticate } from "../../../store/session";
 
 const CreateWorkspace = ({ setShowModal }) => {
     const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const CreateWorkspace = ({ setShowModal }) => {
         const errors = []
         if (!name.length) errors.push('Workspace name is required')
         workspaceArr.filter(wkspace => {
-            if (name === wkspace.name) {
+            if (name.toLowerCase() === wkspace.name.toLowerCase()) {
                 errors.push(['Workspace name already exists'])
             }
         })
@@ -39,6 +39,7 @@ const CreateWorkspace = ({ setShowModal }) => {
         }
         if (!validationErrors.length) {
             let newWorkspace = await dispatch(workspaceCreate(workspace))
+            await dispatch(authenticate())
             if (newWorkspace) {
                 history.push(`/workspaces/${newWorkspace.id}`)
                 setShowModal(false)

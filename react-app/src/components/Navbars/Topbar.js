@@ -76,7 +76,6 @@ export default function Topbar({ toggleNavbarDisplay }) {
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
             </div>
-            { }
         </>
     ) : null
 }
