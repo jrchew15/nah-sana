@@ -20,7 +20,7 @@ const TasksListByProject = ({ projectId }) => {
 
     const tasks = useSelector((state) => state.tasks)
     const tasksArr = Object.values(tasks)
-    console.log(tasks)
+    // console.log(tasks)
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
@@ -42,42 +42,55 @@ const TasksListByProject = ({ projectId }) => {
                 <div style={{ display: 'flex' }} className="table-outer-container">
                     <div className="table-outer-container">
                         <div className='add-task-button'
-                            style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '18px', fontWeight: 300, marginLeft: '15px', marginTop: '8px', padding: '8px' }}
-                            onClick={() => { setShowForm(true) }}>
+                            style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
+                            onClick={() => {
+                                setShowTaskDetail(true)
+                                setOnClickTaskId(null)
+                            }}>
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
                         <table className={showTaskDetail ? "table-onclick" : "table"}>
-                            <tr className="table-row">
-                                <th className="table-head">Task Name</th>
-                                <th className="table-head">Due Date</th>
-                            </tr>
-                            {tasksArr.map((task) => (
-
-                                <tr key={task.id} className="table-row">
-                                    <td className="table-cell" id='task-name'>
-                                        <div className="table-cell-text">{task.name}</div>
-                                        <div id='button' onClick={() => (
-                                            setShowTaskDetail(!showTaskDetail),
-                                            setOnClickTaskId(task.id),
-                                            setShowSideBar(!showSideBar)
-                                        )}>View Details</div>
-                                    </td>
-                                    <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                            <tbody>
+                                <tr className="table-row">
+                                    <th className="table-head">Task Name</th>
+                                    <th className="table-head">Due Date</th>
                                 </tr>
-                            ))
-                            }
+                                {tasksArr.map((task) => (
+
+                                    <tr key={task.id} className="table-row">
+                                        <td className="table-cell" id='task-name'
+                                            onClick={() => (
+                                                setShowTaskDetail(!showTaskDetail),
+                                                setOnClickTaskId(task.id),
+                                                setShowSideBar(!showSideBar)
+                                            )}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <div>
+
+                                                <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
+                                            {/* <div id='button' >details</div> */}
+                                        </td>
+                                        <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                                    </tr>
+                                ))
+                                }
+                            </tbody>
                         </table >
                     </div>
                 </div>
                 <div>
-                    {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+                    {showTaskDetail ? <TaskForm plainForm={true} taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
                 </div>
+                {/* <div>
+                    {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+                </div> */}
             </div >
-            {showForm && (
+            {/* {showForm && (
                 <Modal onClose={() => setShowModal(false)}>
                     <TaskForm setShowModal={setShowModal} />
                 </Modal>
-            )}
+            )} */}
         </>
     ) : null
 }
