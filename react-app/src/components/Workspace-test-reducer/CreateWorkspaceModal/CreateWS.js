@@ -21,14 +21,14 @@ const CreateWorkspace = ({ setShowModal }) => {
     useEffect(() => {
 
         const errors = []
-        if (!name.length) errors.push('Workspace name is required')
+        if (!name.length) errors.push('error: Workspace name is required')
         workspaceArr.filter(wkspace => {
             if (name.toLowerCase() === wkspace.name.toLowerCase()) {
-                errors.push(['Workspace name already exists'])
+                errors.push('error: Workspace name already exists')
             }
         })
         setValidationErrors(errors)
-    }, [name, workspaceArr])
+    }, [name])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,8 +39,8 @@ const CreateWorkspace = ({ setShowModal }) => {
         }
         if (!validationErrors.length) {
             let newWorkspace = await dispatch(workspaceCreate(workspace))
-            await dispatch(authenticate())
             if (newWorkspace) {
+                await dispatch(authenticate())
                 history.push(`/workspaces/${newWorkspace.id}`)
                 setShowModal(false)
 
@@ -56,15 +56,11 @@ const CreateWorkspace = ({ setShowModal }) => {
                 </div>
                 <div>
 
-                    {hasSubmitted && validationErrors.length > 0 && (
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
-                                {validationErrors.map(error => (
-                                    <li key={error}>{error}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                    {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
+                        {validationErrors.map((error, ind) => (
+                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                        ))}
+                    </div>)}
                     <form onSubmit={handleSubmit}>
                         <div className="label-container-create">
                             <label className="workspace-label">

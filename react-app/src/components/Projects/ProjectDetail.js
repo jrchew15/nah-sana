@@ -102,7 +102,10 @@ function ProjectDetail({ workspaceId }) {
   )
 
   let list = (
-    <TasksListByProject projectId={id} />
+    <div className='projectDetailTaskOuterContainer'>
+      <TasksListByProject projectId={id} />
+
+    </div>
   )
 
 

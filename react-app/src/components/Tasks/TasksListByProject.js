@@ -39,8 +39,8 @@ const TasksListByProject = ({ projectId }) => {
     return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
-                <div style={{ display: 'flex' }}>
-                    <div>
+                <div style={{ display: 'flex' }} className="table-outer-container">
+                    <div className="table-outer-container">
                         <div className='add-task-button'
                             style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
                             onClick={() => {

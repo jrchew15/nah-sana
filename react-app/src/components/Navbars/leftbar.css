@@ -82,23 +82,50 @@
 
 #user-circles {
     display: flex;
+    padding-left: var(--dropdown-left-padding);
+    overflow: hidden;
+    margin: 8px 0;
 }
 
 /* #left-nav-projects-list>li {
     cursor: pointer
 } */
 
+#create-dropdown-workspace {
+    top: 180px;
+    left: calc(var(--navbar-width) - 50px);
+    min-width: max-content;
+}
+
+#create-dropdown {
+    top: 10px;
+    left: 120px;
+}
+
+#left-nav-projects-list {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
 .left-dropdowns {
     background-color: var(--bkg-color-black);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     position: absolute;
-    right: 0;
-    padding: 20px;
+    padding: 8px 0;
 }
 
-#create-dropdown-workspace {
-    top: 130px;
-    left: var(--navbar-width);
-    min-width: max-content;
+.left-dropdowns>span {
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.left-dropdowns>span:hover {
+    background-color: var(--bkg-color-grey);
+}
+
+.left-dropdowns i {
+    width: 22px;
+    font-size: 0.8rem;
 }

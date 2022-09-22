@@ -11,7 +11,7 @@ const CreateProjectForm = ({ setShowModal }) => {
   const [status, setStatus] = useState('On Track')
   const [dueDate, setDueDate] = useState()
   const [description, setDescription] = useState('')
-  const [test, setClass] = useState('project-submit-button')
+  const [buttonChange, setButtonChange] = useState('project-submit-button')
   let ownerId = user.id
   const { id } = useParams()
 
@@ -19,10 +19,10 @@ const CreateProjectForm = ({ setShowModal }) => {
   useEffect(() => {
 
     if (name.length > 0) {
-      setClass('test')
+      setButtonChange('test')
     }
     if (name.length === 0) {
-      setClass('project-submit-button')
+      setButtonChange('project-submit-button')
     }
   }, [name])
 
@@ -44,12 +44,11 @@ const CreateProjectForm = ({ setShowModal }) => {
         <button className="create-button" onClick={() => setShowModal(false)}>X</button>
       </div>
       <form onSubmit={createProject}>
-        {errors.length > 0 && (<div >
+        {errors.length > 0 && (<div className='errorContainer project-errors '>
           {errors.map((error, ind) => (
-            <div key={ind}>{error.split(":")[1]}</div>
+            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
           ))}
         </div>)}
-        {/* <div> */}
         <div className='project-input-container'>
           <label className='project-input-label'>Project Name</label>
           <input
@@ -103,8 +102,8 @@ const CreateProjectForm = ({ setShowModal }) => {
             value={description}
           ></textarea>
         </div>
-        <div className='project-input-container'>
-          <button className={`${test}`} type='submit'>Submit</button>
+        <div className='project-input-container move-button-down'>
+          <button className={`${buttonChange}`} type='submit'>Submit</button>
         </div>
       </form>
     </div>
