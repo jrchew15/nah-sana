@@ -33,7 +33,7 @@ function UserProfilePage() {
   }
 
 
-  if (!user) {
+  if (loaded && !user) {
     return (
       <div>
         <h1 className='projectDoesNotExist'>User does not exist...redirecting</h1>
