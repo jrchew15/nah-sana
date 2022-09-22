@@ -38,7 +38,6 @@ function ProjectDetail({ workspaceId }) {
       </div>
     )
   }
-  // if (!project) return null
 
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
