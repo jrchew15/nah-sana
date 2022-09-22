@@ -1,6 +1,6 @@
 .project-create-form-container {
     width: 30em;
-    height: 33.5em;
+    height: 35em;
     display: flex;
     flex-direction: column;
 }
@@ -12,16 +12,24 @@
     padding-left: 16px;
 }
 
+.form-container-pull-down {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 .form-container-inside {
     display: flex;
     flex-direction: column;
-    padding-top: 20pxs;
+    padding-top: 20px;
 }
 
 .project-input-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    /* padding-top: 5sem; */
+
     /* width: 95%; */
 }
 

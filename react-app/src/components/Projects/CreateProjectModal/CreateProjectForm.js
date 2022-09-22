@@ -37,7 +37,7 @@ const CreateProjectForm = ({ setShowModal }) => {
       }
     })
     setErrors(error)
-  }, [name])
+  }, [name, dueDate])
 
   let workspaceId = id
   const dispatch = useDispatch();

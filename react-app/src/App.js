@@ -10,6 +10,7 @@ import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspace
 import Splashpage from './components/Splashpage';
 import LoginPage from './components/auth/LoginPage';
 import SignUpPage from './components/auth/SignUpPage';
+import NewUserWorkspace from './components/NewUserCreateWS/NEW';
 
 export default function App() {
   const [currentUserIsLoaded, setCurrentUserIsLoaded] = useState(false);
@@ -30,7 +31,7 @@ export default function App() {
     if (currentUser && currentUser.workspaces) {
       return currentUser.workspaces.length ?
         <Redirect to={`/workspaces/${currentUser.workspaces[0].id}`} /> :
-        <CreateWorkspace />
+        <NewUserWorkspace />
     }
     else
       return (

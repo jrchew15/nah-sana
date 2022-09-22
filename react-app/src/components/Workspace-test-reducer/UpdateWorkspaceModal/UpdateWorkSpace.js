@@ -19,12 +19,13 @@ const UpdateWorkspace = ({ setShowModal }) => {
 
     const currentUser = useSelector(state => state.session.user);
     let workspaceArr = currentUser.workspaces
+    const originalName = workspaces.name
     useEffect(() => {
 
         const errors = []
         if (!name.length) errors.push('error: Workspace name already exists')
         workspaceArr.filter(wkspace => {
-            if (name.toLowerCase() === wkspace.name.toLowerCase()) {
+            if (name.toLowerCase() === wkspace.name.toLowerCase() && name.toLowerCase() && name !== originalName) {
                 errors.push('error: Workspace name already exists')
             }
         })
