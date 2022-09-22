@@ -16,7 +16,8 @@ const EditUserForm = () => {
   const gridStyles = {
     display: 'grid',
     gridColumnTemplate: '50px 50px',
-    gap: '15px'
+    gap: '15px',
+    padding: '6px 24px 24px 24px'
   }
 
   const dispatch = useDispatch();
