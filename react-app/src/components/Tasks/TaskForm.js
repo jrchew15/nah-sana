@@ -131,14 +131,15 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='description' id='form-label' >Description</label>
-                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} style={{ background: 'none', color: 'whitesmoke' }} />
+                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} style={{ background: 'none', color: 'whitesmoke', width: '200px', height: '100px' }} />
                             </div>
                             <div style={{ display: 'flex', padding: '30px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                                     <button id='task-form-button' type='submit'
-                                    // style={{ marginRight: '10px', color: 'whitesmoke', background: 'none' }}
+                                    // style={{ background: '#4473D2' }}
                                     >Submit</button>
                                     <button id='task-form-button'
+                                        style={{ border: 'solid 1px red', background: '#D11A2A' }}
                                         onClick={async () => {
                                             await dispatch(deleteOneTask(taskId))
                                             if (!plainForm) setShowModal(false)
