@@ -96,3 +96,8 @@ div.horizontal-separator {
 option {
     background-color: var(--bkg-color-black);
 }
+
+.add-user-error {
+    text-align: center;
+
+}
