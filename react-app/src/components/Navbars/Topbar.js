@@ -9,13 +9,13 @@ import UserIcon from "../UserIcon";
 
 import './topbar.css'
 
-export default function Topbar({ toggleNavbarDisplay }) {
+export default function Topbar({ toggleNavbarDisplay, profileDropdownRef, userDropdownOpen: dropdownOpen, setUserDropdownOpen: setDropdownOpen }) {
     const currentUser = useSelector(state => state.session.user);
     const currentWorkspace = useSelector(state => state.workspace.workspace);
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+
     const toggleUserDropdown = () => {
         setDropdownOpen(val => !val);
     }
@@ -26,21 +26,22 @@ export default function Topbar({ toggleNavbarDisplay }) {
     };
 
 
-    {/* comment this out */ }
+    const conditionalClose = (e) => {
+        if (dropdownOpen && profileDropdownRef) {
+            if (e.target !== profileDropdownRef.current) {
+                setDropdownOpen(false)
+            }
+        }
+    }
 
-    // const { id } = useParams()
-    // const handlepush = (e) => {
-    //     e.preventDefault()
-    //     history.push(`/workspaces/${id}`)
-    // }
 
     return currentWorkspace && currentUser ? (
         <>
-            <div id='topbar'>
+            <div id='topbar' onClick={conditionalClose}>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
-                <UserIcon user={currentUser} clickHandler={toggleUserDropdown} />
+                <UserIcon user={currentUser} clickHandler={() => { toggleUserDropdown(); console.log(profileDropdownRef) }} />
             </div>
-            <div id='profile-dropdown' style={{ display: dropdownOpen ? 'flex' : 'none' }}>
+            <div id='profile-dropdown' ref={profileDropdownRef} style={{ display: dropdownOpen ? 'flex' : 'none' }}>
                 <div id='workspaces'>
                     {currentUser.workspaces.map(workspace => (
                         <a key={workspace.id}

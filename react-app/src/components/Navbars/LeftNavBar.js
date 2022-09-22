@@ -1,19 +1,15 @@
 import { NavLink, useHistory } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { useState } from "react";
 import UserIcon, { ProjectLi } from "../UserIcon";
 import { NavAddUserModal, NavDropdownAddUserModal, NavTaskModal, NavProjectForm } from "./NavModals";
 
 import './leftbar.css';
 
 
-export default function LeftNavBar() {
+export default function LeftNavBar({ workspaceCreateDropdownRef, workspaceCreateDropdownOpen, setWorkspaceCreateDropdownOpen, createDropdownRef, createDropdownOpen, setCreateDropdownOpen }) {
     const workspace = useSelector(state => state.workspace);
     const currentUser = useSelector(state => state.session.user);
     const history = useHistory();
-
-    const [showAddAny, setShowAddAny] = useState(false)
-    const [showAddToWorkspace, setShowAddToWorkspace] = useState(false)
 
     function redirectToProfile(userId) {
         history.push(`/workspaces/${workspace.workspace.id}/user/${userId}/list`)
@@ -26,7 +22,7 @@ export default function LeftNavBar() {
         <>
             <div id='left-nav-bar'>
                 <div id='add-any'>
-                    <span onClick={() => setShowAddAny(val => !val)}>
+                    <span onClick={() => setCreateDropdownOpen(val => !val)}>
                         <i className="fas fa-plus" /> Create
                     </span>
                 </div>
@@ -43,7 +39,7 @@ export default function LeftNavBar() {
                 <div id='this-workspace-links'>
                     <span id='workspace-name'>
                         {workspace.workspace.name}
-                        <i className="fas fa-plus" onClick={() => setShowAddToWorkspace(val => !val)} />
+                        <i className="fas fa-plus" onClick={() => setWorkspaceCreateDropdownOpen(val => !val)} />
                     </span>
                     <div id='user-circles'>
                         {Object.values(workspace.users).map(user => (
@@ -66,14 +62,14 @@ export default function LeftNavBar() {
                     <NavAddUserModal />
                 </div>
             </div>
-            <div id='create-dropdown' className="left-dropdowns" style={{ display: showAddAny ? 'flex' : 'none' }}>
-                <NavTaskModal handleClick={() => setShowAddAny(false)} />
-                <NavProjectForm handleClick={() => setShowAddAny(false)} />
-                <NavDropdownAddUserModal handleClick={() => setShowAddAny(false)} />
+            <div id='create-dropdown' className="left-dropdowns" style={{ display: createDropdownOpen ? 'flex' : 'none' }} ref={createDropdownRef}>
+                <NavTaskModal handleClick={() => setCreateDropdownOpen(false)} />
+                <NavProjectForm handleClick={() => setCreateDropdownOpen(false)} />
+                <NavDropdownAddUserModal handleClick={() => setCreateDropdownOpen(false)} />
             </div>
-            <div id='create-dropdown-workspace' className="left-dropdowns" style={{ display: showAddToWorkspace ? 'flex' : 'none' }}>
-                <NavProjectForm handleClick={() => setShowAddToWorkspace(false)} />
-                <NavDropdownAddUserModal handleClick={() => setShowAddToWorkspace(false)} />
+            <div id='create-dropdown-workspace' className="left-dropdowns" style={{ display: workspaceCreateDropdownOpen ? 'flex' : 'none' }} ref={workspaceCreateDropdownRef}>
+                <NavProjectForm handleClick={() => setWorkspaceCreateDropdownOpen(false)} />
+                <NavDropdownAddUserModal handleClick={() => setWorkspaceCreateDropdownOpen(false)} />
             </div>
         </>) : null
     )
