@@ -5,7 +5,6 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
-import TaskDetail from './components/Tasks/TaskDetail';
 import { DropdownHandlingProvider } from './context/DropdownHandlingContext';
 
 import Workspace from './components/Workspace';
@@ -76,12 +75,6 @@ export default function App() {
           <CreateProjectModal />
           <EditUserFormModal />
         </Route> */}
-        <Route exact path='/tasks/:taskId/edit'>
-          <TaskDetail />
-        </Route>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
-        </Route>
       </Switch>
     </BrowserRouter>
   )
