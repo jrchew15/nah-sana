@@ -1,5 +1,5 @@
 .table {
-    width: 100vw;
+    width: 100%;
     border-collapse: collapse;
     border-style: hidden;
     /* padding: 10px; */
@@ -20,12 +20,21 @@
 }
 
 .table-head {
+    padding-left: 15px;
     height: 30px;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .table-cell {
     height: 50px;
-    font-size: medium;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.table-cell-text {
+    display: flex;
+    align-items: center;
 }
 
 #task-name {
@@ -59,4 +68,8 @@ th:first-child {
 #button {
     display: none;
     cursor: pointer;
+}
+
+.table-outer-container {
+    width: 100%;
 }

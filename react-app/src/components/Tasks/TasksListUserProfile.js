@@ -1,26 +1,27 @@
-import { getTasksByProjectId } from "../../store/tasks";
+import { oneWorkspace } from "../../store/workspace";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getTasksByWorkspace } from "../../store/tasks";
 import { Modal } from '../../context/Modal';
 
-
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import TaskForm from "./TaskForm";
-// import TaskDetail from "./TaskDetail";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
 import TaskDetail from "./TaskDetail";
 
-const TasksListByProject = ({ projectId }) => {
+const TasksListUserProfile = ({ props } ) => {
     const dispatch = useDispatch()
     const history = useHistory()
+    let workspaceId = props.workspaceId;
 
-    const tasks = useSelector((state) => state.tasks)
+    const tasks = useSelector((state) => state.workspace.tasks)
     const tasksArr = Object.values(tasks)
-    console.log(tasks)
+    let filteredTasks;
+    if (tasksArr){
+        filteredTasks = tasksArr.filter(task => Number(task.userId) === Number(props.id))
+    }
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
@@ -32,10 +33,10 @@ const TasksListByProject = ({ projectId }) => {
     // console.log('**********tasks from component****', tasks)
 
     useEffect(() => {
-        dispatch(getTasksByProjectId(projectId)).then(() => setIsLoaded(true))
-    }, [dispatch, showTaskDetail])
+        dispatch(oneWorkspace(workspaceId)).then(() => setIsLoaded(true))
+    }, [dispatch, workspaceId])
 
-    if (!tasksArr.length) return null
+    if (!filteredTasks.length) return null
     return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
@@ -51,8 +52,7 @@ const TasksListByProject = ({ projectId }) => {
                                 <th className="table-head">Task Name</th>
                                 <th className="table-head">Due Date</th>
                             </tr>
-                            {tasksArr.map((task) => (
-
+                            {filteredTasks.map((task) => (
                                 <tr key={task.id} className="table-row">
                                     <td className="table-cell" id='task-name'>
                                         <div className="table-cell-text">{task.name}</div>
@@ -82,4 +82,4 @@ const TasksListByProject = ({ projectId }) => {
     ) : null
 }
 
-export default TasksListByProject
+export default TasksListUserProfile

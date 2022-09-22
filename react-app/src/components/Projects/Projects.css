@@ -323,3 +323,7 @@
   font-size: 16px;
   margin-left: 6px;
 }
+
+.projectDetailTaskOuterContainer {
+  padding: 20px;
+}
