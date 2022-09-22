@@ -59,6 +59,9 @@ export default function App() {
         <Route exact path='/signup'>
           <SignUpPage />
         </Route>
+        <Route>
+          <Home />
+        </Route>
       </Switch>
     </BrowserRouter>
   )
