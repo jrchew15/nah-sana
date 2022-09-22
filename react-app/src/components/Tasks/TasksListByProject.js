@@ -2,15 +2,17 @@ import { getTasksByProjectId } from "../../store/tasks";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getTasksByWorkspace } from "../../store/tasks";
+import { Modal } from '../../context/Modal';
 
 
-import { Route, useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import TaskForm from "./TaskForm";
 // import TaskDetail from "./TaskDetail";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
+import TaskDetail from "./TaskDetail";
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
@@ -23,6 +25,9 @@ const TasksListByProject = ({ projectId }) => {
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
+    const [showSideBar, setShowSideBar] = useState(false)
+    const [showForm, setShowForm] = useState(false)
+    const [showModal, setShowModal] = useState(false)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
 
@@ -33,28 +38,46 @@ const TasksListByProject = ({ projectId }) => {
     if (!tasksArr.length) return null
     return isLoaded ? (
         <>
-            <table className="table">
-                <tr className="table-row">
-                    <th className="table-head">Task Name</th>
-                    <th className="table-head">Due Date</th>
-                </tr>
-                {tasksArr.map((task) => (
+            <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex' }}>
+                    <div>
+                        <div className='add-task-button'
+                            style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
+                            onClick={() => { setShowForm(true) }}>
+                            <i className="fa-solid fa-plus"></i> Add Task
+                        </div>
+                        <table className={showTaskDetail ? "table-onclick" : "table"}>
+                            <tr className="table-row">
+                                <th className="table-head">Task Name</th>
+                                <th className="table-head">Due Date</th>
+                            </tr>
+                            {tasksArr.map((task) => (
 
-                    <tr key={task.id} className="table-row">
-                        <td className="table-cell" id='task-name'>
-                            <div>{task.name}</div>
-                            <div id='button' onClick={() => (
-                                setShowTaskDetail(!showTaskDetail),
-                                setOnClickTaskId(task.id)
-                                // history.push(`/tasks/${task.id}`)
-                            )}>details</div>
-                        </td>
-                        <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
-                    </tr>
-                ))
-                }
-            </table >
-            {showTaskDetail ? <TaskForm taskId={onClickTaskId} /> : null}
+                                <tr key={task.id} className="table-row">
+                                    <td className="table-cell" id='task-name'>
+                                        <div>{task.name}</div>
+                                        <div id='button' onClick={() => (
+                                            setShowTaskDetail(!showTaskDetail),
+                                            setOnClickTaskId(task.id),
+                                            setShowSideBar(!showSideBar)
+                                        )}>details</div>
+                                    </td>
+                                    <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                                </tr>
+                            ))
+                            }
+                        </table >
+                    </div>
+                </div>
+                <div>
+                    {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+                </div>
+            </div >
+            {showForm && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <TaskForm setShowModal={setShowModal} />
+                </Modal>
+            )}
         </>
     ) : null
 }

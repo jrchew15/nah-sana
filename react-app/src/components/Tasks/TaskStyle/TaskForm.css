@@ -1,12 +1,12 @@
-.form-container {
+.task-form-container {
     display: flex;
-    width: 100%;
+    width: 500px;
     height: 100%;
     padding: 15px;
     border-radius: 8px;
 }
 
-.task-form {
+#task-form {
     display: flex;
     padding: 30px;
 }
@@ -39,4 +39,10 @@ input#form-input {
 
 .form-button {
     margin-top: 50px;
+    background-color: #4573d2;
+    color: whitesmoke;
+    border-radius: 7px;
+    border: none;
+    padding: 7px;
+    cursor: pointer;
 }

@@ -1,6 +1,14 @@
+.task-detail-container {
+    border-left: solid 1px gray;
+}
+
+.add-task-button:hover {
+    background-color: rgba(128, 128, 128, 0.559);
+    cursor: pointer;
+}
+
 .closebtn {
     position: absolute;
-    top: 0;
     right: 0;
     font-size: 36px;
     margin-left: 50px;
@@ -53,4 +61,15 @@ td {
     color: rgb(146, 145, 145);
     padding-right: 5%;
     margin-right: 20%;
+}
+
+.button {
+    background-color: transparent;
+    border: #424244 2px solid;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 4px;
+    margin-top: 3em;
+    /* margin: 5px; */
+    cursor: pointer;
 }

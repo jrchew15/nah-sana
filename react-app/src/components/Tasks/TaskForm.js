@@ -6,9 +6,10 @@ import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
 
-const TaskForm = ({ taskId }) => {
+const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId, setTaskDetail }) => {
     const dispatch = useDispatch();
-
+    const { users, projects } = useSelector((state) => state.workspace)
+    // console.log('**************taskform', plainForm)
     // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
     const [task, setTask] = useState(null)
@@ -17,15 +18,16 @@ const TaskForm = ({ taskId }) => {
     const [dueDate, setDueDate] = useState(null);
     const [description, setDescription] = useState('');
     const [complete, setComplete] = useState(false);
-    const [userId, setUserId] = useState(0);
-    const [projectId, setProjectId] = useState(0);
-    const [showForm, setShowForm] = useState(true)
+    const [userId, setUserId] = useState(passedUserId || 0);
+    const [projectId, setProjectId] = useState(passedProjectId || 0);
+    const [errors, setErrors] = useState([])
 
 
     useEffect(async () => {
+        // console.log('*********in use effct 1*******', taskId)
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
-
+            // console.log('*********in use effct 2*******', foundTask)
             let inputDate;
             foundTask.dueDate ?
                 inputDate = new Date(foundTask.dueDate).toJSON().split("T")[0] : inputDate = ''
@@ -49,21 +51,41 @@ const TaskForm = ({ taskId }) => {
             projectId,
             complete
         }
+        let data
         if (!task) {
-            const data = await dispatch(createOneTask(formData))
+            data = await dispatch(createOneTask(formData))
         } else {
             formData.id = taskId;
-            const data = await dispatch(updateOneTask(formData))
+            data = await dispatch(updateOneTask(formData))
         }
+        if (data) {
+            setErrors(data)
+            return
+        }
+        setShowModal(false)
+        if (setTaskDetail) setTaskDetail(false)
     }
 
     return (
         <>
-            {showForm && (
-                <div className='form-container'>
+            {(
+                <div className='task-form-container'>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
-                        <h2>My Task</h2>
                         <form onSubmit={handleSubmit}>
+                            <div id='task-complete' className='task-complete'
+                                style={{ backgroundColor: complete.toString() === 'false' ? 'gray' : 'olive' }}
+                                onClick={() => (
+                                    setComplete(!complete)
+                                )}>
+                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
+                            </div>
+                            <h2>My Task</h2>
+                            {errors.length > 0 && <div className='form-row'>
+                                {errors.map((error, ind) => (
+                                    <div key={ind}>{error}</div>
+                                ))}
+                            </div>}
                             <div className='form-row'>
                                 <label htmlFor='name' id='form-label'>Name</label>
                                 <input id='form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
@@ -72,29 +94,38 @@ const TaskForm = ({ taskId }) => {
                                 <label htmlFor='dueDate' id='form-label'>Due Date</label>
                                 <input id='form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
                             </div>
-                            {/* User Id will eventually be chosen from workspace users dropdown */}
                             <div className='form-row'>
                                 <label htmlFor='userId' id='form-label'>User Id</label>
-                                <input id='form-input' type='number' name='userId' onChange={e => setUserId(e.target.value)} value={userId} />
+                                <select name='userId' onChange={e => setUserId(e.target.value)} value={userId}>
+                                    <option disabled value=''>Choose a user</option>
+                                    {
+                                        Object.values(users).map(user => (
+                                            <option value={user.id}>{user.firstName} {user.lastName}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
-                            {/* project Id will eventually be chosen from workspace projects dropdown */}
                             <div className='form-row'>
                                 <label htmlFor='projectId' id='form-label'>Project Id</label>
-                                <input id='form-input' type='number' name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} />
+                                <select name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId}>
+                                    <option disabled value=''>Choose a project</option>
+                                    {
+                                        projects.map(project => (
+                                            <option value={project.id}>{project.name}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
                             <div className='form-row'>
                                 <label htmlFor='description' id='form-label'>Description</label>
-                                <input id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
+                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
                             </div>
-                            <div className='form-row'>
-                                <label htmlFor='complete' id='form-label'>Complete</label>
-                                <input id='form-input' type='checkbox' name='complete' onChange={e => setComplete(compl => !compl)} checked={complete} />
-                            </div>
-                            <button id='form-button' type='submit' onClick={() => { setShowForm(false) }}>Submit</button>
+                            <button id='task-form-button' type='submit'>Submit</button>
                         </form >
                     </div>
                 </div >
-            )}
+            )
+            }
         </>
     )
 }
