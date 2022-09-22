@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import Topbar from "./Navbars/Topbar";
@@ -9,6 +9,7 @@ import { oneWorkspace } from "../store/workspace";
 import AllWorkSpaces from "./Workspace-test-reducer/AllWorkspaces";
 import LeftNavBar from "./Navbars/LeftNavBar";
 import UserProfilePage from "./UserProfilePage";
+import { DropdownHandlingContext } from "../context/DropdownHandlingContext";
 
 
 export default function Workspace() {
@@ -18,23 +19,9 @@ export default function Workspace() {
     const workspaceId = match.params.id;
     const user = useSelector(state => state.session.user);
 
-    const [userDropdownOpen, setUserDropdownOpen] = useState(false)
-    const profileDropdownRef = useRef(null);
-
-    const [createDropdownOpen, setCreateDropdownOpen] = useState(false)
-    const createDropdownRef = useRef(null);
-
-    const [workspaceCreateDropdownOpen, setWorkspaceCreateDropdownOpen] = useState(false)
-    const workspaceCreateDropdownRef = useRef(null);
-
     const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
 
     const [navDisplay, setNavDisplay] = useState(true)
-
-    // this will be updated with a fetch containing all info
-    // in the future, we may instead use useSelectors on all slices of state
-    //    which are filled when fetch hydrates state
-    // const [workspace, setWorkspace] = useState(null)
 
     useEffect(() => {
         dispatch(oneWorkspace(workspaceId))
@@ -45,33 +32,16 @@ export default function Workspace() {
         setNavDisplay(state => !state)
     }
 
-    function dropdownChecks(e) {
-        if (profileDropdownRef && userDropdownOpen) {
-            if (e.target !== profileDropdownRef.current) {
-                setUserDropdownOpen(false)
-            }
-        }
-        if (createDropdownOpen && createDropdownRef) {
-            if (e.target !== createDropdownRef.current) {
-                setCreateDropdownOpen(false)
-            }
-        }
-        if (workspaceCreateDropdownOpen && workspaceCreateDropdownRef) {
-            if (e.target !== workspaceCreateDropdownRef.current) {
-                setWorkspaceCreateDropdownOpen(false)
-            }
-        }
-    }
+    const context = useContext(DropdownHandlingContext);
+    console.log(context)
+    const { dropdownChecks } = context;
 
     return workspaceLoaded && user ? (
         <>
-            <Topbar toggleNavbarDisplay={toggleNavbarDisplay} profileDropdownRef={profileDropdownRef} userDropdownOpen={userDropdownOpen} setUserDropdownOpen={setUserDropdownOpen} dropdownChecks={dropdownChecks} />
+            <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
             <div id='navbar-and-content' onClick={dropdownChecks}>
                 <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}>
-                    <LeftNavBar
-                        workspaceCreateDropdownRef={workspaceCreateDropdownRef} workspaceCreateDropdownOpen={workspaceCreateDropdownOpen} setWorkspaceCreateDropdownOpen={setWorkspaceCreateDropdownOpen}
-                        createDropdownRef={createDropdownRef} createDropdownOpen={createDropdownOpen} setCreateDropdownOpen={setCreateDropdownOpen}
-                    />
+                    <LeftNavBar />
                 </div>
                 <div id='content'>
                     <Switch>
