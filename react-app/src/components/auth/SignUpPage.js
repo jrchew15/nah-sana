@@ -109,16 +109,6 @@ const SignUpPage = () => {
                 placeholder='Role (Optional)'
               ></input>
             </div>
-            {/* <div className="signupOuterInput">
-              <input
-                type='text'
-                name='image'
-                onChange={(e) => setImage(e.target.value)}
-                value={image}
-                id="signupInput"
-                placeholder='Image'
-              ></input>
-            </div> */}
             <div className="signupOuterInput">
               <input
                 type='text'
