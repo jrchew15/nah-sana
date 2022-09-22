@@ -20,7 +20,7 @@ const TasksListByProject = ({ projectId }) => {
 
     const tasks = useSelector((state) => state.tasks)
     const tasksArr = Object.values(tasks)
-    console.log(tasks)
+    // console.log(tasks)
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
