@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch, Redirect, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
 import TaskDetail from './components/Tasks/TaskDetail';
 import { DropdownHandlingProvider } from './context/DropdownHandlingContext';
@@ -63,19 +60,6 @@ export default function App() {
         <Route exact path='/signup'>
           <SignUpPage />
         </Route>
-        {/* <Route path='/workspaces'>
-          <AllWorkSpaces />
-        </Route> */}
-        {/*
-          <CreateWorkspace />
-        <Route exact path='/projects/:id'>
-          <ProjectDetail />
-        </Route>
-        <Route exact path='/projects'>
-          <GetProjects />
-          <CreateProjectModal />
-          <EditUserFormModal />
-        </Route> */}
         <Route exact path='/tasks/:taskId/edit'>
           <TaskDetail />
         </Route>
