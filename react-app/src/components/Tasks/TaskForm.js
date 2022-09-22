@@ -79,7 +79,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             {(
                 <div className='task-form-container' style={{ borderLeft: plainForm ? 'solid 1px gray' : 'none' }}>
                     <a href="javascript:void(0)" className="closebtn"
-                        style={{ display: plainForm ? 'block' : 'none' }}
+                        style={{ display: plainForm ? 'block' : 'none', marginRight: '35px' }}
                         onClick={() => { setShowTaskDetail(false) }}>&times;</a>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
                         <form onSubmit={handleSubmit}>

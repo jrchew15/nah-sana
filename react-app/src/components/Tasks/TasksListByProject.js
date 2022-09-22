@@ -58,14 +58,18 @@ const TasksListByProject = ({ projectId }) => {
                                 {tasksArr.map((task) => (
 
                                     <tr key={task.id} className="table-row">
-                                        <td className="table-cell" id='task-name'>
-                                            <div>
-                                                <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
-                                            <div id='button' onClick={() => (
+                                        <td className="table-cell" id='task-name'
+                                            onClick={() => (
                                                 setShowTaskDetail(!showTaskDetail),
                                                 setOnClickTaskId(task.id),
                                                 setShowSideBar(!showSideBar)
-                                            )}>details</div>
+                                            )}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <div>
+
+                                                <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
+                                            {/* <div id='button' >details</div> */}
                                         </td>
                                         <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
                                     </tr>

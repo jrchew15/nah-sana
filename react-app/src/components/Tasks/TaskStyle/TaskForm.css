@@ -9,6 +9,7 @@
 #task-form {
     display: flex;
     padding: 30px;
+    justify-content: center;
 }
 
 .form-row {
