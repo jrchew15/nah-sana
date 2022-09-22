@@ -70,7 +70,7 @@ export default function Topbar({ toggleNavbarDisplay }) {
                 <div className="horizontal-separator" />
 
                 <div id="user-links">
-                    <NavLink to={`/workspaces/${currentWorkspace.id}/user/${currentUser.id}/lists`}>My Profile</NavLink>
+                    <NavLink to={`/workspaces/${currentWorkspace.id}/user/${currentUser.id}/list`}>My Profile</NavLink>
                     <EditUserFormModal toggleUserDropdown={toggleUserDropdown} />
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
