@@ -33,7 +33,7 @@ export default function Workspace() {
     }
 
     const context = useContext(DropdownHandlingContext);
-    console.log(context)
+    // console.log(context)
     const { dropdownChecks } = context;
 
     return workspaceLoaded && user ? (
