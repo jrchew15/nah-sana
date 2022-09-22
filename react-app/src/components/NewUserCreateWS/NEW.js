@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { workspaceCreate } from "../../../store/workspace";
-import './createWS.css'
-import { authenticate } from "../../../store/session";
+import { workspaceCreate } from "../../store/workspace";
+import './NEW.css'
+import { authenticate } from "../../store/session";
 
-const CreateWorkspace = ({ setShowModal }) => {
+const NewUserWorkspace = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
     const [name, setName] = useState('')
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
-
-    const currentUser = useSelector(state => state.session.user);
-    let workspaceArr = currentUser.workspaces
+    const [changeB, setChangeB] = useState('project-select-class')
 
 
     useEffect(() => {
 
         const errors = []
         if (!name.length) errors.push('error: Workspace name is required')
-        workspaceArr.filter(wkspace => {
-            if (name.toLowerCase() === wkspace.name.toLowerCase()) {
-                errors.push('error: Workspace name already exists')
-            }
-        })
+        if (name.length > 0) {
+            setChangeB('test')
+        }
+        if (name.length === 0) {
+            setChangeB('project-submit-button')
+        }
         setValidationErrors(errors)
     }, [name])
 
@@ -42,31 +41,36 @@ const CreateWorkspace = ({ setShowModal }) => {
                 await dispatch(authenticate())
                 history.push(`/workspaces/${newWorkspace.id}`)
 
-                setShowModal(false)
 
             }
         }
     }
     return (
         <>
-            <div className="form-container">
-                <div className="top-create-form">
-                    <h2 className="create-title">Create Your Workspace</h2>
-                    <button className="create-button" onClick={() => setShowModal(false)}>X</button>
+            <div className="user-form-container">
+                <div className="user-top-create-form">
+                    <h2 className="user-newuser-title">Create Your  First Workspace</h2>
                 </div>
                 <div>
-
                     {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
                         {validationErrors.map((error, ind) => (
                             <div key={ind} className='errorText'>{error.split(":")[1]}</div>
                         ))}
-                    </div>)}
+                    </div>
+                    )}
+                    <div className="word-div-intro">
+                        <h3 className="user-intro">Welcome to Nah-sana!</h3>
+                        <p className="user-intro">Welcome to Nah-sana! Where planning your next project is as easy as clicking a buttton.
+                            To continue please create your very first Workspace. Once created you will be able to create projects, assign tasks,
+                            and add collaborators. </p>
+
+                    </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="label-container-create">
-                            <label className="workspace-label">
+                        <div className="user-label-container-create">
+                            <label className="user-workspace-label">
                                 Workspace Name
                                 <input
-                                    className="workspace-input"
+                                    className="user-workspace-input"
                                     maxLength={41}
                                     type='text'
                                     placeholder="Company or Team Name"
@@ -75,8 +79,8 @@ const CreateWorkspace = ({ setShowModal }) => {
                                 />
                             </label>
                         </div>
-                        <div className="button-container-create">
-                            <button className='submit-create-workspace' type="submit" >Create Workspace</button>
+                        <div className="user-button-container-create">
+                            <button className={changeB} type="submit" >Create Workspace</button>
                         </div>
                     </form>
                 </div>
@@ -85,4 +89,4 @@ const CreateWorkspace = ({ setShowModal }) => {
     )
 
 }
-export default CreateWorkspace
+export default NewUserWorkspace

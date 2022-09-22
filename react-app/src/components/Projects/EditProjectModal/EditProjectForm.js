@@ -20,6 +20,8 @@ const EditProjectForm = ({ project, setShowModal }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const projects = useSelector(state => state.workspace.projects)
   const projectsArray = Object.values(projects)
+  const originalName = project.name
+
   useEffect(() => {
     const error = []
 
@@ -30,12 +32,12 @@ const EditProjectForm = ({ project, setShowModal }) => {
       setButtonChange('project-submit-button')
     }
     projectsArray.filter(project => {
-      if (project.name.toLowerCase() === name.toLowerCase()) {
+      if (project.name.toLowerCase() === name.toLowerCase() && name !== originalName) {
         error.push('Error: Project with that name already exists')
       }
     })
     setErrors(error)
-  }, [name])
+  }, [name, dueDate])
 
   const icon = project.icon
 
@@ -76,58 +78,61 @@ const EditProjectForm = ({ project, setShowModal }) => {
               <div key={ind} className='errorText'>{error.split(":")[1]}</div>
             ))}
           </div>)}
-          <div className='project-input-container'>
-            <label className='project-input-label'>Project Name</label>
-            <input
-              maxLength={25}
-              type='text'
-              name='name'
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            ></input>
-          </div>
-          <div className='project-input-container'>
-            <label className='project-input-label'>Status</label>
-            <select
-              className='project-select-class'
-              name='status'
-              onChange={(e) => setStatus(e.target.value)}
-              value={status}>
-              <option className='project-option' value="On Track">
-                On Track
-              </option>
-              <option value="At Risk">
-                At Risk
-              </option>
-              <option value="Off Track">
-                Off Track
-              </option>
-              <option value="On Hold">
-                On Hold
-              </option>
-              <option value="Complete">
-                Complete
-              </option>
-            </select>
-          </div>
-          <div className='project-input-container'>
-            <label className='project-input-label'>Due Date</label>
-            <input
-              type='date'
-              name='dueDate'
-              onChange={(e) => setDueDate(e.target.value)}
-              value={dueDate}
-            ></input>
-          </div>
-          <div className='project-input-container'>
-            <label className='project-input-label'>Description</label>
-            <textarea
-              className='text-area-style'
-              type='text'
-              name='description'
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-            ></textarea>
+          <div className='form-container-pull-down'>
+
+            <div className='project-input-container'>
+              <label className='project-input-label'>Project Name</label>
+              <input
+                maxLength={25}
+                type='text'
+                name='name'
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              ></input>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Status</label>
+              <select
+                className='project-select-class'
+                name='status'
+                onChange={(e) => setStatus(e.target.value)}
+                value={status}>
+                <option className='project-option' value="On Track">
+                  On Track
+                </option>
+                <option value="At Risk">
+                  At Risk
+                </option>
+                <option value="Off Track">
+                  Off Track
+                </option>
+                <option value="On Hold">
+                  On Hold
+                </option>
+                <option value="Complete">
+                  Complete
+                </option>
+              </select>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Due Date</label>
+              <input
+                type='date'
+                name='dueDate'
+                onChange={(e) => setDueDate(e.target.value)}
+                value={dueDate}
+              ></input>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Description</label>
+              <textarea
+                className='text-area-style'
+                type='text'
+                name='description'
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              ></textarea>
+            </div>
           </div>
           <div className='project-input-container move-button-down'>
             <button className={`${buttonChange}`} type='submit'>Submit</button>
