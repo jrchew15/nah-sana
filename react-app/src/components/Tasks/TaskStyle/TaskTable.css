@@ -1,12 +1,12 @@
 .table {
-    width: 100%;
+    width: 100vw;
     border-collapse: collapse;
     border-style: hidden;
     /* padding: 10px; */
 }
 
 .table-onclick {
-    width: 50%;
+    width: 50vw;
     border-collapse: collapse;
     border-style: hidden;
     /* padding: 10px; */
