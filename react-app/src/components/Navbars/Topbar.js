@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouteMatch, NavLink, useHistory, useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useContext } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";
@@ -48,7 +48,8 @@ export default function Topbar({ toggleNavbarDisplay }) {
                         <a key={workspace.id}
                             href={`/workspaces/${workspace.id}`}
                             target='_blank'
-                            className={workspace.id == currentWorkspace.id ? 'active' : ''}>
+                            rel='noreferrer'
+                            className={+workspace.id === +currentWorkspace.id ? 'active' : ''}>
                             {workspace.name}
                         </a>
                     ))}
