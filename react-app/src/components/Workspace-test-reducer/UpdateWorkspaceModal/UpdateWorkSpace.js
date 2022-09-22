@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { workspaceUpdate } from "../../../store/workspace"
 import { useHistory, useParams } from "react-router-dom";
+import { authenticate } from "../../../store/session";
 
 
 
@@ -21,10 +22,10 @@ const UpdateWorkspace = ({ setShowModal }) => {
     useEffect(() => {
 
         const errors = []
-        if (!name.length) errors.push('Workspace name is required')
+        if (!name.length) errors.push('error: Workspace name already exists')
         workspaceArr.filter(wkspace => {
-            if (name === wkspace.name) {
-                errors.push(['Workspace name already exists'])
+            if (name.toLowerCase() === wkspace.name.toLowerCase()) {
+                errors.push('error: Workspace name already exists')
             }
         })
         setValidationErrors(errors)
@@ -38,7 +39,9 @@ const UpdateWorkspace = ({ setShowModal }) => {
             name
         }
         if (!validationErrors.length) {
-            dispatch(workspaceUpdate(workspace, id))
+            await dispatch(workspaceUpdate(workspace, id))
+            await dispatch(authenticate())
+
             setShowModal(false)
 
         }
@@ -51,8 +54,13 @@ const UpdateWorkspace = ({ setShowModal }) => {
                     <button className="create-button" onClick={() => setShowModal(false)}>X</button>
                 </div>
                 <div>
+                    {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
+                        {validationErrors.map((error, ind) => (
+                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                        ))}
+                    </div>)}
 
-                    {hasSubmitted && validationErrors.length > 0 && (
+                    {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
                                 {validationErrors.map(error => (
@@ -60,7 +68,7 @@ const UpdateWorkspace = ({ setShowModal }) => {
                                 ))}
                             </ul>
                         </div>
-                    )}
+                    )} */}
                     <form onSubmit={handleSubmit}>
                         <div className="label-container-create">
                             <label className="workspace-label">

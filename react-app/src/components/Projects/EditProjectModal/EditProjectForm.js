@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { updateAProject } from '../../../store/projects';
 
-const EditProjectForm = ({ project }) => {
+const EditProjectForm = ({ project, setShowModal }) => {
 
   let inputDate = ''
   if (project.dueDate) {
@@ -15,6 +15,17 @@ const EditProjectForm = ({ project }) => {
   const [status, setStatus] = useState(project.status || '')
   const [dueDate, setDueDate] = useState(inputDate)
   const [description, setDescription] = useState(project.description || '')
+  const [buttonChange, setButtonChange] = useState('project-submit-button')
+  useEffect(() => {
+
+    if (name.length > 0) {
+      setButtonChange('test')
+    }
+    if (name.length === 0) {
+      setButtonChange('project-submit-button')
+    }
+  }, [name])
+
   const icon = project.icon
   let ownerId = user.id
   let workspaceId = project.workspaceId
@@ -22,7 +33,7 @@ const EditProjectForm = ({ project }) => {
   const dispatch = useDispatch();
   const editProject = async (e) => {
     e.preventDefault();
-    if (dueDate === ''){
+    if (dueDate === '') {
       setDueDate()
     }
 
@@ -35,64 +46,77 @@ const EditProjectForm = ({ project }) => {
   };
 
   return (
-    <form onSubmit={editProject}>
-      {errors.length > 0 && (<div >
-        {errors.map((error, ind) => (
-          <div key={ind}>{error.split(":")[1]}</div>
-        ))}
-      </div>)}
-      <div>
-        <label>Name</label>
-        <input
-          type='text'
-          name='name'
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        ></input>
+    <>
+      <div className='project-create-form-container'>
+        <div className='project-top-container'>
+          <h2>Edit Project</h2>
+          <button className="create-button" onClick={() => setShowModal(false)}>X</button>
+        </div>
+        <form onSubmit={editProject}>
+          {errors.length > 0 && (<div className='errorContainer project-errors'>
+            {errors.map((error, ind) => (
+              <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+            ))}
+          </div>)}
+          <div className='project-input-container'>
+            <label className='project-input-label'>Project Name</label>
+            <input
+
+              type='text'
+              name='name'
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            ></input>
+          </div>
+          <div className='project-input-container'>
+            <label className='project-input-label'>Status</label>
+            <select
+              className='project-select-class'
+              name='status'
+              onChange={(e) => setStatus(e.target.value)}
+              value={status}>
+              <option className='project-option' value="On Track">
+                On Track
+              </option>
+              <option value="At Risk">
+                At Risk
+              </option>
+              <option value="Off Track">
+                Off Track
+              </option>
+              <option value="On Hold">
+                On Hold
+              </option>
+              <option value="Complete">
+                Complete
+              </option>
+            </select>
+          </div>
+          <div className='project-input-container'>
+            <label className='project-input-label'>Due Date</label>
+            <input
+              type='date'
+              name='dueDate'
+              onChange={(e) => setDueDate(e.target.value)}
+              value={dueDate}
+            ></input>
+          </div>
+          <div className='project-input-container'>
+            <label className='project-input-label'>Description</label>
+            <textarea
+              className='text-area-style'
+              type='text'
+              name='description'
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            ></textarea>
+          </div>
+          <div className='project-input-container move-button-down'>
+            <button className={`${buttonChange}`} type='submit'>Submit</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Status</label>
-        <select
-          name='status'
-          onChange={(e) => setStatus(e.target.value)}
-          value={status}>
-          <option value="On Track">
-            On Track
-          </option>
-          <option value="At Risk">
-            At Risk
-          </option>
-          <option value="Off Track">
-            Off Track
-          </option>
-          <option value="On Hold">
-            On Hold
-          </option>
-          <option value="Complete">
-            Complete
-          </option>
-        </select>
-      </div>
-      <div>
-        <label>Due Date</label>
-        <input
-          type='date'
-          name='dueDate'
-          onChange={(e) => setDueDate(e.target.value)}
-          value={dueDate}
-        ></input>
-      </div>
-      <div>
-        <label>Description</label>
-        <textarea
-          type='text'
-          name='description'
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-        ></textarea>
-      </div>
-      <button type='submit'>Submit</button>
-    </form>
+    </>
   );
 };
 
