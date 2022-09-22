@@ -109,7 +109,7 @@ export const deleteOneTask = taskId => async dispatch => {
         headers: { 'Content-Type': 'application/json' }
     })
     if (response.ok) {
-        const task = await response.json()
+        // const task = await response.json()
         dispatch(remove(taskId))
     }
 };

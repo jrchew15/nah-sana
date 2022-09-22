@@ -134,3 +134,30 @@
     width: 22px;
     font-size: 0.8rem;
 }
+
+#left-nav-bar .acknowledgements>span {
+    cursor: unset;
+}
+
+#left-nav-bar .acknowledgements>span:hover,
+#left-nav-bar .acknowledgements a:hover {
+    background-color: unset;
+}
+
+#left-nav-bar .acknowledgements a {
+    padding: 0 2px 0 2px;
+    min-width: 48px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#left-nav-bar a.acknowledgements:hover {
+    background-color: unset;
+    color: #ff6666;
+    font-weight: bolder;
+}
+
+#left-nav-bar .acknowledgements img {
+    height: 35px;
+}

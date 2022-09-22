@@ -25,7 +25,7 @@ export default function Workspace() {
     useEffect(() => {
         dispatch(oneWorkspace(workspaceId))
         setWorkspaceLoaded(true)
-    }, [dispatch, workspaceId])
+    }, [dispatch, workspaceId, oneWorkspace, setWorkspaceLoaded])
 
     function toggleNavbarDisplay() {
         setNavDisplay(state => !state)

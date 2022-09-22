@@ -8,7 +8,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-
 }
 
 #modal-background {
@@ -63,6 +62,14 @@ textarea:focus {
 .user-settings-field {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#modal-content .user-settings-field input,
+#modal-content .user-settings-field textarea {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #save-user-changes {

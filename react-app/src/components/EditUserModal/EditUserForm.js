@@ -14,8 +14,9 @@ const EditUserForm = () => {
 
   const gridStyles = {
     display: 'grid',
-    gridColumnTemplate: '50px 50px',
-    gap: '15px'
+    gridColumnTemplate: '200px 200px',
+    gap: '15px',
+    padding: '6px 24px 24px 24px'
   }
 
   const dispatch = useDispatch();
@@ -33,11 +34,12 @@ const EditUserForm = () => {
     <form onSubmit={onUpdateProfile} style={gridStyles}>
       <h3 style={{ gridColumn: '1 / 3' }}>My Settings</h3>
       <div style={{ gridColumn: '1 / 3' }} className="horizontal-separator" />
-      {errors.length > 0 && (<div style={{ gridColumn: '1 / 3' }}>
+      {errors.length > 0 && (<div style={{ gridColumn: '1 / 3' }} className='errorContainer'>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind} className='errorText'>{error}</div>
         ))}
-      </div>)}
+      </div>)
+      }
       <div className="user-settings-field">
         <label>First Name</label>
         <input
@@ -90,14 +92,15 @@ const EditUserForm = () => {
           name='bio'
           onChange={(e) => setBio(e.target.value)}
           value={bio}
+          style={{ resize: 'none', height: '100px' }}
         ></textarea>
       </div>
-      <div style={{ gridRow: '7', gridColumn: '2', display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ gridRow: '7', gridColumn: '2', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
         <button type='submit' id="save-user-changes" >
           Save Changes
         </button>
       </div>
-    </form>
+    </form >
   );
 };
 
