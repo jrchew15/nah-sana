@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { createOneTask, updateOneTask } from '../../store/tasks';
+import { createOneTask, updateOneTask, deleteOneTask } from '../../store/tasks';
 import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
@@ -70,11 +70,15 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         <>
             {(
                 <div className='task-form-container' style={{ borderLeft: plainForm ? 'solid 1px gray' : 'none' }}>
-                    <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowTaskDetail(false) }}>&times;</a>
+                    <a href="javascript:void(0)" className="closebtn"
+                        style={{ display: plainForm ? 'block' : 'none' }}
+                        onClick={() => { setShowTaskDetail(false) }}>&times;</a>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
                         <form onSubmit={handleSubmit}>
                             <div id='task-complete' className='task-complete'
-                                style={{ backgroundColor: complete.toString() === 'false' ? 'gray' : 'olive' }}
+                                style={{
+                                    backgroundColor: complete.toString() === 'false' ? 'gray' : 'olive', cursor: 'pointer'
+                                }}
                                 onClick={() => (
                                     setComplete(!complete)
                                 )}>
@@ -96,8 +100,8 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 <input id='form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
                             </div>
                             <div className='form-row'>
-                                <label htmlFor='userId' id='form-label'>User Id</label>
-                                <select name='userId' onChange={e => setUserId(e.target.value)} value={userId}>
+                                <label htmlFor='userId' id='form-label'>Assignee</label>
+                                <select name='userId' onChange={e => setUserId(e.target.value)} value={userId} style={{ background: 'none', color: 'whitesmoke' }}>
                                     <option disabled value=''>Choose a user</option>
                                     {
                                         Object.values(users).map(user => (
@@ -107,8 +111,8 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 </select>
                             </div>
                             <div className='form-row'>
-                                <label htmlFor='projectId' id='form-label'>Project Id</label>
-                                <select name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId}>
+                                <label htmlFor='projectId' id='form-label'>Project</label>
+                                <select name='projectId' onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
                                     <option disabled value=''>Choose a project</option>
                                     {
                                         projects.map(project => (
@@ -118,10 +122,22 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 </select>
                             </div>
                             <div className='form-row'>
-                                <label htmlFor='description' id='form-label'>Description</label>
-                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} />
+                                <label htmlFor='description' id='form-label' >Description</label>
+                                <textarea id='form-input' type='text' name='description' onChange={e => setDescription(e.target.value)} value={description} style={{ background: 'none', color: 'whitesmoke' }} />
                             </div>
-                            <button id='task-form-button' type='submit'>Submit</button>
+                            <div style={{ display: 'flex', padding: '30px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                    <button id='task-form-button' type='submit'
+                                    // style={{ marginRight: '10px', color: 'whitesmoke', background: 'none' }}
+                                    >Submit</button>
+                                    <button id='task-form-button'
+                                        onClick={async () => {
+                                            await dispatch(deleteOneTask(taskId))
+                                            if (!plainForm) setShowModal(false)
+                                            if (plainForm) setShowTaskDetail(false)
+                                        }}>Delete</button>
+                                </div>
+                            </div>
                         </form >
                     </div>
                 </div >

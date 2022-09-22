@@ -43,7 +43,7 @@ const TasksListByProject = ({ projectId }) => {
                     <div>
                         <div className='add-task-button'
                             style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
-                            onClick={() => { setShowForm(true) }}>
+                            onClick={() => { setShowTaskDetail(true) }}>
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
                         <table className={showTaskDetail ? "table-onclick" : "table"}>
