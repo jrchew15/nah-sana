@@ -144,7 +144,6 @@
 
 .user-name-link {
     color: whitesmoke;
-    text-decoration-line: none;
 }
 
 .nav-to-users {
@@ -161,7 +160,6 @@
     border-radius: 5px;
     padding: 4px;
     margin-top: 3em;
-    /* margin: 5px; */
     cursor: pointer;
 }
 
