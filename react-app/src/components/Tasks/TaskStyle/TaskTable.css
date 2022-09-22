@@ -1,19 +1,21 @@
+.task-section {
+    width: calc(100vw - var(--navbar-width))
+}
+
 .table-outer-container {
     width: 100%;
 }
 
 .table {
-    width: 100%;
+    width: 100vw;
     border-collapse: collapse;
     border-style: hidden;
-    border: solid 3px blue
 }
 
 .table-onclick {
     width: 50vw;
     border-collapse: collapse;
     border-style: hidden;
-    border: solid 3px red;
 }
 
 .table-row,

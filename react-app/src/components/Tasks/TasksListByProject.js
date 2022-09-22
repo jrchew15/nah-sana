@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import TaskForm from "./TaskForm";
 
-// import './TaskStyle/TaskDetail.css'
+import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
 
@@ -29,7 +29,7 @@ const TasksListByProject = ({ projectId }) => {
 
     return isLoaded ? (
         <>
-            <div className="task-section" style={{ display: 'flex' }}>
+            <div style={{ display: 'flex' }}>
                 <div style={{ display: 'flex' }} className="table-outer-container">
                     <div className="table-outer-container">
                         <div className='add-task-button'
@@ -40,7 +40,7 @@ const TasksListByProject = ({ projectId }) => {
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
                         {tasksArr && (
-                            <table className={showTaskDetail ? 'table-onclick' : 'table'}>
+                            <table className={showTaskDetail ? "table-onclick" : "table"}>
                                 <tbody>
                                     <tr className="table-row">
                                         <th className="table-head">Task Name</th>
