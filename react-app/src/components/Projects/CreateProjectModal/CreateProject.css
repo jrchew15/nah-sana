@@ -12,10 +12,24 @@
     padding-left: 16px;
 }
 
+.form-container-pull-down {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container-inside {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
 .project-input-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    /* padding-top: 5sem; */
+
     /* width: 95%; */
 }
 
@@ -25,14 +39,16 @@
     padding-bottom: 10px;
 }
 
-.text-area-style {}
-
 .project-submit-button {
     color: #a2a0a2;
     background-color: transparent;
     border: #424244 1px solid;
     height: 2.5em;
     border-radius: 5px;
+}
+
+.move-button-down {
+    padding-top: 2.5em;
 }
 
 .test {
@@ -58,4 +74,8 @@
 .project-option {
     color: whitesmoke;
     background-color: #424244;
+}
+
+.project-errors {
+    padding-top: 10px;
 }

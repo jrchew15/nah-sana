@@ -42,18 +42,5 @@
 .fa-check-circle-o {
     width: 12px;
     height: 12px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
-
-.fa-check-circle-o:hover {
-    background-color: rgb(11, 202, 11);
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-
-}
-
-
-/* .task-flex:hover {
-    background-color: #dbdbdb;
-} */

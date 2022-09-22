@@ -19,7 +19,6 @@
 
 body {
     margin: 0px;
-    overflow: hidden;
     font-weight: 400;
     width: 100vw;
     height: 100vh;
@@ -33,9 +32,6 @@ body {
     height: 100%;
 }
 
-#navbar {
-    background-color: var(--bkg-color-grey);
-}
 
 
 #navbar-and-content {
@@ -59,8 +55,11 @@ body {
 
 #navbar {
     min-width: var(--navbar-width);
+    width: var(--navbar-width);
+    max-width: var(--navbar-width);
     height: 100%;
     position: relative;
+    background-color: #2e2e30;
 }
 
 div.horizontal-separator {
@@ -75,6 +74,8 @@ div.horizontal-separator {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0;
+    margin: 0;
 }
 
 .errorText {
@@ -92,3 +93,11 @@ div.horizontal-separator {
     user-select: none;
 }
 
+option {
+    background-color: var(--bkg-color-black);
+}
+
+.add-user-error {
+    text-align: center;
+
+}

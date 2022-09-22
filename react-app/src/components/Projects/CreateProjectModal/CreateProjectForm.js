@@ -1,39 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { createAProject } from '../../../store/projects';
+import { oneWorkspace } from '../../../store/workspace';
 import './CreateProject.css'
 
 const CreateProjectForm = ({ setShowModal }) => {
   const user = useSelector(state => state.session.user);
+  const projects = useSelector(state => state.workspace.projects)
+  const projectsArray = Object.values(projects)
+  console.log(projects)
+  const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('')
   const [status, setStatus] = useState('On Track')
   const [dueDate, setDueDate] = useState()
   const [description, setDescription] = useState('')
-  const [test, setClass] = useState('project-submit-button')
+  const [buttonChange, setButtonChange] = useState('project-submit-button')
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
   let ownerId = user.id
   const { id } = useParams()
 
   const icon = `/static/images/icons/${Math.ceil(Math.random() * 5)}.png`
   useEffect(() => {
-
+    const error = []
     if (name.length > 0) {
-      setClass('test')
+      setButtonChange('test')
     }
     if (name.length === 0) {
-      setClass('project-submit-button')
+      setButtonChange('project-submit-button')
     }
-  }, [name])
+    projectsArray.filter(project => {
+      if (project.name.toLowerCase() === name.toLowerCase()) {
+        error.push('Error: Project with that name already exists')
+      }
+    })
+    setErrors(error)
+  }, [name, dueDate])
 
   let workspaceId = id
   const dispatch = useDispatch();
   const createProject = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
+
     let payload = { workspaceId, name, status, dueDate, description, icon, ownerId }
-    const data = await dispatch(createAProject(payload));
-    if (data) {
-      setErrors(data)
+    if (!errors.length) {
+      let data = await dispatch(createAProject(payload));
+      if (Array.isArray(data)) {
+        setErrors(data)
+      } else {
+        await history.push(`/workspaces/${workspaceId}/projects/${data.id}`)
+        await setShowModal(false)
+        await dispatch(oneWorkspace(id))
+      }
     }
   };
 
@@ -44,16 +65,15 @@ const CreateProjectForm = ({ setShowModal }) => {
         <button className="create-button" onClick={() => setShowModal(false)}>X</button>
       </div>
       <form onSubmit={createProject}>
-        {errors.length > 0 && (<div >
+        {hasSubmitted && errors.length > 0 && (<div className='errorContainer project-errors '>
           {errors.map((error, ind) => (
-            <div key={ind}>{error.split(":")[1]}</div>
+            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
           ))}
         </div>)}
-        {/* <div> */}
         <div className='project-input-container'>
           <label className='project-input-label'>Project Name</label>
           <input
-
+            maxLength={25}
             type='text'
             name='name'
             onChange={(e) => setName(e.target.value)}
@@ -103,8 +123,8 @@ const CreateProjectForm = ({ setShowModal }) => {
             value={description}
           ></textarea>
         </div>
-        <div className='project-input-container'>
-          <button className={`${test}`} type='submit'>Submit</button>
+        <div className='project-input-container move-button-down'>
+          <button className={`${buttonChange}`} type='submit'>Submit</button>
         </div>
       </form>
     </div>

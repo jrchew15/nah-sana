@@ -1,48 +1,66 @@
 .task-form-container {
+    width: 30em;
+    min-width: 15em;
+    height: 37em;
     display: flex;
-    width: 500px;
-    height: 100%;
-    padding: 15px;
-    border-radius: 8px;
+    flex-direction: column;
 }
 
-#task-form {
+.task-form-top-container {
     display: flex;
-    padding: 30px;
+    justify-content: space-between;
+    border-bottom: solid 1px #424244;
+    padding-left: 16px;
 }
 
-.form-row {
+.task-input-container {
     display: flex;
+    flex-direction: column;
     padding: 10px;
-    justify-content: space-around;
+    width: 82%;
 }
 
-.form-row>.form-label {
-    padding: .5em 1em .5em 0;
-    flex: 1;
+.task-form-label {
+    padding-bottom: 10px;
 }
 
-.form-row>.form-input {
-    justify-content: flex-start;
-    flex: 2;
+.task-input-label {
+    padding-bottom: 10px;
 }
 
-input#form-input {
-    background-color: #1e1f21;
-    border: 1px solid #424244;
-    color: #f5f4f3;
+.task-form-input {
+    background-color: var(--bkg-color-black);
+    color: var(--text-color);
+    overflow: auto;
+    flex-grow: 1;
+    height: 100%;
+    border: #a2a0a2 1px solid;
 }
 
-.form-input:focus {
-    border: solid 1px blue;
+.task-form-textarea {
+    background-color: var(--bkg-color-black);
+    color: var(--text-color);
+    overflow: auto;
+    flex-grow: 1;
+    height: 100%;
+    border: #a2a0a2 1px solid;
 }
 
-.form-button {
-    margin-top: 50px;
+.move-button-down {
+    padding-top: 2.5em;
+}
+
+.task-form-button {
     background-color: #4573d2;
     color: whitesmoke;
     border-radius: 7px;
     border: none;
     padding: 7px;
     cursor: pointer;
+    border: #424244 1px solid;
+    height: 2.5em;
+    border-radius: 6px;
+    margin-left: 5px;
+    width: 83%;
+    margin-bottom: 8px;
 }

@@ -113,10 +113,15 @@
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    /* overflow: visible;
-    overflow-x: hidden; */
-    /* overflow-y: scroll; */
+    justify-content: flex-start;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.user-list:hover {
+
+    overflow-x: visible;
 }
 
 /* .user-list:hover {
@@ -142,6 +147,18 @@
     /* border: #a2a0a2 1px solid; */
 }
 
+.user-name-link {
+    color: whitesmoke;
+}
+
+.nav-to-users {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 .delete-button {
     background-color: transparent;
     border: #424244 2px solid;
@@ -149,7 +166,6 @@
     border-radius: 5px;
     padding: 4px;
     margin-top: 3em;
-    /* margin: 5px; */
     cursor: pointer;
 }
 

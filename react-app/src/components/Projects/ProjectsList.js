@@ -6,11 +6,7 @@ import CreateProjectModal from './CreateProjectModal';
 
 function GetProjects({ workspaceId }) {
   const dispatch = useDispatch();
-
-
-
   const allProjects = useSelector(state => state.projects)
-
 
   let projectArr;
   let filtered;
@@ -19,7 +15,6 @@ function GetProjects({ workspaceId }) {
   }, [dispatch, filtered])
   if (allProjects) {
     projectArr = Object.values(allProjects)
-    console.log(projectArr)
     filtered = projectArr.filter(project => project?.workspaceId === Number(workspaceId))
   } else {
     return null
@@ -34,11 +29,10 @@ function GetProjects({ workspaceId }) {
           <div className='project-wrapper'>
             <CreateProjectModal />
 
-
             {filtered.map(project => {
               return (
                 <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
-                  <img src={project.icon} alt="icon" style={{ height: '3em', weight: '25px' }} />
+                  <img src={project.icon} alt="icon" style={{ height: '3.2em', weight: '25px' }} />
                   <div className='project-titles'>
                     {project.name}
                   </div>

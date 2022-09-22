@@ -1,11 +1,10 @@
 import { useParams, useHistory, NavLink, Route, Switch } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAProject, getAllProjects, getAProject } from '../../store/projects';
 import EditProjectModal from './EditProjectModal';
 import TasksListByProject from '../Tasks/TasksListByProject';
 import './Projects.css'
-import TaskDetail from '../Tasks/TaskDetail';
 
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
@@ -13,12 +12,32 @@ function ProjectDetail({ workspaceId }) {
   const { id } = useParams()
   const projectObj = useSelector(state => state.projects)
   const project = projectObj[id]
+  const [projectLoaded, setProjectLoaded] = useState(false)
+
 
   useEffect(() => {
     dispatch(getAProject(id))
   }, [dispatch, id])
 
-  if (!project) return null
+  useEffect(() => {
+    if (project) {
+      setProjectLoaded(true)
+    }
+  }, [project])
+
+  function redirect() {
+    setTimeout(() => { history.push(`/workspaces/${workspaceId}`) }, 1000)
+  }
+
+  if ((projectLoaded === false) && !project) return null
+  if ((projectLoaded === true) && (!project || Number(project.workspaceId) !== Number(workspaceId))) {
+    return (
+      <div>
+        <h1 className='projectDoesNotExist'>Project does not exist...redirecting</h1>
+        {redirect()}
+      </div>
+    )
+  }
 
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
@@ -27,7 +46,7 @@ function ProjectDetail({ workspaceId }) {
   }
 
   let dueDate;
-  project.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
+  project?.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
 
   function widgetColor() {
     if (project?.status === "At Risk") {
@@ -71,9 +90,11 @@ function ProjectDetail({ workspaceId }) {
         {
           project ? (
             <div className='projectDescriptionContainer'>
-              <h3>Project Description</h3>
-              <div className='projectDescriptionInner'>
-                {project.description}
+              <h3 className="projectHeader">Project Description</h3>
+              <div className="projectDescriptionTextContainer">
+                <p className='profileInfoText'>
+                  {project?.description ? project?.description : "No Description Provided"}
+                </p>
               </div>
             </div>
           ) : (
@@ -102,13 +123,13 @@ function ProjectDetail({ workspaceId }) {
   )
 
   let list = (
-    <TasksListByProject projectId={id} />
+    <div className='projectDetailTaskOuterContainer'>
+      <TasksListByProject projectId={id} />
+    </div>
   )
 
 
-
-
-  return (
+  return projectLoaded && project ? (
     <div className='innerContent'>
       <div className='projectNavBar'>
         <div className='projectNavBarIcon'>
@@ -151,6 +172,8 @@ function ProjectDetail({ workspaceId }) {
       </div>
 
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 export default ProjectDetail

@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getTaskById } from "../../store/tasks";
-import { useHistory } from 'react-router-dom';
+import { getTaskById, updateOneTask } from "../../store/tasks";
 import { deleteOneTask } from '../../store/tasks';
 import TaskForm from './TaskForm';
 import { Modal } from '../../context/Modal';
 import './TaskStyle/TaskDetail.css';
 
 const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
-    // const { taskId } = useParams()
     const dispatch = useDispatch()
     const tasks = useSelector((state) => state.tasks)
     const workspaceUsers = useSelector((state) => state.workspace.users)
@@ -20,10 +18,23 @@ const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
     const [showTaskDetail, setShowTaskDetail] = useState(true)
     const [showModal, setShowModal] = useState(false)
 
+
     useEffect(() => {
         dispatch(getTaskById(taskId))
     }, [dispatch])
 
+
+    const handleClick = async () => {
+        const response = await fetch(`/api/tasks/${taskId}`)
+        if (response.ok) {
+            setTaskComplete(!taskComplete)
+            const formData = await response.json()
+            const data = { ...formData }
+            data.complete = taskComplete
+            data.id = taskId
+            await dispatch(updateOneTask(data))
+        }
+    }
     if (!task) { return null }
     return (
         <>
@@ -32,10 +43,7 @@ const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
                     <a href="javascript:void(0)" className="closebtn" onClick={() => { setTaskDetail(false) }}>&times;</a>
                     <div id='task-complete' className='task-complete'
                         style={{ backgroundColor: taskComplete.toString() === 'false' ? 'gray' : 'olive' }}
-                        onClick={() => (
-                            setTaskComplete(!taskComplete)
-                            // handleSubmit()
-                        )}>
+                        onClick={handleClick}>
                         <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                         {taskComplete.toString() === 'false' ? "Mark Complete" : "Completed"}
                     </div>
@@ -74,11 +82,13 @@ const TaskDetail = ({ taskId, setShowTaskDetail: setTaskDetail }) => {
                 </div>
             )
             }
-            {showForm && showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <TaskForm taskId={taskId} setShowModal={setShowModal} setTaskDetail={setTaskDetail} userId={workspaceUsers[task.userId].id} projectId={Object.keys(project)[0]} />
-                </Modal>
-            )}
+            {
+                showForm && showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <TaskForm taskId={taskId} setShowModal={setShowModal} setTaskDetail={setTaskDetail} userId={workspaceUsers[task.userId].id} projectId={Object.keys(project)[0]} />
+                    </Modal>
+                )
+            }
         </>
     )
 }

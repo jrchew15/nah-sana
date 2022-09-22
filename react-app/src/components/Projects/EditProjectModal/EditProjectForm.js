@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { updateAProject } from '../../../store/projects';
-
-const EditProjectForm = ({ project }) => {
+import { oneWorkspace } from '../../../store/workspace';
+const EditProjectForm = ({ project, setShowModal }) => {
 
   let inputDate = ''
   if (project.dueDate) {
@@ -15,84 +15,131 @@ const EditProjectForm = ({ project }) => {
   const [status, setStatus] = useState(project.status || '')
   const [dueDate, setDueDate] = useState(inputDate)
   const [description, setDescription] = useState(project.description || '')
+  const [buttonChange, setButtonChange] = useState('project-submit-button')
+
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const projects = useSelector(state => state.workspace.projects)
+  const projectsArray = Object.values(projects)
+  const originalName = project.name
+
+  useEffect(() => {
+    const error = []
+
+    if (name.length > 0) {
+      setButtonChange('test')
+    }
+    if (name.length === 0) {
+      setButtonChange('project-submit-button')
+    }
+    projectsArray.filter(project => {
+      if (project.name.toLowerCase() === name.toLowerCase() && name !== originalName) {
+        error.push('Error: Project with that name already exists')
+      }
+    })
+    setErrors(error)
+  }, [name, dueDate])
+
   const icon = project.icon
+
   let ownerId = user.id
   let workspaceId = project.workspaceId
 
   const dispatch = useDispatch();
   const editProject = async (e) => {
     e.preventDefault();
-    if (dueDate === ''){
+    setHasSubmitted(true)
+
+    if (dueDate === '') {
       setDueDate()
     }
 
     let payload = { id: project.id, workspaceId, name, status, dueDate, description, icon, ownerId }
+    if (!errors.length) {
 
-    const data = await dispatch(updateAProject(payload));
-    if (data) {
-      setErrors(data)
+      const data = await dispatch(updateAProject(payload));
+      await dispatch(oneWorkspace(workspaceId))
+
+      if (data) {
+        setErrors(data)
+      }
     }
   };
 
   return (
-    <form onSubmit={editProject}>
-      {errors.length > 0 && (<div >
-        {errors.map((error, ind) => (
-          <div key={ind}>{error.split(":")[1]}</div>
-        ))}
-      </div>)}
-      <div>
-        <label>Name</label>
-        <input
-          type='text'
-          name='name'
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        ></input>
+    <>
+      <div className='project-create-form-container'>
+        <div className='project-top-container'>
+          <h2>Edit Project</h2>
+          <button className="create-button" onClick={() => setShowModal(false)}>X</button>
+        </div>
+        <form onSubmit={editProject}>
+          {hasSubmitted && errors.length > 0 && (<div className='errorContainer project-errors'>
+            {errors.map((error, ind) => (
+              <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+            ))}
+          </div>)}
+          <div className='form-container-pull-down'>
+
+            <div className='project-input-container'>
+              <label className='project-input-label'>Project Name</label>
+              <input
+                maxLength={25}
+                type='text'
+                name='name'
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              ></input>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Status</label>
+              <select
+                className='project-select-class'
+                name='status'
+                onChange={(e) => setStatus(e.target.value)}
+                value={status}>
+                <option className='project-option' value="On Track">
+                  On Track
+                </option>
+                <option value="At Risk">
+                  At Risk
+                </option>
+                <option value="Off Track">
+                  Off Track
+                </option>
+                <option value="On Hold">
+                  On Hold
+                </option>
+                <option value="Complete">
+                  Complete
+                </option>
+              </select>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Due Date</label>
+              <input
+                type='date'
+                name='dueDate'
+                onChange={(e) => setDueDate(e.target.value)}
+                value={dueDate}
+              ></input>
+            </div>
+            <div className='project-input-container'>
+              <label className='project-input-label'>Description</label>
+              <textarea
+                className='text-area-style'
+                type='text'
+                name='description'
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              ></textarea>
+            </div>
+          </div>
+          <div className='project-input-container move-button-down'>
+            <button className={`${buttonChange}`} type='submit'>Submit</button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Status</label>
-        <select
-          name='status'
-          onChange={(e) => setStatus(e.target.value)}
-          value={status}>
-          <option value="On Track">
-            On Track
-          </option>
-          <option value="At Risk">
-            At Risk
-          </option>
-          <option value="Off Track">
-            Off Track
-          </option>
-          <option value="On Hold">
-            On Hold
-          </option>
-          <option value="Complete">
-            Complete
-          </option>
-        </select>
-      </div>
-      <div>
-        <label>Due Date</label>
-        <input
-          type='date'
-          name='dueDate'
-          onChange={(e) => setDueDate(e.target.value)}
-          value={dueDate}
-        ></input>
-      </div>
-      <div>
-        <label>Description</label>
-        <textarea
-          type='text'
-          name='description'
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-        ></textarea>
-      </div>
-      <button type='submit'>Submit</button>
-    </form>
+    </>
   );
 };
 
