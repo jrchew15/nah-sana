@@ -1,6 +1,6 @@
 .task-form-container {
     width: 30em;
-    height: 36em;
+    height: 37em;
     display: flex;
     flex-direction: column;
 }
@@ -17,6 +17,10 @@
     flex-direction: column;
     padding: 10px;
     width: 82%;
+}
+
+.task-form-label {
+    padding-bottom: 10px;
 }
 
 .task-input-label {
@@ -56,6 +60,6 @@
     height: 2.5em;
     border-radius: 6px;
     margin-left: 5px;
-    width: 85%;
+    width: 83%;
     margin-bottom: 8px;
 }

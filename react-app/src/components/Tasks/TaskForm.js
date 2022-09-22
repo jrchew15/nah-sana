@@ -141,6 +141,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             <div className='task-form-container'>
                                 <button type='submit'
                                     className={`${buttonChange}`}
+                                    style={{ marginTop: '3px' }}
                                 >Submit</button>
                                 {taskId && (
                                     <button
