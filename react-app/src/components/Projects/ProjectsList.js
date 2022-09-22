@@ -6,11 +6,7 @@ import CreateProjectModal from './CreateProjectModal';
 
 function GetProjects({ workspaceId }) {
   const dispatch = useDispatch();
-
-
-
   const allProjects = useSelector(state => state.projects)
-
 
   let projectArr;
   let filtered;
@@ -19,7 +15,6 @@ function GetProjects({ workspaceId }) {
   }, [dispatch, filtered])
   if (allProjects) {
     projectArr = Object.values(allProjects)
-    console.log(projectArr)
     filtered = projectArr.filter(project => project?.workspaceId === Number(workspaceId))
   } else {
     return null
@@ -33,7 +28,6 @@ function GetProjects({ workspaceId }) {
 
           <div className='project-wrapper'>
             <CreateProjectModal />
-
 
             {filtered.map(project => {
               return (

@@ -328,3 +328,10 @@
 .projectDetailTaskOuterContainer {
   padding: 20px;
 }
+
+.projectDoesNotExist {
+  padding-left: 20px;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+}

@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink, Route, Switch } from "react-router-dom";
+import { useParams, NavLink, Route, Switch, useHistory } from "react-router-dom";
 import { oneWorkspace } from "../store/workspace";
 import TasksListUserProfile from "./Tasks/TasksListUserProfile";
 import './UserProfilePage.css'
 
 function UserProfilePage() {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const [loaded, setLoaded] = useState(false)
+
   const { workspaceId, id } = useParams()
   const users = useSelector(state => state.workspace.users)
   let user;
@@ -18,9 +21,28 @@ function UserProfilePage() {
     dispatch(oneWorkspace(workspaceId))
   }, [dispatch, workspaceId])
 
+  useEffect(() => {
+    if (user) {
+      setLoaded(true)
+    }
+  }, [user])
 
-  if (!user) return null
 
+  function redirect() {
+    setTimeout(() => { history.push(`/workspaces/${workspaceId}`) }, 1000)
+  }
+
+
+  if (!user) {
+    return (
+      <div>
+        <h1 className='projectDoesNotExist'>User does not exist...redirecting</h1>
+        {redirect()}
+      </div>
+    )
+  }
+
+  if (!loaded && !user) return null
   let overview = (
     <div className="profileInfoContainer">
       <div className="profileInfoLeftContent">
@@ -68,15 +90,15 @@ function UserProfilePage() {
       </div>
     </div>
   )
-  let props = {workspaceId, id}
+  let props = { workspaceId, id }
 
   let list = (
     <div className='projectDetailTaskOuterContainer'>
-      <TasksListUserProfile props={props}/>
+      <TasksListUserProfile props={props} />
     </div>
   )
 
-  return (
+  return loaded && user ? (
     <div className='innerContent'>
       {/* NavBar */}
       <div className='profileNavBar'>
@@ -113,6 +135,8 @@ function UserProfilePage() {
         </Switch>
       </div>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   )
 }
 
