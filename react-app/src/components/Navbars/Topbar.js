@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouteMatch, NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useRouteMatch, NavLink, useHistory, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";
@@ -26,11 +26,24 @@ export default function Topbar({ toggleNavbarDisplay }) {
         history.push('/')
     };
 
+
+    {/* comment this out */ }
+
+    // const { id } = useParams()
+    // const handlepush = (e) => {
+    //     e.preventDefault()
+    //     history.push(`/workspaces/${id}`)
+    // }
+
     return currentWorkspace && currentUser ? (
         <>
+            {/* comment this out */}
+            {/* <button onClick={handlepush}>Back to workspaces</button> */}
+
             <div id='topbar'>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
-                {/* this usericon is a placeholder */}
+                {/* {console.log(currentUser.image)} */}
+                {/* <img src={currentUser.image} className='user-icon' onClick={toggleUserDropdown} onError={e => e.target.src = '/static/images/users/1.png'} /> */}
                 <div className="userIcon" onClick={toggleUserDropdown}>{currentUser.firstName[0].toUpperCase()}{currentUser.lastName[0].toUpperCase()}</div>
             </div>
             <div id='profile-dropdown' style={{ display: dropdownOpen ? 'flex' : 'none' }}>
@@ -63,7 +76,6 @@ export default function Topbar({ toggleNavbarDisplay }) {
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
             </div>
-            { }
         </>
     ) : null
 }

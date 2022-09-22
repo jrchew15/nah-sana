@@ -5,10 +5,11 @@ import AddUser from './AddUser';
 
 function AddUserToWorkspace() {
     const [showModal, setShowModal] = useState(false);
+    const user = useSelector(state => state.workspace.users)
 
     useEffect(() => {
         setShowModal(false)
-    }, [])
+    }, [user])
 
     return (
         <>
@@ -18,7 +19,7 @@ function AddUserToWorkspace() {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <AddUser />
+                    <AddUser setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

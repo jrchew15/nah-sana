@@ -34,7 +34,7 @@ export const getTasks = () => async dispatch => {
     const response = await fetch(`/api/tasks`);
     if (response.ok) {
         const tasks = await response.json()
-        console.log('*******tasks from thunk******', tasks)
+        // console.log('*******tasks from thunk******', tasks)
         dispatch(loadAll(tasks))
         return tasks
     }
@@ -70,17 +70,20 @@ export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => 
 }
 
 export const createOneTask = data => async dispatch => {
-    console.log('in thunk before fetch', data)
+    // console.log('in thunk before fetch', data)
     const response = await fetch(`/api/projects/${data.projectId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    console.log('in thunk after fetch', response)
+    // console.log('in thunk after fetch', response)
+    const data = await response.json()
     if (response.ok) {
-        const task = await response.json()
-        dispatch(add(task))
-        return task
+        dispatch(add(data))
+        return null
+    }
+    if (data.errors.length) {
+        return data.errors;
     }
 };
 
@@ -90,10 +93,14 @@ export const updateOneTask = data => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
+    const resBody = await response.json()
     if (response.ok) {
-        const task = await response.json()
-        dispatch(update(task))
-        return task
+        dispatch(update(resBody))
+        return null
+    }
+    if (resBody.errors.length) {
+        // console.log('update Thunk', resBody.errors)
+        return resBody.errors;
     }
 };
 
@@ -113,7 +120,7 @@ const tasksReducer = (state = initialState, action) => {
     let newState = {}
     switch (action.type) {
         case LOAD_TASKS:
-            newState = { ...state, ...action.tasks }
+            newState = { ...action.tasks }
             // console.log('*********tasks from reducer******', action.tasks)
             return newState
         case LOAD_TASK:

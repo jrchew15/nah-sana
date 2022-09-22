@@ -1,0 +1,166 @@
+.splashpageNav {
+  height: 58px;
+  align-items: center;
+  padding-left: 10px;
+  font-family: 'Montserrat', sans-serif;
+  border-bottom: 1px solid #e0e6e8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background-color: var(--bkg-color-black); */
+}
+
+.splashpageLogoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.splashpageLogo {
+  height: 50px;
+  width: 50px;
+}
+
+.splashpageLogoText {
+  padding-left: 10px;
+  color: #0d0e10;
+}
+
+.splashpageLoginOuterContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.splashpageLoginContainer {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #0d0e10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splashpageLogin {
+  color: #0d0e10;
+}
+
+.splashpageSignupContainer {
+  padding-left: 20px;
+}
+
+.splashpageSignup {
+  background-color: #0d0e10;
+  color: #FFFFFF;
+  font-size: 14px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  height: 36px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.splashpageContent {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e0e6e8;
+  height: auto;
+  width: 100%;
+}
+
+.splashpageContentLeft {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.splashpageQuote {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 200;
+  text-align: left;
+}
+
+.splashpageTextDivider {
+  width: 100px;
+  border-bottom: 1px solid #0d0e10;
+}
+
+.splashpageDescription {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  text-align: left;
+  padding-right: 20px;
+}
+
+.splashpageContentRight {
+  width: 45%;
+}
+
+.splashpageImage {
+  max-width: 100%;
+  height: 100%;
+}
+
+.splashpageFooter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: var(--bkg-color-black); */
+}
+
+.splashpageFooterText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  padding-right: 20px;
+  color: #0d0e10;
+}
+
+.splashpageProfileContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.splashpageButton {
+  border: none;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--bkg-color-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splashpageButton#spgreen {
+  background-color: #60c792;
+}
+
+.splashpageButton#spyellow {
+  background-color: #F3DD94;
+}

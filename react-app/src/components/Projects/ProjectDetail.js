@@ -5,6 +5,7 @@ import { deleteAProject, getAllProjects, getAProject } from '../../store/project
 import EditProjectModal from './EditProjectModal';
 import TasksListByProject from '../Tasks/TasksListByProject';
 import './Projects.css'
+import TaskDetail from '../Tasks/TaskDetail';
 
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function ProjectDetail({ workspaceId }) {
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
     await dispatch(getAllProjects())
-    await history.push(`/workspaces/${workspaceId}/projects`)
+    await history.push(`/workspaces/${workspaceId}`)
   }
 
   let dueDate;
@@ -49,6 +50,18 @@ function ProjectDetail({ workspaceId }) {
       return "statusWidgetColorHoldFont"
     } else {
       return "statusWidgetColorFont"
+    }
+  }
+
+  function circleType() {
+    if (project?.status === "At Risk") {
+      return "projectNavStatusCircleRisk"
+    } else if (project?.status === "Off Track") {
+      return "projectNavStatusCircleOffTrack"
+    } else if (project?.status === "On Hold") {
+      return "projectNavStatusCircleHold"
+    } else {
+      return "projectNavStatusCircle"
     }
   }
 
@@ -92,17 +105,7 @@ function ProjectDetail({ workspaceId }) {
     <TasksListByProject projectId={id} />
   )
 
-  function circleType() {
-    if (project?.status === "At Risk") {
-      return "projectNavStatusCircleRisk"
-    } else if (project?.status === "Off Track") {
-      return "projectNavStatusCircleOffTrack"
-    } else if (project?.status === "On Hold") {
-      return "projectNavStatusCircleHold"
-    } else {
-      return "projectNavStatusCircle"
-    }
-  }
+
 
 
   return (
