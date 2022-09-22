@@ -30,7 +30,7 @@
 }
 
 .userIcon {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: black;
     font-weight: lighter;
     border-radius: 50%;
@@ -40,7 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 16px;
+    margin-right: 10px;
     cursor: pointer;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -48,6 +48,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.userIcon:not(#user-circles .userIcon) {
+    margin-right: 24px;
+    font-size: 0.9em;
 }
 
 #profile-dropdown {

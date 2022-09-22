@@ -51,7 +51,7 @@ export default function LeftNavBar() {
                         <i className="fas fa-plus" onClick={() => setWorkspaceDropdownOpen(val => !val)} />
                     </span>
                     <div id='user-circles'>
-                        {Object.values(workspace.users).map(user => (
+                        {Object.values(workspace.users).slice(0, 6).map(user => (
                             <UserIcon user={user} clickHandler={() => redirectToProfile(user.id)} />
                         )
                         )}
