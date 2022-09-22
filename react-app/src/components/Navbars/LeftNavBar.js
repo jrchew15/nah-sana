@@ -67,8 +67,23 @@ export default function LeftNavBar() {
                 <div className='horizontal-separator' style={{ margin: "10px 0" }} />
                 <div id='extra-space' />
                 <div className='horizontal-separator' style={{ margin: "10px 0" }} />
-                <div style={{ marginBottom: 10 }}>
+                <div>
                     <NavAddUserModal />
+                </div>
+                <div className='horizontal-separator' style={{ margin: "10px 0" }} />
+                <div style={{ marginBottom: 10 }} className='acknowledgements'>
+                    <span>{'These icons by '}<a target="_blank" href="https://icons8.com" className='acknowledgements'>{' Icons8'}</a></span>
+                    <span>
+                        <a target="_blank" href="https://icons8.com/icon/HZlBOLspcgKX/user">
+                            <img src='/static/images/users/1.png' alt='user' style={{ display: 'block' }} />
+                        </a>
+                        <a target="_blank" href="https://icons8.com/icon/48255/tasks">
+                            <img src='/static/images/icons/1.png' alt='tasks' style={{ display: 'block' }} />
+                        </a>
+                        <a target="_blank" href="https://icons8.com/icon/TQVbHl2Y1vPv/night">
+                            <img src='/static/images/logos/logo-dark.png' alt='night' style={{ display: 'block' }} />
+                        </a>
+                    </span>
                 </div>
             </div>
             <div id='create-dropdown' className="left-dropdowns" style={{ display: createDropdownOpen ? 'flex' : 'none' }} ref={createDropdownRef}>

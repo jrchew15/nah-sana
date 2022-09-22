@@ -17,15 +17,15 @@
     position: relative;
 }
 
-#topbar>i {
+#topbar i {
     font-size: 1.4em;
-    margin-left: 20px;
+    margin: 0 35px 0 20px;
     padding: 5px;
     border-radius: 20%;
     cursor: pointer;
 }
 
-#topbar>i:hover {
+#topbar i:hover {
     background-color: var(--border-color-hover);
 }
 
