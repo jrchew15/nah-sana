@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, Route, Switch } from "react-router-dom";
 import { oneWorkspace } from "../store/workspace";
+import TasksListUserProfile from "./Tasks/TasksListUserProfile";
 import './UserProfilePage.css'
 
 function UserProfilePage() {
@@ -67,9 +68,12 @@ function UserProfilePage() {
       </div>
     </div>
   )
+  let props = {workspaceId, id}
 
   let list = (
-    <h3>User List</h3>
+    <div className='projectDetailTaskOuterContainer'>
+      <TasksListUserProfile props={props}/>
+    </div>
   )
 
   return (
