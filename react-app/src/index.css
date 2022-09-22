@@ -35,9 +35,6 @@ body {
     height: 100%;
 }
 
-#navbar {
-    background-color: var(--bkg-color-grey);
-}
 
 
 #navbar-and-content {
@@ -61,8 +58,11 @@ body {
 
 #navbar {
     min-width: var(--navbar-width);
+    width: var(--navbar-width);
+    max-width: var(--navbar-width);
     height: 100%;
     position: relative;
+    background-color: #2e2e30;
 }
 
 div.horizontal-separator {

@@ -5,12 +5,11 @@ import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";
 import UpdateWorkspaceModal from "../Workspace-test-reducer/UpdateWorkspaceModal";
+import UserIcon from "../UserIcon";
 
 import './topbar.css'
 
 export default function Topbar({ toggleNavbarDisplay }) {
-    const currentUserTaskListUrl = '/' // REVISIT
-
     const currentUser = useSelector(state => state.session.user);
     const currentWorkspace = useSelector(state => state.workspace.workspace);
     const dispatch = useDispatch();
@@ -37,21 +36,13 @@ export default function Topbar({ toggleNavbarDisplay }) {
 
     return currentWorkspace && currentUser ? (
         <>
-            {/* comment this out */}
-            {/* <button onClick={handlepush}>Back to workspaces</button> */}
-
             <div id='topbar'>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
-                {/* {console.log(currentUser.image)} */}
-                {/* <img src={currentUser.image} className='user-icon' onClick={toggleUserDropdown} onError={e => e.target.src = '/static/images/users/1.png'} /> */}
-                <div className="userIcon" onClick={toggleUserDropdown}>{currentUser.firstName[0].toUpperCase()}{currentUser.lastName[0].toUpperCase()}</div>
+                <UserIcon user={currentUser} clickHandler={toggleUserDropdown} />
             </div>
             <div id='profile-dropdown' style={{ display: dropdownOpen ? 'flex' : 'none' }}>
                 <div id='workspaces'>
                     {currentUser.workspaces.map(workspace => (
-                        // <NavLink key={workspace.id} to={`/workspaces/${workspace.id}`}>
-                        //     {workspace.name}
-                        // </NavLink>
                         <a key={workspace.id}
                             href={`/workspaces/${workspace.id}`}
                             target='_blank'
@@ -71,7 +62,7 @@ export default function Topbar({ toggleNavbarDisplay }) {
                 <div className="horizontal-separator" />
 
                 <div id="user-links">
-                    <NavLink to={currentUserTaskListUrl}>My Profile</NavLink>
+                    <NavLink to={`/workspaces/${currentWorkspace.id}/user/${currentUser.id}/lists`}>My Profile</NavLink>
                     <EditUserFormModal toggleUserDropdown={toggleUserDropdown} />
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
