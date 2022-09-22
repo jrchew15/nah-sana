@@ -1,6 +1,6 @@
 .project-create-form-container {
     width: 30em;
-    height: 35em;
+    height: 33em;
     display: flex;
     flex-direction: column;
 }
@@ -35,6 +35,10 @@
     border-radius: 5px;
 }
 
+.move-button-down {
+    padding-top: 2em;
+}
+
 .test {
     background-color: #4573d2;
     color: whitesmoke;
@@ -58,4 +62,8 @@
 .project-option {
     color: whitesmoke;
     background-color: #424244;
+}
+
+.project-errors {
+    padding-top: 10px;
 }
