@@ -1,13 +1,19 @@
+.table-outer-container {
+    width: 100%;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
     border-style: hidden;
+    border: solid 3px blue
 }
 
 .table-onclick {
     width: 50vw;
     border-collapse: collapse;
     border-style: hidden;
+    border: solid 3px red;
 }
 
 .table-row,
@@ -43,7 +49,7 @@
 #task-name {
     display: flex;
     border: none;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 #task-name:hover>#button {
@@ -68,6 +74,6 @@
     cursor: pointer;
 }
 
-.table-outer-container {
+/* .table-outer-container {
     width: 100%;
-}
+} */

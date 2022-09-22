@@ -1,11 +1,12 @@
 .task-form-container {
     width: 30em;
+    min-width: 15em;
     height: 37em;
     display: flex;
     flex-direction: column;
 }
 
-.task-top-container {
+.task-form-top-container {
     display: flex;
     justify-content: space-between;
     border-bottom: solid 1px #424244;
