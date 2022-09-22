@@ -2,14 +2,12 @@
     width: 100%;
     border-collapse: collapse;
     border-style: hidden;
-    /* padding: 10px; */
 }
 
 .table-onclick {
     width: 50vw;
     border-collapse: collapse;
     border-style: hidden;
-    /* padding: 10px; */
 }
 
 .table-row,
@@ -55,11 +53,6 @@
 .table-cell:hover {
     background-color: rgba(128, 128, 128, 0.169);
 }
-
-/* td:first-child,
-th:first-child {
-    border-right: 0;
-} */
 
 .table-head {
     font-size: smaller;

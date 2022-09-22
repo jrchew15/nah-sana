@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import { createOneTask, updateOneTask, deleteOneTask } from '../../store/tasks';
 import { getTaskById } from '../../store/tasks';
 import { oneWorkspace } from '../../store/workspace'
@@ -11,9 +10,6 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const dispatch = useDispatch();
     const { workspace, users, projects } = useSelector((state) => state.workspace)
     const workspaceId = workspace.id
-    // console.log('**************taskform', plainForm)
-    // const { taskId } = useParams();
-    // const task = useSelector(state => state.tasks)
     const [task, setTask] = useState(null)
 
     const [name, setName] = useState('');
@@ -26,12 +22,10 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [buttonChange, setButtonChange] = useState('task-form-button')
 
-    // console.log('*************in component******', hasSubmitted)
     useEffect(async () => {
 
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
-            // console.log('*********in use effct 2*******', foundTask)
             let inputDate;
             foundTask.dueDate ?
                 inputDate = new Date(foundTask.dueDate).toJSON().split("T")[0] : inputDate = ''

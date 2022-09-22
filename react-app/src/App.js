@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticate } from './store/session';
-import TaskDetail from './components/Tasks/TaskDetail';
 import { DropdownHandlingProvider } from './context/DropdownHandlingContext';
 
 import Workspace from './components/Workspace';
@@ -59,12 +58,6 @@ export default function App() {
         </Route>
         <Route exact path='/signup'>
           <SignUpPage />
-        </Route>
-        <Route exact path='/tasks/:taskId/edit'>
-          <TaskDetail />
-        </Route>
-        <Route exact path='/tasks/:taskId'>
-          <TaskDetail />
         </Route>
       </Switch>
     </BrowserRouter>

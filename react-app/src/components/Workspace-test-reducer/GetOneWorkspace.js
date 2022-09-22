@@ -4,7 +4,6 @@ import { useHistory, useParams, NavLink } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
 import GetProjects from "../Projects/ProjectsList";
 import TasksListByUser from "../Tasks/TasksListByUser";
-import TaskDetail from "../Tasks/TaskDetail";
 import './GetOne.css';
 import AddUserToWorkspace from "./AddUserModal";
 
