@@ -70,14 +70,17 @@ const TasksListByProject = ({ projectId }) => {
                     </div>
                 </div>
                 <div>
-                    {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+                    {showTaskDetail ? <TaskForm plainForm={true} taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
                 </div>
+                {/* <div>
+                    {showTaskDetail ? <TaskDetail taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+                </div> */}
             </div >
-            {showForm && (
+            {/* {showForm && (
                 <Modal onClose={() => setShowModal(false)}>
                     <TaskForm setShowModal={setShowModal} />
                 </Modal>
-            )}
+            )} */}
         </>
     ) : null
 }

@@ -6,7 +6,7 @@ import { getTaskById } from '../../store/tasks';
 
 import './TaskStyle/TaskForm.css'
 
-const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId, setTaskDetail }) => {
+const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId, setShowTaskDetail, plainForm }) => {
     const dispatch = useDispatch();
     const { users, projects } = useSelector((state) => state.workspace)
     // console.log('**************taskform', plainForm)
@@ -62,14 +62,15 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             setErrors(data)
             return
         }
-        setShowModal(false)
-        if (setTaskDetail) setTaskDetail(false)
+        if (!plainForm) setShowModal(false)
+        if (plainForm) setShowTaskDetail(false)
     }
 
     return (
         <>
             {(
-                <div className='task-form-container'>
+                <div className='task-form-container' style={{ borderLeft: plainForm ? 'solid 1px gray' : 'none' }}>
+                    <a href="javascript:void(0)" className="closebtn" onClick={() => { setShowTaskDetail(false) }}>&times;</a>
                     <div id='task-form' style={{ marginLeft: '30px' }}>
                         <form onSubmit={handleSubmit}>
                             <div id='task-complete' className='task-complete'
