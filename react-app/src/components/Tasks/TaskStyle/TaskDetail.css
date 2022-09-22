@@ -1,5 +1,15 @@
 .task-detail-container {
-    border-left: solid 1px gray;
+    border-left: 1px solid var(--border-color);
+}
+
+.add-task-button {
+    width: 100px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 5px;
+    margin-left: 8px;
 }
 
 .add-task-button:hover {
@@ -17,7 +27,7 @@
 }
 
 .task-complete {
-    border: 1px solid grey;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: x-small;
     width: fit-content;
@@ -65,7 +75,7 @@ td {
 
 .button {
     background-color: transparent;
-    border: #424244 2px solid;
+    border: 1px solid var(--border-color);
     color: whitesmoke;
     border-radius: 5px;
     padding: 4px;

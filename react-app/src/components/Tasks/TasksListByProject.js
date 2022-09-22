@@ -1,18 +1,11 @@
 import { getTasksByProjectId } from "../../store/tasks";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getTasksByWorkspace } from "../../store/tasks";
-import { Modal } from '../../context/Modal';
-
-
-import { useHistory } from "react-router-dom";
 import TaskForm from "./TaskForm";
-// import TaskDetail from "./TaskDetail";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 import './TaskStyle/TaskTable.css'
-import TaskDetail from "./TaskDetail";
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
@@ -47,7 +40,6 @@ const TasksListByProject = ({ projectId }) => {
                 <div style={{ display: 'flex' }} className="table-outer-container">
                     <div className="table-outer-container">
                         <div className='add-task-button'
-                            style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
                             onClick={() => {
                                 setShowTaskDetail(true)
                                 setOnClickTaskId(null)
@@ -61,7 +53,7 @@ const TasksListByProject = ({ projectId }) => {
                                         <th className="table-head">Task Name</th>
                                         <th className="table-head">Due Date</th>
                                     </tr>
-                                    {tasksArr.length == 0 && (<div className="horizontal-separator"></div>)}
+                                    {tasksArr.length === 0 && (<div className="horizontal-separator"></div>)}
                                     {filteredTasks.map((task) => (
                                         <tr key={task.id} className="table-row">
                                             <td className="table-cell" id='task-name'
@@ -77,7 +69,7 @@ const TasksListByProject = ({ projectId }) => {
                                                     <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
                                                 {/* <div id='button' >details</div> */}
                                             </td>
-                                            <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                                            <td className="table-cell">{task?.dueDate.split(' ')[2]} {task?.dueDate.split(' ')[1]}</td>
                                         </tr>
                                     ))
                                     }
