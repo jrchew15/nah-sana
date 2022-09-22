@@ -24,10 +24,9 @@ const update = (task) => ({
     task
 });
 
-const remove = (taskId, projectId) => ({
+const remove = (taskId) => ({
     type: REMOVE_TASK,
-    taskId,
-    projectId
+    taskId
 });
 
 export const getTasks = () => async dispatch => {
@@ -111,7 +110,7 @@ export const deleteOneTask = taskId => async dispatch => {
     })
     if (response.ok) {
         const task = await response.json()
-        dispatch(remove(task))
+        dispatch(remove(taskId))
     }
 };
 

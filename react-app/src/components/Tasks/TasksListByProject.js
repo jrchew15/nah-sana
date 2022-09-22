@@ -16,10 +16,15 @@ import TaskDetail from "./TaskDetail";
 
 const TasksListByProject = ({ projectId }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
 
-    const tasks = useSelector((state) => state.tasks)
-    const tasksArr = Object.values(tasks)
+    // const tasks = useSelector((state) => state.tasks)
+    // const tasksArr = Object.values(tasks)
+    const workspace = useSelector((state) => state.workspace)
+    const tasksArr = workspace['tasks']
+    let filteredTasks;
+    if (tasksArr) {
+        filteredTasks = tasksArr.filter(task => Number(task.projectId) === Number(projectId))
+    }
     // console.log(tasks)
 
     const [showTaskDetail, setShowTaskDetail] = useState(false)
@@ -35,7 +40,7 @@ const TasksListByProject = ({ projectId }) => {
         dispatch(getTasksByProjectId(projectId)).then(() => setIsLoaded(true))
     }, [dispatch, showTaskDetail])
 
-    if (!tasksArr.length) return null
+    // if (!tasksArr.length) return null
     return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
@@ -49,34 +54,36 @@ const TasksListByProject = ({ projectId }) => {
                             }}>
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
-                        <table className={showTaskDetail ? "table-onclick" : "table"}>
-                            <tbody>
-                                <tr className="table-row">
-                                    <th className="table-head">Task Name</th>
-                                    <th className="table-head">Due Date</th>
-                                </tr>
-                                {tasksArr.map((task) => (
-
-                                    <tr key={task.id} className="table-row">
-                                        <td className="table-cell" id='task-name'
-                                            onClick={() => (
-                                                setShowTaskDetail(!showTaskDetail),
-                                                setOnClickTaskId(task.id),
-                                                setShowSideBar(!showSideBar)
-                                            )}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <div>
-
-                                                <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
-                                            {/* <div id='button' >details</div> */}
-                                        </td>
-                                        <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                        {tasksArr && (
+                            <table className={showTaskDetail ? "table-onclick" : "table"}>
+                                <tbody>
+                                    <tr className="table-row">
+                                        <th className="table-head">Task Name</th>
+                                        <th className="table-head">Due Date</th>
                                     </tr>
-                                ))
-                                }
-                            </tbody>
-                        </table >
+                                    {tasksArr.length == 0 && (<div className="horizontal-separator"></div>)}
+                                    {filteredTasks.map((task) => (
+                                        <tr key={task.id} className="table-row">
+                                            <td className="table-cell" id='task-name'
+                                                onClick={() => (
+                                                    setShowTaskDetail(!showTaskDetail),
+                                                    setOnClickTaskId(task.id),
+                                                    setShowSideBar(!showSideBar)
+                                                )}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                <div>
+
+                                                    <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
+                                                {/* <div id='button' >details</div> */}
+                                            </td>
+                                            <td className="table-cell">{task.dueDate.split(' ')[2]} {task.dueDate.split(' ')[1]}</td>
+                                        </tr>
+                                    ))
+                                    }
+                                </tbody>
+                            </table >
+                        )}
                     </div>
                 </div>
                 <div>
