@@ -45,7 +45,6 @@ export default function GetOne({ workspaceId }) {
             {(isLoaded &&
                 <div className="dashboard-container">
                     {/* <button onClick={handlepush}>Back to workspaces</button> */}
-                    <div className="left-corner">Home</div>
                     <div className="dashboard-titles">
                         <h5 style={{ fontWeight: '500', }}>{current}</h5>
                         <div>
