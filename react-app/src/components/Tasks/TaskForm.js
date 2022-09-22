@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { createOneTask, updateOneTask, deleteOneTask } from '../../store/tasks';
 import { getTaskById } from '../../store/tasks';
+import { oneWorkspace } from '../../store/workspace'
 
 import './TaskStyle/TaskForm.css'
 
 const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passedProjectId, setShowTaskDetail, plainForm }) => {
     const dispatch = useDispatch();
-    const { users, projects } = useSelector((state) => state.workspace)
+    const { workspace, users, projects } = useSelector((state) => state.workspace)
+    const workspaceId = workspace.id
     // console.log('**************taskform', plainForm)
     // const { taskId } = useParams();
     // const task = useSelector(state => state.tasks)
@@ -23,9 +25,9 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
-    console.log('*************in component******', hasSubmitted)
+    // console.log('*************in component******', hasSubmitted)
     useEffect(async () => {
-        console.log('*********in use effct*******')
+
         if (taskId) {
             const foundTask = await dispatch(getTaskById(taskId))
             // console.log('*********in use effct 2*******', foundTask)
@@ -69,6 +71,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             formData.id = taskId;
             data = await dispatch(updateOneTask(formData))
         }
+        await dispatch(oneWorkspace(workspaceId))
         if (data) {
             setErrors(data)
             // return
@@ -145,6 +148,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                         style={{ border: 'solid 1px red', background: '#D11A2A' }}
                                         onClick={async () => {
                                             await dispatch(deleteOneTask(taskId))
+                                            await dispatch(oneWorkspace(workspaceId))
                                             if (!plainForm) setShowModal(false)
                                             if (plainForm) setShowTaskDetail(false)
                                         }}>Delete</button>

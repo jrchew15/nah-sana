@@ -11,12 +11,14 @@ import TaskForm from "./TaskForm";
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 
-const TasksListByUser = ({ projects }) => {
+const TasksListByUser = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const tasks = useSelector((state) => state.tasks)
-    const tasksArr = Object.values(tasks)
+    // const tasks = useSelector((state) => state.tasks)
+    const workspace = useSelector((state) => state.workspace)
+    const tasksArr = workspace['tasks']
+    // const tasksArr = Object.values(tasks)
 
     const [showModal, setShowModal] = useState(false)
     // const [showTaskDetail, setShowTaskDetail] = useState(false)
@@ -33,11 +35,11 @@ const TasksListByUser = ({ projects }) => {
         <>
             {/* REVISIT */}
             <div className="task-container-list scroller">
-                {tasksArr.map((task) => (
+                {tasksArr.map((task, idx) => (
                     <>
                         <div className="task-flex">
                             <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasks[task.id].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
+                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
                             </button>
                             <div className="task-items" onClick={() => {
                                 setShowModal(true)
