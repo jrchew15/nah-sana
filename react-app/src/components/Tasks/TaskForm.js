@@ -101,7 +101,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 <i className="fa fa-check-circle-o" aria-hidden="true"></i>
                                 {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
                             </div>
-                            <h2>My Task</h2>
+                            <h2 style={{ marginLeft: '10px' }}>My Task</h2>
                             {hasSubmitted && errors.length > 0 && <div className='errorContainer'>
                                 {errors.map((error, ind) => (
                                     <div key={ind} className='errorText'>{error}</div>

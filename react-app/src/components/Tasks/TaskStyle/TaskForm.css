@@ -24,6 +24,24 @@
     padding-bottom: 10px;
 }
 
+.task-form-input {
+    background-color: var(--bkg-color-black);
+    color: var(--text-color);
+    overflow: auto;
+    flex-grow: 1;
+    height: 100%;
+    border: #a2a0a2 1px solid;
+}
+
+.task-form-textarea {
+    background-color: var(--bkg-color-black);
+    color: var(--text-color);
+    overflow: auto;
+    flex-grow: 1;
+    height: 100%;
+    border: #a2a0a2 1px solid;
+}
+
 .move-button-down {
     padding-top: 2.5em;
 }
