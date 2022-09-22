@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import Topbar from "./Navbars/Topbar";
@@ -16,7 +16,16 @@ export default function Workspace() {
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
     const workspaceId = match.params.id;
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
+
+    const [userDropdownOpen, setUserDropdownOpen] = useState(false)
+    const profileDropdownRef = useRef(null);
+
+    const [createDropdownOpen, setCreateDropdownOpen] = useState(false)
+    const createDropdownRef = useRef(null);
+
+    const [workspaceCreateDropdownOpen, setWorkspaceCreateDropdownOpen] = useState(false)
+    const workspaceCreateDropdownRef = useRef(null);
 
     const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
 
@@ -36,12 +45,33 @@ export default function Workspace() {
         setNavDisplay(state => !state)
     }
 
+    function dropdownChecks(e) {
+        if (profileDropdownRef && userDropdownOpen) {
+            if (e.target !== profileDropdownRef.current) {
+                setUserDropdownOpen(false)
+            }
+        }
+        if (createDropdownOpen && createDropdownRef) {
+            if (e.target !== createDropdownRef.current) {
+                setCreateDropdownOpen(false)
+            }
+        }
+        if (workspaceCreateDropdownOpen && workspaceCreateDropdownRef) {
+            if (e.target !== workspaceCreateDropdownRef.current) {
+                setWorkspaceCreateDropdownOpen(false)
+            }
+        }
+    }
+
     return workspaceLoaded && user ? (
         <>
-            <Topbar toggleNavbarDisplay={toggleNavbarDisplay} />
-            <div id='navbar-and-content'>
+            <Topbar toggleNavbarDisplay={toggleNavbarDisplay} profileDropdownRef={profileDropdownRef} userDropdownOpen={userDropdownOpen} setUserDropdownOpen={setUserDropdownOpen} dropdownChecks={dropdownChecks} />
+            <div id='navbar-and-content' onClick={dropdownChecks}>
                 <div id='navbar' style={{ display: navDisplay ? 'flex' : 'none' }}>
-                    <LeftNavBar />
+                    <LeftNavBar
+                        workspaceCreateDropdownRef={workspaceCreateDropdownRef} workspaceCreateDropdownOpen={workspaceCreateDropdownOpen} setWorkspaceCreateDropdownOpen={setWorkspaceCreateDropdownOpen}
+                        createDropdownRef={createDropdownRef} createDropdownOpen={createDropdownOpen} setCreateDropdownOpen={setCreateDropdownOpen}
+                    />
                 </div>
                 <div id='content'>
                     <Switch>

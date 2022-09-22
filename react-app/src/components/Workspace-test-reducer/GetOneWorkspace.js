@@ -42,7 +42,6 @@ export default function GetOne({ workspaceId }) {
                 <div className="dashboard-container">
                     {/* <button onClick={handlepush}>Back to workspaces</button> */}
                     <div className="left-corner">Home</div>
-                    <AddUserToWorkspace />
                     <div className="dashboard-titles">
                         <h5 style={{ fontWeight: '500', }}>{current}</h5>
                         <div>
