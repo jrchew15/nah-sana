@@ -20,7 +20,7 @@ function ProjectDetail({ workspaceId }) {
   }, [dispatch, id])
 
   useEffect(() => {
-    if (project){
+    if (project) {
       setProjectLoaded(true)
     }
   }, [project])
@@ -90,9 +90,11 @@ function ProjectDetail({ workspaceId }) {
         {
           project ? (
             <div className='projectDescriptionContainer'>
-              <h3>Project Description</h3>
-              <div className='projectDescriptionInner'>
-                {project.description}
+              <h3 className="projectHeader">Project Description</h3>
+              <div className="projectDescriptionTextContainer">
+                <p className='profileInfoText'>
+                  {project?.description ? project?.description : "No Description Provided"}
+                </p>
               </div>
             </div>
           ) : (
