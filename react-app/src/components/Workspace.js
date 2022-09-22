@@ -19,13 +19,19 @@ export default function Workspace() {
     const workspaceId = match.params.id;
     const user = useSelector(state => state.session.user);
 
-    const [workspaceLoaded, setWorkspaceLoaded] = useState(false)
+    const [workspaceLoaded, setWorkspaceLoaded] = useState(false);
+    const [workspaceNotFound, setWorkspaceNotFound] = useState(false);
 
     const [navDisplay, setNavDisplay] = useState(true)
 
     useEffect(() => {
-        dispatch(oneWorkspace(workspaceId))
-        setWorkspaceLoaded(true)
+        (async () => {
+            const res = await dispatch(oneWorkspace(workspaceId))
+            if (!res) {
+                setWorkspaceNotFound(true)
+            }
+            setWorkspaceLoaded(true)
+        })()
     }, [dispatch, user, workspaceId, oneWorkspace, setWorkspaceLoaded])
 
     function toggleNavbarDisplay() {
@@ -50,8 +56,14 @@ export default function Workspace() {
         )
     }
 
-
-
+    if (workspaceNotFound) {
+        redirect()
+        return (
+            <div>
+                <h1 className='projectDoesNotExist'>Workspace doesn't exist...redirecting</h1>
+            </div>
+        )
+    }
 
     return workspaceLoaded && user ? (
         <>

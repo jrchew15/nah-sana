@@ -72,8 +72,8 @@ export default function LeftNavBar() {
                 </div>
                 <div className='horizontal-separator' style={{ margin: "10px 0" }} />
                 <div style={{ marginBottom: 10 }} className='acknowledgements'>
-                    <span>{'These icons by '}<a target="_blank" href="https://icons8.com" className='acknowledgements' rel="noreferrer">{' Icons8'}</a></span>
-                    <span>
+                    <span style={{ display: 'flex', justifyContent: 'center' }}>{'These icons by '}<a target="_blank" href="https://icons8.com" className='acknowledgements' rel="noreferrer">{' Icons8'}</a></span>
+                    <span style={{ display: 'flex', justifyContent: 'center' }}>
                         <a target="_blank" href="https://icons8.com/icon/HZlBOLspcgKX/user" rel="noreferrer">
                             <img src='/static/images/users/1.png' alt='user' style={{ display: 'block' }} />
                         </a>

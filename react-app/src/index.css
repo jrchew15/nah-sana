@@ -92,3 +92,7 @@ div.horizontal-separator {
     -ms-user-select: none;
     user-select: none;
 }
+
+option {
+    background-color: var(--bkg-color-black);
+}
