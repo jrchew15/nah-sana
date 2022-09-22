@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch, Switch, Route } from "react-router-dom";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import Topbar from "./Navbars/Topbar";
 import GetOne from "./Workspace-test-reducer/GetOneWorkspace";
 import GetProjects from "./Projects/ProjectsList";
@@ -9,11 +9,11 @@ import { oneWorkspace } from "../store/workspace";
 import LeftNavBar from "./Navbars/LeftNavBar";
 import UserProfilePage from "./UserProfilePage";
 import { DropdownHandlingContext } from "../context/DropdownHandlingContext";
-import Splashpage from "./Splashpage";
 
 
 export default function Workspace() {
     const dispatch = useDispatch();
+    const history = useHistory();
     // routeMatch is used to choose isolate which workspace we are on
     const match = useRouteMatch();
     const workspaceId = match.params.id;
@@ -26,7 +26,7 @@ export default function Workspace() {
     useEffect(() => {
         dispatch(oneWorkspace(workspaceId))
         setWorkspaceLoaded(true)
-    }, [dispatch, workspaceId, oneWorkspace, setWorkspaceLoaded])
+    }, [dispatch, user, workspaceId, oneWorkspace, setWorkspaceLoaded])
 
     function toggleNavbarDisplay() {
         setNavDisplay(state => !state)
@@ -34,6 +34,24 @@ export default function Workspace() {
 
     const context = useContext(DropdownHandlingContext);
     const { dropdownChecks } = context;
+
+    if (!workspaceLoaded) return null
+
+    function redirect() {
+        setTimeout(() => { history.push(`/`) }, 1000)
+    }
+
+    if (user && !user.workspaces.some(ele => ele.id === +workspaceId)) {
+        redirect()
+        return (
+            <div>
+                <h1 className='projectDoesNotExist'>You do not have access to this workspace...redirecting</h1>
+            </div>
+        )
+    }
+
+
+
 
     return workspaceLoaded && user ? (
         <>

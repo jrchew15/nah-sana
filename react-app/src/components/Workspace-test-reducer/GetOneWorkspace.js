@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, NavLink } from "react-router-dom";
 import { oneWorkspace, removeUserFromWorkspace } from "../../store/workspace";
+import { authenticate } from "../../store/session";
 import GetProjects from "../Projects/ProjectsList";
 import TasksListByUser from "../Tasks/TasksListByUser";
 import './GetOne.css';
@@ -29,9 +30,13 @@ export default function GetOne({ workspaceId }) {
         e.preventDefault()
         history.push('/workspaces')
     }
-    const deleteUser = userid => {
+    const deleteUser = async userid => {
         console.log(userid, '------------')
-        dispatch(removeUserFromWorkspace(id, userid))
+        await dispatch(removeUserFromWorkspace(id, userid))
+        await dispatch(authenticate())
+        if (user.id === userid) {
+            history.push('/')
+        }
     }
 
     return isLoaded ? (
