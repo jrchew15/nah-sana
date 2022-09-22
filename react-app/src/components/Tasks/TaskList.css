@@ -1,5 +1,4 @@
 .task-items {
-    border-bottom: 1px solid #edeae9;
     padding: .5em;
 
 }
@@ -13,11 +12,26 @@
     border-radius: 5px;
 }
 
+
+.task-container-list:hover {
+    overflow-y: visible;
+}
+
 .task-flex {
     display: flex;
+    border-bottom: 1px solid #424244;
     flex-direction: row;
     align-items: center;
     padding-left: .5em;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.task-flex:hover {
+    margin-left: 0px;
+    margin-right: 0px;
+
 }
 
 .task-button {
@@ -39,11 +53,8 @@
 
 }
 
-.task-container-list:hover {
-    overflow-y: visible;
 
-}
-
-.task-flex:hover {
+/* .task-flex:hover {
     background-color: #dbdbdb;
-}
+} */
+

@@ -34,7 +34,7 @@ const EditUserForm = () => {
     <form onSubmit={onUpdateProfile} style={gridStyles}>
       <h3 style={{ gridColumn: '1 / 3' }}>My Settings</h3>
       <div style={{ gridColumn: '1 / 3' }} className="horizontal-separator" />
-      {errors.length > 0 && (<div>
+      {errors.length > 0 && (<div style={{ gridColumn: '1 / 3' }}>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}

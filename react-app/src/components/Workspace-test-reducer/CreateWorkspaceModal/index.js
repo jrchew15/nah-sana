@@ -22,7 +22,7 @@ function CreateWorkspaceModal({ toggleUserDropdown }) {
             </span>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CreateWS />
+                    <CreateWS setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

@@ -39,7 +39,7 @@ const LoginPage = () => {
     return dispatch(login(demoEmail, demoPassword)).catch(
       async (res) => {
         const data = await res.json()
-        if (data){
+        if (data) {
           setErrors(data)
         }
       }
@@ -49,43 +49,49 @@ const LoginPage = () => {
   return (
     <div className='loginOuter'>
       <div className='loginInner'>
+        <div className='loginLogoContainer'>
+          <img src="/static/images/logos/logo-light.png" alt="logo" className='loginLogo' />
+        </div>
         <h2 className='loginTitle'>Log in to Nah-sana</h2>
-        <form onSubmit={onLogin}>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
-          <div className='loginFields'>
-            <label htmlFor='email' className='loginLabels'>Email</label>
-            <div className='loginInputContainers'>
-              <input
-                name='email'
-                type='text'
-                placeholder='Email'
-                value={email}
-                onChange={updateEmail}
-                className='loginInputs'
-              />
-            </div>
+        <div className='loginFormContainer'>
+          <form onSubmit={onLogin}>
+            {errors.length > 0 && (<div className='errorContainer project-errors'>
+              {errors.map((error, ind) => (
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+              ))}
+            </div>)}
+            <div className='loginFields'>
+              <label htmlFor='email' className='loginLabels'>Email</label>
+              <div className='loginInputContainers'>
+                <input
+                  name='email'
+                  type='text'
+                  placeholder='Email'
+                  value={email}
+                  onChange={updateEmail}
+                  className='loginInputs'
+                />
+              </div>
 
-          </div>
-          <div className='loginFields'>
-            <label htmlFor='password' className='loginLabels'>Password</label>
-            <div className='loginInputContainers'>
-              <input
-                name='password'
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={updatePassword}
-                className='loginInputs'
-              />
             </div>
+            <div className='loginFields'>
+              <label htmlFor='password' className='loginLabels'>Password</label>
+              <div className='loginInputContainers'>
+                <input
+                  name='password'
+                  type='password'
+                  placeholder='Password'
+                  value={password}
+                  onChange={updatePassword}
+                  className='loginInputs'
+                />
+              </div>
 
-            <button type='submit' className='loginButton'>Login</button>
-          </div>
-        </form>
+              <button type='submit' className='loginButton'>Login</button>
+            </div>
+          </form>
+        </div>
+
         <button type='button' className='loginButton' id='demo' onClick={handleDemoClick}>Sign in as Demo user</button>
         <p className='loginSignup'>Don't have an account?
           <NavLink to="/signup" className='signupLink'>
@@ -93,7 +99,7 @@ const LoginPage = () => {
           </NavLink>
         </p>
       </div>
-      
+
     </div>
 
   );

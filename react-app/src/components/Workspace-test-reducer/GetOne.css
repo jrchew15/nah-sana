@@ -28,23 +28,28 @@
 }
 
 .left-widget {
-    background-color: aliceblue;
+    background-color: #2e2e30;
     border-radius: 10px;
     height: 25em;
     /* width: 40.5vw; */
     width: 35em;
     margin: .5em;
+    border: #424244 1px solid;
+}
+
+.left-widget:hover {
+    border: #6a696a 1px solid;
 
 }
 
 .task-container {
-    color: black;
+    color: whitesmoke;
 }
 
 .task-title {
     display: flex;
     padding: 10px;
-    border-bottom: 1px solid #edeae9;
+    border-bottom: 1px solid #424244;
 }
 
 .task-words {
@@ -62,14 +67,20 @@
 }
 
 .right-widget {
-    color: black;
+    color: whitesmoke;
     display: flex;
-    background-color: aliceblue;
+    background-color: #2e2e30;
     border-radius: 10px;
     height: 25em;
     /* width: 40.5vw; */
     width: 35em;
     margin: .5em;
+    border: #424244 1px solid;
+
+}
+
+.right-widget:hover {
+    border: #6a696a 1px solid;
 
 }
 
@@ -78,22 +89,24 @@
     width: 100%;
     flex-direction: row;
     justify-content: center;
-    padding-top: .3em;
-
+    /* padding-top: 0em; */
 
 }
 
 .bottom-widgets {
-    background-color: aliceblue;
-    color: black;
+    background-color: #2e2e30;
+    color: whitesmoke;
     /* width: 82.2vw; */
     width: 71em;
     height: 25em;
     border-radius: 10px;
     /* padding-top: 1em; */
     margin: .5em;
+    border: #424244 1px solid;
+}
 
-
+.bottom-widgets:hover {
+    border: #6a696a 1px solid;
 }
 
 .user-list {
@@ -101,12 +114,14 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    overflow: scroll;
-    overflow-x: visible;
-    overflow-y: visible;
-
+    /* overflow: visible;
+    overflow-x: hidden; */
+    /* overflow-y: scroll; */
 }
 
+/* .user-list:hover {
+    overflow-x: scroll;
+} */
 
 .user-card {
     display: flex;
@@ -115,20 +130,43 @@
     align-items: center;
     width: 15em;
     height: 18em;
-    background-color: aliceblue;
+    background-color: #2e2e30;
     border-radius: 10px;
     margin: .5em;
-    border: #edeae9 2px solid;
+    border: #424244 1px solid;
+}
+
+.user-card:hover {
+    border: #6a696a 1px solid;
+    /* #6a696a #a2a0a2 */
+    /* border: #a2a0a2 1px solid; */
+}
+
+.user-name-link {
+    color: whitesmoke;
+}
+
+.nav-to-users {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .delete-button {
     background-color: transparent;
-    border: #aeadad 2px solid;
+    border: #424244 2px solid;
+    color: whitesmoke;
     border-radius: 5px;
-    padding: 3px;
-    margin: 5px;
+    padding: 4px;
+    margin-top: 3em;
     cursor: pointer;
+}
 
+.delete-button:hover {
+    background-color: #363639;
+    ;
 
 }
 

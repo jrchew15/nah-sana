@@ -20,7 +20,7 @@ function UpdateWorkspaceModal({ toggleUserDropdown }) {
             </span>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <UpdateWorkspace />
+                    <UpdateWorkspace setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

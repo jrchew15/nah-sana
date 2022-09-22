@@ -5,6 +5,7 @@ import { deleteAProject, getAllProjects, getAProject } from '../../store/project
 import EditProjectModal from './EditProjectModal';
 import TasksListByProject from '../Tasks/TasksListByProject';
 import './Projects.css'
+import TaskDetail from '../Tasks/TaskDetail';
 
 function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function ProjectDetail({ workspaceId }) {
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))
     await dispatch(getAllProjects())
-    await history.push(`/workspaces/${workspaceId}/projects`)
+    await history.push(`/workspaces/${workspaceId}`)
   }
 
   let dueDate;
@@ -51,7 +52,7 @@ function ProjectDetail({ workspaceId }) {
       return "statusWidgetColorFont"
     }
   }
-  
+
   function circleType() {
     if (project?.status === "At Risk") {
       return "projectNavStatusCircleRisk"
@@ -101,7 +102,10 @@ function ProjectDetail({ workspaceId }) {
   )
 
   let list = (
-    <TasksListByProject projectId={id} />
+    <div className='projectDetailTaskOuterContainer'>
+      <TasksListByProject projectId={id} />
+
+    </div>
   )
 
 

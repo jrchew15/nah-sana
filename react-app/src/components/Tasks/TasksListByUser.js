@@ -6,20 +6,22 @@ import { Modal } from '../../context/Modal';
 
 import { Route, useParams, useHistory } from "react-router-dom";
 import TaskForm from "./TaskForm";
-import TaskDetailByWorkSpace from "./TaskDetailByWorkSpace";
+// import TaskDetailByWorkSpace from "./TaskDetailByWorkSpace";
 // REVISIT CSS
 import './TaskStyle/TaskDetail.css'
 import './TaskList.css'
 
-const TasksListByUser = ({ projects }) => {
+const TasksListByUser = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const tasks = useSelector((state) => state.tasks)
-    const tasksArr = Object.values(tasks)
+    // const tasks = useSelector((state) => state.tasks)
+    const workspace = useSelector((state) => state.workspace)
+    const tasksArr = workspace['tasks']
+    // const tasksArr = Object.values(tasks)
 
     const [showModal, setShowModal] = useState(false)
-    const [showTaskDetail, setShowTaskDetail] = useState(false)
+    // const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     // console.log('**********projects from component****', projects)
     // console.log('**********tasks from component****', tasks)
@@ -32,16 +34,16 @@ const TasksListByUser = ({ projects }) => {
     return (
         <>
             {/* REVISIT */}
-            <div className="task-container-list">
-                {tasksArr.map((task) => (
+            <div className="task-container-list scroller">
+                {tasksArr.map((task, idx) => (
                     <>
                         <div className="task-flex">
                             <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
                             </button>
                             <div className="task-items" onClick={() => {
                                 setShowModal(true)
-                                setShowTaskDetail(true)
+                                // setShowTaskDetail(true)
                                 setOnClickTaskId(task.id)
                             }}>{task.name}</div>
                         </div>
@@ -50,7 +52,7 @@ const TasksListByUser = ({ projects }) => {
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <TaskForm taskId={onClickTaskId} />
+                    <TaskForm taskId={onClickTaskId} setShowModal={setShowModal} />
                 </Modal>
             )
             }

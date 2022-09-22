@@ -1,14 +1,15 @@
-.form-container {
+.task-form-container {
     display: flex;
-    width: 100%;
+    width: 500px;
     height: 100%;
     padding: 15px;
     border-radius: 8px;
 }
 
-.task-form {
+#task-form {
     display: flex;
     padding: 30px;
+    justify-content: center;
 }
 
 .form-row {
@@ -17,12 +18,12 @@
     justify-content: space-around;
 }
 
-.form-row>.form-label {
+.form-row>#form-label {
     padding: .5em 1em .5em 0;
     flex: 1;
 }
 
-.form-row>.form-input {
+.form-row>#form-input {
     justify-content: flex-start;
     flex: 2;
 }
@@ -37,6 +38,24 @@ input#form-input {
     border: solid 1px blue;
 }
 
-.form-button {
-    margin-top: 50px;
+.forms-buttons-container {
+    justify-content: space-around;
+}
+
+#task-form-button {
+    border: solid 1px gray;
+    background-color: transparent;
+    color: whitesmoke;
+    text-align: 'center';
+    border-radius: 4px;
+    margin-right: 15px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 10px;
+    background-color: #4473D2;
+}
+
+#task-form-button:hover {
+    cursor: pointer;
 }

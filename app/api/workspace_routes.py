@@ -19,6 +19,13 @@ workspace_routes = Blueprint('workspace', __name__)
 def get_all_workspace():
     workspaces = [wk.to_dict() for wk in Workspace.query.all()]
     return {"workspaces": workspaces}
+#Get All Workspaces that a users is in
+# @workspace_routes.route('<int:id>/apple')
+# def users_workspaces():
+#     user_id =current_user.id
+#     workspace = Workspace.query.get(workspace.member ==user_id)
+#     find_user = [x for x in workspace.spaces if x.id == user_id]
+#     print(workspace,'------------------')
 
 
 #Get all tasks by a user's id who is in the same workspace as current user
@@ -90,9 +97,9 @@ def add_user_from_workspace(id):
         workspace.members.append(foundUser)
         db.session.commit()
         return foundUser.to_dict()
-    else:
-        return form.errors
-#   return {'errors': validation_errors_to_error_messages(new_form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        # return form.errors
+        # return form.errors
 #
 # #Update a Workspace
 @workspace_routes.route('/<int:id>', methods=['PUT'])

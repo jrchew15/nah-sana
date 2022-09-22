@@ -62,7 +62,7 @@ export const workspaceCreate = (workspace) => async (dispatch) => {
     if (response.ok) {
         const wks = await response.json();
         dispatch(createWorkspace(wks))
-        // return wks
+        return wks
     }
     return response
 }
@@ -91,9 +91,16 @@ export const addUserToWorkspace = (user, id) => async (dispatch) => {
     if (response.ok) {
         const user = await response.json();
         dispatch(addUser(user));
-        return user
+        return null
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+
     }
-    return response
 }
 export const removeUserFromWorkspace = (id, userid) => async (dispatch) => {
     const response = await fetch(`/api/workspaces/${id}/users/${userid}`, {
@@ -124,8 +131,13 @@ export default function workspaceReducer(state = initialState, action) {
             return newState
         case CREATE_WORKSPACE:
             newState = { ...state }
-            newState[action.workspace.id] = action.workspace
+            let newWorkspace = { ...newState['workspace'] }
+            newWorkspace[action.workspace.id] = action.workspace
+            newState['workspaces'] = newWorkspace
             return newState
+        // newState = { ...state }
+        // newState[action.workspace.id] = action.workspace
+
         case UPDATE_WORKSPACE:
             newState = { ...state }
             newState['workspace'] = { ...action.workspace }

@@ -27,16 +27,16 @@ const SignUpPage = () => {
       if (data) {
         setErrors(data)
       }
-    } 
+    }
   };
 
   if (user) {
     return <Redirect to='/' />;
   }
-  function passwordCheck(){
-    if (password !== repeatPassword){
+  function passwordCheck() {
+    if (password !== repeatPassword) {
       return (
-        <div className='signupErrorText'>
+        <div className='errorText'>
           Passwords must match
         </div>
       )
@@ -46,17 +46,24 @@ const SignUpPage = () => {
   return (
     <div className='signupOuter'>
       <div className='signupNav'>
-        <p>Nah-sana</p>
+        <div className='signupLogoContainer'>
+          <a href="/" className='signupLogoContainer'>
+            <img src="/static/images/logos/logo-light.png" alt="logo" className='signupLogo' />
+            <p className='signupLogoText'>Nah-sana</p>
+
+          </a>
+        </div>
+
       </div>
       <div className='signupContent'>
         <div className='signupContentLeft'>
           <p className='signupHeader'>Sign up</p>
           <p className='signupSubheader'> By signing up, I agree to the Nah-sana Privacy Policy and Terms of Service</p>
-
+          
           <form onSubmit={onSignUp} className='signupForm'>
-            {errors.length > 0 && (<div className='signupErrorContainer'>
+            {errors.length > 0 && (<div className='errorContainer'>
               {errors.map((error, ind) => (
-                <div key={ind} className='signupErrorText'>{error.split(":")[1]}</div>
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
               ))}
             </div>)}
             {
@@ -168,10 +175,9 @@ const SignUpPage = () => {
           </form>
         </div>
         <div className='signupMedia'>
-
+          <img src="/static/images/signupPageImage.png" alt="computer signup" className='signupImage' />
         </div>
       </div>
-
     </div>
 
   );

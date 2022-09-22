@@ -255,6 +255,7 @@
   font-weight: 500;
   font-size: 20px;
   padding-left: 1em;
+  padding-top: .5em;
 }
 
 .project-container {
@@ -289,11 +290,11 @@
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-
+  color: rgb(174, 173, 173)
 }
 
 .create-project-button:hover {
-  background-color: #dbdbdb;
+  color: whitesmoke;
 }
 
 .square {
@@ -303,7 +304,7 @@
 .project-links {
   text-decoration-line: none;
   width: 40%;
-  color: black;
+  color: whitesmoke;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -311,15 +312,19 @@
   border-radius: 5px;
   margin-left: 10px;
   font-size: 16px;
+  margin-top: .7em;
 
 }
 
-.project-links:hover {
+/* .project-links:hover {
   background-color: #dbdbdb;
-
-}
+} */
 
 .project-titles {
   font-size: 16px;
   margin-left: 6px;
+}
+
+.projectDetailTaskOuterContainer {
+  padding: 20px;
 }

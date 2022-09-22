@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { workspaceUpdate } from "../../../store/workspace"
 import { useHistory, useParams } from "react-router-dom";
+import { authenticate } from "../../../store/session";
 
 
 
 
-const UpdateWorkspace = () => {
+const UpdateWorkspace = ({ setShowModal }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     // const workspaceId = workspace.workspace.id
@@ -16,11 +17,17 @@ const UpdateWorkspace = () => {
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
-
+    const currentUser = useSelector(state => state.session.user);
+    let workspaceArr = currentUser.workspaces
     useEffect(() => {
 
         const errors = []
-        if (!name.length) errors.push('Workspace name is required')
+        if (!name.length) errors.push('error: Workspace name already exists')
+        workspaceArr.filter(wkspace => {
+            if (name.toLowerCase() === wkspace.name.toLowerCase()) {
+                errors.push('error: Workspace name already exists')
+            }
+        })
         setValidationErrors(errors)
     }, [name])
 
@@ -32,34 +39,57 @@ const UpdateWorkspace = () => {
             name
         }
         if (!validationErrors.length) {
-            dispatch(workspaceUpdate(workspace, id))
+            await dispatch(workspaceUpdate(workspace, id))
+            await dispatch(authenticate())
+
+            setShowModal(false)
+
         }
     }
     return (
         <>
-            <h2>Update Workspace</h2>
-            {hasSubmitted && validationErrors.length > 0 && (
-                <div>
-                    <ul style={{ padding: '10px', color: 'red', listStyle: 'none' }}>
-                        {validationErrors.map(error => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
+            <div className="form-container">
+                <div className="top-create-form">
+                    <h2 className="create-title">Update Your Workspace</h2>
+                    <button className="create-button" onClick={() => setShowModal(false)}>X</button>
                 </div>
-            )}
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Workspace Name :
-                    <input
-                        maxLength={41}
-                        type='text'
-                        placeholder="Company or Team Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </label>
-                <button type="submit">Update</button>
-            </form>
+                <div>
+                    {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
+                        {validationErrors.map((error, ind) => (
+                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                        ))}
+                    </div>)}
+
+                    {/* {hasSubmitted && validationErrors.length > 0 && (
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <ul style={{ margin: '0', color: 'red', listStyle: 'none', padding: '10px' }}>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )} */}
+                    <form onSubmit={handleSubmit}>
+                        <div className="label-container-create">
+                            <label className="workspace-label">
+                                Workspace Name
+                                <input
+                                    className="workspace-input"
+                                    maxLength={41}
+                                    type='text'
+                                    placeholder="Company or Team Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <div className="button-container-create">
+                            <button className='submit-create-workspace' type="submit" >Update Workspace</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </>
     )
 

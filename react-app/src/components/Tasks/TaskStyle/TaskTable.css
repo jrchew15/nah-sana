@@ -2,18 +2,39 @@
     width: 100%;
     border-collapse: collapse;
     border-style: hidden;
-    padding: 10px;
+    /* padding: 10px; */
+}
+
+.table-onclick {
+    width: 50vw;
+    border-collapse: collapse;
+    border-style: hidden;
+    /* padding: 10px; */
 }
 
 .table-row,
 .table-head,
 .table-cell {
     border: solid 0.3px gray;
+    overflow: hidden;
+}
+
+.table-head {
+    padding-left: 15px;
+    height: 30px;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .table-cell {
     height: 50px;
-    font-size: medium;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.table-cell-text {
+    display: flex;
+    align-items: center;
 }
 
 #task-name {
@@ -47,4 +68,8 @@ th:first-child {
 #button {
     display: none;
     cursor: pointer;
+}
+
+.table-outer-container {
+    width: 100%;
 }

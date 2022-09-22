@@ -1,24 +1,30 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouteMatch, NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useRouteMatch, NavLink, useHistory, useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { logout } from "../../store/session";
 import EditUserFormModal from "../EditUserModal";
 import CreateWorkspaceModal from "../Workspace-test-reducer/CreateWorkspaceModal";
 import UpdateWorkspaceModal from "../Workspace-test-reducer/UpdateWorkspaceModal";
+import UserIcon from "../UserIcon";
+import { DropdownHandlingContext } from "../../context/DropdownHandlingContext";
 
 import './topbar.css'
 
 export default function Topbar({ toggleNavbarDisplay }) {
-    const currentUserTaskListUrl = '/' // REVISIT
-
     const currentUser = useSelector(state => state.session.user);
     const currentWorkspace = useSelector(state => state.workspace.workspace);
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const {
+        userDropdownRef,
+        userDropdownOpen,
+        setUserDropdownOpen,
+        dropdownChecks
+    } = useContext(DropdownHandlingContext)
+
     const toggleUserDropdown = () => {
-        setDropdownOpen(val => !val);
+        setUserDropdownOpen(val => !val);
     }
 
     const onLogout = async (e) => {
@@ -26,19 +32,25 @@ export default function Topbar({ toggleNavbarDisplay }) {
         history.push('/')
     };
 
+
+    // const conditionalClose = (e) => {
+    //     if (dropdownOpen && profileDropdownRef) {
+    //         if (e.target !== profileDropdownRef.current) {
+    //             setDropdownOpen(false)
+    //         }
+    //     }
+    // }
+
+
     return currentWorkspace && currentUser ? (
         <>
-            <div id='topbar'>
+            <div id='topbar' onClick={dropdownChecks}>
                 <i className="fas fa-bars" onClick={toggleNavbarDisplay} />
-                {/* this usericon is a placeholder */}
-                <div className="userIcon" onClick={toggleUserDropdown}>{currentUser.firstName[0].toUpperCase()}{currentUser.lastName[0].toUpperCase()}</div>
+                <UserIcon user={currentUser} clickHandler={toggleUserDropdown} />
             </div>
-            <div id='profile-dropdown' style={{ display: dropdownOpen ? 'flex' : 'none' }}>
+            <div id='profile-dropdown' ref={userDropdownRef} style={{ display: userDropdownOpen ? 'flex' : 'none' }}>
                 <div id='workspaces'>
                     {currentUser.workspaces.map(workspace => (
-                        // <NavLink key={workspace.id} to={`/workspaces/${workspace.id}`}>
-                        //     {workspace.name}
-                        // </NavLink>
                         <a key={workspace.id}
                             href={`/workspaces/${workspace.id}`}
                             target='_blank'
@@ -58,12 +70,11 @@ export default function Topbar({ toggleNavbarDisplay }) {
                 <div className="horizontal-separator" />
 
                 <div id="user-links">
-                    <NavLink to={currentUserTaskListUrl}>My Profile</NavLink>
+                    <NavLink to={`/workspaces/${currentWorkspace.id}/user/${currentUser.id}/list`}>My Profile</NavLink>
                     <EditUserFormModal toggleUserDropdown={toggleUserDropdown} />
                     <span className="logout" onClick={onLogout}>Log Out</span>
                 </div>
             </div>
-            { }
         </>
     ) : null
 }
