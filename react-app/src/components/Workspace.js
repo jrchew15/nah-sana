@@ -9,6 +9,7 @@ import { oneWorkspace } from "../store/workspace";
 import LeftNavBar from "./Navbars/LeftNavBar";
 import UserProfilePage from "./UserProfilePage";
 import { DropdownHandlingContext } from "../context/DropdownHandlingContext";
+import Splashpage from "./Splashpage";
 
 
 export default function Workspace() {
@@ -43,7 +44,7 @@ export default function Workspace() {
                 </div>
                 <div id='content'>
                     <Switch>
-                        <Route path='/workspaces/:id' exact>
+                        <Route exact path='/workspaces/:id'>
                             <GetOne workspaceId={workspaceId} />
                         </Route>
                         <Route exact path='/workspaces/:workspaceId/user/:id'>
@@ -60,6 +61,9 @@ export default function Workspace() {
                         </Route>
                         <Route exact path='/workspaces/:workspaceId/projects/:id/list'>
                             <ProjectDetail workspaceId={workspaceId} />
+                        </Route>
+                        <Route>
+                            <GetOne workspaceId={workspaceId} />
                         </Route>
                     </Switch>
                 </div>
