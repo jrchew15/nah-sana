@@ -137,6 +137,7 @@
 
 #left-nav-bar .acknowledgements>span {
     cursor: unset;
+    padding: 0;
 }
 
 #left-nav-bar .acknowledgements>span:hover,
