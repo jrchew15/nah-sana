@@ -52,7 +52,7 @@ const AddUser = ({ setShowModal }) => {
 
                 </div>
 
-                {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
+                {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors add-user-error'>
                     {validationErrors.map((error, ind) => (
                         <div key={ind} className='errorText'>{error.split(":")[1]}</div>
                     ))}
