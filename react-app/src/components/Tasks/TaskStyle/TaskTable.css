@@ -27,9 +27,14 @@
 }
 
 .table-cell {
-    height: 50px;
+    height: 40px;
     font-size: 16px;
     font-weight: 300;
+}
+
+.table-cell#task-name {
+    display: flex;
+    align-items: center;
 }
 
 .table-cell-text {
