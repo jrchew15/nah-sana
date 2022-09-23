@@ -9,7 +9,7 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if not user:
-        raise ValidationError('Email provided not found.')
+        raise ValidationError("Email provided not found. This user doesn't have an account, please ask them to sign up.")
 
 class WorkspaceForm(FlaskForm):
       # from variables are in camelCase to better match the front end

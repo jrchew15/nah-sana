@@ -6,7 +6,6 @@ import { authenticate } from "../../store/session";
 import GetProjects from "../Projects/ProjectsList";
 import TasksListByUser from "../Tasks/TasksListByUser";
 import './GetOne.css';
-import AddUserToWorkspace from "./AddUserModal";
 
 export default function GetOne({ workspaceId }) {
 
@@ -17,7 +16,6 @@ export default function GetOne({ workspaceId }) {
 
     const workspace = useSelector(state => state.workspace)
     const user = useSelector(state => state.session.user)
-    // console.log(user.image)
     const current = new Date().toDateString()
     // const date = new Date().toLocaleDateString();
     // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`
@@ -31,7 +29,6 @@ export default function GetOne({ workspaceId }) {
         history.push('/workspaces')
     }
     const deleteUser = async userid => {
-        console.log(userid, '------------')
         await dispatch(removeUserFromWorkspace(id, userid))
         await dispatch(authenticate())
         if (user.id === userid) {
@@ -45,7 +42,6 @@ export default function GetOne({ workspaceId }) {
             {(isLoaded &&
                 <div className="dashboard-container">
                     {/* <button onClick={handlepush}>Back to workspaces</button> */}
-                    <div className="left-corner">Home</div>
                     <div className="dashboard-titles">
                         <h5 style={{ fontWeight: '500', }}>{current}</h5>
                         <div>
