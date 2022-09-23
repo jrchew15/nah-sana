@@ -261,9 +261,16 @@
   height: 65px;
   margin-bottom: 8px;
   width: 48%;
-  background-color: #2a2b2d;
   color: var(--text-color);
   text-align: center;
+}
+
+#deleteProject{
+  background-color: #D11A2A;
+}
+
+#editProject {
+  background-color: #4473D2;
 }
 
 .title-projects {
