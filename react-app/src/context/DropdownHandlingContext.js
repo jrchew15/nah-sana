@@ -6,11 +6,18 @@ export const DropdownHandlingProvider = props => {
     const [userDropdownOpen, setUserDropdownOpen] = useState(false)
     const profileDropdownRef = useRef(null);
 
+
     const [createDropdownOpen, setCreateDropdownOpen] = useState(false)
     const createDropdownRef = useRef(null);
 
+
     const [workspaceDropdownOpen, setWorkspaceDropdownOpen] = useState(false)
     const workspaceDropdownRef = useRef(null);
+
+
+    const [developerDropdownOpen, setDeveloperDropdownOpen] = useState(false)
+    const developerDropdownRef = useRef(null);
+
 
     function dropdownChecks(e) {
         if (profileDropdownRef && userDropdownOpen) {
@@ -28,12 +35,19 @@ export const DropdownHandlingProvider = props => {
                 setWorkspaceDropdownOpen(false)
             }
         }
+        if (developerDropdownOpen && developerDropdownRef) {
+
+            if (e.target !== developerDropdownRef.current) {
+                setDeveloperDropdownOpen(false)
+            }
+        }
     }
 
     const allvals = {
         userDropdownOpen, setUserDropdownOpen,
         createDropdownOpen, setCreateDropdownOpen,
         workspaceDropdownOpen, setWorkspaceDropdownOpen,
+        developerDropdownOpen, setDeveloperDropdownOpen,
         dropdownChecks
     }
 

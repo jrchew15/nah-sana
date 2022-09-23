@@ -49,10 +49,10 @@ function Splashpage() {
           <div className='splashpageButton' id="spgreen">
             <div className='spProfileInitials'>CC</div>
             <div className='splashpageProfileIcons'>
-              <a href="https://github.com/chencc33">
+              <a href="https://github.com/chencc33" target="_blank">
                 <i className="fa-brands fa-square-github devLinks"></i>
               </a>
-              <a href="https://www.linkedin.com/in/chencc33">
+              <a href="https://www.linkedin.com/in/chencc33" target="_blank">
                 <i className="fa-brands fa-linkedin devLinks"></i>
               </a>
             </div>
@@ -60,10 +60,10 @@ function Splashpage() {
           <div className='splashpageButton' id="spyellow">
             <div className='spProfileInitials'>CO</div>
             <div className='splashpageProfileIcons'>
-              <a href="https://github.com/coucode">
-                <i className="fa-brands fa-square-github devLinks"></i> 
+              <a href="https://github.com/coucode" target="_blank">
+                <i className="fa-brands fa-square-github devLinks"></i>
               </a>
-              <a href="https://www.linkedin.com/in/ceciliasou">
+              <a href="https://www.linkedin.com/in/ceciliasou" target="_blank">
                 <i className="fa-brands fa-linkedin devLinks"></i>
               </a>
             </div>
@@ -71,7 +71,7 @@ function Splashpage() {
           <div className='splashpageButton' id="spgreen">
             <div className='spProfileInitials'>FP</div>
             <div className='splashpageProfileIcons'>
-              <a href="https://github.com/Fpalacios153">
+              <a href="https://github.com/Fpalacios153" target="_blank">
                 <i className="fa-brands fa-square-github devLinks"></i>
               </a>
               {/* <a href="">
@@ -82,10 +82,10 @@ function Splashpage() {
           <div className='splashpageButton' id="spyellow">
             <div className='spProfileInitials'>JC</div>
             <div className='splashpageProfileIcons'>
-              <a href="https://github.com/jrchew15">
+              <a href="https://github.com/jrchew15" target="_blank">
                 <i className="fa-brands fa-square-github devLinks"></i>
               </a>
-              <a href="https://www.linkedin.com/in/jason-chew-20867a207/">
+              <a href="https://www.linkedin.com/in/jason-chew-20867a207/" target="_blank">
                 <i className="fa-brands fa-linkedin devLinks"></i>
               </a>
             </div>
