@@ -13,7 +13,7 @@ class ProjectForm(FlaskForm):
   workspaceId = IntegerField("Workspace", validators=[DataRequired()])
   name = StringField("Name", validators=[DataRequired(message="Name is required"), Length(max=100, message="Name must be less than 100 characters")])
   status = StringField("Status", validators=[Length(max=15, message="Status must be less than 100 characters")])
-  dueDate = DateField("Due Date",validators=[DataRequired('Date is required'), check_for_future])
+  dueDate = DateField("Due Date",validators=[DataRequired('Date is required')])
   description = StringField("Description", validators=[Length(max=500, message="Description must be less than 500 characters")])
   icon = StringField("Icon", validators=[Length(max=100, message="Icon must be less than 100 characters")])
   ownerId = IntegerField("Owner")
