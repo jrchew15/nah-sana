@@ -120,11 +120,6 @@ const CreateProjectForm = ({ setShowModal }) => {
             name='description'
             onChange={(e) => setDescription(e.target.value)}
             value={description}
-<<<<<<< Updated upstream
-=======
-            placeholder="Add a description of your project here (Optional)"
-            style={{ resize: 'none', height: '5em' }}
->>>>>>> Stashed changes
           ></textarea>
         </div>
         <div className='project-input-container move-button-down'>
