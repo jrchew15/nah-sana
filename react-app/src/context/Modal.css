@@ -59,6 +59,10 @@ textarea:focus {
   height: 40px; */
 }
 
+.user-settings-field label {
+  margin-bottom: 10px;
+}
+
 .user-settings-field {
   display: flex;
   flex-direction: column;
