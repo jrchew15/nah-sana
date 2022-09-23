@@ -45,7 +45,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         if (!dueDate) errors.push('Please choose a due date')
         if (!userId) errors.push('Please choose a user')
         setErrors(errors)
-    }, [name, projectId, userId])
+    }, [name, projectId, userId, dueDate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,21 +58,32 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             projectId,
             complete
         }
-        let data
-        if (!task) {
-            data = await dispatch(createOneTask(formData))
-        } else {
+        // let data
+        if (!errors.length && !task) {
+            let data = await dispatch(createOneTask(formData))
+            if (Array.isArray(data)) {
+                setErrors(data)
+            } else {
+                await dispatch(oneWorkspace(workspaceId))
+                if (!plainForm) setShowModal(false)
+                if (plainForm) setShowTaskDetail(false)
+            }
+        }
+
+        if (!errors.length && task) {
             formData.id = taskId;
-            data = await dispatch(updateOneTask(formData))
+            let data = await dispatch(updateOneTask(formData))
+            if (Array.isArray(data)) {
+                console.log(errors)
+                setErrors(data)
+            } else {
+                await dispatch(oneWorkspace(workspaceId))
+                if (!plainForm) setShowModal(false)
+                if (plainForm) setShowTaskDetail(false)
+            }
         }
-        await dispatch(oneWorkspace(workspaceId))
-        if (data) {
-            setErrors(data)
-            // return
-        }
-        if (!plainForm) setShowModal(false)
-        if (plainForm) setShowTaskDetail(false)
     }
+
 
     return (
         <>
@@ -97,11 +108,14 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             </div>
                             <h2 style={{ marginLeft: '10px' }}>My Task</h2>
                         </div>
-                        {hasSubmitted && errors.length > 0 && <div className='errorContainer'>
+
+                        {hasSubmitted && errors.length > 0 && (<div className='errorContainer project-errors '>
                             {errors.map((error, ind) => (
-                                <div key={ind} className='errorText'>{error}</div>
+                                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
                             ))}
-                        </div>}
+                        </div>)}
+
+
                         <div className='task-input-container'>
                             <label htmlFor='name' className='task-form-label'>Name</label>
                             <input className='task-form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
@@ -157,7 +171,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             )}
                         </div>
                     </form >
-                    {/* </div> */}
+
                 </div >
             )
             }
