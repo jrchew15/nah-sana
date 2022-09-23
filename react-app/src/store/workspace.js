@@ -44,7 +44,6 @@ export const workspaceGet = () => async (dispatch) => {
 }
 //Get All workspace details
 export const oneWorkspace = (id) => async (dispatch) => {
-    // console.log(id)
     const response = await fetch(`/api/workspaces/${id}`)
     if (response.ok) {
         const workspace = await response.json()
@@ -68,7 +67,6 @@ export const workspaceCreate = (workspace) => async (dispatch) => {
 }
 //Update Workspace
 export const workspaceUpdate = (workspace, id) => async (dispatch) => {
-    // console.log('THUNK WORKSPAXCE', workspace, id)
     const response = await fetch(`/api/workspaces/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -118,7 +116,6 @@ export default function workspaceReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_WORKSPACE:
             const allWorkspaces = {}
-            // console.log('HELLLO', action.workspace.workspaces)
             action.workspace.workspaces.forEach(ws => {
                 allWorkspaces[ws.id] = ws
             });
@@ -153,7 +150,6 @@ export default function workspaceReducer(state = initialState, action) {
         case REMOVE_USER:
             newState = { ...state }
             let oldUsers = { ...newState['users'] }
-            console.log(action)
             delete oldUsers[action.userId]
             newState['users'] = oldUsers
             return newState

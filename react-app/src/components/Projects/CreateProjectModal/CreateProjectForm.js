@@ -9,7 +9,6 @@ const CreateProjectForm = ({ setShowModal }) => {
   const user = useSelector(state => state.session.user);
   const projects = useSelector(state => state.workspace.projects)
   const projectsArray = Object.values(projects)
-  console.log(projects)
   const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState('')

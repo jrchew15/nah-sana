@@ -10,27 +10,32 @@ function ProjectDetail({ workspaceId }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const { id } = useParams()
+  const redirectCheck = useSelector(state => state.workspace.projects)
   const projectObj = useSelector(state => state.projects)
   const project = projectObj[id]
   const [projectLoaded, setProjectLoaded] = useState(false)
 
-
   useEffect(() => {
     dispatch(getAProject(id))
   }, [dispatch, id])
-
+  
   useEffect(() => {
     if (project) {
       setProjectLoaded(true)
     }
   }, [project])
-
+  
   function redirect() {
     setTimeout(() => { history.push(`/workspaces/${workspaceId}`) }, 1000)
   }
 
-  if ((projectLoaded === false) && !project) return null
-  if ((projectLoaded === true) && (!project || Number(project.workspaceId) !== Number(workspaceId))) {
+  let exists = false;
+  redirectCheck.forEach(project => {
+    if (Number(project.id) === Number(id)){
+      exists = true;
+    }
+  })
+  if (!exists){
     return (
       <div>
         <h1 className='projectDoesNotExist'>Project does not exist...redirecting</h1>
@@ -38,6 +43,9 @@ function ProjectDetail({ workspaceId }) {
       </div>
     )
   }
+
+
+  if (!project) return null
 
   const handleDeleteClick = async (e) => {
     await dispatch(deleteAProject(id))

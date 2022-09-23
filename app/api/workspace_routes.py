@@ -25,7 +25,6 @@ def get_all_workspace():
 #     user_id =current_user.id
 #     workspace = Workspace.query.get(workspace.member ==user_id)
 #     find_user = [x for x in workspace.spaces if x.id == user_id]
-#     print(workspace,'------------------')
 
 
 #Get all tasks by a user's id who is in the same workspace as current user
@@ -47,8 +46,7 @@ def one_workspace(id):
     project_objs= [project for project in workspace.projects]
     project_in_this_ws= [project.to_dict() for project in project_objs]
     task_in_this_ws = []
-    print(users_in_this_ws,'1111111111-----------')
-    print(current_user.to_dict(),'-------------------CURRRRRRR')
+
     # add all the tasks from each project on the workspace
     for project in project_objs:
         task_in_this_ws.extend([task.to_dict() for task in project.tasks])
@@ -79,7 +77,6 @@ def create_workspace():
 
         # user_email = str(form.data['email'])
         # foundUser = User.query.filter(User.email == user_email)[0]
-        # print(user_email,'----------------33333-')
         # new_workspace.members.append(foundUser)
         db.session.commit()
         return  new_workspace.to_dict()
