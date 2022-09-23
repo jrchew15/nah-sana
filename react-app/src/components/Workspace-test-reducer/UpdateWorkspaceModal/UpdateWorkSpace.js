@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { workspaceUpdate } from "../../../store/workspace"
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { authenticate } from "../../../store/session";
 
 

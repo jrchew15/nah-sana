@@ -5,7 +5,6 @@ import { authenticate } from './store/session';
 import { DropdownHandlingProvider } from './context/DropdownHandlingContext';
 
 import Workspace from './components/Workspace';
-import CreateWorkspace from './components/Workspace-test-reducer/CreateWorkspaceModal/CreateWS'
 
 import Splashpage from './components/Splashpage';
 import LoginPage from './components/auth/LoginPage';

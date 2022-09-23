@@ -30,8 +30,8 @@ const TasksListByProject = ({ projectId }) => {
     return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
-                <div style={{ display: 'flex' }} className="table-outer-container">
-                    <div className="table-outer-container">
+                <div className="table-outer-container">
+                    <div style={{ width: '100%' }}>
                         <div className='add-task-button'
                             onClick={() => {
                                 setShowTaskDetail(true)
