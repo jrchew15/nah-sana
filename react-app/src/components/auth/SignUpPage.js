@@ -136,7 +136,7 @@ const SignUpPage = () => {
                 onChange={(e) => setBio(e.target.value)}
                 value={bio}
                 rows="5"
-                placeholder="Have important information to share with your team like: My hours are 9am-5pm? Write them here!"
+                placeholder="Have important information to share with your team like: My hours are 9am-5pm? Write them here! (Optional)"
                 className="signupTextArea"
               ></textarea>
             </div>
@@ -165,7 +165,7 @@ const SignUpPage = () => {
           </form>
         </div>
         <div className='signupMedia'>
-          <img src="/static/images/signupPageImage.png" alt="computer signup" className='signupImage' />
+          <img src="/static/images/signupPageImage.jpeg" alt="computer signup" className='signupImage' />
         </div>
       </div>
     </div>
