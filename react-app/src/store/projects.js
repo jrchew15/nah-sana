@@ -39,7 +39,7 @@ const deleteProject = (projectId) => {
 }
 
 export const getAllProjects = () => async (dispatch) => {
-  const response = await fetch('/api/projects');
+  const response = await fetch('/api/projects')
   if (response.ok) {
     const projects = await response.json()
     dispatch(getProjects(projects))
@@ -54,7 +54,7 @@ export const getAllProjects = () => async (dispatch) => {
 }
 
 export const getAProject = (id) => async (dispatch) => {
-  const response = await fetch(`/api/projects/${id}`);
+  const response = await fetch(`/api/projects/${id}`)
   if (response.ok) {
     const project = await response.json()
     dispatch(getProject(project))
