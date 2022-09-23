@@ -39,11 +39,7 @@ const deleteProject = (projectId) => {
 }
 
 export const getAllProjects = () => async (dispatch) => {
-  const response = await fetch('/api/projects', {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
+  const response = await fetch('/api/projects')
   if (response.ok) {
     const projects = await response.json()
     dispatch(getProjects(projects))
@@ -58,11 +54,7 @@ export const getAllProjects = () => async (dispatch) => {
 }
 
 export const getAProject = (id) => async (dispatch) => {
-  const response = await fetch(`/api/projects/${id}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
+  const response = await fetch(`/api/projects/${id}`)
   if (response.ok) {
     const project = await response.json()
     dispatch(getProject(project))
@@ -121,10 +113,7 @@ export const updateAProject = (payload) => async (dispatch) => {
 
 export const deleteAProject = (projectId) => async (dispatch) => {
   const response = await fetch(`/api/projects/${projectId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    }
+    method: 'DELETE'
   });
   if (response.ok) {
     dispatch(deleteProject(projectId))

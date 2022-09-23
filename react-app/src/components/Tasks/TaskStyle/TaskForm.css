@@ -1,3 +1,9 @@
+.task-form-header {
+    font-weight: 400;
+    margin: 10px;
+    width: 200px;
+}
+
 .task-form-container {
     width: 30em;
     min-width: 15em;
@@ -21,6 +27,9 @@
 
 .task-form-label {
     padding-bottom: 10px;
+    font-weight: 300;
+    font-size: 18px;
+    padding-left: 2px;
 }
 
 .task-input-label {
@@ -28,12 +37,16 @@
 }
 
 .task-form-input {
+    border: solid 1px #424244;
     background-color: var(--bkg-color-black);
     color: var(--text-color);
     overflow: auto;
     flex-grow: 1;
     height: 100%;
-    border: #a2a0a2 1px solid;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .task-form-textarea {
@@ -43,6 +56,11 @@
     flex-grow: 1;
     height: 100%;
     border: #a2a0a2 1px solid;
+    resize: none;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .move-button-down {
@@ -69,4 +87,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.task-select-class {
+    background: none;
+    color: whitesmoke;
+    padding: 8px;
+    border: #424244 1px solid;
+    border-radius: 6px;
 }
