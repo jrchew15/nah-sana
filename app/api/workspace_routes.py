@@ -1,5 +1,4 @@
 
-import email
 from flask import Blueprint,request
 from app.api.user_routes import user, users
 from app.forms import project_form

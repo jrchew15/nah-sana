@@ -42,7 +42,7 @@ def create_task(id):
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 # Get all projects
-@project_routes.route('/')
+@project_routes.route('')
 def all_projects():
     projects_all= [project.to_dict() for project in Project.query.all()]
     return { "projects": projects_all }
