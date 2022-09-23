@@ -1,25 +1,18 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams, NavLink, Route, Switch, useHistory } from "react-router-dom";
-import { oneWorkspace } from "../store/workspace";
 import TasksListUserProfile from "./Tasks/TasksListUserProfile";
 import './UserProfilePage.css'
 
 function UserProfilePage() {
-  const dispatch = useDispatch()
   const history = useHistory()
   const [loaded, setLoaded] = useState(false)
-
   const { workspaceId, id } = useParams()
   const users = useSelector(state => state.workspace.users)
   let user;
   if (users) {
     user = users[id]
   }
-
-  useEffect(() => {
-    dispatch(oneWorkspace(workspaceId))
-  }, [dispatch, workspaceId])
 
   useEffect(() => {
     if (user) {
@@ -33,7 +26,7 @@ function UserProfilePage() {
   }
 
 
-  if (loaded && !user) {
+  if (!user) {
     return (
       <div>
         <h1 className='projectDoesNotExist'>User does not exist...redirecting</h1>
@@ -42,7 +35,7 @@ function UserProfilePage() {
     )
   }
 
-  if (!loaded && !user) return null
+
   let overview = (
     <div className="profileInfoContainer">
       <div className="profileInfoLeftContent">

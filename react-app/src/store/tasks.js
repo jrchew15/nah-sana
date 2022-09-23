@@ -33,7 +33,6 @@ export const getTasks = () => async dispatch => {
     const response = await fetch(`/api/tasks`);
     if (response.ok) {
         const tasks = await response.json()
-        // console.log('*******tasks from thunk******', tasks)
         dispatch(loadAll(tasks))
         return tasks
     }
@@ -43,7 +42,6 @@ export const getTaskById = (taskId) => async (dispatch) => {
     const response = await fetch(`/api/tasks/${taskId}`);
     if (response.ok) {
         const task = await response.json()
-        // console.log('*******tasks from thunk******', task)
         dispatch(loadOneTask(task))
         return task
     }
@@ -62,20 +60,17 @@ export const getTasksByWorkspace = (workspaceId, userId) => async (dispatch) => 
     const response = await fetch(`/api/workspaces/${workspaceId}/users/${userId}/tasks`)
     if (response.ok) {
         const tasks = await response.json()
-        // console.log('*******tasks from thunk******', tasks)
         dispatch(loadAll(tasks))
         return tasks
     }
 }
 
 export const createOneTask = formData => async dispatch => {
-    // console.log('in thunk before fetch', formData)
     const response = await fetch(`/api/projects/${formData.projectId}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
     })
-    // console.log('in thunk after fetch', response)
     const data = await response.json()
     if (response.ok) {
         dispatch(add(data))
@@ -98,7 +93,6 @@ export const updateOneTask = data => async dispatch => {
         return null
     }
     if (resBody.errors.length) {
-        // console.log('update Thunk', resBody.errors)
         return resBody.errors;
     }
 };
@@ -120,7 +114,6 @@ const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_TASKS:
             newState = { ...action.tasks }
-            // console.log('*********tasks from reducer******', action.tasks)
             return newState
         case LOAD_TASK:
             newState = { ...state }

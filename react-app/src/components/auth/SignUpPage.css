@@ -72,7 +72,7 @@
   padding-bottom: 2px;
 }
 
-#signupInput {
+.signupInput {
   background-color: #fff;
   border: 2px solid #e0e6e8;
   border-radius: 3px;
@@ -86,7 +86,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-#signupTextArea {
+.signupTextArea {
   background-color: #fff;
   border: 2px solid #e0e6e8;
   border-radius: 3px;

@@ -75,7 +75,7 @@ const SignUpPage = () => {
                 name='firstName'
                 onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
-                id="signupInput"
+                className="signupInput"
                 placeholder='First Name'
               ></input>
             </div>
@@ -85,7 +85,7 @@ const SignUpPage = () => {
                 name='lastName'
                 onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Last Name'
               ></input>
             </div>
@@ -95,7 +95,7 @@ const SignUpPage = () => {
                 name='email'
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                id="signupInput"
+                className="signupInput"
                 placeholder='name@company.com'
               ></input>
             </div>
@@ -105,7 +105,7 @@ const SignUpPage = () => {
                 name='role'
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Role (Optional)'
               ></input>
             </div>
@@ -115,7 +115,7 @@ const SignUpPage = () => {
                 name='pronouns'
                 onChange={(e) => setPronouns(e.target.value)}
                 value={pronouns}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Pronouns (Optional)'
               ></input>
             </div>
@@ -125,7 +125,7 @@ const SignUpPage = () => {
                 name='department'
                 onChange={(e) => setDepartment(e.target.value)}
                 value={department}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Department (Optional)'
               ></input>
             </div>
@@ -137,7 +137,7 @@ const SignUpPage = () => {
                 value={bio}
                 rows="5"
                 placeholder="Have important information to share with your team like: My hours are 9am-5pm? Write them here!"
-                id="signupTextArea"
+                className="signupTextArea"
               ></textarea>
             </div>
             <div className="signupOuterInput">
@@ -146,7 +146,7 @@ const SignUpPage = () => {
                 name='password'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Password'
               ></input>
             </div>
@@ -157,7 +157,7 @@ const SignUpPage = () => {
                 onChange={(e) => setRepeatPassword(e.target.value)}
                 value={repeatPassword}
                 required={true}
-                id="signupInput"
+                className="signupInput"
                 placeholder='Repeat Password'
               ></input>
             </div>
