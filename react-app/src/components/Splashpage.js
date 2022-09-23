@@ -85,7 +85,7 @@ function Splashpage() {
               <a href="https://github.com/jrchew15">
                 <i className="fa-brands fa-square-github devLinks"></i>
               </a>
-              <a href="">
+              <a href="https://www.linkedin.com/in/jason-chew-20867a207/">
                 <i className="fa-brands fa-linkedin devLinks"></i>
               </a>
             </div>
