@@ -74,9 +74,9 @@ function Splashpage() {
               <a href="https://github.com/Fpalacios153">
                 <i className="fa-brands fa-square-github devLinks"></i>
               </a>
-              <a href="">
+              {/* <a href="">
                 <i className="fa-brands fa-linkedin devLinks"></i>
-              </a>
+              </a> */}
             </div>
           </div>
           <div className='splashpageButton' id="spyellow">
