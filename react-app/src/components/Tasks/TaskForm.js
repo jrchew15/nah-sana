@@ -40,10 +40,10 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
 
     useEffect(async () => {
         let errors = []
-        if (!name) errors.push('Task Name is required')
-        if (!projectId) errors.push('Please choose a project')
-        if (!dueDate) errors.push('Please choose a due date')
-        if (!userId) errors.push('Please choose a user')
+        if (!name) errors.push('error: Task Name is required')
+        if (!projectId) errors.push('error: Please choose a project')
+        if (!dueDate) errors.push('error: Please choose a due date')
+        if (!userId) errors.push('error: Please choose a user')
         setErrors(errors)
     }, [name, projectId, userId, dueDate])
 
