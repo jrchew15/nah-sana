@@ -17,6 +17,17 @@ const TasksListUserProfile = ({ props }) => {
         filteredTasks = tasksArr.filter(task => Number(task.userId) === Number(props.id))
     }
 
+    function modifyDate(str) {
+        const dateStr = str.split(', ')
+        const modifiedDate = `${dateStr[1].split(' ')[1]} ${dateStr[1].split(' ')[0]}`
+        return modifiedDate
+    }
+
+
+    const sortedTasks = filteredTasks?.sort(function (a, b) {
+        return new Date(modifyDate(b.dueDate)) - new Date(modifyDate(a.dueDate))
+    })
+
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
@@ -39,15 +50,15 @@ const TasksListUserProfile = ({ props }) => {
                             }}>
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
-                        {filteredTasks && (
+                        {sortedTasks && (
                             <table className={showTaskDetail ? "table-onclick" : "table"}>
                                 <tbody>
                                     <tr className="table-row">
                                         <th className="table-head">Task Name</th>
                                         <th className="table-head">Due Date</th>
                                     </tr>
-                                    {filteredTasks.length === 0 && (<div className="horizontal-separator"></div>)}
-                                    {filteredTasks.map((task) => (
+                                    {sortedTasks.length === 0 && (<div className="horizontal-separator"></div>)}
+                                    {sortedTasks.map((task) => (
                                         <tr key={task.id} className="table-row">
                                             <td className="table-cell" id='task-name'
                                                 onClick={() => (
