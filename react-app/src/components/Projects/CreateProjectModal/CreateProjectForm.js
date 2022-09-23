@@ -122,6 +122,7 @@ const CreateProjectForm = ({ setShowModal }) => {
             onChange={(e) => setDescription(e.target.value)}
             value={description}
             placeholder="Add a description of your project here (Optional)"
+            style={{ resize: 'none', height: '5em' }}
           ></textarea>
         </div>
         <div className='project-input-container move-button-down'>
