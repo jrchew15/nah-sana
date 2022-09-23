@@ -127,7 +127,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
 
                         <div className='task-input-container'>
                             <label htmlFor='name' className='task-form-label'>Name</label>
-                            <input className='task-form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
+                            <input className='task-form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required placeholder='Your task name' />
                         </div>
                         <div className='task-input-container'>
                             <label htmlFor='dueDate' className='task-form-label'>Due Date</label>
@@ -160,7 +160,8 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                             <label htmlFor='description' className='task-form-label' >Description</label>
                             <textarea className='task-form-textarea' type='text' name='description'
                                 style={{ height: '80px' }}
-                                onChange={e => setDescription(e.target.value)} value={description} />
+                                onChange={e => setDescription(e.target.value)} value={description}
+                                placeholder="Add a description for your task here (Optional)" />
                         </div>
                         <div className='task-button-container, task-input-container' style={{ alignItems: 'center' }}>
                             <button type='submit'
