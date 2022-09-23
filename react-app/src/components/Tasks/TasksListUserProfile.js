@@ -26,12 +26,12 @@ const TasksListUserProfile = ({ props }) => {
     useEffect(() => {
         dispatch(oneWorkspace(workspaceId)).then(() => setIsLoaded(true))
     }, [dispatch, workspaceId])
-    
+
     return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
-                <div style={{ display: 'flex' }} className="table-outer-container">
-                    <div className="table-outer-container">
+                <div style={{ display: 'flex', flexGrow: '1' }} >
+                    <div style={{ width: '100%' }}>
                         <div className='add-task-button'
                             onClick={() => {
                                 setShowTaskDetail(true)
