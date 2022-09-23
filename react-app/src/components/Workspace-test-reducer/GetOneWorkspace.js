@@ -48,7 +48,7 @@ export default function GetOne({ workspaceId }) {
                             <div className="welcome">Welcome {user.firstName}!</div>
                         </div>
                         <div>
-                            <h3 style={{ fontWeight: '500', }}> Workspace: {workspace.workspace.name}</h3>
+                            <h3 style={{ fontWeight: '500', }}>{workspace.workspace.name}</h3>
                         </div>
                     </div>
                     <div className="top-widgets">
@@ -66,6 +66,7 @@ export default function GetOne({ workspaceId }) {
                         </div>
                         <div className="right-widget">
                             {/* <div className="wrapper"> */}
+                            {/* <h3 className='title-projects'>Projects</h3> */}
                             <GetProjects workspaceId={workspaceId} />
                             {/* </div> */}
                         </div>
@@ -76,19 +77,18 @@ export default function GetOne({ workspaceId }) {
                             <div className="user-list ">
                                 {Object.values(workspace.users).map(user => (
                                     <>
-                                        <div>
-
-                                            <div className="user-card">
-                                                <NavLink className='nav-to-users' to={`/workspaces/${workspaceId}/user/${user.id}`}>
-                                                    <img className="user-card-image" src={user.image} alt={user.firstName}></img>
-                                                    <div className="user-name-link" key={user.id}>{user.firstName} {user.lastName}</div>
-                                                </NavLink>
-                                                <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
-                                                <div>
-                                                    <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
-                                                </div>
+                                        {/* <div> */}
+                                        <div className="user-card">
+                                            <NavLink className='nav-to-users' to={`/workspaces/${workspaceId}/user/${user.id}`}>
+                                                <img className="user-card-image" src={user.image} alt={user.firstName}></img>
+                                                <div className="user-name-link" key={user.id}>{user.firstName} {user.lastName}</div>
+                                            </NavLink>
+                                            <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
+                                            <div>
+                                                <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
                                             </div>
                                         </div>
+                                        {/* </div> */}
                                     </>
                                 ))}
                             </div>

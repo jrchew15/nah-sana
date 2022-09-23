@@ -50,9 +50,9 @@ const CreateProjectForm = ({ setShowModal }) => {
       if (Array.isArray(data)) {
         setErrors(data)
       } else {
+        await dispatch(oneWorkspace(id))
         await history.push(`/workspaces/${workspaceId}/projects/${data.id}`)
         await setShowModal(false)
-        await dispatch(oneWorkspace(id))
       }
     }
   };

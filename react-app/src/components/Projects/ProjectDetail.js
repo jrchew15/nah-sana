@@ -124,7 +124,7 @@ function ProjectDetail({ workspaceId }) {
         </div>
         <div className='projectDetailRightButtons'>
           <EditProjectModal project={project} />
-          <button onClick={handleDeleteClick} className='projectButton'>Delete Project</button>
+          <button onClick={handleDeleteClick} className='projectButton' id="deleteProject">Delete Project</button>
         </div>
       </div>
     </div>
