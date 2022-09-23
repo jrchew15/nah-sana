@@ -18,7 +18,10 @@ export default function LeftNavBar() {
         setCreateDropdownOpen,
         setWorkspaceDropdownOpen,
         workspaceDropdownOpen,
-        workspaceDropdownRef } = useContext(DropdownHandlingContext);
+        workspaceDropdownRef,
+        developerDropdownOpen,
+        setDeveloperDropdownOpen,
+        developerDropdownRef } = useContext(DropdownHandlingContext);
 
     function redirectToProfile(userId) {
         history.push(`/workspaces/${workspace.workspace.id}/user/${userId}`)
@@ -71,6 +74,10 @@ export default function LeftNavBar() {
                     <NavAddUserModal />
                 </div>
                 <div className='horizontal-separator' style={{ margin: "10px 0" }} />
+                <div onClick={() => setDeveloperDropdownOpen(val => !val)}>
+                    <span><i className="fa-brands fa-square-github" />About the Developers</span>
+                </div>
+                <div className='horizontal-separator' style={{ margin: "10px 0" }} />
                 <div style={{ marginBottom: 10 }} className='acknowledgements'>
                     <span style={{ display: 'flex', justifyContent: 'center' }}>{'These icons by '}<a target="_blank" href="https://icons8.com" className='acknowledgements' rel="noreferrer">{' Icons8'}</a></span>
                     <span style={{ display: 'flex', justifyContent: 'center' }}>
@@ -94,6 +101,31 @@ export default function LeftNavBar() {
             <div id='create-dropdown-workspace' className="left-dropdowns" style={{ display: workspaceDropdownOpen ? 'flex' : 'none' }} ref={workspaceDropdownRef}>
                 <NavProjectForm handleClick={() => setWorkspaceDropdownOpen(false)} />
                 <NavDropdownAddUserModal handleClick={() => setWorkspaceDropdownOpen(false)} />
+            </div>
+            <div id='developer-info-dropdown' className="left-dropdowns" style={{ display: developerDropdownOpen ? 'flex' : 'none' }} ref={developerDropdownRef} >
+                <a href="https://www.github.com/chencc33" target="_blank">C. Chen -
+                    <div>
+                        <i className="fa-brands fa-square-github" />
+                    </div>
+                </a>
+                <div className="horizontal-separator" />
+                <a href="https://www.github.com/jrchew15" target="_blank">J. Chew -
+                    <div>
+                        <i className="fa-brands fa-square-github" />
+                    </div>
+                </a>
+                <div className="horizontal-separator" />
+                <a href="https://www.github.com/coucode" target="_blank">C. Ou -
+                    <div>
+                        <i className="fa-brands fa-square-github" />
+                    </div>
+                </a>
+                <div className="horizontal-separator" />
+                <a href="https://www.github.com/Fpalacios153" target="_blank">F. Palacios -
+                    <div>
+                        <i className="fa-brands fa-square-github" />
+                    </div>
+                </a>
             </div>
         </>) : null
     )

@@ -44,6 +44,55 @@ function Splashpage() {
           <a href="https://github.com/coucode" className='splashpageButton' id="spyellow">CO</a>
           <a href="https://github.com/Fpalacios153" className='splashpageButton' id="spgreen">FP</a>
           <a href="https://github.com/jrchew15" className='splashpageButton' id="spyellow">JC</a>
+<<<<<<< Updated upstream
+=======
+        </div> */}
+        <div className='splashpageProfileContainer'>
+          <div className='splashpageButton' id="spgreen">
+            <div className='spProfileInitials'>CC</div>
+            <div className='splashpageProfileIcons'>
+              <a href="https://github.com/chencc33" target="_blank">
+                <i className="fa-brands fa-square-github devLinks"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/chencc33" target="_blank">
+                <i className="fa-brands fa-linkedin devLinks"></i>
+              </a>
+            </div>
+          </div>
+          <div className='splashpageButton' id="spyellow">
+            <div className='spProfileInitials'>CO</div>
+            <div className='splashpageProfileIcons'>
+              <a href="https://github.com/coucode" target="_blank">
+                <i className="fa-brands fa-square-github devLinks"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/ceciliasou" target="_blank">
+                <i className="fa-brands fa-linkedin devLinks"></i>
+              </a>
+            </div>
+          </div>
+          <div className='splashpageButton' id="spgreen">
+            <div className='spProfileInitials'>FP</div>
+            <div className='splashpageProfileIcons'>
+              <a href="https://github.com/Fpalacios153" target="_blank">
+                <i className="fa-brands fa-square-github devLinks"></i>
+              </a>
+              {/* <a href="">
+                <i className="fa-brands fa-linkedin devLinks"></i>
+              </a> */}
+            </div>
+          </div>
+          <div className='splashpageButton' id="spyellow">
+            <div className='spProfileInitials'>JC</div>
+            <div className='splashpageProfileIcons'>
+              <a href="https://github.com/jrchew15" target="_blank">
+                <i className="fa-brands fa-square-github devLinks"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/jason-chew-20867a207/" target="_blank">
+                <i className="fa-brands fa-linkedin devLinks"></i>
+              </a>
+            </div>
+          </div>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
