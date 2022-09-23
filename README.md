@@ -12,10 +12,9 @@
 - [User Stories](https://github.com/jrchew15/nah-sana/wiki/User-Stories)
 
 ### This project is built with:
-
+* [![React][React.js]][React-url]
 - SQLAlchemy
 - Flask
-- React
 - Redux
 - Docker
 - Alembic
@@ -124,3 +123,5 @@ Navigate to the /react-app directory, run the following command to set up the ne
 npm install
 npm start
 ```
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
