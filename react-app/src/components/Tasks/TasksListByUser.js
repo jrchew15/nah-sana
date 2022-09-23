@@ -10,9 +10,14 @@ import './TaskList.css'
 
 const TasksListByUser = () => {
     const dispatch = useDispatch()
-
+    const currentUser = useSelector((state) => state.session.user.id)
     const workspace = useSelector((state) => state.workspace)
     const tasksArr = workspace['tasks']
+    let filtered
+    if (tasksArr.length) {
+        filtered = tasksArr.filter(task => task?.userId === currentUser)
+    }
+
 
     const [showModal, setShowModal] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
@@ -25,7 +30,7 @@ const TasksListByUser = () => {
     return (
         <>
             <div className="task-container-list scroller">
-                {tasksArr.map((task, idx) => (
+                {filtered.map((task, idx) => (
                     <>
                         <div className="task-flex">
                             <button className="task-button">
