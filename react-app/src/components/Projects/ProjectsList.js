@@ -28,7 +28,6 @@ function GetProjects({ workspaceId }) {
 
           <div className='project-wrapper'>
             <CreateProjectModal />
-
             {filtered.map(project => {
               return (
                 <NavLink className='project-links' to={`/workspaces/${workspaceId}/projects/${project.id}`} >
