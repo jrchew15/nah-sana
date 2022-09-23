@@ -1,7 +1,4 @@
 ## Get all tasks of current user
-from pickle import TRUE
-from urllib import response
-from sqlalchemy import desc
 from app.forms.task_form import TaskForm
 from ..models.models import db, Workspace, Project, Task
 from ..models import User
