@@ -51,7 +51,7 @@ const TasksListUserProfile = ({ props }) => {
                                         <tr key={task.id} className="table-row">
                                             <td className="table-cell" id='task-name'
                                                 onClick={() => (
-                                                    setShowTaskDetail(!showTaskDetail),
+                                                    setShowTaskDetail(true),
                                                     setOnClickTaskId(task.id),
                                                     setShowSideBar(!showSideBar)
                                                 )}
