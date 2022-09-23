@@ -77,6 +77,7 @@ const CreateProjectForm = ({ setShowModal }) => {
             name='name'
             onChange={(e) => setName(e.target.value)}
             value={name}
+            placeholder="Your project name"
           ></input>
         </div>
         <div className='project-input-container'>
@@ -120,6 +121,7 @@ const CreateProjectForm = ({ setShowModal }) => {
             name='description'
             onChange={(e) => setDescription(e.target.value)}
             value={description}
+            placeholder="Add a description of your project here (Optional)"
           ></textarea>
         </div>
         <div className='project-input-container move-button-down'>
