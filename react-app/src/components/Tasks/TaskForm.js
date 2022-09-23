@@ -124,7 +124,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                         </div>
                         <div className='task-input-container'>
                             <label htmlFor='projectId' className='task-form-label'>Project</label>
-                            <select name='projectId' required onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
+                            <select name='projectId' className='task-select-class' required onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
                                 <option className='task-option' disabled value={0}>Choose a project</option>
                                 {
                                     projects.map(project => (
