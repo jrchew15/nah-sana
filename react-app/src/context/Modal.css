@@ -25,7 +25,9 @@
   color: var(--text-color);
   box-sizing: border-box;
   border-radius: 10px;
-
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
   /* padding: 8px 32px; */
 }
 

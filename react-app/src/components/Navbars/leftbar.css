@@ -9,7 +9,9 @@
 }
 
 #left-nav-bar {
-    height: calc(100vh - var(--topbar-height))
+    max-height: calc(100vh - var(--topbar-height));
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #left-nav-bar i {
@@ -19,7 +21,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
 }
 
 /* #left-nav-bar>div {
