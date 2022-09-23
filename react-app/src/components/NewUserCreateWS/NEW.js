@@ -47,42 +47,47 @@ const NewUserWorkspace = () => {
     }
     return (
         <>
-            <div className="user-form-container">
-                <div className="user-top-create-form">
-                    <h2 className="user-newuser-title">Create Your  First Workspace</h2>
-                </div>
-                <div>
-                    {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
-                        {validationErrors.map((error, ind) => (
-                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
-                        ))}
-                    </div>
-                    )}
-                    <div className="word-div-intro">
-                        <h3 className="user-intro">Welcome to Nah-sana!</h3>
-                        <p className="user-intro">Welcome to Nah-sana! Where planning your next project is as easy as clicking a buttton.
-                            To continue please create your very first Workspace. Once created you will be able to create projects, assign tasks,
-                            and add collaborators. </p>
-
-                    </div>
-                    <form onSubmit={handleSubmit}>
-                        <div className="user-label-container-create">
-                            <label className="user-workspace-label">
-                                Workspace Name
-                                <input
-                                    className="user-workspace-input"
-                                    maxLength={41}
-                                    type='text'
-                                    placeholder="Company or Team Name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </label>
+            <div>
+                <div className="user-page-container">
+                    <div className="user-form-container">
+                        <div className="user-top-create-form">
+                            <h1 className="user-newuser-title">Create Your  First Workspace</h1>
                         </div>
-                        <div className="user-button-container-create">
-                            <button className={changeB} type="submit" >Create Workspace</button>
+                        <div>
+                            {hasSubmitted && validationErrors.length > 0 && (<div className='errorContainer project-errors'>
+                                {validationErrors.map((error, ind) => (
+                                    <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                                ))}
+                            </div>
+                            )}
+                            <div className="word-div-intro">
+                                <img src="/static/images/logos/logo-dark.png" alt="logo" className='splashpageLogo' style={{ height: 'calc(0.9 * var(--topbar-height))', width: 'calc(0.9 * var(--topbar-height))', paddingTop: '10px' }} />
+                                <h2 className="user-intro">Welcome to Nah-sana!</h2>
+                                <p className="user-intro">Where planning your next project is as easy as clicking a buttton.
+                                    To continue please create your very first Workspace. Once created you will be able to create projects, assign tasks,
+                                    and add collaborators.
+                                </p>
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <div className="user-label-container-create">
+                                    <label className="user-workspace-label">
+                                        Workspace Name
+                                        <input
+                                            className="user-workspace-input"
+                                            maxLength={41}
+                                            type='text'
+                                            placeholder="Company or Team Name"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                        />
+                                    </label>
+                                </div>
+                                <div className="user-button-container-create">
+                                    <button className={changeB} type="submit" >Create Workspace</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </>

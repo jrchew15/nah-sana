@@ -33,13 +33,14 @@ const TasksListByUser = () => {
                 {filtered.map((task, idx) => (
                     <>
                         <div className="task-flex">
-                            <button className="task-button">
-                                <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
-                            </button>
                             <div className="task-items" onClick={() => {
                                 setShowModal(true)
                                 setOnClickTaskId(task.id)
-                            }}>{task.name}</div>
+                            }}>
+                                <button className="task-button">
+                                    <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
+                                </button>
+                                {task.name}</div>
                         </div>
                     </>
                 ))}

@@ -15,7 +15,8 @@ export default function GetOne({ workspaceId }) {
     const { id } = useParams()
 
     const workspace = useSelector(state => state.workspace)
-    const user = useSelector(state => state.session.user)
+    const currentUser = useSelector(state => state.session.user)
+
     const current = new Date().toDateString()
     // const date = new Date().toLocaleDateString();
     // const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`
@@ -31,7 +32,7 @@ export default function GetOne({ workspaceId }) {
     const deleteUser = async userid => {
         await dispatch(removeUserFromWorkspace(id, userid))
         await dispatch(authenticate())
-        if (user.id === userid) {
+        if (currentUser.id === userid) {
             history.push('/')
         }
     }
@@ -45,7 +46,7 @@ export default function GetOne({ workspaceId }) {
                     <div className="dashboard-titles">
                         <h5 style={{ fontWeight: '500', }}>{current}</h5>
                         <div>
-                            <div className="welcome">Welcome {user.firstName}!</div>
+                            <div className="welcome">Welcome {currentUser.firstName}!</div>
                         </div>
                         <div>
                             <h3 style={{ fontWeight: '500', }}>{workspace.workspace.name}</h3>
@@ -55,7 +56,7 @@ export default function GetOne({ workspaceId }) {
                         <div className="left-widget">
                             <div className="task-container">
                                 <div className="task-title">
-                                    <img className="profile-pic" src={user.image} alt={user.firstName}></img>
+                                    <img className="profile-pic" src={currentUser.image} alt={currentUser.firstName}></img>
                                     <h3 className="task-words">My Priorities</h3>
                                 </div>
                                 <div className="task-div">
@@ -73,7 +74,7 @@ export default function GetOne({ workspaceId }) {
                     </div>
                     <div className="bottom-container">
                         <div className="bottom-widgets">
-                            <h3 className="task-words">People</h3>
+                            <h3 className="task-words another-tag">People</h3>
                             <div className="user-list ">
                                 {Object.values(workspace.users).map(user => (
                                     <>
@@ -85,17 +86,15 @@ export default function GetOne({ workspaceId }) {
                                             </NavLink>
                                             <div style={{ textAlign: 'center', fontSize: '13px', color: '#aeadad' }}>Assgin a task to start collaborating</div>
                                             <div>
-                                                <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
+                                                {user.id === currentUser.id ? <div style={{ paddingTop: '40px', paddingBottom: '2px' }}>Owner</div> :
+
+                                                    <button className="delete-button" onClick={() => deleteUser(user.id)} >Remove User</button>
+                                                }
                                             </div>
                                         </div>
-                                        {/* </div> */}
                                     </>
                                 ))}
                             </div>
-                            {/* <NavLink to={`/workspaces/${workspace.workspace.id}/users/${currentUser.id}`} exact>
-                                <i className="far fa-check-circle" />
-                                My Tasks
-                            </NavLink> */}
                         </div>
                     </div>
                 </div>

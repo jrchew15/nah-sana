@@ -54,9 +54,13 @@
 }
 
 .task-words {
-    padding-left: .7em;
+    padding-left: 16px;
     font-size: 20px;
     font-weight: 500;
+}
+
+.another-tag {
+    padding-left: 20px;
 }
 
 /* .task-div {} */
@@ -120,7 +124,9 @@
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: hidden;
-    width: 75ems;
+    /* width: 75em; */
+    padding-left: 10px;
+
 }
 
 .user-list:hover {
@@ -138,7 +144,7 @@
     align-items: center;
     /* width: 25%; */
     /* width: 14.5vw; */
-    min-width: 13em;
+    min-width: 14em;
     height: 18em;
     background-color: #2e2e30;
     border-radius: 10px;

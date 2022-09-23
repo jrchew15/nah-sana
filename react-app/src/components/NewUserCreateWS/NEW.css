@@ -1,6 +1,16 @@
+.user-page-container {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(29, 193, 54);
+    background: linear-gradient(0deg, rgba(29, 193, 54, 1) 0%, rgba(131, 170, 77, 1) 55%, rgba(212, 176, 41, 1) 100%);
+    display: flex;
+
+
+}
+
 .user-form-container {
     width: 40em;
-    height: 30em;
+    height: 33em;
     border-radius: 10px;
     background-color: var(--bkg-color-black);
     display: flex;
@@ -27,6 +37,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    font-weight: 500;
+
 }
 
 
@@ -34,6 +46,8 @@
     padding-left: 1em;
     padding-right: 1em;
     color: #a2a0a2;
+    font-weight: 500;
+
 }
 
 .user-label-container-create {
@@ -64,6 +78,7 @@
     height: 1.8em;
     border-radius: 5px;
     color: whitesmoke;
+
 }
 
 .user-button-container-create {
