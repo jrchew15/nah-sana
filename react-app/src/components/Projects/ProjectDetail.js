@@ -54,7 +54,7 @@ function ProjectDetail({ workspaceId }) {
   }
 
   let dueDate;
-  project?.dueDate ? dueDate = new Date(project.dueDate).toString().slice(0, 16) : dueDate = null
+  project?.dueDate ? dueDate = project.dueDate.toString().slice(0, 16) : dueDate = null
 
   function widgetColor() {
     if (project?.status === "At Risk") {
