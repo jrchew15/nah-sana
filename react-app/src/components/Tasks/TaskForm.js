@@ -83,7 +83,7 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                         <div href="javascript:void(0)" className="closebtn"
                             style={{ display: plainForm ? 'block' : 'none', marginRight: '35px', cursor: 'pointer' }}
                             onClick={() => { setShowTaskDetail(false) }}>&times;</div>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '30px' }}>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '60px' }}>
                             <div className='task-complete'
                                 style={{
                                     padding: '4px',
