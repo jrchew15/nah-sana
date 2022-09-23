@@ -53,6 +53,8 @@
   font-weight: 400;
   font-size: calc(33.75px + 11.25 * ((100vw - 480px) / 800));
   font-family: 'Montserrat', sans-serif;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .signupSubheader {
