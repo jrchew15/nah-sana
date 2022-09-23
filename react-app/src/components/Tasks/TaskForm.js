@@ -35,15 +35,24 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             setComplete(foundTask.complete)
             setUserId(foundTask.userId)
             setProjectId(foundTask.projectId)
+        } else {
+            setName('');
+            setDueDate('');
+            setDescription('');
+            setComplete(false);
+            setUserId(passedUserId || 0);
+            setProjectId(passedProjectId || 0);
+            setErrors([])
+            setHasSubmitted(false)
         }
-    }, [dispatch])
+    }, [dispatch, taskId])
 
     useEffect(async () => {
         let errors = []
-        if (!name) errors.push('Task Name is required')
-        if (!projectId) errors.push('Please choose a project')
-        if (!dueDate) errors.push('Please choose a due date')
-        if (!userId) errors.push('Please choose a user')
+        if (!name) errors.push('error: Task Name is required')
+        if (!projectId) errors.push('error: Please choose a project')
+        if (!dueDate) errors.push('error: Please choose a due date')
+        if (!userId) errors.push('error: Please choose a user')
         setErrors(errors)
     }, [name, projectId, userId, dueDate])
 
