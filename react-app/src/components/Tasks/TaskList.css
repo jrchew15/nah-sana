@@ -1,5 +1,6 @@
 .task-items {
     padding: .5em;
+    width: 100%;
 
 }
 
@@ -22,21 +23,24 @@
     border-bottom: 1px solid #424244;
     flex-direction: row;
     align-items: center;
-    padding-left: .5em;
-    margin-left: 15px;
+    /* padding-left: .5em; */
+    padding-left: 15px;
     margin-right: 15px;
     cursor: pointer;
+    width: 100%;
 }
 
 .task-flex:hover {
-    margin-left: 0px;
-    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 
 }
 
 .task-button {
     background-color: transparent;
     border: none;
+    padding-right: 45px;
+    cursor: pointer;
 }
 
 .fa-check-circle-o {

@@ -74,7 +74,7 @@ export default function GetOne({ workspaceId }) {
                     </div>
                     <div className="bottom-container">
                         <div className="bottom-widgets">
-                            <h3 className="task-words">People</h3>
+                            <h3 className="task-words another-tag">People</h3>
                             <div className="user-list ">
                                 {Object.values(workspace.users).map(user => (
                                     <>
@@ -92,14 +92,9 @@ export default function GetOne({ workspaceId }) {
                                                 }
                                             </div>
                                         </div>
-                                        {/* </div> */}
                                     </>
                                 ))}
                             </div>
-                            {/* <NavLink to={`/workspaces/${workspace.workspace.id}/users/${currentUser.id}`} exact>
-                                <i className="far fa-check-circle" />
-                                My Tasks
-                            </NavLink> */}
                         </div>
                     </div>
                 </div>
