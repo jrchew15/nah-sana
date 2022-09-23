@@ -18,6 +18,17 @@ const TasksListByUser = () => {
         filtered = tasksArr.filter(task => task?.userId === currentUser)
     }
 
+    function modifyDate(str) {
+        const dateStr = str.split(', ')
+        const modifiedDate = `${dateStr[1].split(' ')[1]} ${dateStr[1].split(' ')[0]}`
+        return modifiedDate
+    }
+
+
+    const sortedTasks = filtered.sort(function (a, b) {
+        return new Date(modifyDate(b.dueDate)) - new Date(modifyDate(a.dueDate))
+    })
+
 
     const [showModal, setShowModal] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
@@ -30,7 +41,7 @@ const TasksListByUser = () => {
     return (
         <>
             <div className="task-container-list scroller">
-                {filtered.map((task, idx) => (
+                {sortedTasks.map((task, idx) => (
                     <>
                         <div className="task-flex">
                             <div className="task-items" onClick={() => {
@@ -38,7 +49,7 @@ const TasksListByUser = () => {
                                 setOnClickTaskId(task.id)
                             }}>
                                 <button className="task-button">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
+                                    <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>
                                 </button>
                                 {task.name}</div>
                         </div>

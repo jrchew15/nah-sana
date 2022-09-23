@@ -1,6 +1,7 @@
 import { getTasksByProjectId } from "../../store/tasks";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { oneWorkspace } from "../../store/workspace";
 import TaskForm from "./TaskForm";
 
 import './TaskStyle/TaskDetail.css'
@@ -17,6 +18,18 @@ const TasksListByProject = ({ projectId }) => {
         filteredTasks = tasksArr.filter(task => Number(task.projectId) === Number(projectId))
     }
 
+    function modifyDate(str) {
+        const dateStr = str.split(', ')
+        const modifiedDate = `${dateStr[1].split(' ')[1]} ${dateStr[1].split(' ')[0]}`
+        return modifiedDate
+    }
+
+
+    const sortedTasks = filteredTasks.sort(function (a, b) {
+        return new Date(modifyDate(b.dueDate)) - new Date(modifyDate(a.dueDate))
+    })
+
+
     const [showTaskDetail, setShowTaskDetail] = useState(false)
     const [onClickTaskId, setOnClickTaskId] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
@@ -25,6 +38,7 @@ const TasksListByProject = ({ projectId }) => {
 
     useEffect(() => {
         dispatch(getTasksByProjectId(projectId)).then(() => setIsLoaded(true))
+        dispatch(oneWorkspace(workspace.workspace.id))
     }, [dispatch, showTaskDetail, projectId])
 
     return isLoaded ? (
@@ -47,7 +61,7 @@ const TasksListByProject = ({ projectId }) => {
                                         <th className="table-head">Due Date</th>
                                     </tr>
                                     {tasksArr.length === 0 && (<div className="horizontal-separator"></div>)}
-                                    {filteredTasks.map((task) => (
+                                    {sortedTasks.map((task) => (
                                         <tr key={task.id} className="table-row">
                                             <td className="table-cell" id='task-name'
                                                 onClick={() => (
@@ -58,8 +72,8 @@ const TasksListByProject = ({ projectId }) => {
                                                 style={{ cursor: 'pointer' }}
                                             >
                                                 <div>
-
-                                                    <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}</div>
+                                                    <i className="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>  {task.name}
+                                                </div>
                                             </td>
                                             <td className="table-cell">{task?.dueDate.split(' ')[2]} {task?.dueDate.split(' ')[1]}</td>
                                         </tr>

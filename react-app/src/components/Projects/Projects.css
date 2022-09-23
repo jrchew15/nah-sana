@@ -265,7 +265,7 @@
   text-align: center;
 }
 
-#deleteProject{
+#deleteProject {
   background-color: #D11A2A;
 }
 
@@ -340,9 +340,9 @@
 
 }
 
-/* .project-links:hover {
-  background-color: #dbdbdb;
-} */
+.project-links:hover {
+  background-color: #dbdbdb45;
+}
 
 .project-titles {
   font-size: 16px;
