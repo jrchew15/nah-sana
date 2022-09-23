@@ -25,7 +25,7 @@ const TasksListByUser = () => {
     }
 
 
-    const sortedTasks = filtered.sort(function (a, b) {
+    const sortedTasks = filtered?.sort(function (a, b) {
         return new Date(modifyDate(b.dueDate)) - new Date(modifyDate(a.dueDate))
     })
 
