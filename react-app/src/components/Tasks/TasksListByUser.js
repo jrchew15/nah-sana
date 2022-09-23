@@ -30,7 +30,7 @@ const TasksListByUser = () => {
     return (
         <>
             <div className="task-container-list scroller">
-                {filtered.map((task, idx) => (
+                {filtered.map((task) => (
                     <>
                         <div className="task-flex">
                             <div className="task-items" onClick={() => {
@@ -38,7 +38,7 @@ const TasksListByUser = () => {
                                 setOnClickTaskId(task.id)
                             }}>
                                 <button className="task-button">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: tasksArr[idx].complete ? 'green' : 'white', borderRadius: '10px' }}></i>
+                                    <i class="fa fa-check-circle-o" aria-hidden="true" style={{ color: task.complete ? 'green' : 'white', borderRadius: '10px' }}></i>
                                 </button>
                                 {task.name}</div>
                         </div>

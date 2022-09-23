@@ -109,9 +109,21 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                     padding: '4px',
                                     backgroundColor: complete.toString() === 'false' ? 'gray' : 'green', cursor: 'pointer'
                                 }}
-                                onClick={() => (
-                                    setComplete(!complete)
-                                )}>
+                                onClick={async () => {
+                                    if (taskId) {
+                                        await dispatch(updateOneTask({
+                                            id: taskId,
+                                            name: task.name,
+                                            dueDate: new Date(task.dueDate).toJSON().split("T")[0],
+                                            description: task.description,
+                                            userId: task.userId,
+                                            projectId: task.projectId,
+                                            complete: !complete
+                                        }))
+                                        await dispatch(oneWorkspace(workspaceId))
+                                    }
+                                    setComplete(!complete);
+                                }}>
                                 <i className="fa fa-check-circle-o" aria-hidden="true"></i>
                                 {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
                             </div>
