@@ -3,17 +3,18 @@
 }
 
 .table-outer-container {
-    width: 100%;
+    display: flex;
+    flex-grow: 1;
 }
 
 .table {
-    width: 100vw;
+    width: 100%;
     border-collapse: collapse;
     border-style: hidden;
 }
 
 .table-onclick {
-    width: 50vw;
+    width: 100%;
     border-collapse: collapse;
     border-style: hidden;
 }

@@ -20,7 +20,6 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
     const [projectId, setProjectId] = useState(passedProjectId || 0);
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
-    const [buttonChange, setButtonChange] = useState('task-form-button')
 
     useEffect(async () => {
 
@@ -79,11 +78,12 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
         <>
             {(
                 <div className='task-form-container' style={{ borderLeft: plainForm ? 'solid 1px gray' : 'none' }}>
-                    <div className='task-form-top-container' style={{ marginLeft: '30px' }}>
-                        <form onSubmit={handleSubmit}>
-                            <a href="javascript:void(0)" className="closebtn"
-                                style={{ display: plainForm ? 'block' : 'none', marginRight: '35px' }}
-                                onClick={() => { setShowTaskDetail(false) }}>&times;</a>
+                    {/* <div className='task-form-top-container' style={{}}> */}
+                    <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div href="javascript:void(0)" className="closebtn"
+                            style={{ display: plainForm ? 'block' : 'none', marginRight: '35px', cursor: 'pointer' }}
+                            onClick={() => { setShowTaskDetail(false) }}>&times;</div>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '30px' }}>
                             <div className='task-complete'
                                 style={{
                                     padding: '4px',
@@ -96,67 +96,68 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
                                 {complete.toString() === 'false' ? "Mark Complete" : "Completed"}
                             </div>
                             <h2 style={{ marginLeft: '10px' }}>My Task</h2>
-                            {hasSubmitted && errors.length > 0 && <div className='errorContainer'>
-                                {errors.map((error, ind) => (
-                                    <div key={ind} className='errorText'>{error}</div>
-                                ))}
-                            </div>}
-                            <div className='task-input-container'>
-                                <label htmlFor='name' className='task-form-label'>Name</label>
-                                <input className='task-form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
-                            </div>
-                            <div className='task-input-container'>
-                                <label htmlFor='dueDate' className='task-form-label'>Due Date</label>
-                                <input className='task-form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
-                            </div>
-                            <div className='task-input-container'>
-                                <label htmlFor='userId' className='task-form-label'>Assignee</label>
-                                <select className='task-select-class' name='userId' required onChange={e => setUserId(e.target.value)} value={userId}
-                                    style={{ background: 'none', color: 'whitesmoke' }}>
-                                    <option className='task-option' disabled value={0}>Choose a user</option>
-                                    {
-                                        Object.values(users).map(user => (
-                                            <option key={user.id} value={user.id}>{user.firstName} {user.lastName}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-                            <div className='task-input-container'>
-                                <label htmlFor='projectId' className='task-form-label'>Project</label>
-                                <select name='projectId' required onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
-                                    <option className='task-option' disabled value={0}>Choose a project</option>
-                                    {
-                                        projects.map(project => (
-                                            <option key={project.id} value={project.id}>{project.name}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-                            <div className='task-input-container'>
-                                <label htmlFor='description' className='task-form-label' >Description</label>
-                                <textarea className='task-form-textarea' type='text' name='description'
-                                    style={{ height: '80px' }}
-                                    onChange={e => setDescription(e.target.value)} value={description} />
-                            </div>
-                            <div className='task-form-container'>
-                                <button type='submit'
-                                    className={`${buttonChange}`}
-                                    style={{ marginTop: '3px' }}
-                                >Submit</button>
-                                {taskId && (
-                                    <button
-                                        className={`${buttonChange}`}
-                                        style={{ background: '#d11a2a' }}
-                                        onClick={async () => {
-                                            await dispatch(deleteOneTask(taskId))
-                                            await dispatch(oneWorkspace(workspaceId))
-                                            if (!plainForm) setShowModal(false)
-                                            if (plainForm) setShowTaskDetail(false)
-                                        }}>Delete</button>
-                                )}
-                            </div>
-                        </form >
-                    </div>
+                        </div>
+                        {hasSubmitted && errors.length > 0 && <div className='errorContainer'>
+                            {errors.map((error, ind) => (
+                                <div key={ind} className='errorText'>{error}</div>
+                            ))}
+                        </div>}
+                        <div className='task-input-container'>
+                            <label htmlFor='name' className='task-form-label'>Name</label>
+                            <input className='task-form-input' type='text' name='name' onChange={e => setName(e.target.value)} value={name} required />
+                        </div>
+                        <div className='task-input-container'>
+                            <label htmlFor='dueDate' className='task-form-label'>Due Date</label>
+                            <input className='task-form-input' type='date' name='dueDate' onChange={e => setDueDate(e.target.value)} value={dueDate} />
+                        </div>
+                        <div className='task-input-container'>
+                            <label htmlFor='userId' className='task-form-label'>Assignee</label>
+                            <select className='task-select-class' name='userId' required onChange={e => setUserId(e.target.value)} value={userId}
+                                style={{ background: 'none', color: 'whitesmoke' }}>
+                                <option className='task-option' disabled value={0}>Choose a user</option>
+                                {
+                                    Object.values(users).map(user => (
+                                        <option key={user.id} value={user.id}>{user.firstName} {user.lastName}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className='task-input-container'>
+                            <label htmlFor='projectId' className='task-form-label'>Project</label>
+                            <select name='projectId' required onChange={e => setProjectId(e.target.value)} value={projectId} style={{ background: 'none', color: 'whitesmoke' }}>
+                                <option className='task-option' disabled value={0}>Choose a project</option>
+                                {
+                                    projects.map(project => (
+                                        <option key={project.id} value={project.id}>{project.name}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className='task-input-container'>
+                            <label htmlFor='description' className='task-form-label' >Description</label>
+                            <textarea className='task-form-textarea' type='text' name='description'
+                                style={{ height: '80px' }}
+                                onChange={e => setDescription(e.target.value)} value={description} />
+                        </div>
+                        <div className='task-button-container, task-input-container' style={{ alignItems: 'center' }}>
+                            <button type='submit'
+                                className={'task-form-button'}
+                                style={{ marginTop: '3px' }}
+                            >Submit</button>
+                            {taskId && (
+                                <button
+                                    className={'task-form-button'}
+                                    style={{ background: '#d11a2a' }}
+                                    onClick={async () => {
+                                        await dispatch(deleteOneTask(taskId))
+                                        await dispatch(oneWorkspace(workspaceId))
+                                        if (!plainForm) setShowModal(false)
+                                        if (plainForm) setShowTaskDetail(false)
+                                    }}>Delete</button>
+                            )}
+                        </div>
+                    </form >
+                    {/* </div> */}
                 </div >
             )
             }

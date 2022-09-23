@@ -1,7 +1,6 @@
 .task-form-container {
     width: 30em;
     min-width: 15em;
-    height: 37em;
     display: flex;
     flex-direction: column;
 }
@@ -63,4 +62,11 @@
     margin-left: 5px;
     width: 83%;
     margin-bottom: 8px;
+}
+
+.task-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

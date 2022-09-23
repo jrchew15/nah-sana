@@ -27,26 +27,26 @@ const TasksListUserProfile = ({ props }) => {
         dispatch(oneWorkspace(workspaceId)).then(() => setIsLoaded(true))
     }, [dispatch, workspaceId])
 
-    if (!filteredTasks.length) return (
-        <div>
-            <div className='add-task-button'
-                style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
-                onClick={() => {
-                    setShowTaskDetail(true)
-                    setOnClickTaskId(null)
-                }}>
-                <i className="fa-solid fa-plus"></i> Add Task
-            </div>
-            <div>
-                {showTaskDetail ? <TaskForm plainForm={true} taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
-            </div>
-        </div>
-    )
-    return isLoaded && filteredTasks ? (
+    // if (!filteredTasks.length) return (
+    //     <div>
+    //         <div className='add-task-button'
+    //             style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
+    //             onClick={() => {
+    //                 setShowTaskDetail(true)
+    //                 setOnClickTaskId(null)
+    //             }}>
+    //             <i className="fa-solid fa-plus"></i> Add Task
+    //         </div>
+    //         <div>
+    //             {showTaskDetail ? <TaskForm plainForm={true} taskId={onClickTaskId} setShowTaskDetail={setShowTaskDetail} /> : null}
+    //         </div>
+    //     </div>
+    // )
+    return isLoaded ? (
         <>
             <div style={{ display: 'flex' }}>
-                <div style={{ display: 'flex' }} className="table-outer-container">
-                    <div className="table-outer-container">
+                <div style={{ display: 'flex', flexGrow: '1' }} >
+                    <div style={{ width: '100%' }}>
                         <div className='add-task-button'
                             style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
                             onClick={() => {
@@ -55,13 +55,13 @@ const TasksListUserProfile = ({ props }) => {
                             }}>
                             <i className="fa-solid fa-plus"></i> Add Task
                         </div>
-                        <table className={showTaskDetail ? "table-onclick" : "table"}>
+                        {tasksArr && <table className={showTaskDetail ? "table-onclick" : "table"}>
                             <tbody>
                                 <tr className="table-row">
                                     <th className="table-head">Task Name</th>
                                     <th className="table-head">Due Date</th>
                                 </tr>
-                                {filteredTasks.map((task, idx) => (
+                                {filteredTasks.length > 0 && filteredTasks.map((task) => (
                                     <tr key={task.id} className="table-row">
                                         <td className="table-cell" id='task-name'
                                             onClick={() => (
@@ -79,7 +79,7 @@ const TasksListUserProfile = ({ props }) => {
                                 ))
                                 }
                             </tbody>
-                        </table>
+                        </table>}
                     </div>
                 </div>
                 <div>
@@ -87,16 +87,16 @@ const TasksListUserProfile = ({ props }) => {
                 </div>
             </div >
         </>
-    ) : (
-        <div className='add-task-button'
-            style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
-            onClick={() => {
-                setShowTaskDetail(true)
-                setOnClickTaskId(null)
-            }}>
-            <i className="fa-solid fa-plus"></i> Add Task
-        </div>
-    )
+    ) : null
+    //     <div className='add-task-button'
+    //         style={{ width: 'fit-content', border: 'solid 1px grey', borderRadius: '4px', fontSize: '20px', marginLeft: '15px', marginTop: '8px' }}
+    //         onClick={() => {
+    //             setShowTaskDetail(true)
+    //             setOnClickTaskId(null)
+    //         }}>
+    //         <i className="fa-solid fa-plus"></i> Add Task
+    //     </div>
+    // )
 }
 
 export default TasksListUserProfile
