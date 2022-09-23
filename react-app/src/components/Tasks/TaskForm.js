@@ -35,8 +35,17 @@ const TaskForm = ({ taskId, setShowModal, userId: passedUserId, projectId: passe
             setComplete(foundTask.complete)
             setUserId(foundTask.userId)
             setProjectId(foundTask.projectId)
+        } else {
+            setName('');
+            setDueDate('');
+            setDescription('');
+            setComplete(false);
+            setUserId(passedUserId || 0);
+            setProjectId(passedProjectId || 0);
+            setErrors([])
+            setHasSubmitted(false)
         }
-    }, [dispatch])
+    }, [dispatch, taskId])
 
     useEffect(async () => {
         let errors = []
