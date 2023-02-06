@@ -21,9 +21,15 @@
   padding: 48px 32px;
   width: calc(100% - 16px);
 }
+
 .loginLogoContainer {
-  padding: 20px;
+  /* padding: 20px; */
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  /* background-color: #726ab9; */
 }
+
 .loginLogo {
   height: 64px;
   width: 64px;
@@ -38,9 +44,11 @@
   font-weight: 400;
   color: #1e1f21;
 }
+
 .loginFormContainer {
   width: 100%;
 }
+
 .loginLabels {
   font-size: 12px;
   line-height: 18px;
@@ -90,6 +98,7 @@
   border-radius: 6px;
   box-sizing: border-box;
 }
+
 .loginButton#demo {
   margin-top: 12px;
 }

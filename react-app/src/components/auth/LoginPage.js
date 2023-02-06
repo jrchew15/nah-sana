@@ -50,7 +50,9 @@ const LoginPage = () => {
     <div className='loginOuter'>
       <div className='loginInner'>
         <div className='loginLogoContainer'>
-          <img src="/static/images/logos/logo-light.png" alt="logo" className='loginLogo' />
+          <NavLink to="/" >
+            <img src="/static/images/logos/logo-light.png" alt="logo" className='loginLogo' />
+          </NavLink>
         </div>
         <h2 className='loginTitle'>Log in to Nah-sana</h2>
         <div className='loginFormContainer'>

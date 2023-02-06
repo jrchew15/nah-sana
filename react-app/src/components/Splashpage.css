@@ -35,17 +35,18 @@
   padding-right: 20px;
 }
 
-.splashpageLoginContainer {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid #0d0e10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* .splashpageLoginContainer {} */
 
 .splashpageLogin {
+  padding: 0 16px;
+  border: 1px solid #0d0e10;
+  display: inline-block;
+  border-radius: 3px;
+  letter-spacing: .5px;
+  line-height: 36px;
+  cursor: pointer;
+  transition: background-color 0.5s 0.1s;
+  text-decoration: none;
   color: #0d0e10;
 }
 
@@ -68,6 +69,9 @@
   padding: 0 16px;
   text-align: center;
   text-decoration: none;
+  transition-property: background-color, color;
+  transition-duration: 0.5s;
+  transition-delay: 0.1s;
 }
 
 .splashpageContent {
@@ -184,4 +188,29 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 5px;
+}
+
+.splashpageTryUsButton {
+  padding: 20px;
+  font-size: 30px;
+  border-radius: 0px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition-property: color, background-color;
+  transition-duration: 0.5s;
+  transition-delay: 0.1s;
+  background-color: black;
+}
+
+.splashpageTryUsButton:hover,
+.splashpageSignup:hover {
+  color: black;
+  background-color: #ed4758;
+}
+
+.splashpageLogin:hover {
+  background-color: #F3DD94;
 }
