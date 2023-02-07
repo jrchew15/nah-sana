@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom';
 import './Splashpage.css'
 
 function Splashpage() {
+  const history = useHistory();
+
   return (
     <div className='signupOuter'>
       {/* Navbar */}
@@ -13,7 +15,7 @@ function Splashpage() {
         <div className='splashpageLoginOuterContainer'>
           <div className='splashpageLoginContainer'>
             <NavLink to="/login" className='splashpageLogin' >
-              <i className="fa-solid fa-user"></i>
+              Login
             </NavLink>
           </div>
           <div className='splashpageSignupContainer'>
@@ -30,6 +32,9 @@ function Splashpage() {
           <h3 className='splashpageQuote'>"That meeting could've been an email"</h3>
           <div className='splashpageTextDivider'></div>
           <p className='splashpageDescription'>Enter Nah-sana -- manage your projects and tasks effectively so you can get back to sleep...zZzZ</p>
+          <button className='splashpageTryUsButton' onClick={() => { history.push('/signup') }}>
+            Try Us Now
+          </button>
         </div>
         {/* Right Image */}
         <div className='splashpageContentRight'>
